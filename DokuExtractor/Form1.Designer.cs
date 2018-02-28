@@ -1,4 +1,4 @@
-﻿namespace DokuExtractor
+﻿namespace DokuExtractorGUI
 {
     partial class Form1
     {
