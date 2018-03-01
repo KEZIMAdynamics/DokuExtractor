@@ -133,6 +133,12 @@ namespace DokuExtractorCore
             return retVal;
         }
 
+        public string ExtractDataAsJson(FieldExtractorTemplate template, string inputText)
+        {
+            var json = JsonConvert.SerializeObject(ExtractData(template, inputText), Formatting.Indented);
+            return json;
+        }
+
         public FieldExtractorTemplate AutoCreateTemplate(string templateName, string inputText)
         {
             var genericRechnung = JsonConvert.DeserializeObject<FieldExtractorTemplate>(File.ReadAllText(Path.Combine(appRootPath, "GenericTemplates", "GenericTemplateRechnungen.json.txt")));

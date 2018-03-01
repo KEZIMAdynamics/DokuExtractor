@@ -9,6 +9,7 @@ namespace DokuExtractorCore
 {
     public class RegexExpressionFinder
     {
+        // TODO: Implementieren
         public bool TryFindRegexMatchExpress(string inputText, string regexHalfString, string regexFullString, DataFieldTypes dataFieldType, out string regexMatchExpression)
         {
             switch (dataFieldType)

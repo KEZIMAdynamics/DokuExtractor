@@ -32,12 +32,15 @@ namespace DokuExtractorGUI
             if (matchingTemplateResult.IsMatchSuccessfull)
             {
                 MessageBox.Show("Yay ich habe " + matchingTemplateResult.Template.TemplateName + " gefunden!");
+
+                var json = processor.ExtractDataAsJson(matchingTemplateResult.Template, inputString);
+                tbExtractedData.Text = json;
             }
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void btBeispieltemplateGenerieren_Click(object sender, EventArgs e)
