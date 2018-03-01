@@ -1,0 +1,21 @@
+{
+  "TemplateName": "StartTemplate",
+  "KeyWords": [
+    "bla",
+    "blubb"
+  ],
+  "DataFields": [
+    {
+      "Name": "Ein Datenfeld",
+      "RegexExpression": "/d/",
+      "RegexFullString": "Auto fahren",
+      "RegexHalfString": "Auto "
+    },
+    {
+      "Name": "Noch ein Datenfeld",
+      "RegexExpression": "/s/",
+      "RegexFullString": "Flugzeug fliegen",
+      "RegexHalfString": "Flugzeug "
+    }
+  ]
+}
