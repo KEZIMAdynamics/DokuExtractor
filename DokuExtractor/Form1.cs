@@ -50,7 +50,7 @@ namespace DokuExtractorGUI
             templates.Add(new DokuExtractorCore.Model.FieldExtractorTemplate()
             {
                 TemplateName = "StartTemplate",
-                KeyWords = new List<string>() { "bla", "blubb" },
+                KeyWords = new List<string>() { "bla", "blubb|blobb" },
                 DataFields = new List<DokuExtractorCore.Model.DataFieldTemplate>()
                    {
                         new DokuExtractorCore.Model.DataFieldTemplate()

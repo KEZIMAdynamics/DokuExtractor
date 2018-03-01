@@ -2,7 +2,7 @@
   "TemplateName": "StartTemplate",
   "KeyWords": [
     "bla",
-    "blubb"
+    "blubb|blobb"
   ],
   "DataFields": [
     {
