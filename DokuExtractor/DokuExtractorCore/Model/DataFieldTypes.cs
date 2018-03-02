@@ -9,6 +9,7 @@ namespace DokuExtractorCore.Model
     public enum DataFieldTypes
     {
         Text,
-        Date
+        Date,
+        Currency
     }
 }
