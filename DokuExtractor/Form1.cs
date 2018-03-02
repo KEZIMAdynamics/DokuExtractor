@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -15,6 +16,8 @@ namespace DokuExtractorGUI
 {
     public partial class Form1 : Form
     {
+        TemplateProcessor processor = new TemplateProcessor(Application.StartupPath);
+
         public Form1()
         {
             InitializeComponent();
@@ -22,7 +25,7 @@ namespace DokuExtractorGUI
 
         private void btLos_Click(object sender, EventArgs e)
         {
-            var processor = new TemplateProcessor(Application.StartupPath);
+          //  var processor = new TemplateProcessor(Application.StartupPath);
 
             var templates = processor.LoadTemplatesFromDisk();
             var inputString = tbInhalt.Text;
@@ -35,11 +38,23 @@ namespace DokuExtractorGUI
             if (matchingTemplateResult.IsMatchSuccessfull)
             {
                 MessageBox.Show("Yay ich habe " + template.TemplateName + " gefunden!");
+                var json = processor.ExtractDataAsJson(template, inputString);
+                tbExtractedData.Text = json;
+            }
+            else
+            {
+                template = processor.AutoCreateTemplate("NeuesTemplate", inputString);
+                var json = processor.ExtractDataAsJson(template, inputString);
+                tbExtractedData.Text = json;
 
+                var editor = new frmTemplateEditor();
+                editor.Text = "Neues Template entdeckt";
+                editor.LoadTemplate(template);
+                editor.Show();
 
             }
-            var json = processor.ExtractDataAsJson(template, inputString);
-            tbExtractedData.Text = json;
+
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -76,6 +91,11 @@ namespace DokuExtractorGUI
                    }
             });
             proc.SaveTemplates(templates, Path.Combine(Application.StartupPath, "ExtractorTemplates"));
+        }
+
+        private void btOpenTemplateDir_Click(object sender, EventArgs e)
+        {
+            Process.Start(processor.TemplateDirectory);
         }
     }
 }

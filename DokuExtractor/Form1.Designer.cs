@@ -35,6 +35,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tbExtractedData = new System.Windows.Forms.TextBox();
+            this.btOpenTemplateDir = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tbInputPfad
@@ -101,11 +102,22 @@
             this.tbExtractedData.Size = new System.Drawing.Size(579, 487);
             this.tbExtractedData.TabIndex = 6;
             // 
+            // btOpenTemplateDir
+            // 
+            this.btOpenTemplateDir.Location = new System.Drawing.Point(880, 580);
+            this.btOpenTemplateDir.Name = "btOpenTemplateDir";
+            this.btOpenTemplateDir.Size = new System.Drawing.Size(165, 53);
+            this.btOpenTemplateDir.TabIndex = 7;
+            this.btOpenTemplateDir.Text = "Templateverzeichnis öffnen";
+            this.btOpenTemplateDir.UseVisualStyleBackColor = true;
+            this.btOpenTemplateDir.Click += new System.EventHandler(this.btOpenTemplateDir_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1272, 676);
+            this.Controls.Add(this.btOpenTemplateDir);
             this.Controls.Add(this.tbExtractedData);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -130,6 +142,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tbExtractedData;
+        private System.Windows.Forms.Button btOpenTemplateDir;
     }
 }
 

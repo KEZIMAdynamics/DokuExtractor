@@ -13,19 +13,21 @@ namespace DokuExtractorCore
 {
     public class TemplateProcessor
     {
+        public string TemplateDirectory { get; set; }
         string appRootPath;
+
 
         public TemplateProcessor(string appRootPath)
         {
             this.appRootPath = appRootPath;
+            TemplateDirectory = Path.Combine(appRootPath, "ExtractorTemplates");
         }
 
         public List<FieldExtractorTemplate> LoadTemplatesFromDisk()
         {
             var retVal = new List<FieldExtractorTemplate>();
 
-            var templateDirectory = Path.Combine(appRootPath, "ExtractorTemplates");
-            foreach (var item in Directory.GetFiles(templateDirectory))
+            foreach (var item in Directory.GetFiles(TemplateDirectory))
             {
                 try
                 {
@@ -41,6 +43,10 @@ namespace DokuExtractorCore
             return retVal;
         }
 
+        public void SaveTemplates(List<FieldExtractorTemplate> templates)
+        {
+            SaveTemplates(templates, TemplateDirectory);
+        }
         public void SaveTemplates(List<FieldExtractorTemplate> templates, string templateDirectory)
         {
             if (Directory.Exists(templateDirectory) == false)
