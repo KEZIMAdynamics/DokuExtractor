@@ -8,8 +8,8 @@
     {
       "Name": "Datum",
       "RegexExpression": "/d/",
-      "RegexFullString": "Datum: 15.01.2018",
-      "RegexHalfString": "Datum:",
+      "RegexFullString": "Liefer.-Nr.I-Datum : 13625289 /04.01.2018",
+      "RegexHalfString": "Liefer.-Nr.I-Datum",
       "FieldType": 1
     },
     {
