@@ -21,11 +21,12 @@ namespace DokuExtractorGUI
         public Form1()
         {
             InitializeComponent();
+            listBox1.SelectedIndex = 0;
         }
 
         private void btLos_Click(object sender, EventArgs e)
         {
-          //  var processor = new TemplateProcessor(Application.StartupPath);
+            //  var processor = new TemplateProcessor(Application.StartupPath);
 
             var templates = processor.LoadTemplatesFromDisk();
             var inputString = tbInhalt.Text;
@@ -96,6 +97,23 @@ namespace DokuExtractorGUI
         private void btOpenTemplateDir_Click(object sender, EventArgs e)
         {
             Process.Start(processor.TemplateDirectory);
+        }
+
+        private void btFindRegexExpression_Click(object sender, EventArgs e)
+        {
+            var finder = new RegexExpressionFinder();
+
+            DataFieldTypes type = (DataFieldTypes)Enum.Parse(typeof(DataFieldTypes), listBox1.SelectedItem.ToString(), true);
+
+            string expression;
+            if (finder.TryFindRegexMatchExpress(tbInhalt.Text, tbRegexHalfString.Text, tbRegexFullString.Text, type, out expression))
+            {
+                tbExtractedData.Text = expression;
+            }
+            else
+            {
+                tbExtractedData.Text = "Kein Match gefunden -.-";
+            }
         }
     }
 }

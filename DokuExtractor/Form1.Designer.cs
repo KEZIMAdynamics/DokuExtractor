@@ -36,6 +36,14 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tbExtractedData = new System.Windows.Forms.TextBox();
             this.btOpenTemplateDir = new System.Windows.Forms.Button();
+            this.tbRegexFullString = new System.Windows.Forms.TextBox();
+            this.tbRegexHalfString = new System.Windows.Forms.TextBox();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.btFindRegexExpression = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tbInputPfad
@@ -112,11 +120,82 @@
             this.btOpenTemplateDir.UseVisualStyleBackColor = true;
             this.btOpenTemplateDir.Click += new System.EventHandler(this.btOpenTemplateDir_Click);
             // 
+            // tbRegexFullString
+            // 
+            this.tbRegexFullString.Location = new System.Drawing.Point(17, 45);
+            this.tbRegexFullString.Multiline = true;
+            this.tbRegexFullString.Name = "tbRegexFullString";
+            this.tbRegexFullString.Size = new System.Drawing.Size(421, 99);
+            this.tbRegexFullString.TabIndex = 9;
+            // 
+            // tbRegexHalfString
+            // 
+            this.tbRegexHalfString.Location = new System.Drawing.Point(497, 45);
+            this.tbRegexHalfString.Multiline = true;
+            this.tbRegexHalfString.Name = "tbRegexHalfString";
+            this.tbRegexHalfString.Size = new System.Drawing.Size(397, 99);
+            this.tbRegexHalfString.TabIndex = 10;
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Items.AddRange(new object[] {
+            "Date",
+            "Text"});
+            this.listBox1.Location = new System.Drawing.Point(913, 49);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(120, 95);
+            this.listBox1.TabIndex = 11;
+            // 
+            // btFindRegexExpression
+            // 
+            this.btFindRegexExpression.Location = new System.Drawing.Point(1070, 49);
+            this.btFindRegexExpression.Name = "btFindRegexExpression";
+            this.btFindRegexExpression.Size = new System.Drawing.Size(178, 95);
+            this.btFindRegexExpression.TabIndex = 12;
+            this.btFindRegexExpression.Text = "Regex Expression finden";
+            this.btFindRegexExpression.UseVisualStyleBackColor = true;
+            this.btFindRegexExpression.Click += new System.EventHandler(this.btFindRegexExpression_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(14, 29);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(50, 13);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "FullString";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(494, 29);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(53, 13);
+            this.label4.TabIndex = 14;
+            this.label4.Text = "HalfString";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.tbRegexFullString);
+            this.groupBox1.Controls.Add(this.btFindRegexExpression);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.listBox1);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.tbRegexHalfString);
+            this.groupBox1.Location = new System.Drawing.Point(12, 660);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(1263, 150);
+            this.groupBox1.TabIndex = 15;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Regex Expression Finder";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1272, 676);
+            this.ClientSize = new System.Drawing.Size(1287, 822);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btOpenTemplateDir);
             this.Controls.Add(this.tbExtractedData);
             this.Controls.Add(this.label2);
@@ -128,6 +207,8 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -143,6 +224,13 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tbExtractedData;
         private System.Windows.Forms.Button btOpenTemplateDir;
+        private System.Windows.Forms.TextBox tbRegexFullString;
+        private System.Windows.Forms.TextBox tbRegexHalfString;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Button btFindRegexExpression;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }
 
