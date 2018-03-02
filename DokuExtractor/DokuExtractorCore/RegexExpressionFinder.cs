@@ -26,6 +26,8 @@ namespace DokuExtractorCore
 
         public bool TryFindRegexMatchExpress(string inputText, string regexHalfString, string regexFullString, DataFieldTypes dataFieldType, out string regexMatchExpression)
         {
+
+
             regexMatchExpression = string.Empty;
             switch (dataFieldType)
             {
@@ -33,7 +35,7 @@ namespace DokuExtractorCore
                     regexMatchExpression = RegHeart(regexFullString, regexHalfString, new List<string>() { @"\w+" }, new List<string>() { @"\s+" }, inputText);
                     break;
                 case DataFieldTypes.Date:
-                    regexMatchExpression = RegHeart(regexFullString, regexHalfString, dateExpressions, new List<string>() {  @"\s+", @"\s+.\s+",@"\s+\w+\s+", @"\s+\w+\s+\w+\s+", @"\s+\w+\s+\w+\s+\w+\s+" , @".+\s+", @".+\s+\w+", @".+\s+\w+\s+", @".+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+", @".+\s+\w+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+\w+\s+", @".+\/" }, inputText);
+                    regexMatchExpression = RegHeart(regexFullString, regexHalfString, dateExpressions, new List<string>() { @"\s+", @"\s+.\s+", @"\s+\w+\s+", @"\s+\w+\s+\w+\s+", @"\s+\w+\s+\w+\s+\w+\s+", @".+\s+", @".+\s+\w+", @".+\s+\w+\s+", @".+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+", @".+\s+\w+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+\w+\s+", @".+\/" }, inputText);
                     break;
                 default:
                     break;
@@ -48,10 +50,15 @@ namespace DokuExtractorCore
         // TODO: auf group[1] ausdruck testen und "Groupstring" aufnehmen
         private string RegHeart(string regexFullString, string regexHalfString, List<string> specificExpressions, List<string> generalExpressions, string inputText)
         {
+            var loopCounter = 0;
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
+
             foreach (var specificExpression in specificExpressions)
             {
                 foreach (var generalExpression in generalExpressions)
                 {
+                    loopCounter++;
                     var regexText = regexHalfString + generalExpression + specificExpression;
                     var match = Regex.Match(inputText, regexText);
 
@@ -59,7 +66,8 @@ namespace DokuExtractorCore
                     {
                         if (match.Value == regexFullString)
                         {
-                            Debug.Print(regexText);
+                            Debug.Print(regexText + Environment.NewLine +"Regex runs until result: " + loopCounter + Environment.NewLine + "Duration: " + stopWatch.Elapsed.ToString());
+
                             return regexText;
                         }
 
