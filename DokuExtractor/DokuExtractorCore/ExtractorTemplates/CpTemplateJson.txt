@@ -1,0 +1,22 @@
+{
+  "TemplateName": "C + P Möbelsysteme",
+  "KeyWords": [
+    "C + P Möbelsysteme"
+    
+  ],
+  "DataFields": [
+    {
+      "Name": "Datum",
+      "RegexExpression": "Datum:\\s+(\\d+.\\d{2}.\\d+)",
+      "RegexFullString": "",
+      "RegexHalfString": "",
+	  "FieldType": 1
+    },
+    {
+      "Name": "Noch ein Datenfeld",
+      "RegexExpression": "/s/",
+      "RegexFullString": "Flugzeug fliegen",
+      "RegexHalfString": "Flugzeug "
+    }
+  ]
+}

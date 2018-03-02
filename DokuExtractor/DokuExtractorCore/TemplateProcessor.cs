@@ -170,8 +170,10 @@ namespace DokuExtractorCore
         public string ExecuteRegexExpression(string inputText, string regexExpression)
         {
             var match = Regex.Match(inputText, regexExpression);
-            // TODO: Regexstring ausführen
-            return match.Value;
+            if (match.Groups.Count >= 2)
+                return match.Groups[1].Value;
+            else
+                return string.Empty;
         }
 
         public bool TryFindRegexMatchExpress(string inputText, string regexHalfString, string regexFullString, DataFieldTypes dataFieldType, out string regexMatchExpression)

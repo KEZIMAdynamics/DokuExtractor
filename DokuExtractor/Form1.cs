@@ -28,14 +28,18 @@ namespace DokuExtractorGUI
             var inputString = tbInhalt.Text;
 
             var matchingTemplateResult = processor.MatchTemplates(templates, inputString);
+            var template = matchingTemplateResult.Template;
+            if (matchingTemplateResult.IsMatchSuccessfull == false)
+                template = processor.AutoCreateTemplate("NeuesTemplate", inputString);
 
             if (matchingTemplateResult.IsMatchSuccessfull)
             {
-                MessageBox.Show("Yay ich habe " + matchingTemplateResult.Template.TemplateName + " gefunden!");
+                MessageBox.Show("Yay ich habe " + template.TemplateName + " gefunden!");
 
-                var json = processor.ExtractDataAsJson(matchingTemplateResult.Template, inputString);
-                tbExtractedData.Text = json;
+
             }
+            var json = processor.ExtractDataAsJson(template, inputString);
+            tbExtractedData.Text = json;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -58,14 +62,16 @@ namespace DokuExtractorGUI
                              Name = "Ein Datenfeld",
                              RegexExpression = "/d/",
                              RegexFullString = "Auto fahren",
-                             RegexHalfString = "Auto "
+                             RegexHalfString = "Auto ",
+                              FieldType = DataFieldTypes.Date
                         },
                         new DokuExtractorCore.Model.DataFieldTemplate()
                         {
                             Name = "Noch ein Datenfeld",
                             RegexExpression = "/s/",
                             RegexFullString = "Flugzeug fliegen",
-                            RegexHalfString = "Flugzeug "
+                            RegexHalfString = "Flugzeug ",
+                              FieldType = DataFieldTypes.Text
                         }
                    }
             });

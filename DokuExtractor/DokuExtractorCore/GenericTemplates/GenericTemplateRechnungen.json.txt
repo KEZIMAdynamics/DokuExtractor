@@ -1,21 +1,23 @@
 {
-  "TemplateName": "StartTemplate",
+  "TemplateName": "GenericStartTemplate",
   "KeyWords": [
     "bla",
     "blubb"
   ],
   "DataFields": [
     {
-      "Name": "Ein Datenfeld",
+      "Name": "Datum",
       "RegexExpression": "/d/",
-      "RegexFullString": "Auto fahren",
-      "RegexHalfString": "Auto "
+      "RegexFullString": "Datum: 15.01.2018",
+      "RegexHalfString": "Datum:",
+      "FieldType": 1
     },
     {
       "Name": "Noch ein Datenfeld",
       "RegexExpression": "/s/",
       "RegexFullString": "Flugzeug fliegen",
-      "RegexHalfString": "Flugzeug "
+      "RegexHalfString": "Flugzeug ",
+      "FieldType": 0
     }
   ]
 }
