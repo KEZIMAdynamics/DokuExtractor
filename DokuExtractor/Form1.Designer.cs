@@ -43,6 +43,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btStartTableParser = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -191,11 +192,22 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Regex Expression Finder";
             // 
+            // btStartTableParser
+            // 
+            this.btStartTableParser.Location = new System.Drawing.Point(1117, 580);
+            this.btStartTableParser.Name = "btStartTableParser";
+            this.btStartTableParser.Size = new System.Drawing.Size(121, 53);
+            this.btStartTableParser.TabIndex = 16;
+            this.btStartTableParser.Text = "Tabellenparser starten";
+            this.btStartTableParser.UseVisualStyleBackColor = true;
+            this.btStartTableParser.Click += new System.EventHandler(this.btStartTableParser_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1287, 822);
+            this.Controls.Add(this.btStartTableParser);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btOpenTemplateDir);
             this.Controls.Add(this.tbExtractedData);
@@ -232,6 +244,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btStartTableParser;
     }
 }
 

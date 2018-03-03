@@ -46,8 +46,12 @@
     <Compile Include="Model\DataFieldResult.cs" />
     <Compile Include="Model\DataFieldTypes.cs" />
     <Compile Include="Model\FieldExtractionResult.cs" />
+    <Compile Include="Model\Tables\TableColumn.cs" />
+    <Compile Include="Model\Tables\TableLine.cs" />
+    <Compile Include="Model\Tables\TableResult.cs" />
     <Compile Include="Model\TemplateMachResult.cs" />
     <Compile Include="RegexExpressionFinder.cs" />
+    <Compile Include="TableProcessor.cs" />
     <Compile Include="TemplateProcessor.cs" />
     <Compile Include="Model\DataFieldTemplate.cs" />
     <Compile Include="Model\FieldExtractorTemplate.cs" />
@@ -68,6 +72,10 @@
     <None Include="GenericTemplates\GenericTemplateRechnungen.json.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SampleFiles\AllTableColumns.txt" />
+    <Content Include="SampleFiles\AllTableLines.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

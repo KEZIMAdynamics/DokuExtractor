@@ -115,5 +115,11 @@ namespace DokuExtractorGUI
                 tbExtractedData.Text = "Kein Match gefunden -.-";
             }
         }
+
+        private void btStartTableParser_Click(object sender, EventArgs e)
+        {
+            var form = new frmTableProcessor();
+            form.Show();
+        }
     }
 }
