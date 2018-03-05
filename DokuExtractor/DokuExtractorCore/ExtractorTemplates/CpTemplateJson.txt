@@ -1,7 +1,7 @@
 {
   "TemplateName": "C + P Möbelsysteme",
   "KeyWords": [
-    "XXXC + P Möbelsysteme"
+    "C + P Möbelsysteme"
     
   ],
   "DataFields": [
@@ -13,10 +13,11 @@
 	  "FieldType": 1
     },
     {
-      "Name": "Noch ein Datenfeld",
-      "RegexExpression": "/s/",
+      "Name": "Rechnungssumme",
+      "RegexExpression": "Wert\\s+(\\d+,\\d{2})",
       "RegexFullString": "Flugzeug fliegen",
-      "RegexHalfString": "Flugzeug "
+      "RegexHalfString": "Flugzeug ",
+	  "FieldType": 2
     }
   ]
 }

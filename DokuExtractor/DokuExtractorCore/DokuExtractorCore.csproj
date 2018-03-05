@@ -61,11 +61,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ExtractorTemplates\CpTemplateJson.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="ExtractorTemplates\VölkeiTemplate.json.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -74,6 +69,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ExtractorTemplates\CpTemplateJson.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Content Include="SampleFiles\AllTableColumns.txt" />
     <Content Include="SampleFiles\AllTableLines.txt" />
   </ItemGroup>
