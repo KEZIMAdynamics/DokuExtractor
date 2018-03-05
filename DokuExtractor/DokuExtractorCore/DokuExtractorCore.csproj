@@ -72,6 +72,7 @@
     <None Include="ExtractorTemplates\CpTemplateJson.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="ExtractorTemplates\ColumbusMcKinnonenTemplate.Json.txt" />
     <Content Include="SampleFiles\AllTableColumns.txt" />
     <Content Include="SampleFiles\AllTableLines.txt" />
   </ItemGroup>

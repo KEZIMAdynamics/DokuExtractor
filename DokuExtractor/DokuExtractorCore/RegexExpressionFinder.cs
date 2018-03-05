@@ -26,7 +26,9 @@ namespace DokuExtractorCore
 
         List<string> currencyExpressions = new List<string>()
         {
-         @"(\d+,\d{2})"
+         @"(\d+,\d{2})",
+         @"(\d+'\d{2})",
+         @"(\d+\D\d{2})"
         };
 
         public bool TryFindRegexMatchExpress(string inputText, string regexHalfString, string regexFullString, DataFieldTypes dataFieldType, out string regexMatchExpression)
@@ -41,7 +43,8 @@ namespace DokuExtractorCore
                     regexMatchExpression = RegHeart(regexFullString, regexHalfString, dateExpressions, new List<string>() { @"\s+", @"\s+.\s+", @"\s+\w+\s+", @"\s+\w+\s+\w+\s+", @"\s+\w+\s+\w+\s+\w+\s+", @".+\s+", @".+\s+\w+", @".+\s+\w+\s+", @".+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+", @".+\s+\w+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+\w+\s+", @".+\/" }, inputText);
                     break;
                 case DataFieldTypes.Currency:
-                    regexMatchExpression = RegHeart(regexFullString, regexHalfString, currencyExpressions, new List<string>() { @"\s+", @"\s+.\s+", @"\s+\w+\s+", @"\s+\w+\s+\w+\s+", @"\s+\w+\s+\w+\s+\w+\s+", @".+\s+", @".+\s+\w+", @".+\s+\w+\s+", @".+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+", @".+\s+\w+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+\w+\s+", @".+\/" }, inputText);
+                    regexMatchExpression = RegHeart(regexFullString, regexHalfString, currencyExpressions, new List<string>() { @"\s+", @"\s+.\s+", @"\s+\w+\s+", @"\s+\w+\s+\w+\s+", @"\s+\w+\s+\w+\s+\w+\s+", @".+\s+", @".+\s+\w+", @".+\s+\w+\s+", @".+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+", @".+\s+\w+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+\w+\s+", @".+\/", @"\s+\w+\s+\d+,\d{2}\s+",
+                        @"\s+\d+,\d{2}\s+\w+\s+" }, inputText);
                     break;
                 default:
                     break;

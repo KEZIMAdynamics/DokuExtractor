@@ -60,7 +60,6 @@ namespace DokuExtractorCore
                 File.WriteAllText(filePath, templateJson);
             }
 
-
         }
 
         public TemplateMachResult MatchTemplates(List<FieldExtractorTemplate> templates, string inputText)
@@ -83,15 +82,15 @@ namespace DokuExtractorCore
 
                         if (checkedWords.TryGetValue(singleWord, out singleWordCount) == false)
                         {
-                            if (inputText.Contains(singleWord))
+                            var regexMatches = Regex.Matches(inputText, Regex.Escape(singleWord));
+                            singleWordCount = regexMatches.Count;
+                            checkedWords.Add(singleWord, singleWordCount);
+
+                            if (singleWordCount > 0)
                             {
-                                singleWordCount = 1;
-                                checkedWords.Add(singleWord, singleWordCount);
                                 wordCount = 1;
                                 break;
                             }
-                            else
-                                checkedWords.Add(singleWord, 0);
                         }
 
                         if (singleWordCount >= 1)
@@ -100,8 +99,6 @@ namespace DokuExtractorCore
                             break;
                         }
                     }
-
-
 
                     if (wordCount >= 1)
                     {

@@ -1,27 +1,34 @@
 {
-  "TemplateName": "C + P Möbelsysteme",
+  "TemplateName": "COLUMBUS MCKINNON Industrial",
   "KeyWords": [
-    "C + P Möbelsysteme",
+    "COLUMBUS MCKINNON Industrial|COLUMBUS McKINNON Industrial",
     "Rechnung"
   ],
   "DataFields": [
     {
       "Name": "Rechnungsdatum",
-      "RegexExpression": "Datum:\\s+(\\d+.\\d{2}.\\d+)",
+      "RegexExpression": "Seite 1 of2\\s+(\\d+.\\d{2}.\\d+)",
       "RegexFullString": "",
       "RegexHalfString": "",
 	  "FieldType": 1
     },
     {
       "Name": "Rechnungssumme Netto",
-      "RegexExpression": "Wert\\s+(\\d+,\\d{2})",
+      "RegexExpression": "Nettosumme\\s+(\\d+,\\d{2})",
       "RegexFullString": "Flugzeug fliegen",
       "RegexHalfString": "Flugzeug ",
 	  "FieldType": 2
     },
 	{
       "Name": "MwSt Betrag",
-      "RegexExpression": "MWST\\s+(\\d+,\\d{2})",
+      "RegexExpression": "Umsatzsteuer \\(19.00%\\)\\s+(\\d+,\\d{2})",
+      "RegexFullString": "",
+      "RegexHalfString": "",
+	  "FieldType": 2
+    },
+	  {
+      "Name": "Rechnungssumme Brutto",
+      "RegexExpression": "Rechnungssumme \\(EUR\\)\\s+(\\d+,\\d{2})",
       "RegexFullString": "",
       "RegexHalfString": "",
 	  "FieldType": 2
