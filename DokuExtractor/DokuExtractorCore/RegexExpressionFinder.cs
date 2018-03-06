@@ -37,7 +37,7 @@ namespace DokuExtractorCore
             switch (dataFieldType)
             {
                 case DataFieldTypes.Text:
-                    regexMatchExpression = RegHeart(regexFullString, regexHalfString, new List<string>() { @"\w+" }, new List<string>() { @"\s+" }, inputText);
+                    regexMatchExpression = RegHeart(regexFullString, regexHalfString, new List<string>() { @"(\w+)" }, new List<string>() { @"\s+" }, inputText);
                     break;
                 case DataFieldTypes.Date:
                     regexMatchExpression = RegHeart(regexFullString, regexHalfString, dateExpressions, new List<string>() { @"\s+", @"\s+.\s+", @"\s+\w+\s+", @"\s+\w+\s+\w+\s+", @"\s+\w+\s+\w+\s+\w+\s+", @".+\s+", @".+\s+\w+", @".+\s+\w+\s+", @".+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+", @".+\s+\w+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+\w+\s+", @".+\/" }, inputText);
@@ -68,12 +68,11 @@ namespace DokuExtractorCore
                 foreach (var generalExpression in generalExpressions)
                 {
                     loopCounter++;
-                    var regexText = regexHalfString + generalExpression + specificExpression;
+                    var regexText = regexFullString + generalExpression + specificExpression;
                     var match = Regex.Match(inputText, regexText);
-
                     if (match.Success)
                     {
-                        if (match.Value == regexFullString)
+                        if (match.Groups[1].Value == regexHalfString)
                         {
                             Debug.Print(regexText + Environment.NewLine + "Regex runs until result: " + loopCounter + Environment.NewLine + "Duration: " + stopWatch.Elapsed.ToString());
 
