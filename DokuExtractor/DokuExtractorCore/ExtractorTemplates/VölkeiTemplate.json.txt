@@ -7,14 +7,14 @@
   "DataFields": [
     {
       "Name": "Lieferdatum",
-      "RegexExpression": "Lieferung vom\\s+(\\d+.\\d{2}.\\d+)",
+      "RegexExpressions": ["Lieferung vom\\s+(\\d+.\\d{2}.\\d+)"],
       "RegexFullString": "",
       "RegexHalfString": "",
 	  "FieldType": 1
     },
     {
       "Name": "Noch ein Datenfeld",
-      "RegexExpression": "/s/",
+      "RegexExpressions": ["/s/"],
       "RegexFullString": "Flugzeug fliegen",
       "RegexHalfString": "Flugzeug "
     }

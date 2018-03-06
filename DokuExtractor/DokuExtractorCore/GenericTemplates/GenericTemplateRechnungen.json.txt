@@ -7,14 +7,14 @@
   "DataFields": [
     {
       "Name": "Datum",
-      "RegexExpression": "/d/",
+      "RegexExpressions": ["/d/"],
       "RegexFullString": "Rechnungsdatum: 12-Jan-2018",
       "RegexHalfString": "Rechnungsdatum:",
       "FieldType": 1
     },
     {
       "Name": "Noch ein Datenfeld",
-      "RegexExpression": "/s/",
+      "RegexExpressions": ["/s/"],
       "RegexFullString": "Flugzeug fliegen",
       "RegexHalfString": "Flugzeug ",
       "FieldType": 0

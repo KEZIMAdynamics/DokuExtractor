@@ -76,7 +76,7 @@ namespace DokuExtractorGUI
                         new DokuExtractorCore.Model.DataFieldTemplate()
                         {
                              Name = "Ein Datenfeld",
-                             RegexExpression = "/d/",
+                             RegexExpressions = new List<string>(){ "/d/" },
                              RegexFullString = "Auto fahren",
                              RegexHalfString = "Auto ",
                               FieldType = DataFieldTypes.Date
@@ -84,7 +84,7 @@ namespace DokuExtractorGUI
                         new DokuExtractorCore.Model.DataFieldTemplate()
                         {
                             Name = "Noch ein Datenfeld",
-                            RegexExpression = "/s/",
+                            RegexExpressions = new List<string>(){"/s/" },
                             RegexFullString = "Flugzeug fliegen",
                             RegexHalfString = "Flugzeug ",
                               FieldType = DataFieldTypes.Text

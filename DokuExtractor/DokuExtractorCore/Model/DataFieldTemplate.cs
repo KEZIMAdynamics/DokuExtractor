@@ -12,7 +12,7 @@ namespace DokuExtractorCore.Model
     public class DataFieldTemplate
     {
         public string Name { get; set; } = string.Empty;
-        public string RegexExpression { get; set; } = string.Empty;
+        public List<string> RegexExpressions { get; set; } = new List<string>();
         public string RegexFullString { get; set; } = string.Empty; // TODO: Think of better name
         public string RegexHalfString { get; set; } = string.Empty; // TODO: Think of better name
         public DataFieldTypes FieldType { get; set; }

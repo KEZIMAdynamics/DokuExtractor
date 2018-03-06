@@ -129,7 +129,7 @@ namespace DokuExtractorCore
             foreach (var item in template.DataFields)
             {
                 var resultItem = new DataFieldResult() { FieldType = item.FieldType, Name = item.Name };
-                resultItem.Value = ExecuteRegexExpression(inputText, item.RegexExpression);
+                resultItem.Value = ExecuteRegexExpression(inputText, item.RegexExpressions);
                 retVal.DataFields.Add(resultItem);
             }
 
@@ -154,7 +154,7 @@ namespace DokuExtractorCore
                 string expression;
                 if (TryFindRegexMatchExpress(inputText, item.RegexHalfString, item.RegexFullString, item.FieldType, out expression))
                 {
-                    item.RegexExpression = expression;
+                    item.RegexExpressions = new List<string>() { expression };
                     retVal.DataFields.Add(item);
                 }
             }
@@ -164,19 +164,22 @@ namespace DokuExtractorCore
 
         public bool CheckRegexExpression(string inputText, string regexString, string targetValue)
         {
-            if (ExecuteRegexExpression(inputText, regexString) == targetValue)
+            if (ExecuteRegexExpression(inputText, new List<string>() { regexString }) == targetValue)
                 return true;
             else
                 return false;
         }
 
-        public string ExecuteRegexExpression(string inputText, string regexExpression)
+        public string ExecuteRegexExpression(string inputText, List<string> regexExpressions)
         {
-            var match = Regex.Match(inputText, regexExpression);
-            if (match.Groups.Count >= 2)
-                return match.Groups[1].Value;
-            else
-                return string.Empty;
+            foreach (var expression in regexExpressions)
+            {
+                var match = Regex.Match(inputText, expression);
+                if (match.Groups.Count >= 2)
+                    return match.Groups[1].Value;
+            }
+
+            return string.Empty;
         }
 
         public bool TryFindRegexMatchExpress(string inputText, string regexHalfString, string regexFullString, DataFieldTypes dataFieldType, out string regexMatchExpression)
