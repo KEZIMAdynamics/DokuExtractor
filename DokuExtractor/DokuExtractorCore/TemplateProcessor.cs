@@ -151,10 +151,10 @@ namespace DokuExtractorCore
 
             foreach (var item in genericRechnung.DataFields)
             {
-                string expression;
-                if (TryFindRegexMatchExpress(inputText, item.RegexHalfString, item.RegexFullString, item.FieldType, out expression))
+                RegexExpressionFinderResult expressionResult;
+                if (TryFindRegexMatchExpress(inputText, item.RegexHalfString, item.RegexFullString, item.FieldType, out expressionResult))
                 {
-                    item.RegexExpressions = new List<string>() { expression };
+                    item.RegexExpressions = new List<string>() { expressionResult.RegexExpression };
                     retVal.DataFields.Add(item);
                 }
             }
@@ -182,7 +182,7 @@ namespace DokuExtractorCore
             return string.Empty;
         }
 
-        public bool TryFindRegexMatchExpress(string inputText, string regexHalfString, string regexFullString, DataFieldTypes dataFieldType, out string regexMatchExpression)
+        public bool TryFindRegexMatchExpress(string inputText, string regexHalfString, string regexFullString, DataFieldTypes dataFieldType, out RegexExpressionFinderResult regexMatchExpression)
         {
             var finder = new RegexExpressionFinder();
             return finder.TryFindRegexMatchExpress(inputText, regexHalfString, regexFullString, dataFieldType, out regexMatchExpression);

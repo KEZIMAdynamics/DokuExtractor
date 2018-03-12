@@ -105,10 +105,11 @@ namespace DokuExtractorGUI
 
             DataFieldTypes type = (DataFieldTypes)Enum.Parse(typeof(DataFieldTypes), listBox1.SelectedItem.ToString(), true);
 
-            string expression;
-            if (finder.TryFindRegexMatchExpress(tbInhalt.Text, tbRegexHalfString.Text, tbRegexFullString.Text, type, out expression))
+            RegexExpressionFinderResult expressionResult;
+            if (finder.TryFindRegexMatchExpress(tbInhalt.Text, tbRegexHalfString.Text, tbRegexFullString.Text, type, out expressionResult))
             {
-                tbExtractedData.Text = expression;
+                tbExtractedData.Text = "Regex expression found:" + Environment.NewLine + expressionResult.RegexExpression + Environment.NewLine
+                    + Environment.NewLine + "Matching value:" + Environment.NewLine + expressionResult.MatchingValue;
             }
             else
             {
