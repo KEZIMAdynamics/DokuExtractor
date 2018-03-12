@@ -13,8 +13,8 @@ namespace DokuExtractorCore.Model
     {
         public string Name { get; set; } = string.Empty;
         public List<string> RegexExpressions { get; set; } = new List<string>();
-        public string RegexFullString { get; set; } = string.Empty; // TODO: Think of better name
-        public string RegexHalfString { get; set; } = string.Empty; // TODO: Think of better name
+        public List<string> TextAnchors { get; set; } = new List<string>();
+        // public string RegexHalfString { get; set; } = string.Empty;         obsolete?       // TODO: Think of better name
         public DataFieldTypes FieldType { get; set; }
     }
 }

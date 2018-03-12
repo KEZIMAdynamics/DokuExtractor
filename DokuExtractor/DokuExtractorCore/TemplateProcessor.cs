@@ -149,14 +149,21 @@ namespace DokuExtractorCore
             var retVal = new FieldExtractorTemplate();
             retVal.TemplateName = templateName;
 
-            foreach (var item in genericRechnung.DataFields)
+            foreach (var item in genericRechnung.DataFields.ToList())
             {
-                RegexExpressionFinderResult expressionResult;
-                if (TryFindRegexMatchExpress(inputText, item.RegexHalfString, item.RegexFullString, item.FieldType, out expressionResult))
+                var newDataField = new DataFieldTemplate() { Name = item.Name, FieldType = item.FieldType }; // Ignore text anchors as they are not needed in concrete templates
+
+                foreach (var anchor in item.TextAnchors)
                 {
-                    item.RegexExpressions = new List<string>() { expressionResult.RegexExpression };
-                    retVal.DataFields.Add(item);
+                    RegexExpressionFinderResult expressionResult;
+                    if (TryFindRegexMatchExpress(inputText, string.Empty, anchor, item.FieldType, out expressionResult))
+                    {
+                        newDataField.RegexExpressions = new List<string>() { expressionResult.RegexExpression };
+                        break;
+                    }
                 }
+
+                retVal.DataFields.Add(newDataField);
             }
 
             return retVal;

@@ -27,6 +27,10 @@ namespace DokuExtractorCore
 
         List<string> currencyExpressions = new List<string>()
         {
+         @"(\d+,\d{2}\D)",
+         @"(\d+'\d{2}\D)",
+         @"(\d+\D\d{2}\D)",
+         @"(\d+.\d{3},\d{2})",
          @"(\d+,\d{2})",
          @"(\d+'\d{2})",
          @"(\d+\D\d{2})"
@@ -70,7 +74,7 @@ namespace DokuExtractorCore
                 foreach (var generalExpression in generalExpressions)
                 {
                     loopCounter++;
-                    var regexText = textAnchor + generalExpression + specificExpression;
+                    var regexText = Regex.Escape(textAnchor) + generalExpression + specificExpression;
                     var match = Regex.Match(inputText, regexText);
                     if (match.Success)
                     {

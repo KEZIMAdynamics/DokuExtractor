@@ -33,8 +33,8 @@ namespace DokuExtractorGUI
 
             var matchingTemplateResult = processor.MatchTemplates(templates, inputString);
             var template = matchingTemplateResult.Template;
-            if (matchingTemplateResult.IsMatchSuccessfull == false)
-                template = processor.AutoCreateTemplate("NeuesTemplate", inputString);
+            //if (matchingTemplateResult.IsMatchSuccessfull == false)
+            //    template = processor.AutoCreateTemplate("NeuesTemplate", inputString);
 
             if (matchingTemplateResult.IsMatchSuccessfull)
             {
@@ -55,7 +55,6 @@ namespace DokuExtractorGUI
 
             }
 
-
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -75,19 +74,19 @@ namespace DokuExtractorGUI
                    {
                         new DokuExtractorCore.Model.DataFieldTemplate()
                         {
-                             Name = "Ein Datenfeld",
+                             Name = "Ein Datumsfeld",
                              RegexExpressions = new List<string>(){ "/d/" },
-                             RegexFullString = "Auto fahren",
-                             RegexHalfString = "Auto ",
+                             TextAnchors = new List<string>(){ "Datum", "Datum:" },
+                             //RegexHalfString = "Auto ",
                               FieldType = DataFieldTypes.Date
                         },
                         new DokuExtractorCore.Model.DataFieldTemplate()
                         {
-                            Name = "Noch ein Datenfeld",
+                            Name = "Ein Währungsfeld",
                             RegexExpressions = new List<string>(){"/s/" },
-                            RegexFullString = "Flugzeug fliegen",
-                            RegexHalfString = "Flugzeug ",
-                              FieldType = DataFieldTypes.Text
+                            TextAnchors = new List<string>(){ "Summe", "Summe:" },
+                            //RegexHalfString = "Flugzeug ",
+                              FieldType = DataFieldTypes.Currency
                         }
                    }
             });
@@ -101,6 +100,7 @@ namespace DokuExtractorGUI
 
         private void btFindRegexExpression_Click(object sender, EventArgs e)
         {
+            tbRegexFullString.Text = tbRegexFullString.Text.Trim(' ');
             var finder = new RegexExpressionFinder();
 
             DataFieldTypes type = (DataFieldTypes)Enum.Parse(typeof(DataFieldTypes), listBox1.SelectedItem.ToString(), true);
