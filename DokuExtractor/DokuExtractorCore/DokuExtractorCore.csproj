@@ -35,6 +35,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HelperExtensions.cs" />
     <Compile Include="Model\DataFieldResult.cs" />
     <Compile Include="Model\DataFieldTypes.cs" />
     <Compile Include="Model\FieldExtractionResult.cs" />
@@ -50,6 +53,7 @@
     <Compile Include="Model\Tables\TableLine.cs" />
     <Compile Include="Model\Tables\TableResult.cs" />
     <Compile Include="Model\TemplateMachResult.cs" />
+    <Compile Include="PdfTextLoader.cs" />
     <Compile Include="RegexExpressionFinder.cs" />
     <Compile Include="TableProcessor.cs" />
     <Compile Include="TemplateProcessor.cs" />
@@ -59,6 +63,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="poppler-0.51.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="ExtractorTemplates\VölkeiTemplate.json.txt">
