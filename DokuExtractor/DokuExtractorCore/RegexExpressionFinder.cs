@@ -74,7 +74,7 @@ namespace DokuExtractorCore
                     var match = Regex.Match(inputText, regexText);
                     if (match.Success)
                     {
-                        if (match.Groups[1].Value == targetValue)
+                        if (match.Groups[1].Value == targetValue || targetValue == string.Empty)
                         {
                             Debug.Print(regexText + Environment.NewLine + "Regex runs until result: " + loopCounter + Environment.NewLine + "Duration: " + stopWatch.Elapsed.ToString());
                             retVal.RegexExpression = regexText;
