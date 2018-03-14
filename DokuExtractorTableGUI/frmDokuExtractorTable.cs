@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using GdPicture14;
 using System.IO;
 using GdPicture14.Annotations;
+using DokuExtractorCore;
 
 namespace DokuExtractorTableGUI
 {
@@ -140,6 +141,15 @@ namespace DokuExtractorTableGUI
                             + allTableLines + Environment.NewLine + Environment.NewLine + Environment.NewLine
                             + "All Table Columns:" + Environment.NewLine + Environment.NewLine
                             + allTableColumns;
+
+            var tableProcessor = new TableProcessor(Application.StartupPath);
+            var table = tableProcessor.BuildTableFromLinesAndColumns(tableProcessor.LoadTableLinesFromString(allTableLines), tableProcessor.LoadTableColumnsFromString(allTableColumns));
+
+            var tableViewer = new frmTableViewer();
+            tableViewer.ShowTable(table);
+            tableViewer.Show();
+
+           // var lines = 
         }
 
         /// <summary>

@@ -1,6 +1,7 @@
 ﻿using DokuExtractorCore.Model.Tables;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -35,7 +36,18 @@ namespace DokuExtractorCore
             var filePath = Path.Combine(inputFileDirectory, "AllTableLines.txt");
 
             var content = File.ReadAllText(filePath);
-            var lines = content.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            //var lines = content.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+
+            //return lines.ToList();
+            return LoadTableLinesFromString(content);
+        }
+
+        public List<string> LoadTableLinesFromString(string allTableLines)
+        {
+            //var filePath = Path.Combine(inputFileDirectory, "AllTableLines.txt");
+
+            //var content = File.ReadAllText(filePath);
+            var lines = allTableLines.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
             return lines.ToList();
         }
@@ -47,7 +59,34 @@ namespace DokuExtractorCore
             var filePath = Path.Combine(inputFileDirectory, "AllTableColumns.txt");
 
             var content = File.ReadAllText(filePath);
-            var columns = content.Split("|||".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+
+            return LoadTableColumnsFromString(content);
+            //var columns = content.Split("|||".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+
+            //foreach (var item in columns)
+            //{
+            //    var tableColumn = new TableColumn();
+
+            //    var columnLines = item.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            //    foreach (var line in columnLines)
+            //    {
+            //        tableColumn.Lines.Add(new TableLine() { Content = line });
+            //    }
+
+            //    retVal.Add(tableColumn);
+            //}
+
+            //return retVal;
+        }
+
+        public List<TableColumn> LoadTableColumnsFromString(string allTableColumns)
+        {
+            var retVal = new List<TableColumn>();
+
+            //var filePath = Path.Combine(inputFileDirectory, "AllTableColumns.txt");
+
+            //var content = File.ReadAllText(filePath);
+            var columns = allTableColumns.Split("|||".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
             foreach (var item in columns)
             {
@@ -161,6 +200,41 @@ namespace DokuExtractorCore
             }
 
             return tableResult;
+        }
+
+        /// <summary>
+        /// Converts a table that is based on a two dimensional string-array/matrix to a list of TableColumns. Empty column lines are NOT removed, so the table structure stays intact.
+        /// </summary>
+        /// <param name="tableResult"></param>
+        /// <returns></returns>
+        public List<TableColumn> Convert2dTableToListOfTableColumns(TableResult tableResult)
+        {
+            var tableArray = new List<List<string>>();
+
+            var columnCount = tableResult.ColumnCount; //.Table.Length / tableResult.Table.GetLength(0);
+            var lineCount = tableResult.LineCount; //Table.GetLength(0);
+
+            var tableColumns = new List<TableColumn>();
+            for (int lines = 0; lines < lineCount; lines++)
+
+            {
+                var printString = "";
+                var lineItems = new List<string>();
+                var tableColumnLines = new List<TableLine>();
+                for (int columns = 0; columns < columnCount; columns++)
+                {
+                    printString += "|||" + tableResult.Table[lines, columns];
+                    lineItems.Add(tableResult.Table[lines, columns]);
+                    tableColumnLines.Add(new TableLine() { Content = tableResult.Table[lines, columns] });
+                }
+                Debug.Print(printString);
+                tableArray.Add(lineItems);
+                tableColumns.Add(new TableColumn() { Lines = tableColumnLines });
+            }
+
+            Debug.Print(tableArray.ToString());
+
+            return tableColumns;
         }
     }
 }
