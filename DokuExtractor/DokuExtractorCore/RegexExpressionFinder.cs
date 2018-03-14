@@ -49,14 +49,14 @@ namespace DokuExtractorCore
                 default:
                     break;
             }
-
+            
 
             if (regexMatchExpression == string.Empty)
                 return false;
             else
                 return true;
         }
-        // TODO: auf group[1] ausdruck testen und "Groupstring" aufnehmen
+
         private string RegHeart(string regexFullString, string regexHalfString, List<string> specificExpressions, List<string> generalExpressions, string inputText)
         {
             var loopCounter = 0;
