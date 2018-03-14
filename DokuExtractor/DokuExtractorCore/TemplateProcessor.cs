@@ -129,7 +129,7 @@ namespace DokuExtractorCore
             foreach (var item in template.DataFields)
             {
                 var resultItem = new DataFieldResult() { FieldType = item.FieldType, Name = item.Name };
-                resultItem.Value = ExecuteRegexExpression(inputText, item.RegexExpression);
+                resultItem.Value = ExecuteRegexExpression(inputText, item.RegexExpressions);
                 retVal.DataFields.Add(resultItem);
             }
 
@@ -149,14 +149,21 @@ namespace DokuExtractorCore
             var retVal = new FieldExtractorTemplate();
             retVal.TemplateName = templateName;
 
-            foreach (var item in genericRechnung.DataFields)
+            foreach (var item in genericRechnung.DataFields.ToList())
             {
-                string expression;
-                if (TryFindRegexMatchExpress(inputText, item.RegexHalfString, item.RegexFullString, item.FieldType, out expression))
+                var newDataField = new DataFieldTemplate() { Name = item.Name, FieldType = item.FieldType }; // Ignore text anchors as they are not needed in concrete templates
+
+                foreach (var anchor in item.TextAnchors)
                 {
-                    item.RegexExpression = expression;
-                    retVal.DataFields.Add(item);
+                    RegexExpressionFinderResult expressionResult;
+                    if (TryFindRegexMatchExpress(inputText, string.Empty, anchor, item.FieldType, out expressionResult))
+                    {
+                        newDataField.RegexExpressions = new List<string>() { expressionResult.RegexExpression };
+                        break;
+                    }
                 }
+
+                retVal.DataFields.Add(newDataField);
             }
 
             return retVal;
@@ -164,22 +171,25 @@ namespace DokuExtractorCore
 
         public bool CheckRegexExpression(string inputText, string regexString, string targetValue)
         {
-            if (ExecuteRegexExpression(inputText, regexString) == targetValue)
+            if (ExecuteRegexExpression(inputText, new List<string>() { regexString }) == targetValue)
                 return true;
             else
                 return false;
         }
 
-        public string ExecuteRegexExpression(string inputText, string regexExpression)
+        public string ExecuteRegexExpression(string inputText, List<string> regexExpressions)
         {
-            var match = Regex.Match(inputText, regexExpression);
-            if (match.Groups.Count >= 2)
-                return match.Groups[1].Value;
-            else
-                return string.Empty;
+            foreach (var expression in regexExpressions)
+            {
+                var match = Regex.Match(inputText, expression);
+                if (match.Groups.Count >= 2)
+                    return match.Groups[1].Value;
+            }
+
+            return string.Empty;
         }
 
-        public bool TryFindRegexMatchExpress(string inputText, string regexHalfString, string regexFullString, DataFieldTypes dataFieldType, out string regexMatchExpression)
+        public bool TryFindRegexMatchExpress(string inputText, string regexHalfString, string regexFullString, DataFieldTypes dataFieldType, out RegexExpressionFinderResult regexMatchExpression)
         {
             var finder = new RegexExpressionFinder();
             return finder.TryFindRegexMatchExpress(inputText, regexHalfString, regexFullString, dataFieldType, out regexMatchExpression);

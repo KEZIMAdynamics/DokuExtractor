@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -26,64 +27,71 @@ namespace DokuExtractorCore
 
         List<string> currencyExpressions = new List<string>()
         {
+         @"(\d+,\d{2}\D)",
+         @"(\d+'\d{2}\D)",
+         @"(\d+\D\d{2}\D)",
+         @"(\d+.\d{3},\d{2})",
          @"(\d+,\d{2})",
          @"(\d+'\d{2})",
          @"(\d+\D\d{2})"
         };
 
-        public bool TryFindRegexMatchExpress(string inputText, string regexHalfString, string regexFullString, DataFieldTypes dataFieldType, out string regexMatchExpression)
+        public bool TryFindRegexMatchExpress(string inputText, string targetValue, string textAnchor, DataFieldTypes dataFieldType, out RegexExpressionFinderResult regexResult)
         {
-            regexMatchExpression = string.Empty;
+            regexResult = new RegexExpressionFinderResult();
+
+
             switch (dataFieldType)
             {
                 case DataFieldTypes.Text:
-                    regexMatchExpression = RegHeart(regexFullString, regexHalfString, new List<string>() { @"(\w+)" }, new List<string>() { @"\s+" }, inputText);
+                    regexResult = RegHeart(textAnchor, targetValue, new List<string>() { @"(\w+)" }, new List<string>() { @"\s+" }, inputText);
                     break;
                 case DataFieldTypes.Date:
-                    regexMatchExpression = RegHeart(regexFullString, regexHalfString, dateExpressions, new List<string>() { @"\s+", @"\s+.\s+", @"\s+\w+\s+", @"\s+\w+\s+\w+\s+", @"\s+\w+\s+\w+\s+\w+\s+", @".+\s+", @".+\s+\w+", @".+\s+\w+\s+", @".+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+", @".+\s+\w+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+\w+\s+", @".+\/" }, inputText);
+                    regexResult = RegHeart(textAnchor, targetValue, dateExpressions, new List<string>() { @"\s+", @"\s+.\s+", @"\s+\w+\s+", @"\s+\w+\s+\w+\s+", @"\s+\w+\s+\w+\s+\w+\s+", @".+\s+", @".+\s+\w+", @".+\s+\w+\s+", @".+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+", @".+\s+\w+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+\w+\s+", @".+\/" }, inputText);
                     break;
                 case DataFieldTypes.Currency:
-                    regexMatchExpression = RegHeart(regexFullString, regexHalfString, currencyExpressions, new List<string>() { @"\s+", @"\s+.\s+", @"\s+\w+\s+", @"\s+\w+\s+\w+\s+", @"\s+\w+\s+\w+\s+\w+\s+", @".+\s+", @".+\s+\w+", @".+\s+\w+\s+", @".+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+", @".+\s+\w+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+\w+\s+", @".+\/", @"\s+\w+\s+\d+,\d{2}\s+",
+                    regexResult = RegHeart(textAnchor, targetValue, currencyExpressions, new List<string>() { @"\s+", @"\s+.\s+", @"\s+\w+\s+", @"\s+\w+\s+\w+\s+", @"\s+\w+\s+\w+\s+\w+\s+", @".+\s+", @".+\s+\w+", @".+\s+\w+\s+", @".+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+", @".+\s+\w+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+\w+\s+", @".+\/", @"\s+\w+\s+\d+,\d{2}\s+",
                         @"\s+\d+,\d{2}\s+\w+\s+" }, inputText);
                     break;
                 default:
                     break;
             }
-            
 
-            if (regexMatchExpression == string.Empty)
-                return false;
-            else
-                return true;
+            return regexResult.Success;
         }
 
-        private string RegHeart(string regexFullString, string regexHalfString, List<string> specificExpressions, List<string> generalExpressions, string inputText)
+        // TODO: auf group[1] ausdruck testen und "Groupstring" aufnehmen
+        private RegexExpressionFinderResult RegHeart(string textAnchor, string targetValue, List<string> specificExpressions, List<string> generalExpressions, string inputText)
         {
             var loopCounter = 0;
             var stopWatch = new Stopwatch();
             stopWatch.Start();
+
+            var retVal = new RegexExpressionFinderResult();
 
             foreach (var specificExpression in specificExpressions)
             {
                 foreach (var generalExpression in generalExpressions)
                 {
                     loopCounter++;
-                    var regexText = regexFullString + generalExpression + specificExpression;
+                    var regexText = Regex.Escape(textAnchor) + generalExpression + specificExpression;
                     var match = Regex.Match(inputText, regexText);
                     if (match.Success)
                     {
-                        if (match.Groups[1].Value == regexHalfString)
+                        if (match.Groups[1].Value == targetValue || targetValue == string.Empty)
                         {
                             Debug.Print(regexText + Environment.NewLine + "Regex runs until result: " + loopCounter + Environment.NewLine + "Duration: " + stopWatch.Elapsed.ToString());
-
-                            return regexText;
+                            retVal.RegexExpression = regexText;
+                            retVal.MatchingValue = match.Groups[1].Value;
+                            retVal.Success = true;
+                            return retVal;
                         }
 
                     }
                 }
             }
 
-            return string.Empty;
+            return retVal;
         }
     }
 }

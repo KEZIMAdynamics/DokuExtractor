@@ -25,7 +25,7 @@ namespace DokuExtractorCore
 
             var table = BuildTableFromLinesAndColumns(lines, columns);
             var maxAmountOfItemsPerLineToBeMovedUp = table.TableCountDictionary.Values.Max() / 2;
-            // table = CleanMultilineTableItems(table, maxAmountOfItemsPerLineToBeMovedUp);
+             table = CleanMultilineTableItems(table, maxAmountOfItemsPerLineToBeMovedUp);
 
             return table;
         }

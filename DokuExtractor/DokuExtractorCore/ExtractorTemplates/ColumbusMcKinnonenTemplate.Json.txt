@@ -7,35 +7,35 @@
   "DataFields": [
     {
       "Name": "Rechnungsdatum",
-      "RegexExpression": "Seite 1 of2\\s+(\\d+.\\d{2}.\\d+)",
+      "RegexExpressions": ["Seite 1 of2\\s+(\\d+.\\d{2}.\\d+)"],
       "RegexFullString": "",
       "RegexHalfString": "",
 	  "FieldType": 1
     },
     {
       "Name": "Rechnungssumme Netto",
-      "RegexExpression": "Nettosumme\\s+(\\d+,\\d{2})",
+      "RegexExpressions": ["Nettosumme\\s+(\\d+,\\d{2})"],
       "RegexFullString": "Flugzeug fliegen",
       "RegexHalfString": "Flugzeug ",
 	  "FieldType": 2
     },
 	{
       "Name": "MwSt Betrag",
-      "RegexExpression": "Umsatzsteuer \\(19.00%\\)\\s+(\\d+,\\d{2})",
+      "RegexExpressions": ["Umsatzsteuer \\(19.00%\\)\\s+(\\d+,\\d{2})"],
       "RegexFullString": "",
       "RegexHalfString": "",
 	  "FieldType": 2
     },
 	  {
       "Name": "Rechnungssumme Brutto",
-      "RegexExpression": "Rechnungssumme \\(EUR\\)\\s+(\\d+,\\d{2})",
+      "RegexExpressions": ["Rechnungssumme \\(EUR\\)\\s+(\\d+,\\d{2})"],
       "RegexFullString": "",
       "RegexHalfString": "",
 	  "FieldType": 2
     },
 	{
       "Name": "Zahlbar bis",
-      "RegexExpression": "fällig bis\\s+(\\d+.\\d{2}.\\d+)",
+      "RegexExpressions": ["fällig bis\\s+(\\d+.\\d{2}.\\d+)"],
       "RegexFullString": "",
       "RegexHalfString": "",
 	  "FieldType": 1

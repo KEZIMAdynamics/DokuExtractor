@@ -7,28 +7,28 @@
   "DataFields": [
     {
       "Name": "Rechnungsdatum",
-      "RegexExpression": "Datum:\\s+(\\d+.\\d{2}.\\d+)",
+      "RegexExpressions": ["Datum:\\s+(\\d+.\\d{2}.\\d+)"],
       "RegexFullString": "",
       "RegexHalfString": "",
 	  "FieldType": 1
     },
     {
       "Name": "Rechnungssumme Netto",
-      "RegexExpression": "Wert\\s+(\\d+,\\d{2})",
+      "RegexExpressions": ["Wert\\s+(\\d+,\\d{2})"],
       "RegexFullString": "Flugzeug fliegen",
       "RegexHalfString": "Flugzeug ",
 	  "FieldType": 2
     },
 	{
       "Name": "MwSt Betrag",
-      "RegexExpression": "MWST\\s+(\\d+,\\d{2})",
+      "RegexExpressions": ["MWST\\s+(\\d+,\\d{2})"],
       "RegexFullString": "",
       "RegexHalfString": "",
 	  "FieldType": 2
     },
 	{
       "Name": "Zahlbar bis",
-      "RegexExpression": "fällig bis\\s+(\\d+.\\d{2}.\\d+)",
+      "RegexExpressions": ["fällig bis\\s+(\\d+.\\d{2}.\\d+)"],
       "RegexFullString": "",
       "RegexHalfString": "",
 	  "FieldType": 1

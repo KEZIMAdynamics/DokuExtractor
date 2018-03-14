@@ -33,8 +33,8 @@ namespace DokuExtractorGUI
 
             var matchingTemplateResult = processor.MatchTemplates(templates, inputString);
             var template = matchingTemplateResult.Template;
-            if (matchingTemplateResult.IsMatchSuccessfull == false)
-                template = processor.AutoCreateTemplate("NeuesTemplate", inputString);
+            //if (matchingTemplateResult.IsMatchSuccessfull == false)
+            //    template = processor.AutoCreateTemplate("NeuesTemplate", inputString);
 
             if (matchingTemplateResult.IsMatchSuccessfull)
             {
@@ -55,7 +55,6 @@ namespace DokuExtractorGUI
 
             }
 
-
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -75,19 +74,19 @@ namespace DokuExtractorGUI
                    {
                         new DokuExtractorCore.Model.DataFieldTemplate()
                         {
-                             Name = "Ein Datenfeld",
-                             RegexExpression = "/d/",
-                             RegexFullString = "Auto fahren",
-                             RegexHalfString = "Auto ",
+                             Name = "Ein Datumsfeld",
+                             RegexExpressions = new List<string>(){ "/d/" },
+                             TextAnchors = new List<string>(){ "Datum", "Datum:" },
+                             //RegexHalfString = "Auto ",
                               FieldType = DataFieldTypes.Date
                         },
                         new DokuExtractorCore.Model.DataFieldTemplate()
                         {
-                            Name = "Noch ein Datenfeld",
-                            RegexExpression = "/s/",
-                            RegexFullString = "Flugzeug fliegen",
-                            RegexHalfString = "Flugzeug ",
-                              FieldType = DataFieldTypes.Text
+                            Name = "Ein Währungsfeld",
+                            RegexExpressions = new List<string>(){"/s/" },
+                            TextAnchors = new List<string>(){ "Summe", "Summe:" },
+                            //RegexHalfString = "Flugzeug ",
+                              FieldType = DataFieldTypes.Currency
                         }
                    }
             });
@@ -101,14 +100,16 @@ namespace DokuExtractorGUI
 
         private void btFindRegexExpression_Click(object sender, EventArgs e)
         {
+            tbRegexFullString.Text = tbRegexFullString.Text.Trim(' ');
             var finder = new RegexExpressionFinder();
 
             DataFieldTypes type = (DataFieldTypes)Enum.Parse(typeof(DataFieldTypes), listBox1.SelectedItem.ToString(), true);
 
-            string expression;
-            if (finder.TryFindRegexMatchExpress(tbInhalt.Text, tbRegexHalfString.Text, tbRegexFullString.Text, type, out expression))
+            RegexExpressionFinderResult expressionResult;
+            if (finder.TryFindRegexMatchExpress(tbInhalt.Text, tbRegexHalfString.Text, tbRegexFullString.Text, type, out expressionResult))
             {
-                tbExtractedData.Text = expression;
+                tbExtractedData.Text = "Regex expression found:" + Environment.NewLine + expressionResult.RegexExpression + Environment.NewLine
+                    + Environment.NewLine + "Matching value:" + Environment.NewLine + expressionResult.MatchingValue;
             }
             else
             {
@@ -121,5 +122,36 @@ namespace DokuExtractorGUI
             var form = new frmTableProcessor();
             form.Show();
         }
+
+        private async void btLoadPdf_Click(object sender, EventArgs e)
+        {
+            var loader = new PdfTextLoader();
+
+            var pdfContent = await loader.GetTextFromPdf(tbInputPfad.Text, false);
+            tbInhalt.Font = new Font("Consolas", 8);
+            tbInhalt.Text = pdfContent;
+        }
+
+        private void Form1_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effect = DragDropEffects.Copy;
+            }
+        }
+
+        private void Form1_DragDrop(object sender, DragEventArgs e)
+        {
+            var text = string.Empty;
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+
+            foreach (var item in files)
+            {
+                tbInputPfad.Text = item;
+            }
+
+
+        }
+
     }
 }
