@@ -27,9 +27,10 @@ namespace DokuExtractorCore
 
         List<string> currencyExpressions = new List<string>()
         {
-         @"(\d+,\d{2}\D)",
-         @"(\d+'\d{2}\D)",
-         @"(\d+\D\d{2}\D)",
+         @"(\d+.?\d{0,3},\d{2})",
+         @"(\d+,\d{2})\D",
+         @"(\d+'\d{2})\D",
+         @"(\d+\D\d{2})\D",
          @"(\d+.\d{3},\d{2})",
          @"(\d+,\d{2})",
          @"(\d+'\d{2})",
