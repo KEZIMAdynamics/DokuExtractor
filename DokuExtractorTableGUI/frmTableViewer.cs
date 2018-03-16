@@ -36,7 +36,8 @@ namespace DokuExtractorTableGUI
                     row.Cells[c].Value = twoD[r, c];
                 }
 
-                this.dataGridView1.Rows.Add(row);
+                if (row != null && row.Index != -1)
+                    this.dataGridView1.Rows.Add(row);
             }
         }
     }
