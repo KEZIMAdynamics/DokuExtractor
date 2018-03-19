@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace DokuExtractorCore.Model
 {
-    public enum DataFieldTypes
+    public class PreKeyWordSelectionArgs
     {
-        Text,
-        Date,
-        Currency,
-        IBAN
+        public string IBAN { get; set; } = string.Empty;
     }
 }

@@ -37,6 +37,11 @@ namespace DokuExtractorCore
          @"(\d+\D\d{2})"
         };
 
+        List<string> IBANExpressions = new List<string>()
+        {
+        @"([a-zA-Z]{2}\d{2}\s?[0-9a-zA-Z]{4}\s?[0-9a-zA-Z]{4}\s?[0-9a-zA-Z]{4}\s?[0-9a-zA-Z]{4}\s?[0-9a-zA-Z]{2})"
+        };
+
         public bool TryFindRegexMatchExpress(string inputText, string targetValue, string textAnchor, DataFieldTypes dataFieldType, out RegexExpressionFinderResult regexResult)
         {
             regexResult = new RegexExpressionFinderResult();
@@ -54,6 +59,9 @@ namespace DokuExtractorCore
                     regexResult = RegHeart(textAnchor, targetValue, currencyExpressions, new List<string>() { @"\s+", @"\s+.\s+", @"\s+\w+\s+", @"\s+\w+\s+\w+\s+", @"\s+\w+\s+\w+\s+\w+\s+", @".+\s+", @".+\s+\w+", @".+\s+\w+\s+", @".+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+", @".+\s+\w+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+\w+\s+", @".+\/", @"\s+\w+\s+\d+,\d{2}\s+",
                         @"\s+\d+,\d{2}\s+\w+\s+" }, inputText);
                     break;
+                case DataFieldTypes.IBAN:
+                    regexResult = RegHeart(textAnchor, targetValue, IBANExpressions, new List<string>() { @"\s+", @"\s+.\s+", @"\s+\w+\s+", @"\s+\w+\s+\w+\s+", @"\s+\w+\s+\w+\s+\w+\s+", @".+\s+", @".+\s+\w+", @".+\s+\w+\s+", @".+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+", @".+\s+\w+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+\w+\s+", @".+\/" }, inputText);
+                    break;
                 default:
                     break;
             }
@@ -61,7 +69,6 @@ namespace DokuExtractorCore
             return regexResult.Success;
         }
 
-        // TODO: auf group[1] ausdruck testen und "Groupstring" aufnehmen
         private RegexExpressionFinderResult RegHeart(string textAnchor, string targetValue, List<string> specificExpressions, List<string> generalExpressions, string inputText)
         {
             var loopCounter = 0;
@@ -81,9 +88,9 @@ namespace DokuExtractorCore
                     {
                         if (match.Groups[1].Value == targetValue || targetValue == string.Empty)
                         {
-                            Debug.Print(regexText + Environment.NewLine + "Regex runs until result: " + loopCounter + Environment.NewLine + "Duration: " + stopWatch.Elapsed.ToString());
                             retVal.RegexExpression = regexText;
                             retVal.MatchingValue = match.Groups[1].Value;
+                            Debug.Print(regexText + Environment.NewLine + "Regex runs until result: " + loopCounter + Environment.NewLine + "Duration: " + stopWatch.Elapsed.ToString());
                             retVal.Success = true;
                             return retVal;
                         }

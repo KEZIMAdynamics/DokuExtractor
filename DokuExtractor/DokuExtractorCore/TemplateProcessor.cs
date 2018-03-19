@@ -59,10 +59,40 @@ namespace DokuExtractorCore
 
                 File.WriteAllText(filePath, templateJson);
             }
-
         }
 
         public TemplateMachResult MatchTemplates(List<FieldExtractorTemplate> templates, string inputText)
+        {
+            var retVal = new TemplateMachResult();
+
+            var preselectedTemplates = PreSelectTemplates(templates, inputText);
+            if (preselectedTemplates.Count > 0)
+            {
+                retVal = MatchTemplatesViaKeyWords(preselectedTemplates, inputText);
+            }
+            if (retVal.IsMatchSuccessfull == false)
+            {
+                retVal = MatchTemplatesViaKeyWords(templates, inputText);
+            }
+
+            return retVal;
+        }
+
+        public List<FieldExtractorTemplate> PreSelectTemplates(List<FieldExtractorTemplate> templates, string inputText)
+        {
+            var retVal = new List<FieldExtractorTemplate>();
+
+            RegexExpressionFinderResult regexResult;
+            if (TryFindRegexMatchExpress(inputText, string.Empty, string.Empty, DataFieldTypes.IBAN, out regexResult))
+            {
+                var iban = regexResult.MatchingValue.Replace(" ", string.Empty).ToUpper();
+                retVal.AddRange(templates.Where(x => x.PreSelectionCondition.IBAN == iban));
+            }
+
+            return retVal;
+        }
+
+        public TemplateMachResult MatchTemplatesViaKeyWords(List<FieldExtractorTemplate> templates, string inputText)
         {
             var checkedWords = new Dictionary<string, int>();
 
@@ -149,6 +179,10 @@ namespace DokuExtractorCore
             var retVal = new FieldExtractorTemplate();
             retVal.TemplateName = templateName;
 
+            RegexExpressionFinderResult regexResult;
+            if (TryFindRegexMatchExpress(inputText, string.Empty, string.Empty, DataFieldTypes.IBAN, out regexResult))
+                retVal.PreSelectionCondition.IBAN = regexResult.MatchingValue.Replace(" ", string.Empty).ToUpper();
+            
             foreach (var item in genericRechnung.DataFields.ToList())
             {
                 var newDataField = new DataFieldTemplate() { Name = item.Name, FieldType = item.FieldType }; // Ignore text anchors as they are not needed in concrete templates
