@@ -36,7 +36,12 @@ namespace DokuExtractorTableGUI
                     row.Cells[c].Value = twoD[r, c];
                 }
 
-                this.dataGridView1.Rows.Add(row);
+                try
+                {
+                    this.dataGridView1.Rows.Add(row);
+                }
+                catch (Exception ex)
+                { }
             }
         }
     }

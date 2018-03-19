@@ -51,7 +51,6 @@ namespace DokuExtractorTableGUI
             license.RegisterKEY("***REMOVED***");
 
             this.CenterToScreen();
-            this.WindowState = FormWindowState.Maximized;
             splitContainer1.SplitterDistance = splitContainer1.Width / 2;
         }
 
@@ -64,6 +63,8 @@ namespace DokuExtractorTableGUI
             {
                 gdViewer1.DisplayFromGdPicturePDF(gdPdf);
                 annotManager = gdViewer1.GetAnnotationManager();
+                //gdPdf.SetMeasurementUnit(PdfMeasurementUnit.PdfMeasurementUnitInch);
+                this.WindowState = FormWindowState.Maximized;
             }
 
             UpdateInstructionLabel(gdStatus);
@@ -96,10 +97,33 @@ namespace DokuExtractorTableGUI
         {
             DisableTableDefinitionButtons();
 
-            float srcTop = this.tableFrameTop - (this.tableFrameHeight / 2);
-            float srcLeft = this.tableFrameLeft + (this.tableFrameWidth / 2) - 0.1F;
-            float dstTop = srcTop + this.tableFrameHeight;
-            float dstLeft = this.tableFrameLeft + (this.tableFrameWidth / 2) - 0.1F;
+            float srcTop = 0;
+            float srcLeft = 0;
+            float dstTop = 0;
+            float dstLeft = 0;
+            int rotation = gdPdf.GetPageRotation();
+
+            if (rotation == 270 || rotation == -90)
+            {
+                srcTop = this.tableFrameTop + (this.tableFrameHeight / 2) - 0.1F;
+                srcLeft = this.tableFrameLeft + (this.tableFrameWidth / 2);
+                dstTop = this.tableFrameTop + (this.tableFrameHeight / 2) - 0.1F;
+                dstLeft = this.tableFrameLeft - (this.tableFrameWidth / 2);
+            }
+            else if (rotation == 90 || rotation == -270)
+            {
+                srcTop = this.tableFrameTop - (this.tableFrameHeight / 2) + 0.1F;
+                srcLeft = this.tableFrameLeft + (this.tableFrameWidth / 2);
+                dstTop = this.tableFrameTop - (this.tableFrameHeight / 2) + 0.1F;
+                dstLeft = this.tableFrameLeft - (this.tableFrameWidth / 2);
+            }
+            else
+            {
+                srcTop = this.tableFrameTop - (this.tableFrameHeight / 2);
+                srcLeft = this.tableFrameLeft + (this.tableFrameWidth / 2) - 0.1F;
+                dstTop = srcTop + this.tableFrameHeight;
+                dstLeft = this.tableFrameLeft + (this.tableFrameWidth / 2) - 0.1F;
+            }
 
             var line = annotManager.AddLineAnnot(Color.Blue, srcLeft, srcTop, dstLeft, dstTop);
             line.BorderWidth = 0.05F;
@@ -114,10 +138,33 @@ namespace DokuExtractorTableGUI
         {
             DisableTableDefinitionButtons();
 
-            float srcTop = this.tableFrameTop - (this.tableFrameHeight / 2);
-            float srcLeft = this.tableFrameLeft - (this.tableFrameWidth / 2) + 0.1F;
-            float dstTop = srcTop + this.tableFrameHeight;
-            float dstLeft = this.tableFrameLeft - (this.tableFrameWidth / 2) + 0.1F;
+            float srcTop = 0;
+            float srcLeft = 0;
+            float dstTop = 0;
+            float dstLeft = 0;
+            int rotation = gdPdf.GetPageRotation();
+
+            if (rotation == 270 || rotation == -90)
+            {
+                srcTop = this.tableFrameTop - (this.tableFrameHeight / 2) + 0.1F;
+                srcLeft = this.tableFrameLeft + (this.tableFrameWidth / 2);
+                dstTop = this.tableFrameTop - (this.tableFrameHeight / 2) + 0.1F;
+                dstLeft = this.tableFrameLeft - (this.tableFrameWidth / 2);
+            }
+            else if (rotation == 90 || rotation == -270)
+            {
+                srcTop = this.tableFrameTop + (this.tableFrameHeight / 2) - 0.1F;
+                srcLeft = this.tableFrameLeft + (this.tableFrameWidth / 2);
+                dstTop = this.tableFrameTop + (this.tableFrameHeight / 2) - 0.1F;
+                dstLeft = this.tableFrameLeft - (this.tableFrameWidth / 2);
+            }
+            else
+            {
+                srcTop = this.tableFrameTop - (this.tableFrameHeight / 2);
+                srcLeft = this.tableFrameLeft - (this.tableFrameWidth / 2) + 0.1F;
+                dstTop = srcTop + this.tableFrameHeight;
+                dstLeft = this.tableFrameLeft - (this.tableFrameWidth / 2) + 0.1F;
+            }
 
             var line = annotManager.AddLineAnnot(Color.Blue, srcLeft, srcTop, dstLeft, dstTop);
             line.BorderWidth = 0.05F;
@@ -149,7 +196,7 @@ namespace DokuExtractorTableGUI
             tableViewer.ShowTable(table);
             tableViewer.Show();
 
-           // var lines = 
+            // var lines = 
         }
 
         /// <summary>
@@ -178,7 +225,19 @@ namespace DokuExtractorTableGUI
             {
                 var annot = gdViewer1.GetAnnotationFromIdx(AnnotationIdx);
                 annot.CanRotate = false;
+                var rotation = gdPdf.GetPageRotation();
 
+                if (rotation == 270 || rotation == -90 || rotation == 90 || rotation == -270)
+                {
+                    if (annot.Rotation == 270 || annot.Rotation == -90 || annot.Rotation == 90 || annot.Rotation == -270)
+                    {
+                        annot.Rotation = 0;
+                        var newWidth = annot.Height;
+                        var newHeight = annot.Width;
+                        annot.Width = newWidth;
+                        annot.Height = newHeight;
+                    }
+                }
                 UpdateTableFrameMemory(annot.Left, annot.Top, annot.Width, annot.Height);
 
                 EnableColumnButtons();
@@ -253,6 +312,7 @@ namespace DokuExtractorTableGUI
             var widthDif = newTableFrameWidth - this.tableFrameWidth;
             var heightDif = newTableFrameHeight - this.tableFrameHeight;
 
+            var rotation = gdPdf.GetPageRotation();
             var annotCount = gdViewer1.GetAnnotationCount(); // Count of annotations
 
             while (annotCount > 1) // Do following actions for every column separation line (but not for table frame)
@@ -261,13 +321,26 @@ namespace DokuExtractorTableGUI
 
                 if (rezised) // Has the table frame been rezised?
                 {
-                    // Deletes column separation line, if it is (right or left) out of the table frame
-                    if (annot.Left <= newTableFrameLeft - (newTableFrameWidth / 2) || annot.Left >= newTableFrameLeft + (newTableFrameWidth / 2))
-                        gdViewer1.DeleteAnnotation(annotCount - 1);
+                    if (rotation == 270 || rotation == -90 || rotation == 90 || rotation == -270)
+                    {
+                        // Deletes column separation line, if it is (right or left) out of the table frame
+                        if (annot.Top <= newTableFrameTop - (newTableFrameHeight / 2) || annot.Top >= newTableFrameTop + (newTableFrameHeight / 2))
+                            gdViewer1.DeleteAnnotation(annotCount - 1);
 
-                    // Moves column separation line into the table frame, if (a part of) it is (top or bottom) out of the table frame
-                    annot.Top = annot.Top + topDif;
-                    annot.Height = annot.Height + heightDif;
+                        // Moves column separation line into the table frame, if (a part of) it is (top or bottom) out of the table frame
+                        annot.Left = annot.Left + leftDif;
+                        annot.Width = annot.Width + widthDif;
+                    }
+                    else
+                    {
+                        // Deletes column separation line, if it is (right or left) out of the table frame
+                        if (annot.Left <= newTableFrameLeft - (newTableFrameWidth / 2) || annot.Left >= newTableFrameLeft + (newTableFrameWidth / 2))
+                            gdViewer1.DeleteAnnotation(annotCount - 1);
+
+                        // Moves column separation line into the table frame, if (a part of) it is (top or bottom) out of the table frame
+                        annot.Top = annot.Top + topDif;
+                        annot.Height = annot.Height + heightDif;
+                    }
                 }
                 else // Or has the table frame been moved?
                 {
@@ -287,12 +360,24 @@ namespace DokuExtractorTableGUI
         private void TameMovedColumnLine(int annotIndex)
         {
             var annot = gdViewer1.GetAnnotationFromIdx(annotIndex);
+            var rotation = gdPdf.GetPageRotation();
 
-            // Deletes column separation line, if it is (right or left) out of the table frame
-            if (annot.Left <= this.tableFrameLeft - (this.tableFrameWidth / 2) || annot.Left >= this.tableFrameLeft + (this.tableFrameWidth / 2))
-                gdViewer1.DeleteAnnotation(annotIndex);
-            else // Moves column separation line into the table frame, if (a part of) it is out of the table frame
-                annot.Top = this.tableFrameTop;
+            if (rotation == 270 || rotation == -90 || rotation == 90 || rotation == -270)
+            {
+                // Deletes column separation line, if it is (right or left) out of the table frame
+                if (annot.Top <= this.tableFrameTop - (this.tableFrameHeight / 2) || annot.Top >= this.tableFrameTop + (this.tableFrameHeight / 2))
+                    gdViewer1.DeleteAnnotation(annotIndex);
+                else // Moves column separation line into the table frame, if (a part of) it is out of the table frame
+                    annot.Left = this.tableFrameLeft;
+            }
+            else
+            {
+                // Deletes column separation line, if it is (right or left) out of the table frame
+                if (annot.Left <= this.tableFrameLeft - (this.tableFrameWidth / 2) || annot.Left >= this.tableFrameLeft + (this.tableFrameWidth / 2))
+                    gdViewer1.DeleteAnnotation(annotIndex);
+                else // Moves column separation line into the table frame, if (a part of) it is out of the table frame
+                    annot.Top = this.tableFrameTop;
+            }
         }
         #endregion FrameLogic
 
@@ -314,6 +399,7 @@ namespace DokuExtractorTableGUI
         {
             var annotList = new List<Annotation>();
             var annotCount = gdViewer1.GetAnnotationCount();
+            var rotation = gdPdf.GetPageRotation();
 
             while (annotCount > 1) // Do following actions for every column separation line (but not for table frame)
             {
@@ -323,10 +409,34 @@ namespace DokuExtractorTableGUI
                 annotCount--;
             }
 
-            var leftFence = this.tableFrameLeft - (this.tableFrameWidth / 2); // Left border of the table frame
-            var rightFence = this.tableFrameLeft + (this.tableFrameWidth / 2); // Right border of the table frame
+            float leftFence = 0;
+            float rightFence = 0;
 
-            var annotListOrdered = annotList.OrderBy(x => x.Left); // Order column separation lines by position (from left to right)
+            if (rotation == 270 || rotation == -90)
+            {
+                leftFence = this.tableFrameTop - (this.tableFrameHeight / 2); // Left border of the table frame
+                rightFence = this.tableFrameTop + (this.tableFrameHeight / 2); // Right border of the table frame
+            }
+            else if (rotation == 90 || rotation == -270)
+            {
+                leftFence = this.tableFrameTop + (this.tableFrameHeight / 2); // Left border of the table frame
+                rightFence = this.tableFrameTop - (this.tableFrameHeight / 2); // Right border of the table frame
+            }
+            else
+            {
+                leftFence = this.tableFrameLeft - (this.tableFrameWidth / 2); // Left border of the table frame
+                rightFence = this.tableFrameLeft + (this.tableFrameWidth / 2); // Right border of the table frame
+            }
+
+            var annotListOrdered = new List<Annotation>();
+
+            if (rotation == 270 || rotation == -90)
+                annotListOrdered = annotList.OrderBy(x => x.Top).ToList(); // Orders column separation lines by position (from left to right)
+            else if (rotation == 90 || rotation == -270)
+                annotListOrdered = annotList.OrderByDescending(x => x.Top).ToList(); // Orders column separation lines by position (from left to right)
+            else
+                annotListOrdered = annotList.OrderBy(x => x.Left).ToList(); // Orders column separation lines by position (from left to right)
+
             var columnLineNo = 0; // Rememberes which column separation line is currently handled within the foreach
             Annotation prevAnnot = null; // Remembers previous handled column separation line
 
@@ -335,26 +445,45 @@ namespace DokuExtractorTableGUI
             foreach (var annot in annotListOrdered)
             {
                 // In the following there are not used else-ifs because the first column separation line can also be the last and the last column separation line does
-                // have an previous handled column separation line in most cases
+                // have a previous handled column separation line in most cases
 
                 // If it is the first column separation line, the text of the area between the left border of the table frame and the currently handled line is extracted
                 if (columnLineNo == 0)
                 {
-                    allTableColumns = allTableColumns + gdViewer1.GetPageTextArea(leftFence, annot.Top - (annot.Height / 2), annot.Left - leftFence, annot.Height)
-                                      + Environment.NewLine + "|||" + Environment.NewLine;
+                    if (rotation == 270 || rotation == -90)
+                        allTableColumns = allTableColumns + gdViewer1.GetPageTextArea(tableFrameLeft - (tableFrameWidth / 2), leftFence, annot.Width, annot.Top - leftFence)
+                                          + Environment.NewLine + "|||" + Environment.NewLine;
+                    else if (rotation == 90 || rotation == -270)
+                        allTableColumns = allTableColumns + gdViewer1.GetPageTextArea(tableFrameLeft - (tableFrameWidth / 2), annot.Top, annot.Width, leftFence - annot.Top)
+                                          + Environment.NewLine + "|||" + Environment.NewLine;
+                    else
+                        allTableColumns = allTableColumns + gdViewer1.GetPageTextArea(leftFence, annot.Top - (annot.Height / 2), annot.Left - leftFence, annot.Height)
+                                          + Environment.NewLine + "|||" + Environment.NewLine;
                 }
 
                 // If there is a previous handled column seperation line, the text of the area between that line an the currently handled line is extracted
                 if (prevAnnot != null)
                 {
-                    allTableColumns = allTableColumns + gdViewer1.GetPageTextArea(prevAnnot.Left, annot.Top - (annot.Height / 2), annot.Left - prevAnnot.Left, annot.Height)
-                                      + Environment.NewLine + "|||" + Environment.NewLine;
+                    if (rotation == 270 || rotation == -90)
+                        allTableColumns = allTableColumns + gdViewer1.GetPageTextArea(tableFrameLeft - (tableFrameWidth / 2), prevAnnot.Top, annot.Width, annot.Top - prevAnnot.Top)
+                                          + Environment.NewLine + "|||" + Environment.NewLine;
+                    else if (rotation == 90 || rotation == -270)
+                        allTableColumns = allTableColumns + gdViewer1.GetPageTextArea(tableFrameLeft - (tableFrameWidth / 2), annot.Top, annot.Width, prevAnnot.Top - annot.Top)
+                                          + Environment.NewLine + "|||" + Environment.NewLine;
+                    else
+                        allTableColumns = allTableColumns + gdViewer1.GetPageTextArea(prevAnnot.Left, annot.Top - (annot.Height / 2), annot.Left - prevAnnot.Left, annot.Height)
+                                          + Environment.NewLine + "|||" + Environment.NewLine;
                 }
 
                 // If it is the last column separation line, the text of the area between the right border of the table frame and the currently handled line is extracted
                 if (columnLineNo == annotCount - 1)
                 {
-                    allTableColumns = allTableColumns + gdViewer1.GetPageTextArea(annot.Left, annot.Top - (annot.Height / 2), rightFence - annot.Left, annot.Height);
+                    if (rotation == 270 || rotation == -90)
+                        allTableColumns = allTableColumns + gdViewer1.GetPageTextArea(tableFrameLeft - (tableFrameWidth / 2), annot.Top, annot.Width, rightFence - annot.Top);
+                    else if (rotation == 90 || rotation == -270)
+                        allTableColumns = allTableColumns + gdViewer1.GetPageTextArea(tableFrameLeft - (tableFrameWidth / 2), rightFence, annot.Width, annot.Top - rightFence);
+                    else
+                        allTableColumns = allTableColumns + gdViewer1.GetPageTextArea(annot.Left, annot.Top - (annot.Height / 2), rightFence - annot.Left, annot.Height);
                 }
 
                 prevAnnot = annot;
