@@ -117,6 +117,13 @@ namespace DokuExtractorTableGUI
                 dstTop = this.tableFrameTop - (this.tableFrameHeight / 2) + 0.1F;
                 dstLeft = this.tableFrameLeft - (this.tableFrameWidth / 2);
             }
+            //else if (rotation == 180 || rotation == -180) // Documents rotated 180° are not readable!
+            //{
+            //    srcTop = this.tableFrameTop - (this.tableFrameHeight / 2);
+            //    srcLeft = this.tableFrameLeft - (this.tableFrameWidth / 2) + 0.1F;
+            //    dstTop = srcTop + this.tableFrameHeight;
+            //    dstLeft = this.tableFrameLeft - (this.tableFrameWidth / 2) + 0.1F;
+            //}
             else
             {
                 srcTop = this.tableFrameTop - (this.tableFrameHeight / 2);
@@ -158,6 +165,13 @@ namespace DokuExtractorTableGUI
                 dstTop = this.tableFrameTop + (this.tableFrameHeight / 2) - 0.1F;
                 dstLeft = this.tableFrameLeft - (this.tableFrameWidth / 2);
             }
+            //else if (rotation == 180 || rotation == -180) // Documents rotated 180° are not readable!
+            //{
+            //    srcTop = this.tableFrameTop - (this.tableFrameHeight / 2);
+            //    srcLeft = this.tableFrameLeft + (this.tableFrameWidth / 2) - 0.1F;
+            //    dstTop = srcTop + this.tableFrameHeight;
+            //    dstLeft = this.tableFrameLeft + (this.tableFrameWidth / 2) - 0.1F;
+            //}
             else
             {
                 srcTop = this.tableFrameTop - (this.tableFrameHeight / 2);
@@ -238,6 +252,10 @@ namespace DokuExtractorTableGUI
                         annot.Height = newHeight;
                     }
                 }
+                //else if (rotation == 180 || rotation == -180) // Documents rotated 180° are not readable!
+                //    if (annot.Rotation == 180 || annot.Rotation == -180)
+                //        annot.Rotation = 0;
+
                 UpdateTableFrameMemory(annot.Left, annot.Top, annot.Width, annot.Height);
 
                 EnableColumnButtons();
