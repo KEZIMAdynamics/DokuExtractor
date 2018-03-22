@@ -236,7 +236,7 @@
             this.gdViewer1.MouseMode = GdPicture14.ViewerMouseMode.MouseModeAreaSelection;
             this.gdViewer1.MouseWheelMode = GdPicture14.ViewerMouseWheelMode.MouseWheelModeVerticalScroll;
             this.gdViewer1.Name = "gdViewer1";
-            this.gdViewer1.OptimizeDrawingSpeed = true;
+            //this.gdViewer1.OptimizeDrawingSpeed = true;
             this.gdViewer1.PageDisplayMode = GdPicture14.PageDisplayMode.SinglePageView;
             this.gdViewer1.PdfDisplayFormField = true;
             this.gdViewer1.PdfEnableFileLinks = true;
