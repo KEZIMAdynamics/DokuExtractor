@@ -42,6 +42,12 @@ namespace DokuExtractorTableGUI.UserControls
         private float tableFrameWidth = 0;
         private float tableFrameHeight = 0;
 
+        private List<int> pagesWithAnnot = new List<int>();
+
+        private int selectedThumbnailIdx = 0;
+        private bool isExtractionRunning = false;
+        private bool isClearanceRunning = false;
+
         /// <summary>
         /// The AnnotationManager is necessary to add annotations (in this case: column separation lines) by code
         /// </summary>
@@ -65,33 +71,70 @@ namespace DokuExtractorTableGUI.UserControls
         }
 
         /// <summary>
-        /// Loads the first page of a GdPicturePdf
+        /// Loads a GdPicturePdf
         /// </summary>
-        /// <param name="gdPdf">One page GdPicturePdf</param>
+        /// <param name="gdPdf">GdPicturePdf</param>
         public void LoadGdPdf(GdPicturePDF gdPdf)
         {
             this.gdPdf = gdPdf;
             gdViewer1.DisplayFromGdPicturePDF(this.gdPdf);
+            thumbnailEx1.LoadFromGdViewer(gdViewer1);
         }
         #endregion Initialization
 
         #region Extraction
         /// <summary>
+        /// Extracts text of all table frames and columns; Returns a list of string[2] (0: text of all table lines, 1: text of all table columns)
+        /// </summary>
+        public List<string[]> ExtractAllTableLinesAndColumns()
+        {
+            isExtractionRunning = true;
+            var retVal = new List<string[]>();
+            var pageCount = thumbnailEx1.ItemCount;
+
+            if (pagesWithAnnot.Where(x => x == selectedThumbnailIdx).Count() == 0)
+                if (gdViewer1.GetAnnotationFromIdx(0) != null)
+                    pagesWithAnnot.Add(selectedThumbnailIdx);
+
+            if (pagesWithAnnot.Count > 0)
+            {
+                var pagesWithAnnotOrdered = pagesWithAnnot.OrderBy(x => x).ToList();
+                foreach (var pageIdx in pagesWithAnnotOrdered)
+                {
+                    var extractionObject = new string[2];
+                    thumbnailEx1.SelectItem(pageIdx);
+                    extractionObject[0] = ExtractTableLines();
+                    extractionObject[1] = ExtractTableColumns();
+                    retVal.Add(extractionObject);
+                }
+            }
+
+            isExtractionRunning = false;
+            return retVal;
+        }
+
+        /// <summary>
         /// Extracts text of the complete table frame (line by line)
         /// </summary>
-        public string ExtractAllTableLines()
+        private string ExtractTableLines()
         {
             var retVal = string.Empty;
-            var left = this.tableFrameLeft - (this.tableFrameWidth / 2);
-            var top = this.tableFrameTop - (this.tableFrameHeight / 2);
-            retVal = gdViewer1.GetPageTextArea(left, top, this.tableFrameWidth, this.tableFrameHeight);
+
+            var tableFrame = gdViewer1.GetAnnotationFromIdx(0);
+            if (tableFrame != null)
+            {
+                var left = this.tableFrameLeft - (this.tableFrameWidth / 2);
+                var top = this.tableFrameTop - (this.tableFrameHeight / 2);
+                retVal = gdViewer1.GetPageTextArea(left, top, this.tableFrameWidth, this.tableFrameHeight);
+            }
+
             return retVal;
         }
 
         /// <summary>
         /// Extracts text of all table colums (line by line) seperated by ||| between each column
         /// </summary>
-        public string ExtractAllTableColumns()
+        private string ExtractTableColumns()
         {
             var retVal = string.Empty;
             var annotList = new List<Annotation>();
@@ -475,13 +518,23 @@ namespace DokuExtractorTableGUI.UserControls
 
         #region Clearance
         /// <summary>
-        /// Removes all Annotations (table frame and column separation lines) and resets variables and output text
+        /// Removes all Annotations (table frame and column separation lines) and resets variables
         /// </summary>
         public void UndoAll()
         {
-            RemoveAllAnnotations();
-            UndefineTable();
-            UpdateTableFrameMemory(0, 0, 0, 0);
+            isClearanceRunning = true;
+
+            foreach (var pageIdx in pagesWithAnnot)
+            {
+                thumbnailEx1.SelectItem(pageIdx);
+                RemoveAllAnnotations();
+                UndefineTable();
+                UpdateTableFrameMemory(0, 0, 0, 0);
+            }
+
+            pagesWithAnnot = new List<int>();
+
+            isClearanceRunning = false;
         }
 
         /// <summary>
@@ -546,5 +599,48 @@ namespace DokuExtractorTableGUI.UserControls
             butAddTableDefinitionBottom.Enabled = false;
         }
         #endregion VisualAppearance
+
+        #region ThumbnailEvents
+        /// <summary>
+        /// Fired twice, when the selected Item has changed (first for previous selected item, second for selected item)
+        /// If the previous selected item (page) has annotations, its index is added to the pagesWithAnnot list
+        /// If the previous selected item (page) has no annotations, it is removed from the pagesWithAnnot list (if necessary)
+        /// </summary>
+        /// <param name="Idx">Index of item</param>
+        /// <param name="Selected">Is it selected now (true) or is it the item, which was previously selected (false)?</param>
+        private void thumbnailEx1_ItemSelectionChanged(int Idx, bool Selected)
+        {
+            if (Selected)
+                selectedThumbnailIdx = Idx;
+            else if (isExtractionRunning == false && isClearanceRunning == false)
+            {
+                var tableFrame = gdViewer1.GetAnnotationFromIdx(0);
+                if (tableFrame != null)
+                {
+                    if (pagesWithAnnot.Where(x => x == Idx).Count() == 0)
+                        pagesWithAnnot.Add(Idx);
+                }
+                else
+                {
+                    if (pagesWithAnnot.Where(x => x == Idx).Count() > 0)
+                        pagesWithAnnot.Remove(Idx);
+                }
+            }
+        }
+        #endregion ThumbnailEvents
+
+        /// <summary>
+        /// Fired, when the shown page of the gdViewer has changed
+        /// </summary>
+        private void gdViewer1_PageChanged()
+        {
+            var tableFrame = gdViewer1.GetAnnotationFromIdx(0);
+            if (tableFrame != null)
+            {
+                UpdateTableFrameMemory(tableFrame.Left, tableFrame.Top, tableFrame.Width, tableFrame.Height);
+            }
+            else
+                UndefineTable();
+        }
     }
 }

@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.ucDokuViewerGdPicture1 = new DokuExtractorTableGUI.UserControls.ucDokuViewerGdPicture();
             this.lblInstruction = new System.Windows.Forms.Label();
             this.butUndoAll = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.butTest = new System.Windows.Forms.Button();
-            this.ucDokuViewerGdPicture1 = new DokuExtractorTableGUI.UserControls.ucDokuViewerGdPicture();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -57,8 +57,19 @@
             this.splitContainer1.Panel2.Controls.Add(this.textBox1);
             this.splitContainer1.Panel2.Controls.Add(this.butTest);
             this.splitContainer1.Size = new System.Drawing.Size(886, 593);
-            this.splitContainer1.SplitterDistance = 433;
+            this.splitContainer1.SplitterDistance = 495;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // ucDokuViewerGdPicture1
+            // 
+            this.ucDokuViewerGdPicture1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ucDokuViewerGdPicture1.BackColor = System.Drawing.Color.White;
+            this.ucDokuViewerGdPicture1.Location = new System.Drawing.Point(3, 37);
+            this.ucDokuViewerGdPicture1.Name = "ucDokuViewerGdPicture1";
+            this.ucDokuViewerGdPicture1.Size = new System.Drawing.Size(489, 553);
+            this.ucDokuViewerGdPicture1.TabIndex = 0;
             // 
             // lblInstruction
             // 
@@ -67,7 +78,7 @@
             this.lblInstruction.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblInstruction.Location = new System.Drawing.Point(28, 9);
             this.lblInstruction.Name = "lblInstruction";
-            this.lblInstruction.Size = new System.Drawing.Size(377, 23);
+            this.lblInstruction.Size = new System.Drawing.Size(439, 23);
             this.lblInstruction.TabIndex = 12;
             this.lblInstruction.Text = "Hello!";
             this.lblInstruction.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -79,7 +90,7 @@
             this.butUndoAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.butUndoAll.Location = new System.Drawing.Point(3, 524);
             this.butUndoAll.Name = "butUndoAll";
-            this.butUndoAll.Size = new System.Drawing.Size(443, 30);
+            this.butUndoAll.Size = new System.Drawing.Size(381, 30);
             this.butUndoAll.TabIndex = 2;
             this.butUndoAll.Text = "Undo All";
             this.butUndoAll.UseVisualStyleBackColor = true;
@@ -94,7 +105,7 @@
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox1.Size = new System.Drawing.Size(443, 481);
+            this.textBox1.Size = new System.Drawing.Size(381, 481);
             this.textBox1.TabIndex = 1;
             // 
             // butTest
@@ -104,22 +115,11 @@
             this.butTest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.butTest.Location = new System.Drawing.Point(3, 560);
             this.butTest.Name = "butTest";
-            this.butTest.Size = new System.Drawing.Size(443, 30);
+            this.butTest.Size = new System.Drawing.Size(381, 30);
             this.butTest.TabIndex = 0;
             this.butTest.Text = "Test";
             this.butTest.UseVisualStyleBackColor = true;
             this.butTest.Click += new System.EventHandler(this.butTest_Click);
-            // 
-            // ucDokuViewerGdPicture1
-            // 
-            this.ucDokuViewerGdPicture1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ucDokuViewerGdPicture1.BackColor = System.Drawing.Color.White;
-            this.ucDokuViewerGdPicture1.Location = new System.Drawing.Point(3, 37);
-            this.ucDokuViewerGdPicture1.Name = "ucDokuViewerGdPicture1";
-            this.ucDokuViewerGdPicture1.Size = new System.Drawing.Size(427, 553);
-            this.ucDokuViewerGdPicture1.TabIndex = 0;
             // 
             // frmDokuExtractorTable
             // 

@@ -32,7 +32,7 @@ namespace DokuExtractorTableGUI
 
         private void frmDokuExtractorTable_Load(object sender, EventArgs e)
         {
-            var pdfPath = Path.Combine(Application.StartupPath, "TableFiles", "TableFile1.pdf");
+            var pdfPath = Path.Combine(Application.StartupPath, "TableFiles", "TableFileMultiPage1.pdf");
             var gdPdf = new GdPicturePDF();
 
             var gdStatus = gdPdf.LoadFromFile(pdfPath, false);
@@ -52,20 +52,26 @@ namespace DokuExtractorTableGUI
         {
             textBox1.Text = string.Empty;
 
-            var allTableLines = ucDokuViewerGdPicture1.ExtractAllTableLines();
-            var allTableColumns = ucDokuViewerGdPicture1.ExtractAllTableColumns();
+            var extractionResult = ucDokuViewerGdPicture1.ExtractAllTableLinesAndColumns();
 
-            textBox1.Text = "All Table Lines:" + Environment.NewLine + Environment.NewLine
-                            + allTableLines + Environment.NewLine + Environment.NewLine + Environment.NewLine
-                            + "All Table Columns:" + Environment.NewLine + Environment.NewLine
-                            + allTableColumns;
+            foreach (var extractionObject in extractionResult)
+            {
+                var allTableLines = extractionObject[0];
+                var allTableColumns = extractionObject[1];
 
-            var tableProcessor = new TableProcessor(Application.StartupPath);
-            var table = tableProcessor.BuildTableFromLinesAndColumns(tableProcessor.LoadTableLinesFromString(allTableLines), tableProcessor.LoadTableColumnsFromString(allTableColumns));
+                textBox1.Text = textBox1.Text + "All Table Lines:" + Environment.NewLine + Environment.NewLine
+                                + allTableLines + Environment.NewLine + Environment.NewLine + Environment.NewLine
+                                + "All Table Columns:" + Environment.NewLine + Environment.NewLine
+                                + allTableColumns + Environment.NewLine + Environment.NewLine
+                                + "__________" + Environment.NewLine + Environment.NewLine;
 
-            var tableViewer = new frmTableViewer();
-            tableViewer.ShowTable(table);
-            tableViewer.Show();
+                var tableProcessor = new TableProcessor(Application.StartupPath);
+                var table = tableProcessor.BuildTableFromLinesAndColumns(tableProcessor.LoadTableLinesFromString(allTableLines), tableProcessor.LoadTableColumnsFromString(allTableColumns));
+
+                var tableViewer = new frmTableViewer();
+                tableViewer.ShowTable(table);
+                tableViewer.Show();
+            }
         }
 
         /// <summary>
