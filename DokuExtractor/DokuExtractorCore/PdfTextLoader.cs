@@ -60,7 +60,7 @@ namespace DokuExtractorCore
             var retVal = File.ReadAllText(targetFilePath);
 
             if (useMd5Cache == false)
-                File.Decrypt(targetFilePath);
+                File.Delete(targetFilePath);
 
             return retVal;
         }
