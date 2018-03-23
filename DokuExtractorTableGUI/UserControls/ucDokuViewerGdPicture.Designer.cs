@@ -224,6 +224,7 @@
             this.thumbnailEx1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.thumbnailEx1.BackColor = System.Drawing.SystemColors.Control;
+            this.thumbnailEx1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.thumbnailEx1.CheckBoxes = false;
             this.thumbnailEx1.CheckBoxesMarginLeft = 0;
             this.thumbnailEx1.CheckBoxesMarginTop = 0;

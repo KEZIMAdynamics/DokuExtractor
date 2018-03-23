@@ -34,6 +34,7 @@
             this.butUndoAll = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.butTest = new System.Windows.Forms.Button();
+            this.butUndoPage = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -53,6 +54,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.butUndoPage);
             this.splitContainer1.Panel2.Controls.Add(this.butUndoAll);
             this.splitContainer1.Panel2.Controls.Add(this.textBox1);
             this.splitContainer1.Panel2.Controls.Add(this.butTest);
@@ -105,7 +107,7 @@
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox1.Size = new System.Drawing.Size(381, 481);
+            this.textBox1.Size = new System.Drawing.Size(381, 445);
             this.textBox1.TabIndex = 1;
             // 
             // butTest
@@ -120,6 +122,19 @@
             this.butTest.Text = "Test";
             this.butTest.UseVisualStyleBackColor = true;
             this.butTest.Click += new System.EventHandler(this.butTest_Click);
+            // 
+            // butUndoPage
+            // 
+            this.butUndoPage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.butUndoPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.butUndoPage.Location = new System.Drawing.Point(3, 488);
+            this.butUndoPage.Name = "butUndoPage";
+            this.butUndoPage.Size = new System.Drawing.Size(381, 30);
+            this.butUndoPage.TabIndex = 3;
+            this.butUndoPage.Text = "Undo Page";
+            this.butUndoPage.UseVisualStyleBackColor = true;
+            this.butUndoPage.Click += new System.EventHandler(this.butUndoPage_Click);
             // 
             // frmDokuExtractorTable
             // 
@@ -148,6 +163,7 @@
         private System.Windows.Forms.Button butUndoAll;
         private System.Windows.Forms.Label lblInstruction;
         private UserControls.ucDokuViewerGdPicture ucDokuViewerGdPicture1;
+        private System.Windows.Forms.Button butUndoPage;
     }
 }
 

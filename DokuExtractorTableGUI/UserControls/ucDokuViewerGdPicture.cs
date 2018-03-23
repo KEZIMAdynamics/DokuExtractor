@@ -90,22 +90,26 @@ namespace DokuExtractorTableGUI.UserControls
         {
             isExtractionRunning = true;
             var retVal = new List<string[]>();
-            var pageCount = thumbnailEx1.ItemCount;
 
-            if (pagesWithAnnot.Where(x => x == selectedThumbnailIdx).Count() == 0)
-                if (gdViewer1.GetAnnotationFromIdx(0) != null)
-                    pagesWithAnnot.Add(selectedThumbnailIdx);
+            // Adds the selected page to or removes the selected page from the pagesWithAnnot list if necessary
+            if (pagesWithAnnot.Where(x => x == selectedThumbnailIdx).Count() == 0 && gdViewer1.GetAnnotationFromIdx(0) != null)
+                pagesWithAnnot.Add(selectedThumbnailIdx);
+            else if (pagesWithAnnot.Where(x => x == selectedThumbnailIdx).Count() > 0 && gdViewer1.GetAnnotationFromIdx(0) == null)
+                pagesWithAnnot.Remove(selectedThumbnailIdx);
 
             if (pagesWithAnnot.Count > 0)
             {
                 var pagesWithAnnotOrdered = pagesWithAnnot.OrderBy(x => x).ToList();
+                // For every page with annotation(s) the extraction of all lines and columns is processed
                 foreach (var pageIdx in pagesWithAnnotOrdered)
                 {
                     var extractionObject = new string[2];
                     thumbnailEx1.SelectItem(pageIdx);
                     extractionObject[0] = ExtractTableLines();
                     extractionObject[1] = ExtractTableColumns();
-                    retVal.Add(extractionObject);
+
+                    if (string.IsNullOrWhiteSpace(extractionObject[0]) == false)
+                        retVal.Add(extractionObject);
                 }
             }
 
@@ -121,11 +125,11 @@ namespace DokuExtractorTableGUI.UserControls
             var retVal = string.Empty;
 
             var tableFrame = gdViewer1.GetAnnotationFromIdx(0);
-            if (tableFrame != null)
+            if (tableFrame != null && tableFrame.Left > 0 && tableFrame.Top > 0 && tableFrame.Width > 0 && tableFrame.Height > 0)
             {
-                var left = this.tableFrameLeft - (this.tableFrameWidth / 2);
-                var top = this.tableFrameTop - (this.tableFrameHeight / 2);
-                retVal = gdViewer1.GetPageTextArea(left, top, this.tableFrameWidth, this.tableFrameHeight);
+                var left = tableFrame.Left - (tableFrame.Width / 2);
+                var top = tableFrame.Top - (tableFrame.Height / 2);
+                retVal = gdViewer1.GetPageTextArea(left, top, tableFrame.Width, tableFrame.Height);
             }
 
             return retVal;
@@ -374,6 +378,10 @@ namespace DokuExtractorTableGUI.UserControls
 
                 annotCount--;
             }
+
+            annotCount = gdViewer1.GetAnnotationCount();
+            if (annotCount == 1)
+                EnableTableDefinitionButtons();
         }
 
         /// <summary>
@@ -401,6 +409,10 @@ namespace DokuExtractorTableGUI.UserControls
                 else // Moves column separation line into the table frame, if (a part of) it is out of the table frame
                     annot.Top = this.tableFrameTop;
             }
+
+            var annotCount = gdViewer1.GetAnnotationCount();
+            if (annotCount == 1)
+                EnableTableDefinitionButtons();
         }
         #endregion FrameLogic
 
@@ -518,7 +530,7 @@ namespace DokuExtractorTableGUI.UserControls
 
         #region Clearance
         /// <summary>
-        /// Removes all Annotations (table frame and column separation lines) and resets variables
+        /// Removes all annotations (table frame and column separation lines) and resets variables
         /// </summary>
         public void UndoAll()
         {
@@ -535,6 +547,19 @@ namespace DokuExtractorTableGUI.UserControls
             pagesWithAnnot = new List<int>();
 
             isClearanceRunning = false;
+        }
+
+        /// <summary>
+        /// Removes all annotations (table frame and column separation lines) of the displayed page and resets variables and output text
+        /// </summary>
+        public void UndoPage()
+        {
+            RemoveAllAnnotations();
+            UndefineTable();
+            UpdateTableFrameMemory(0, 0, 0, 0);
+
+            if (pagesWithAnnot.Where(x => x == selectedThumbnailIdx).Count() > 0)
+                pagesWithAnnot.Remove(selectedThumbnailIdx);
         }
 
         /// <summary>
@@ -569,7 +594,12 @@ namespace DokuExtractorTableGUI.UserControls
         private void EnableColumnButtons()
         {
             butAddColumnLeft.Enabled = true;
+            butAddColumnLeft.BackColor = Color.FromArgb(123, 158, 60);
+            butAddColumnLeft.FlatAppearance.BorderColor = Color.FromArgb(123, 158, 60);
+
             butAddColumnRight.Enabled = true;
+            butAddColumnRight.BackColor = Color.FromArgb(123, 158, 60);
+            butAddColumnRight.FlatAppearance.BorderColor = Color.FromArgb(123, 158, 60);
         }
 
         /// <summary>
@@ -578,7 +608,12 @@ namespace DokuExtractorTableGUI.UserControls
         private void DisableColumnButtons()
         {
             butAddColumnLeft.Enabled = false;
+            butAddColumnLeft.BackColor = Color.FromArgb(51, 51, 51);
+            butAddColumnLeft.FlatAppearance.BorderColor = Color.FromArgb(51, 51, 51);
+
             butAddColumnRight.Enabled = false;
+            butAddColumnRight.BackColor = Color.FromArgb(51, 51, 51);
+            butAddColumnRight.FlatAppearance.BorderColor = Color.FromArgb(51, 51, 51);
         }
 
         /// <summary>
@@ -587,7 +622,12 @@ namespace DokuExtractorTableGUI.UserControls
         private void EnableTableDefinitionButtons()
         {
             butAddTableDefinitionTop.Enabled = true;
+            butAddTableDefinitionTop.BackColor = Color.FromArgb(123, 158, 60);
+            butAddTableDefinitionTop.FlatAppearance.BorderColor = Color.FromArgb(123, 158, 60);
+
             butAddTableDefinitionBottom.Enabled = true;
+            butAddTableDefinitionBottom.BackColor = Color.FromArgb(123, 158, 60);
+            butAddTableDefinitionBottom.FlatAppearance.BorderColor = Color.FromArgb(123, 158, 60);
         }
 
         /// <summary>
@@ -596,7 +636,12 @@ namespace DokuExtractorTableGUI.UserControls
         private void DisableTableDefinitionButtons()
         {
             butAddTableDefinitionTop.Enabled = false;
+            butAddTableDefinitionTop.BackColor = Color.FromArgb(51, 51, 51);
+            butAddTableDefinitionTop.FlatAppearance.BorderColor = Color.FromArgb(51, 51, 51);
+
             butAddTableDefinitionBottom.Enabled = false;
+            butAddTableDefinitionBottom.BackColor = Color.FromArgb(51, 51, 51);
+            butAddTableDefinitionBottom.FlatAppearance.BorderColor = Color.FromArgb(51, 51, 51);
         }
         #endregion VisualAppearance
 
@@ -637,7 +682,14 @@ namespace DokuExtractorTableGUI.UserControls
             var tableFrame = gdViewer1.GetAnnotationFromIdx(0);
             if (tableFrame != null)
             {
+                IsTableDefined = true;
                 UpdateTableFrameMemory(tableFrame.Left, tableFrame.Top, tableFrame.Width, tableFrame.Height);
+                EnableColumnButtons();
+
+                if (gdViewer1.GetAnnotationFromIdx(1) != null)
+                    DisableTableDefinitionButtons();
+                else
+                    EnableTableDefinitionButtons();
             }
             else
                 UndefineTable();

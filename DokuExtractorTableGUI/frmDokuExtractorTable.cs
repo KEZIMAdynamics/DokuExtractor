@@ -63,7 +63,7 @@ namespace DokuExtractorTableGUI
                                 + allTableLines + Environment.NewLine + Environment.NewLine + Environment.NewLine
                                 + "All Table Columns:" + Environment.NewLine + Environment.NewLine
                                 + allTableColumns + Environment.NewLine + Environment.NewLine
-                                + "__________" + Environment.NewLine + Environment.NewLine;
+                                + "__________________________________________________" + Environment.NewLine + Environment.NewLine;
 
                 var tableProcessor = new TableProcessor(Application.StartupPath);
                 var table = tableProcessor.BuildTableFromLinesAndColumns(tableProcessor.LoadTableLinesFromString(allTableLines), tableProcessor.LoadTableColumnsFromString(allTableColumns));
@@ -75,7 +75,16 @@ namespace DokuExtractorTableGUI
         }
 
         /// <summary>
-        /// Removes all Annotations (table frame and column separation lines) and resets variables and output text
+        /// Removes all annotations (table frame and column separation lines) of the displayed page and resets variables and output text
+        /// </summary>
+        private void butUndoPage_Click(object sender, EventArgs e)
+        {
+            ucDokuViewerGdPicture1.UndoPage();
+            textBox1.Text = string.Empty;
+        }
+
+        /// <summary>
+        /// Removes all annotations (table frame and column separation lines) of all pages and resets variables and output text
         /// </summary>
         private void butUndoAll_Click(object sender, EventArgs e)
         {
