@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DokuExtractorCore", "DokuEx
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DokuExtractorTableGUI", "..\DokuExtractorTableGUI\DokuExtractorTableGUI.csproj", "{647A5BD4-1C77-49DB-98A0-07534629A5BD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DokuExtractorStandardGUI", "..\DokuExtractorStandardGUI\DokuExtractorStandardGUI.csproj", "{3305CF5D-F4C7-48B0-9D4D-A60F7BB4B61F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GdPicturePdfViewer", "..\GdPicturePdfViewer\GdPicturePdfViewer.csproj", "{B2A2182B-50B8-469A-9F7D-E00C43CC63FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{647A5BD4-1C77-49DB-98A0-07534629A5BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{647A5BD4-1C77-49DB-98A0-07534629A5BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{647A5BD4-1C77-49DB-98A0-07534629A5BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3305CF5D-F4C7-48B0-9D4D-A60F7BB4B61F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3305CF5D-F4C7-48B0-9D4D-A60F7BB4B61F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3305CF5D-F4C7-48B0-9D4D-A60F7BB4B61F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3305CF5D-F4C7-48B0-9D4D-A60F7BB4B61F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2A2182B-50B8-469A-9F7D-E00C43CC63FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2A2182B-50B8-469A-9F7D-E00C43CC63FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2A2182B-50B8-469A-9F7D-E00C43CC63FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2A2182B-50B8-469A-9F7D-E00C43CC63FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

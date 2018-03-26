@@ -48,6 +48,7 @@
     <Compile Include="HelperExtensions.cs" />
     <Compile Include="Model\DataFieldResult.cs" />
     <Compile Include="Model\DataFieldTypes.cs" />
+    <Compile Include="Model\DataTableDefinition.cs" />
     <Compile Include="Model\FieldExtractionResult.cs" />
     <Compile Include="Model\PreKeyWordSelectionArgs.cs" />
     <Compile Include="Model\RegexExpressionFinderResult.cs" />
@@ -84,6 +85,9 @@
     <None Include="ExtractorTemplates\ColumbusMcKinnonenTemplate.Json.txt" />
     <Content Include="SampleFiles\AllTableColumns.txt" />
     <Content Include="SampleFiles\AllTableLines.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

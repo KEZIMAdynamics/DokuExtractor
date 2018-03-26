@@ -36,5 +36,10 @@ namespace DokuExtractorCore.Model
         /// Contains the data fields which shall be extracted.
         /// </summary>
         public List<DataFieldTemplate> DataFields { get; set; } = new List<DataFieldTemplate>();
+
+        /// <summary>
+        /// Contains the definitions of the data tables which shall be extracted.
+        /// </summary>
+        public List<DataTableDefinition> DataTables { get; set; } = new List<DataTableDefinition>();
     }
 }
