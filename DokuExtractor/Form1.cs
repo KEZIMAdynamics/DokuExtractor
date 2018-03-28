@@ -104,7 +104,7 @@ namespace DokuExtractorGUI
 
             });
 
-            proc.SaveTemplates(templates, Path.Combine(Application.StartupPath, "ExtractorTemplates"));
+            proc.SaveTemplates(templates);// Path.Combine(Application.StartupPath, "ExtractorTemplates"));
         }
 
         private void btOpenTemplateDir_Click(object sender, EventArgs e)

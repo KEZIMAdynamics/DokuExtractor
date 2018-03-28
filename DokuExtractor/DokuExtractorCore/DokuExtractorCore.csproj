@@ -81,18 +81,16 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ExtractorTemplates\VölkeiTemplate.json.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="GenericTemplates\GenericTemplateRechnungen.json.txt">
+    <None Include="ExtractorGroupTemplates\GenericTemplateRechnungen.json.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ExtractorTemplates\CpTemplateJson.txt">
+    <None Include="ExtractorClassTemplates\CpTemplateJson.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="ExtractorTemplates\ColumbusMcKinnonenTemplate.Json.txt" />
+    <None Include="ExtractorClassTemplates\ColumbusMcKinnonenTemplate.Json.txt" />
+    <Content Include="ExtractorClassTemplates\CompotecTemplate.json.txt" />
     <Content Include="SampleFiles\AllTableColumns.txt" />
     <Content Include="SampleFiles\AllTableLines.txt" />
   </ItemGroup>

@@ -21,8 +21,8 @@ namespace DokuExtractorCore
         public TemplateProcessor(string appRootPath)
         {
             this.appRootPath = appRootPath;
-            TemplateClassDirectory = Path.Combine(appRootPath, "ExtractorTemplates");
-            TemplateClassDirectory = Path.Combine(appRootPath, "ExtractorGroupTemplates");
+            TemplateClassDirectory = Path.Combine(appRootPath, "ExtractorClassTemplates");
+            TemplateGroupDirectory = Path.Combine(appRootPath, "ExtractorGroupTemplates");
         }
 
         public List<DocumentGroupTemplate> LoadGroupTemplatesFromDisk()
@@ -235,7 +235,8 @@ namespace DokuExtractorCore
 
         public DocumentClassTemplate AutoCreateTemplate(string templateName, string inputText)
         {
-            var genericRechnung = JsonConvert.DeserializeObject<DocumentGroupTemplate>(File.ReadAllText(Path.Combine(appRootPath, "GenericTemplates", "GenericTemplateRechnungen.json.txt")));
+            // var genericRechnung = JsonConvert.DeserializeObject<DocumentGroupTemplate>(File.ReadAllText(Path.Combine(appRootPath, "GenericTemplates", "GenericTemplateRechnungen.json.txt")));
+            var genericRechnung = GetDocumentGroupTemplateByName("Rechnung");
 
             var retVal = new DocumentClassTemplate();
             retVal.TemplateClassName = templateName;
