@@ -163,6 +163,12 @@ namespace DokuExtractorCore
                 retVal.DataFields.Add(resultItem);
             }
 
+            var fieldCalculator = new FieldCalculator();
+            foreach (var item in template.CalculationFields)
+            {
+                retVal.CalculationFields.Add(fieldCalculator.CompareExpressionResults(item, retVal.DataFields));
+            }
+
             return retVal;
         }
 
@@ -182,7 +188,7 @@ namespace DokuExtractorCore
             RegexExpressionFinderResult regexResult;
             if (TryFindRegexMatchExpress(inputText, string.Empty, string.Empty, DataFieldTypes.IBAN, out regexResult))
                 retVal.PreSelectionCondition.IBAN = regexResult.MatchingValue.Replace(" ", string.Empty).ToUpper();
-            
+
             foreach (var item in genericRechnung.DataFields.ToList())
             {
                 var newDataField = new DataFieldTemplate() { Name = item.Name, FieldType = item.FieldType }; // Ignore text anchors as they are not needed in concrete templates
@@ -199,6 +205,8 @@ namespace DokuExtractorCore
 
                 retVal.DataFields.Add(newDataField);
             }
+
+            retVal.CalculationFields.Add(new CalculationFieldTemplate() { Name = "Netto Brutto Vergleich", CalculationExpression = "[Rechnungssumme Netto]+[Betrag MwSt]", ValidationExpression = "[Rechnungssumme Brutto]", FieldType = DataFieldTypes.Currency });
 
             return retVal;
         }

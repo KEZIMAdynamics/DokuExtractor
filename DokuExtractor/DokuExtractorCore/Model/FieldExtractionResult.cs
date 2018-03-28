@@ -25,5 +25,10 @@ namespace DokuExtractorCore.Model
         /// Contains the extracted data fields.
         /// </summary>
         public List<DataFieldResult> DataFields { get; set; } = new List<DataFieldResult>();
+
+        /// <summary>
+        /// Contains calculation results based on extracted data fields.
+        /// </summary>
+        public List<CalculationFieldResult> CalculationFields { get; set; } = new List<CalculationFieldResult>();
     }
 }

@@ -23,6 +23,13 @@
       "RegexExpressions": [],
       "TextAnchors": ["Umsatzsteuer (19.00%", "Umsatzsteuer 19%","MwSt (19.00%", "% MwSt", "19.00%"],
       "FieldType": 2
+    },
+    {
+      "Name": "Rechnungssumme Brutto",
+      "RegexExpressions": ["/s/"],
+      "TextAnchors": ["Bruttobetrag", "Bruttogesamt", "Betrag Brutto","Gesamtbetrag","Rechnungsbetrag"],
+      "RegexHalfString": "",
+      "FieldType": 2
     }
   ]
 }
