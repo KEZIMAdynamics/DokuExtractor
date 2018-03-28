@@ -38,7 +38,7 @@ namespace DokuExtractorGUI
 
             if (matchingTemplateResult.IsMatchSuccessfull)
             {
-                MessageBox.Show("Yay ich habe " + template.TemplateName + " gefunden!");
+                MessageBox.Show("Yay ich habe " + template.TemplateClassName + " gefunden!");
                 var json = processor.ExtractDataAsJson(template, inputString);
                 tbExtractedData.Text = json;
             }
@@ -65,10 +65,10 @@ namespace DokuExtractorGUI
         private void btBeispieltemplateGenerieren_Click(object sender, EventArgs e)
         {
             var proc = new TemplateProcessor(Application.StartupPath);
-            var templates = new List<FieldExtractorTemplate>();
-            templates.Add(new DokuExtractorCore.Model.FieldExtractorTemplate()
+            var templates = new List<DocumentClassTemplate>();
+            templates.Add(new DokuExtractorCore.Model.DocumentClassTemplate()
             {
-                TemplateName = "StartTemplate",
+                TemplateClassName = "StartTemplate",
                 KeyWords = new List<string>() { "bla", "blubb|blobb" },
                 DataFields = new List<DokuExtractorCore.Model.DataFieldTemplate>()
                    {

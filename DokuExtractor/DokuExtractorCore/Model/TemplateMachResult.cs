@@ -11,7 +11,7 @@ namespace DokuExtractorCore.Model
     /// </summary>
     public class TemplateMachResult
     {
-        public FieldExtractorTemplate Template { get; set; } = new FieldExtractorTemplate();
+        public DocumentClassTemplate Template { get; set; } = new DocumentClassTemplate();
         public bool IsMatchSuccessfull { get; set; }
     }
 }
