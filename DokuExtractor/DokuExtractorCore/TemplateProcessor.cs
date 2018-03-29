@@ -131,7 +131,7 @@ namespace DokuExtractorCore
             var retVal = new List<DocumentClassTemplate>();
 
             RegexExpressionFinderResult regexResult;
-            if (TryFindRegexMatchExpress(inputText, string.Empty, string.Empty, DataFieldTypes.IBAN, out regexResult))
+            if (TryFindRegexMatchExpress(inputText, string.Empty, string.Empty, DataFieldTypes.AnchorLessIBAN, out regexResult))
             {
                 var iban = regexResult.MatchingValue.Replace(" ", string.Empty).ToUpper();
                 retVal.AddRange(templates.Where(x => x.PreSelectionCondition.IBAN == iban));
@@ -243,7 +243,7 @@ namespace DokuExtractorCore
             retVal.TemplateGroupName = genericRechnung.TemplateGroupName;
 
             RegexExpressionFinderResult regexResult;
-            if (TryFindRegexMatchExpress(inputText, string.Empty, string.Empty, DataFieldTypes.IBAN, out regexResult))
+            if (TryFindRegexMatchExpress(inputText, string.Empty, string.Empty, DataFieldTypes.AnchorLessIBAN, out regexResult))
                 retVal.PreSelectionCondition.IBAN = regexResult.MatchingValue.Replace(" ", string.Empty).ToUpper();
 
             foreach (var item in genericRechnung.DataFields.ToList())

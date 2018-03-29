@@ -11,6 +11,8 @@ namespace DokuExtractorCore.Model
         Text,
         Date,
         Currency,
-        IBAN
+        IBAN,
+        AnchorLessIBAN,
+        VatId
     }
 }
