@@ -1,0 +1,33 @@
+{
+  "TemplateGroupName": "Rechnung",
+  "DataFields": [
+    {
+      "Name": "Datum",
+      "TextAnchors": ["Rechnungsdatum","Datum"],
+      "FieldType": 1
+    },
+    {
+      "Name": "Rechnungssumme Netto",
+      "TextAnchors": ["Nettobetrag", "Nettogesamt","Nettosumme", "Betrag Netto", "Wert"],
+      "FieldType": 2
+    },
+	{
+      "Name": "Betrag MwSt",
+      "TextAnchors": ["Umsatzsteuer (19.00%", "Umsatzsteuer 19%","MwSt (19.00%", "% MwSt", "19.00%"],
+      "FieldType": 2
+    },
+    {
+      "Name": "Rechnungssumme Brutto",
+      "TextAnchors": ["Bruttobetrag", "Bruttogesamt", "Betrag Brutto","Gesamtbetrag","Rechnungsbetrag","Rechnungssumme"],
+      "FieldType": 2
+    }
+  ],
+  "CalculationFields": [
+    {
+      "Name": "Netto Brutto Vergleich",
+      "FieldType": 2,
+      "CalculationExpression": "[Rechnungssumme Netto]+[Betrag MwSt]",
+      "ValidationExpression": "[Rechnungssumme Brutto]"
+    }
+  ]
+}

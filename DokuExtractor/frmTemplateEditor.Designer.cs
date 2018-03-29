@@ -41,6 +41,7 @@
             this.tbTemplateBox.Location = new System.Drawing.Point(12, 85);
             this.tbTemplateBox.Multiline = true;
             this.tbTemplateBox.Name = "tbTemplateBox";
+            this.tbTemplateBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbTemplateBox.Size = new System.Drawing.Size(621, 450);
             this.tbTemplateBox.TabIndex = 0;
             // 

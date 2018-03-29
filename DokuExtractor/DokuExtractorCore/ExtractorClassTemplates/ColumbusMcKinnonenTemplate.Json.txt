@@ -1,0 +1,48 @@
+{
+  "TemplateClassName": "COLUMBUS MCKINNON Industrial",
+  "TemplateGroupName": "Rechnung",
+  "PreSelectionCondition": {
+    "IBAN": ""
+  },
+  "KeyWords": [
+    "COLUMBUS MCKINNON Industrial|COLUMBUS McKINNON Industrial",
+    "Rechnung"
+  ],
+  "DataFields": [
+    {
+      "Name": "Datum",
+      "RegexExpressions": [
+        "Datum.+\\s+(\\d+.\\d{2}.\\d+)"
+      ],
+      "FieldType": 1
+    },
+    {
+      "Name": "Rechnungssumme Netto",
+      "RegexExpressions": [
+        "Nettosumme\\s+(\\d+.?\\d{0,3},\\d{2})"
+      ],
+      "FieldType": 2
+    },
+    {
+      "Name": "Betrag MwSt",
+      "RegexExpressions": [
+        "Umsatzsteuer\\ \\(19\\.00%.+\\s+(\\d+.?\\d{0,3},\\d{2})"
+      ],
+      "FieldType": 2
+    },
+    {
+      "Name": "Rechnungssumme Brutto",
+      "RegexExpressions": [
+        "Rechnungssumme.+\\s+(\\d+.?\\d{0,3},\\d{2})"
+      ],
+      "FieldType": 2
+    },
+    {
+      "Name": "Zahlbar bis",
+      "RegexExpressions": [
+        "fällig bis\\s+(\\d+.\\d{2}.\\d+)"
+      ],
+      "FieldType": 1
+    }
+  ]
+}

@@ -33,6 +33,12 @@
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Sprache, Version=1.10.0.37, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sprache.1.10.0.37\lib\net40\Sprache.dll</HintPath>
+    </Reference>
+    <Reference Include="Sprache.Calc, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sprache.Calc.1.0.0\lib\net40\Sprache.Calc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.IO.Compression" />
@@ -45,10 +51,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FieldCalculator.cs" />
     <Compile Include="HelperExtensions.cs" />
+    <Compile Include="Model\CalculationFieldResult.cs" />
+    <Compile Include="Model\DataFieldGroupTemplate.cs" />
     <Compile Include="Model\DataFieldResult.cs" />
     <Compile Include="Model\DataFieldTypes.cs" />
     <Compile Include="Model\DataTableDefinition.cs" />
+    <Compile Include="Model\DocumentGroupTemplate.cs" />
     <Compile Include="Model\FieldExtractionResult.cs" />
     <Compile Include="Model\PreKeyWordSelectionArgs.cs" />
     <Compile Include="Model\RegexExpressionFinderResult.cs" />
@@ -56,6 +66,7 @@
     <Compile Include="Model\Tables\TableLine.cs" />
     <Compile Include="Model\Tables\TableResult.cs" />
     <Compile Include="Model\TemplateMachResult.cs" />
+    <Compile Include="Model\CalculationFieldTemplate.cs" />
     <Compile Include="PdfTextLoader.cs" />
     <Compile Include="RegexExpressionFinder.cs" />
     <Compile Include="TableProcessor.cs" />
@@ -71,18 +82,16 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ExtractorTemplates\VölkeiTemplate.json.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="GenericTemplates\GenericTemplateRechnungen.json.txt">
+    <None Include="ExtractorGroupTemplates\GenericTemplateRechnungen.json.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ExtractorTemplates\CpTemplateJson.txt">
+    <None Include="ExtractorClassTemplates\CpTemplateJson.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="ExtractorTemplates\ColumbusMcKinnonenTemplate.Json.txt" />
+    <None Include="ExtractorClassTemplates\ColumbusMcKinnonenTemplate.Json.txt" />
+    <Content Include="ExtractorClassTemplates\CompotecTemplate.json.txt" />
     <Content Include="SampleFiles\AllTableColumns.txt" />
     <Content Include="SampleFiles\AllTableLines.txt" />
   </ItemGroup>

@@ -21,7 +21,7 @@ namespace DokuExtractorGUI
             InitializeComponent();
         }
 
-        public void LoadTemplate(FieldExtractorTemplate template)
+        public void LoadTemplate(DocumentClassTemplate template)
         {
             tbTemplateBox.Text = JsonConvert.SerializeObject(template, Formatting.Indented);
         }
@@ -35,9 +35,9 @@ namespace DokuExtractorGUI
         {
             try
             {
-                var template = JsonConvert.DeserializeObject<FieldExtractorTemplate>(tbTemplateBox.Text);
-                new TemplateProcessor(Application.StartupPath).SaveTemplates(new List<FieldExtractorTemplate>() { template });
-                MessageBox.Show("Template " + template.TemplateName + " gespeichert.");
+                var template = JsonConvert.DeserializeObject<DocumentClassTemplate>(tbTemplateBox.Text);
+                new TemplateProcessor(Application.StartupPath).SaveTemplates(new List<DocumentClassTemplate>() { template });
+                MessageBox.Show("Template " + template.TemplateClassName + " gespeichert.");
             }
             catch (Exception ex)
             {

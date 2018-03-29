@@ -13,25 +13,27 @@ namespace DokuExtractorCore
 {
     public class TemplateProcessor
     {
-        public string TemplateDirectory { get; set; }
+        public string TemplateClassDirectory { get; set; }
+        public string TemplateGroupDirectory { get; set; }
         string appRootPath;
 
 
         public TemplateProcessor(string appRootPath)
         {
             this.appRootPath = appRootPath;
-            TemplateDirectory = Path.Combine(appRootPath, "ExtractorTemplates");
+            TemplateClassDirectory = Path.Combine(appRootPath, "ExtractorClassTemplates");
+            TemplateGroupDirectory = Path.Combine(appRootPath, "ExtractorGroupTemplates");
         }
 
-        public List<FieldExtractorTemplate> LoadTemplatesFromDisk()
+        public List<DocumentGroupTemplate> LoadGroupTemplatesFromDisk()
         {
-            var retVal = new List<FieldExtractorTemplate>();
+            var retVal = new List<DocumentGroupTemplate>();
 
-            foreach (var item in Directory.GetFiles(TemplateDirectory))
+            foreach (var item in Directory.GetFiles(TemplateGroupDirectory))
             {
                 try
                 {
-                    var template = JsonConvert.DeserializeObject<FieldExtractorTemplate>(File.ReadAllText(item));
+                    var template = JsonConvert.DeserializeObject<DocumentGroupTemplate>(File.ReadAllText(item));
                     retVal.Add(template);
                 }
                 catch (Exception ex)
@@ -43,11 +45,32 @@ namespace DokuExtractorCore
             return retVal;
         }
 
-        public void SaveTemplates(List<FieldExtractorTemplate> templates)
+        public List<DocumentClassTemplate> LoadClassTemplatesFromDisk()
         {
-            SaveTemplates(templates, TemplateDirectory);
+            var retVal = new List<DocumentClassTemplate>();
+
+            foreach (var item in Directory.GetFiles(TemplateClassDirectory))
+            {
+                try
+                {
+                    var template = JsonConvert.DeserializeObject<DocumentClassTemplate>(File.ReadAllText(item));
+                    retVal.Add(template);
+                }
+                catch (Exception ex)
+                {
+
+                    throw;
+                }
+            }
+            return retVal;
         }
-        public void SaveTemplates(List<FieldExtractorTemplate> templates, string templateDirectory)
+
+        public void SaveTemplates(List<DocumentGroupTemplate> templates)
+        {
+            SaveTemplates(templates, TemplateGroupDirectory);
+        }
+
+        public void SaveTemplates(List<DocumentGroupTemplate> templates, string templateDirectory)
         {
             if (Directory.Exists(templateDirectory) == false)
                 Directory.CreateDirectory(templateDirectory);
@@ -55,13 +78,31 @@ namespace DokuExtractorCore
             foreach (var template in templates)
             {
                 var templateJson = JsonConvert.SerializeObject(template, Formatting.Indented);
-                var filePath = Path.Combine(templateDirectory, template.TemplateName + ".json.txt");
+                var filePath = Path.Combine(templateDirectory, template.TemplateGroupName + ".json.txt");
 
                 File.WriteAllText(filePath, templateJson);
             }
         }
 
-        public TemplateMachResult MatchTemplates(List<FieldExtractorTemplate> templates, string inputText)
+        public void SaveTemplates(List<DocumentClassTemplate> templates)
+        {
+            SaveTemplates(templates, TemplateClassDirectory);
+        }
+        public void SaveTemplates(List<DocumentClassTemplate> templates, string templateDirectory)
+        {
+            if (Directory.Exists(templateDirectory) == false)
+                Directory.CreateDirectory(templateDirectory);
+
+            foreach (var template in templates)
+            {
+                var templateJson = JsonConvert.SerializeObject(template, Formatting.Indented);
+                var filePath = Path.Combine(templateDirectory, template.TemplateClassName + ".json.txt");
+
+                File.WriteAllText(filePath, templateJson);
+            }
+        }
+
+        public TemplateMachResult MatchTemplates(List<DocumentClassTemplate> templates, string inputText)
         {
             var retVal = new TemplateMachResult();
 
@@ -78,9 +119,16 @@ namespace DokuExtractorCore
             return retVal;
         }
 
-        public List<FieldExtractorTemplate> PreSelectTemplates(List<FieldExtractorTemplate> templates, string inputText)
+        public DocumentGroupTemplate GetDocumentGroupTemplateByName(string groupName)
         {
-            var retVal = new List<FieldExtractorTemplate>();
+            var templates = LoadGroupTemplatesFromDisk();
+
+            return templates.Where(x => x.TemplateGroupName == groupName).FirstOrDefault();
+        }
+
+        public List<DocumentClassTemplate> PreSelectTemplates(List<DocumentClassTemplate> templates, string inputText)
+        {
+            var retVal = new List<DocumentClassTemplate>();
 
             RegexExpressionFinderResult regexResult;
             if (TryFindRegexMatchExpress(inputText, string.Empty, string.Empty, DataFieldTypes.IBAN, out regexResult))
@@ -92,7 +140,7 @@ namespace DokuExtractorCore
             return retVal;
         }
 
-        public TemplateMachResult MatchTemplatesViaKeyWords(List<FieldExtractorTemplate> templates, string inputText)
+        public TemplateMachResult MatchTemplatesViaKeyWords(List<DocumentClassTemplate> templates, string inputText)
         {
             var checkedWords = new Dictionary<string, int>();
 
@@ -152,9 +200,9 @@ namespace DokuExtractorCore
             return retVal;
         }
 
-        public FieldExtractionResult ExtractData(FieldExtractorTemplate template, string inputText)
+        public FieldExtractionResult ExtractData(DocumentClassTemplate template, List<DocumentGroupTemplate> groupTemplates, string inputText)
         {
-            var retVal = new FieldExtractionResult() { TemplateName = template.TemplateName, TemplateClass = template.TemplateClass };
+            var retVal = new FieldExtractionResult() { TemplateName = template.TemplateClassName, TemplateClass = template.TemplateGroupName };
 
             foreach (var item in template.DataFields)
             {
@@ -163,29 +211,44 @@ namespace DokuExtractorCore
                 retVal.DataFields.Add(resultItem);
             }
 
+            //var groupTemplate = GetDocumentGroupTemplateByName(template.TemplateGroupName);
+            var groupTemplate = groupTemplates.Where(x => x.TemplateGroupName == template.TemplateGroupName).FirstOrDefault();
+
+            if (groupTemplate != null)
+            {
+                var fieldCalculator = new FieldCalculator();
+                foreach (var item in groupTemplate.CalculationFields)
+                {
+                    retVal.CalculationFields.Add(fieldCalculator.CompareExpressionResults(item, retVal.DataFields));
+                }
+            }
+
+
             return retVal;
         }
 
-        public string ExtractDataAsJson(FieldExtractorTemplate template, string inputText)
+        public string ExtractDataAsJson(DocumentClassTemplate template, List<DocumentGroupTemplate> groupTemplates, string inputText)
         {
-            var json = JsonConvert.SerializeObject(ExtractData(template, inputText), Formatting.Indented);
+            var json = JsonConvert.SerializeObject(ExtractData(template, groupTemplates, inputText), Formatting.Indented);
             return json;
         }
 
-        public FieldExtractorTemplate AutoCreateTemplate(string templateName, string inputText)
+        public DocumentClassTemplate AutoCreateTemplate(string templateName, string inputText)
         {
-            var genericRechnung = JsonConvert.DeserializeObject<FieldExtractorTemplate>(File.ReadAllText(Path.Combine(appRootPath, "GenericTemplates", "GenericTemplateRechnungen.json.txt")));
+            // var genericRechnung = JsonConvert.DeserializeObject<DocumentGroupTemplate>(File.ReadAllText(Path.Combine(appRootPath, "GenericTemplates", "GenericTemplateRechnungen.json.txt")));
+            var genericRechnung = GetDocumentGroupTemplateByName("Rechnung");
 
-            var retVal = new FieldExtractorTemplate();
-            retVal.TemplateName = templateName;
+            var retVal = new DocumentClassTemplate();
+            retVal.TemplateClassName = templateName;
+            retVal.TemplateGroupName = genericRechnung.TemplateGroupName;
 
             RegexExpressionFinderResult regexResult;
             if (TryFindRegexMatchExpress(inputText, string.Empty, string.Empty, DataFieldTypes.IBAN, out regexResult))
                 retVal.PreSelectionCondition.IBAN = regexResult.MatchingValue.Replace(" ", string.Empty).ToUpper();
-            
+
             foreach (var item in genericRechnung.DataFields.ToList())
             {
-                var newDataField = new DataFieldTemplate() { Name = item.Name, FieldType = item.FieldType }; // Ignore text anchors as they are not needed in concrete templates
+                var newDataField = new DataFieldTemplate() { Name = item.Name, FieldType = item.FieldType };
 
                 foreach (var anchor in item.TextAnchors)
                 {
@@ -198,7 +261,7 @@ namespace DokuExtractorCore
                 }
 
                 retVal.DataFields.Add(newDataField);
-            }
+            }          
 
             return retVal;
         }

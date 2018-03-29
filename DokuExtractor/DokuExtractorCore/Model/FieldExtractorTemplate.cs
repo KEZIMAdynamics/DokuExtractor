@@ -9,17 +9,17 @@ namespace DokuExtractorCore.Model
     /// <summary>
     /// Represents a template for data extraction and contains all necessary information to extract data from a matching input text.
     /// </summary>
-    public class FieldExtractorTemplate
+    public class DocumentClassTemplate
     {
         /// <summary>
         /// Identifies a template
         /// </summary>
-        public string TemplateName { get; set; } = string.Empty;
+        public string TemplateClassName { get; set; } = string.Empty;
 
         /// <summary>
-        /// Which class or category does the template belong to? (Rechnung, Angebot, Lieferschein etc)
+        /// Which group or category does the template belong to? (Rechnung, Angebot, Lieferschein etc)
         /// </summary>
-        public string TemplateClass { get; set; } = "Rechnung";
+        public string TemplateGroupName { get; set; } = string.Empty;
 
         /// <summary>
         /// Before the normal KeyWord matching, templates of interests can be pre selected based on certain conditions.

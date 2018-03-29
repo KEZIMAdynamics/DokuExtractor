@@ -28,24 +28,26 @@ namespace DokuExtractorGUI
         {
             //  var processor = new TemplateProcessor(Application.StartupPath);
 
-            var templates = processor.LoadTemplatesFromDisk();
+            var classTemplates = processor.LoadClassTemplatesFromDisk();
+            var groupTemplates = processor.LoadGroupTemplatesFromDisk();
+
             var inputString = tbInhalt.Text;
 
-            var matchingTemplateResult = processor.MatchTemplates(templates, inputString);
+            var matchingTemplateResult = processor.MatchTemplates(classTemplates, inputString);
             var template = matchingTemplateResult.Template;
             //if (matchingTemplateResult.IsMatchSuccessfull == false)
             //    template = processor.AutoCreateTemplate("NeuesTemplate", inputString);
 
             if (matchingTemplateResult.IsMatchSuccessfull)
             {
-                MessageBox.Show("Yay ich habe " + template.TemplateName + " gefunden!");
-                var json = processor.ExtractDataAsJson(template, inputString);
+                MessageBox.Show("Yay ich habe " + template.TemplateClassName + " gefunden!");
+                var json = processor.ExtractDataAsJson(template, groupTemplates, inputString);
                 tbExtractedData.Text = json;
             }
             else
             {
                 template = processor.AutoCreateTemplate("NeuesTemplate", inputString);
-                var json = processor.ExtractDataAsJson(template, inputString);
+                var json = processor.ExtractDataAsJson(template, groupTemplates, inputString);
                 tbExtractedData.Text = json;
 
                 var editor = new frmTemplateEditor();
@@ -65,37 +67,49 @@ namespace DokuExtractorGUI
         private void btBeispieltemplateGenerieren_Click(object sender, EventArgs e)
         {
             var proc = new TemplateProcessor(Application.StartupPath);
-            var templates = new List<FieldExtractorTemplate>();
-            templates.Add(new DokuExtractorCore.Model.FieldExtractorTemplate()
+            var templates = new List<DocumentGroupTemplate>();
+            templates.Add(new DokuExtractorCore.Model.DocumentGroupTemplate()
             {
-                TemplateName = "StartTemplate",
-                KeyWords = new List<string>() { "bla", "blubb|blobb" },
-                DataFields = new List<DokuExtractorCore.Model.DataFieldTemplate>()
+                TemplateGroupName = "StartTemplate",
+                //KeyWords = new List<string>() { "bla", "blubb|blobb" },
+                DataFields = new List<DokuExtractorCore.Model.DataFieldGroupTemplate>()
                    {
-                        new DokuExtractorCore.Model.DataFieldTemplate()
+                        new DokuExtractorCore.Model.DataFieldGroupTemplate()
                         {
                              Name = "Ein Datumsfeld",
-                             RegexExpressions = new List<string>(){ "/d/" },
+                  //           RegexExpressions = new List<string>(){ "/d/" },
                              TextAnchors = new List<string>(){ "Datum", "Datum:" },
                              //RegexHalfString = "Auto ",
                               FieldType = DataFieldTypes.Date
                         },
-                        new DokuExtractorCore.Model.DataFieldTemplate()
+                        new DokuExtractorCore.Model.DataFieldGroupTemplate()
                         {
                             Name = "Ein Währungsfeld",
-                            RegexExpressions = new List<string>(){"/s/" },
+                    //        RegexExpressions = new List<string>(){"/s/" },
                             TextAnchors = new List<string>(){ "Summe", "Summe:" },
                             //RegexHalfString = "Flugzeug ",
                               FieldType = DataFieldTypes.Currency
                         }
-                   }
+                   },
+                CalculationFields = new List<CalculationFieldTemplate>()
+                    {
+                        new CalculationFieldTemplate()
+                        {
+                            Name = "Netto Brutto Vergleich",
+                            CalculationExpression = "[Rechnungssumme Netto]+[Betrag MwSt]",
+                            ValidationExpression = "[Rechnungssumme Brutto]",
+                            FieldType = DataFieldTypes.Currency
+                        }
+                    }
+
             });
-            proc.SaveTemplates(templates, Path.Combine(Application.StartupPath, "ExtractorTemplates"));
+
+            proc.SaveTemplates(templates);// Path.Combine(Application.StartupPath, "ExtractorTemplates"));
         }
 
         private void btOpenTemplateDir_Click(object sender, EventArgs e)
         {
-            Process.Start(processor.TemplateDirectory);
+            Process.Start(processor.TemplateClassDirectory);
         }
 
         private void btFindRegexExpression_Click(object sender, EventArgs e)
