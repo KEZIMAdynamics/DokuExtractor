@@ -8,14 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using GdPicture14;
+using DokuExtractorStandardGUI.UserControls;
 
 namespace GdPicturePdfViewer
 {
-    public partial class ucGdPicturePdfViewer : UserControl
+    public partial class ucGdPicturePdfViewer : ucViewerBase
     {
-        public delegate void TextSelectedHandler(string selectedText);
-        public event TextSelectedHandler TextSelected;
-
         public ucGdPicturePdfViewer()
         {
             InitializeComponent();
@@ -23,7 +21,7 @@ namespace GdPicturePdfViewer
             license.RegisterKEY("***REMOVED***");
         }
 
-        public void LoadPdf(string pdfPath)
+        public override void LoadPdf(string pdfPath)
         {
             var gdPdf = new GdPicturePDF();
             var gdStatus = gdPdf.LoadFromFile(pdfPath, false);
@@ -36,7 +34,7 @@ namespace GdPicturePdfViewer
 
         private void gdViewer1_MouseUp(object sender, MouseEventArgs e)
         {
-            if (gdViewer1.IsRect())
+            if (gdViewer1.IsRect() && e.Button == MouseButtons.Left)
             {
                 float left = 0;
                 float top = 0;
@@ -45,7 +43,7 @@ namespace GdPicturePdfViewer
 
                 gdViewer1.GetRectCoordinatesOnDocumentInches(ref left, ref top, ref width, ref height);
                 var text = gdViewer1.GetPageTextArea(gdViewer1.CurrentPage, left, top, width, height);
-                TextSelected?.Invoke(text);
+                FireTextSelected(text);
             }
         }
     }

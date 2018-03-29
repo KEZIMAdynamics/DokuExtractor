@@ -90,8 +90,12 @@
     <None Include="ExtractorClassTemplates\CpTemplateJson.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="ExtractorClassTemplates\ColumbusMcKinnonenTemplate.Json.txt" />
-    <Content Include="ExtractorClassTemplates\CompotecTemplate.json.txt" />
+    <None Include="ExtractorClassTemplates\ColumbusMcKinnonenTemplate.Json.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="ExtractorClassTemplates\CompotecTemplate.json.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="SampleFiles\AllTableColumns.txt" />
     <Content Include="SampleFiles\AllTableLines.txt" />
   </ItemGroup>
