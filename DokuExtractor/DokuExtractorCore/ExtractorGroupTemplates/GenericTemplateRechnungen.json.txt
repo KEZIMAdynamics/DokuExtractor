@@ -20,6 +20,11 @@
       "Name": "Rechnungssumme Brutto",
       "TextAnchors": ["Bruttobetrag", "Bruttogesamt", "Betrag Brutto","Gesamtbetrag","Rechnungsbetrag","Rechnungssumme"],
       "FieldType": 2
+    },
+	 {
+      "Name": "UST-ID Nummer",
+      "TextAnchors": ["USt.-ID","UST-ID", "Unsere Ust-Id-Nr", "Ust-Id-Nr", "Ust-IdNr"],
+      "FieldType": 5
     }
   ],
   "CalculationFields": [
