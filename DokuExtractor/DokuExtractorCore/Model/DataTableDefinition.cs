@@ -8,6 +8,10 @@ namespace DokuExtractorCore.Model
 {
     public class DataTableDefinition
     {
-        //TODO FRANK!
+        public int TablePage { get; set; } = 0;
+
+        public DataTableCoordinates TableFrameCoordinates { get; set; } = new DataTableCoordinates();
+
+        public List<DataTableCoordinates> TableLinesCoordinates { get; set; } = new List<DataTableCoordinates>();
     }
 }

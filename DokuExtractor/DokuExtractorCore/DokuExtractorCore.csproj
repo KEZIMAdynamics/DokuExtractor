@@ -57,11 +57,13 @@
     <Compile Include="Model\DataFieldGroupTemplate.cs" />
     <Compile Include="Model\DataFieldResult.cs" />
     <Compile Include="Model\DataFieldTypes.cs" />
+    <Compile Include="Model\DataTableCoordinates.cs" />
     <Compile Include="Model\DataTableDefinition.cs" />
     <Compile Include="Model\DocumentGroupTemplate.cs" />
     <Compile Include="Model\FieldExtractionResult.cs" />
     <Compile Include="Model\PreKeyWordSelectionArgs.cs" />
     <Compile Include="Model\RegexExpressionFinderResult.cs" />
+    <Compile Include="Model\StringValue.cs" />
     <Compile Include="Model\Tables\TableColumn.cs" />
     <Compile Include="Model\Tables\TableLine.cs" />
     <Compile Include="Model\Tables\TableResult.cs" />

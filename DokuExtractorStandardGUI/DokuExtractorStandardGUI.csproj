@@ -51,8 +51,44 @@
     <Compile Include="frmExtractorStandard.Designer.cs">
       <DependentUpon>frmExtractorStandard.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmTemplateEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTemplateEditor.Designer.cs">
+      <DependentUpon>frmTemplateEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserControlsTemplateEditor\ucDataField.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlsTemplateEditor\ucDataField.Designer.cs">
+      <DependentUpon>ucDataField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlsTemplateEditor\ucDataFieldEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlsTemplateEditor\ucDataFieldEditor.Designer.cs">
+      <DependentUpon>ucDataFieldEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlsTemplateEditor\ucGeneralPropertyEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlsTemplateEditor\ucGeneralPropertyEditor.Designer.cs">
+      <DependentUpon>ucGeneralPropertyEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlsTemplateEditor\ucTemplateSelector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlsTemplateEditor\ucTemplateSelector.Designer.cs">
+      <DependentUpon>ucTemplateSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ucExtractedData.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ucExtractedData.Designer.cs">
+      <DependentUpon>ucExtractedData.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\ucFileSelector.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -74,6 +110,9 @@
     <EmbeddedResource Include="frmExtractorStandard.resx">
       <DependentUpon>frmExtractorStandard.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmTemplateEditor.resx">
+      <DependentUpon>frmTemplateEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -83,6 +122,21 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UserControlsTemplateEditor\ucDataField.resx">
+      <DependentUpon>ucDataField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlsTemplateEditor\ucDataFieldEditor.resx">
+      <DependentUpon>ucDataFieldEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlsTemplateEditor\ucGeneralPropertyEditor.resx">
+      <DependentUpon>ucGeneralPropertyEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlsTemplateEditor\ucTemplateSelector.resx">
+      <DependentUpon>ucTemplateSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ucExtractedData.resx">
+      <DependentUpon>ucExtractedData.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ucFileSelector.resx">
       <DependentUpon>ucFileSelector.cs</DependentUpon>
     </EmbeddedResource>
@@ -92,6 +146,7 @@
     <EmbeddedResource Include="UserControls\ucViewerBase.resx">
       <DependentUpon>ucViewerBase.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Properties\DataSources\DokuExtractorStandardGUI.UserControlsTemplateEditor.ucDataField.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

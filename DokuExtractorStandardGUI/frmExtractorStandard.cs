@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DokuExtractorCore;
+using DokuExtractorCore.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -32,6 +34,12 @@ namespace DokuExtractorStandardGUI
             ucFileSelector1.LoadFiles(fileInfos);
         }
 
+        private void frmExtractorStandard_Load(object sender, EventArgs e)
+        {
+            this.CenterToScreen();
+            this.WindowState = FormWindowState.Maximized;
+        }
+
         private void UcViewer1_TextSelected(string selectedText)
         {
             //TODO
@@ -41,6 +49,15 @@ namespace DokuExtractorStandardGUI
         private void UcFileSelector1_SelectedFileChanged(string newPath)
         {
             ucViewer1.LoadPdf(newPath);
+        }
+
+        private void butTemplateEditor_Click(object sender, EventArgs e)
+        {
+            var templateProcessor = new TemplateProcessor(Application.StartupPath);
+            var classTemplates = templateProcessor.LoadClassTemplatesFromDisk();
+
+            var templateEditor = new frmTemplateEditor(classTemplates);
+            templateEditor.Show();
         }
     }
 }
