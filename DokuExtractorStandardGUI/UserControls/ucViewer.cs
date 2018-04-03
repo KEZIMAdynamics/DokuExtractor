@@ -26,7 +26,7 @@ namespace DokuExtractorStandardGUI.UserControls
         private void ucViewer_Load(object sender, EventArgs e)
         {
             if (DesignMode == false)
-                LoadViewerPlugin(@"G:\DokuExtractor\GdPicturePdfViewer\bin\Debug\GdPicturePdfViewer.dll");
+                LoadViewerPlugin(@"C:\Users\Fab!an\source\repos\dokuextractor\DokuExtractorStandardGUI\bin\Debug\GdPicturePdfViewer.dll");
         }
 
         private void LoadViewerPlugin(string pluginPath)

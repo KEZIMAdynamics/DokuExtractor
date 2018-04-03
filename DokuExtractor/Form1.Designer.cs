@@ -45,6 +45,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btStartTableParser = new System.Windows.Forms.Button();
             this.btLoadPdf = new System.Windows.Forms.Button();
+            this.btTwoLineTableTest = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -219,12 +220,23 @@
             this.btLoadPdf.UseVisualStyleBackColor = true;
             this.btLoadPdf.Click += new System.EventHandler(this.btLoadPdf_Click);
             // 
+            // btTwoLineTableTest
+            // 
+            this.btTwoLineTableTest.Location = new System.Drawing.Point(248, 619);
+            this.btTwoLineTableTest.Name = "btTwoLineTableTest";
+            this.btTwoLineTableTest.Size = new System.Drawing.Size(93, 63);
+            this.btTwoLineTableTest.TabIndex = 18;
+            this.btTwoLineTableTest.Text = "Test 2 line table";
+            this.btTwoLineTableTest.UseVisualStyleBackColor = true;
+            this.btTwoLineTableTest.Click += new System.EventHandler(this.btTwoLineTableTest_Click);
+            // 
             // Form1
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1286, 866);
+            this.Controls.Add(this.btTwoLineTableTest);
             this.Controls.Add(this.btLoadPdf);
             this.Controls.Add(this.btStartTableParser);
             this.Controls.Add(this.groupBox1);
@@ -267,6 +279,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btStartTableParser;
         private System.Windows.Forms.Button btLoadPdf;
+        private System.Windows.Forms.Button btTwoLineTableTest;
     }
 }
 

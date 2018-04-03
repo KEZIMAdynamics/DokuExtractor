@@ -167,5 +167,9 @@ namespace DokuExtractorGUI
 
         }
 
+        private void btTwoLineTableTest_Click(object sender, EventArgs e)
+        {
+            new TwoLineTableProcessor().RunTest();
+        }
     }
 }
