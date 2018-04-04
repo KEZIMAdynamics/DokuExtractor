@@ -46,7 +46,7 @@ namespace DokuExtractorGUI
             }
             else
             {
-                template = processor.AutoCreateTemplate("NeuesTemplate", inputString);
+                template = processor.AutoCreateClassTemplate("NeuesTemplate", inputString);
                 var json = processor.ExtractDataAsJson(template, groupTemplates, inputString);
                 tbExtractedData.Text = json;
 
