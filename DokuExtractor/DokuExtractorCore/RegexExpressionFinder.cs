@@ -52,6 +52,15 @@ namespace DokuExtractorCore
         @"([a-zA-Z]{2}\s?[0-9a-zA-Z]{3}\s?[0-9]{3}\s?[0-9a-zA-Z]{3}\s?[0-9a-zA-Z]{0,1})"
         };
 
+        /// <summary>
+        /// Tries to find a regex expression to match the target value in an input text based on a text anchor and the type of the target value. 
+        /// </summary>
+        /// <param name="inputText">The text against which the regex expression will be matched</param>
+        /// <param name="targetValue">The value that the regex expression needs to find. If targetValue is empty, the expression will match the next occurence of the correct dataFieldType after the text anchor.</param>
+        /// <param name="textAnchor">The text anchor associated to the regex expression</param>
+        /// <param name="dataFieldType">Indicates the type of data that the regex expression shall match. Different types (e.g. dates and currencies) are matched with different regex expressions. Therefore it is important to specify the correct type.</param>
+        /// <param name="regexResult">The result containing the regex expression and matching value (if any)</param>
+        /// <returns></returns>
         public bool TryFindRegexMatchExpress(string inputText, string targetValue, string textAnchor, DataFieldTypes dataFieldType, out RegexExpressionFinderResult regexResult)
         {
             regexResult = new RegexExpressionFinderResult();

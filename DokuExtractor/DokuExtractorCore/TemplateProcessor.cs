@@ -202,7 +202,7 @@ namespace DokuExtractorCore
 
         public FieldExtractionResult ExtractData(DocumentClassTemplate template, List<DocumentGroupTemplate> groupTemplates, string inputText)
         {
-            var retVal = new FieldExtractionResult() { TemplateName = template.TemplateClassName, TemplateClass = template.TemplateGroupName };
+            var retVal = new FieldExtractionResult() { TemplateClassName = template.TemplateClassName, TemplateGroupName = template.TemplateGroupName };
 
             foreach (var item in template.DataFields)
             {

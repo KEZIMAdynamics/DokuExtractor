@@ -75,7 +75,7 @@
     <Compile Include="TableProcessor.cs" />
     <Compile Include="TemplateProcessor.cs" />
     <Compile Include="Model\DataFieldTemplate.cs" />
-    <Compile Include="Model\FieldExtractorTemplate.cs" />
+    <Compile Include="Model\DocumentClassTemplate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TwoLineTableProcessor.cs" />
   </ItemGroup>

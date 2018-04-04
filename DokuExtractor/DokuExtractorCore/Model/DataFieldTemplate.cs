@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace DokuExtractorCore.Model
 {
     /// <summary>
-    /// Template for a single DataField. Used in FieldExtractorTemplates.
+    /// Template for a single DataField. Used in DocumentClassTemplate.
     /// </summary>
     public class DataFieldTemplate
     {
