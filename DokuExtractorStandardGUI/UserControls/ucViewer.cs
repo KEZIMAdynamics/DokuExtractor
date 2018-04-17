@@ -13,6 +13,8 @@ namespace DokuExtractorStandardGUI.UserControls
 {
     public partial class ucViewer : UserControl
     {
+        public string ViewerPluginPath { get; set; } = @"G:\DokuExtractor\GdPicturePdfViewer\bin\Debug\GdPicturePdfViewer.dll";
+
         public delegate void TextSelectedHandler(string selectedText);
         public event TextSelectedHandler TextSelected;
 
@@ -22,11 +24,11 @@ namespace DokuExtractorStandardGUI.UserControls
         {
             InitializeComponent();
         }
-        
+
         private void ucViewer_Load(object sender, EventArgs e)
         {
             if (DesignMode == false)
-                LoadViewerPlugin(@"C:\Users\Fab!an\source\repos\dokuextractor\DokuExtractorStandardGUI\bin\Debug\GdPicturePdfViewer.dll");
+                LoadViewerPlugin(ViewerPluginPath);
         }
 
         private void LoadViewerPlugin(string pluginPath)

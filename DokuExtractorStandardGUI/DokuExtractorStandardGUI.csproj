@@ -146,7 +146,6 @@
     <EmbeddedResource Include="UserControls\ucViewerBase.resx">
       <DependentUpon>ucViewerBase.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="Properties\DataSources\DokuExtractorStandardGUI.UserControlsTemplateEditor.ucDataField.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -166,6 +165,8 @@
       <Name>DokuExtractorCore</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Properties\DataSources\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

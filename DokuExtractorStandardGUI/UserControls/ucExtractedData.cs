@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DokuExtractorCore.Model;
 
 namespace DokuExtractorStandardGUI.UserControls
 {
@@ -15,6 +16,15 @@ namespace DokuExtractorStandardGUI.UserControls
         public ucExtractedData()
         {
             InitializeComponent();
+        }
+
+        public void ShowExtractedData(FieldExtractionResult extractionResult)
+        {
+            txtClassName.Text = extractionResult.TemplateClass;
+            txtGroupName.Text = extractionResult.TemplateName;
+
+            dgvDataFields.DataSource = extractionResult.DataFields;
+            dgvCalculationFields.DataSource = extractionResult.CalculationFields;
         }
     }
 }
