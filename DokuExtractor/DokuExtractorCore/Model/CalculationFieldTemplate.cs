@@ -11,7 +11,15 @@ namespace DokuExtractorCore.Model
     /// </summary>
     public class CalculationFieldTemplate
     {
+
+        /// <summary>
+        /// Field name
+        /// </summary>
         public string Name { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Field type. Currently only <see cref="DataFieldTypes.Currency"/> operations are supported by the calculator.
+        /// </summary>
         public DataFieldTypes FieldType { get; set; } = DataFieldTypes.Currency;
 
         /// <summary>

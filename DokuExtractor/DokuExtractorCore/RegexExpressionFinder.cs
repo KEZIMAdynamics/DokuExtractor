@@ -61,7 +61,7 @@ namespace DokuExtractorCore
         /// <param name="dataFieldType">Indicates the type of data that the regex expression shall match. Different types (e.g. dates and currencies) are matched with different regex expressions. Therefore it is important to specify the correct type.</param>
         /// <param name="regexResult">The result containing the regex expression and matching value (if any)</param>
         /// <returns></returns>
-        public bool TryFindRegexMatchExpress(string inputText, string targetValue, string textAnchor, DataFieldTypes dataFieldType, out RegexExpressionFinderResult regexResult)
+        public bool TryFindRegexMatchExpress(string inputText, string targetValue, string textAnchor, DataFieldTypes dataFieldType, bool returnFirstMatchOnly, out RegexExpressionFinderResult regexResult)
         {
             regexResult = new RegexExpressionFinderResult();
 
@@ -69,23 +69,23 @@ namespace DokuExtractorCore
             switch (dataFieldType)
             {
                 case DataFieldTypes.Text:
-                    regexResult = RegHeart(textAnchor, targetValue, new List<string>() { @"(\w+)" }, new List<string>() { @"\s+" }, inputText);
+                    regexResult = RegHeart(textAnchor, targetValue, new List<string>() { @"(\w+)" }, new List<string>() { @"\s+" }, inputText, returnFirstMatchOnly);
                     break;
                 case DataFieldTypes.Date:
-                    regexResult = RegHeart(textAnchor, targetValue, dateExpressions, new List<string>() { @"\s+", @"\s+.\s+", @"\s+\w+\s+", @"\s+\w+\s+\w+\s+", @"\s+\w+\s+\w+\s+\w+\s+", @".+\s+", @".+\s+\w+", @".+\s+\w+\s+", @".+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+", @".+\s+\w+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+\w+\s+", @".+\/" }, inputText);
+                    regexResult = RegHeart(textAnchor, targetValue, dateExpressions, new List<string>() { @"\s+", @"\s+.\s+", @"\s+\w+\s+", @"\s+\w+\s+\w+\s+", @"\s+\w+\s+\w+\s+\w+\s+", @".+\s+", @".+\s+\w+", @".+\s+\w+\s+", @".+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+", @".+\s+\w+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+\w+\s+", @".+\/" }, inputText, returnFirstMatchOnly);
                     break;
                 case DataFieldTypes.Currency:
                     regexResult = RegHeart(textAnchor, targetValue, currencyExpressions, new List<string>() { @"\s+", @"\s+.\s+", @"\s+\w+\s+", @"\s+\w+\s+\w+\s+", @"\s+\w+\s+\w+\s+\w+\s+", @".+\s+", @".+\s+\w+", @".+\s+\w+\s+", @".+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+", @".+\s+\w+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+\w+\s+", @".+\/", @"\s+\w+\s+\d+,\d{2}\s+",
-                        @"\s+\d+,\d{2}\s+\w+\s+" }, inputText);
+                        @"\s+\d+,\d{2}\s+\w+\s+" }, inputText, returnFirstMatchOnly);
                     break;
                 case DataFieldTypes.IBAN:
-                    regexResult = RegHeart(textAnchor, targetValue, IBANExpressions, new List<string>() { @"\s+", @"\s+.\s+", @"\s+\w+\s+", @"\s+\w+\s+\w+\s+", @"\s+\w+\s+\w+\s+\w+\s+", @".+\s+", @".+\s+\w+", @".+\s+\w+\s+", @".+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+", @".+\s+\w+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+\w+\s+", @".+\/" }, inputText);
+                    regexResult = RegHeart(textAnchor, targetValue, IBANExpressions, new List<string>() { @"\s+", @"\s+.\s+", @"\s+\w+\s+", @"\s+\w+\s+\w+\s+", @"\s+\w+\s+\w+\s+\w+\s+", @".+\s+", @".+\s+\w+", @".+\s+\w+\s+", @".+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+", @".+\s+\w+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+\w+\s+", @".+\/" }, inputText, returnFirstMatchOnly);
                     break;
                 case DataFieldTypes.AnchorLessIBAN:
-                    regexResult = RegHeart(textAnchor, targetValue, WildCardIBANExpressions, new List<string>() { string.Empty }, inputText);
+                    regexResult = RegHeart(textAnchor, targetValue, WildCardIBANExpressions, new List<string>() { string.Empty }, inputText, returnFirstMatchOnly);
                     break;
                 case DataFieldTypes.VatId:
-                    regexResult = RegHeart(textAnchor, targetValue, VatIdExpressions, new List<string>() { @"\s+", @"\s+.\s+", @"\s+\w+\s+", @"\s+\w+\s+\w+\s+", @"\s+\w+\s+\w+\s+\w+\s+", @".+\s+", @".+\s+\w+", @".+\s+\w+\s+", @".+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+", @".+\s+\w+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+\w+\s+", @".+\/" }, inputText);
+                    regexResult = RegHeart(textAnchor, targetValue, VatIdExpressions, new List<string>() { @"\s+", @"\s+.\s+", @"\s+\w+\s+", @"\s+\w+\s+\w+\s+", @"\s+\w+\s+\w+\s+\w+\s+", @".+\s+", @".+\s+\w+", @".+\s+\w+\s+", @".+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+", @".+\s+\w+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+\w+\s+", @".+\/" }, inputText, returnFirstMatchOnly);
                     break;
                 default:
                     break;
@@ -94,7 +94,7 @@ namespace DokuExtractorCore
             return regexResult.Success;
         }
 
-        private RegexExpressionFinderResult RegHeart(string textAnchor, string targetValue, List<string> specificExpressions, List<string> generalExpressions, string inputText)
+        private RegexExpressionFinderResult RegHeart(string textAnchor, string targetValue, List<string> specificExpressions, List<string> generalExpressions, string inputText, bool returnFirstMatchOnly)
         {
             var loopCounter = 0;
             var stopWatch = new Stopwatch();
@@ -108,19 +108,44 @@ namespace DokuExtractorCore
                 {
                     loopCounter++;
                     var regexText = Regex.Escape(textAnchor) + generalExpression + specificExpression;
-                    var match = Regex.Match(inputText, regexText);
-                    if (match.Success)
+                    if (returnFirstMatchOnly)
                     {
-                        if (match.Groups[1].Value == targetValue || targetValue == string.Empty)
+                        var match = Regex.Match(inputText, regexText);
+                        if (match.Success)
                         {
-                            retVal.RegexExpression = regexText;
-                            retVal.MatchingValue = match.Groups[1].Value;
-                            Debug.Print(regexText + Environment.NewLine + "Regex runs until result: " + loopCounter + Environment.NewLine + "Duration: " + stopWatch.Elapsed.ToString());
-                            retVal.Success = true;
-                            return retVal;
-                        }
+                            if (match.Groups[1].Value == targetValue || targetValue == string.Empty)
+                            {
+                                retVal.RegexExpression = regexText;
+                                retVal.MatchingValue = match.Groups[1].Value;
+                                retVal.AllMatchingValues = new List<string>() { match.Groups[1].Value };
+                                Debug.Print(regexText + Environment.NewLine + "Regex runs until result: " + loopCounter + Environment.NewLine + "Duration: " + stopWatch.Elapsed.ToString());
+                                retVal.Success = true;
+                                return retVal;
+                            }
 
+                        }
                     }
+                    else
+                    {
+                        var matches = Regex.Matches(inputText, regexText);
+                        if (matches.Count > 0)
+                        {
+                            if (matches[0].Groups[1].Value == targetValue || targetValue == string.Empty)
+                            {
+                                retVal.RegexExpression = regexText;
+                                retVal.MatchingValue = matches[0].Groups[1].Value;
+                                retVal.AllMatchingValues = new List<string>();
+                                foreach (Match item in matches )
+                                {
+                                    retVal.AllMatchingValues.Add(item.Groups[1].Value);
+                                }
+                                Debug.Print(regexText + Environment.NewLine + "Regex runs until result: " + loopCounter + Environment.NewLine + "Duration: " + stopWatch.Elapsed.ToString());
+                                retVal.Success = true;
+                                return retVal;
+                            }
+                        }
+                    }
+
                 }
             }
 

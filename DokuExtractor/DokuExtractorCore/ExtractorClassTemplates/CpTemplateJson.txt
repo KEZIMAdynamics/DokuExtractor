@@ -2,7 +2,7 @@
   "TemplateClassName": "C + P Möbelsysteme",
   "TemplateGroupName": "Rechnung",
   "PreSelectionCondition": {
-    "IBAN": "DE625007001000963124OO"
+    "IBANs": ["DE625007001000963124OO"]
   },
   "KeyWords": [ "C + P Möbelsysteme",
     "Rechnung"],

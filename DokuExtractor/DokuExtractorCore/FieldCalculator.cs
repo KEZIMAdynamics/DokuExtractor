@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace DokuExtractorCore
 {
+    /// <summary>
+    /// Allows to perform calculations with value from data fields
+    /// </summary>
     public class FieldCalculator
     {
         public double Calculate(CalculationFieldTemplate calculationField, List<DataFieldResult> datafields)
@@ -65,9 +68,10 @@ namespace DokuExtractorCore
             if (string.IsNullOrEmpty(inputText))
                 return "0";
 
-            var retVal = inputText;
+            var retVal = inputText.Replace("‚",","); // Replce Comma with ASCII Code Dec130 with comma with ASCII Code Dec44 to unfuck OCR results
+            // TODO: Stabilize function against further funny characters
 
-            var temp = double.Parse(inputText, System.Globalization.NumberStyles.Currency);
+            var temp = double.Parse(retVal, System.Globalization.NumberStyles.Currency);
 
             return temp.ToString(CultureInfo.InvariantCulture);
 

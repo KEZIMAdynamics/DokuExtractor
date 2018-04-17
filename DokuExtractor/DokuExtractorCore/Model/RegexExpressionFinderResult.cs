@@ -25,5 +25,10 @@ namespace DokuExtractorCore.Model
         /// The value of the first match, that the RegexExpression generates. Contains targetValue if provided. May be used for validating the expression if no targetValue was provided.
         /// </summary>
         public string MatchingValue { get; set; } = string.Empty;
+
+        /// <summary>
+        /// All matching values, that the RegexExpression generates. Contains targetValue if provided. May be used if value collections are required (e.g. Anchorless IBANs for pre-key-word-selection)
+        /// </summary>
+        public List<string> AllMatchingValues { get; set; } = new List<string>();
     }
 }

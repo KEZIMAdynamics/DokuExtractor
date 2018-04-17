@@ -177,10 +177,29 @@ namespace DokuExtractorCore
             var retVal = new List<DocumentClassTemplate>();
 
             RegexExpressionFinderResult regexResult;
-            if (TryFindRegexMatchExpress(inputText, string.Empty, string.Empty, DataFieldTypes.AnchorLessIBAN, out regexResult))
+            if (TryFindRegexMatchExpress(inputText, string.Empty, string.Empty, DataFieldTypes.AnchorLessIBAN, false, out regexResult))
             {
-                var iban = regexResult.MatchingValue.Replace(" ", string.Empty).ToUpper();
-                retVal.AddRange(templates.Where(x => x.PreSelectionCondition.IBAN == iban));
+                var templateDict = new Dictionary<string, DocumentClassTemplate>();
+                foreach (var item in templates)
+                {
+                    foreach (var itemIban in item.PreSelectionCondition.IBANs)
+                    {
+                        if (templateDict.ContainsKey(itemIban) == false)
+                        {
+                            templateDict.Add(itemIban, item);
+                        }
+                    }
+                }
+
+                foreach (var item in regexResult.AllMatchingValues)
+                {
+                    var iban = item.Replace(" ", string.Empty).ToUpper();
+                    DocumentClassTemplate outTemplate;
+                    if (templateDict.TryGetValue(iban, out outTemplate))
+                        retVal.Add(outTemplate);
+                }
+
+                //   retVal.AddRange(templates.Where(x => x.PreSelectionCondition.IBANs.Contains(iban)));
             }
 
             return retVal;
@@ -315,8 +334,17 @@ namespace DokuExtractorCore
             retVal.TemplateGroupName = genericRechnung.TemplateGroupName;
 
             RegexExpressionFinderResult regexResult;
-            if (TryFindRegexMatchExpress(inputText, string.Empty, string.Empty, DataFieldTypes.AnchorLessIBAN, out regexResult))
-                retVal.PreSelectionCondition.IBAN = regexResult.MatchingValue.Replace(" ", string.Empty).ToUpper();
+            if (TryFindRegexMatchExpress(inputText, string.Empty, string.Empty, DataFieldTypes.AnchorLessIBAN, false, out regexResult))
+            {
+                // retVal.PreSelectionCondition.IBANs = regexResult.MatchingValue.Replace(" ", string.Empty).ToUpper();
+                foreach (var item in regexResult.AllMatchingValues)
+                {
+                    var cleaned = item.Replace(" ", string.Empty).ToUpper();
+                    retVal.PreSelectionCondition.IBANs.Add(cleaned);
+                }
+
+            }
+
 
             foreach (var item in genericRechnung.DataFields.ToList())
             {
@@ -325,7 +353,7 @@ namespace DokuExtractorCore
                 foreach (var anchor in item.TextAnchors)
                 {
                     RegexExpressionFinderResult expressionResult;
-                    if (TryFindRegexMatchExpress(inputText, string.Empty, anchor, item.FieldType, out expressionResult))
+                    if (TryFindRegexMatchExpress(inputText, string.Empty, anchor, item.FieldType, true, out expressionResult))
                     {
                         newDataField.RegexExpressions = new List<string>() { expressionResult.RegexExpression };
                         break;
@@ -380,10 +408,10 @@ namespace DokuExtractorCore
         /// <param name="dataFieldType"></param>
         /// <param name="regexMatchExpression"></param>
         /// <returns></returns>
-        public bool TryFindRegexMatchExpress(string inputText, string regexHalfString, string regexFullString, DataFieldTypes dataFieldType, out RegexExpressionFinderResult regexMatchExpression)
+        public bool TryFindRegexMatchExpress(string inputText, string regexHalfString, string regexFullString, DataFieldTypes dataFieldType, bool returnFirstMatchOnly, out RegexExpressionFinderResult regexMatchExpression)
         {
             var finder = new RegexExpressionFinder();
-            return finder.TryFindRegexMatchExpress(inputText, regexHalfString, regexFullString, dataFieldType, out regexMatchExpression);
+            return finder.TryFindRegexMatchExpress(inputText, regexHalfString, regexFullString, dataFieldType, false, out regexMatchExpression);
 
         }
     }

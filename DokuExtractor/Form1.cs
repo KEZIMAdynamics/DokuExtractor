@@ -17,6 +17,7 @@ namespace DokuExtractorGUI
     public partial class Form1 : Form
     {
         TemplateProcessor processor = new TemplateProcessor(Application.StartupPath);
+        bool isNightModeEnabled = true;
 
         public Form1()
         {
@@ -53,6 +54,11 @@ namespace DokuExtractorGUI
                 var editor = new frmTemplateEditor();
                 editor.Text = "Neues Template entdeckt";
                 editor.LoadTemplate(template);
+                if (isNightModeEnabled)
+                {
+                    PaintAllControls(editor, Color.PaleGreen, Color.Black);
+                    editor.BackColor = Color.Black;
+                }
                 editor.Show();
 
             }
@@ -61,7 +67,11 @@ namespace DokuExtractorGUI
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            if (isNightModeEnabled)
+            {
+                PaintAllControls(this, Color.PaleGreen, Color.Black);
+                BackColor = Color.Black;
+            }
         }
 
         private void btBeispieltemplateGenerieren_Click(object sender, EventArgs e)
@@ -120,10 +130,11 @@ namespace DokuExtractorGUI
             DataFieldTypes type = (DataFieldTypes)Enum.Parse(typeof(DataFieldTypes), listBox1.SelectedItem.ToString(), true);
 
             RegexExpressionFinderResult expressionResult;
-            if (finder.TryFindRegexMatchExpress(tbInhalt.Text, tbRegexHalfString.Text, tbRegexFullString.Text, type, out expressionResult))
+            if (finder.TryFindRegexMatchExpress(tbInhalt.Text, tbRegexHalfString.Text, tbRegexFullString.Text, type, false, out expressionResult))
             {
                 tbExtractedData.Text = "Regex expression found:" + Environment.NewLine + expressionResult.RegexExpression + Environment.NewLine
-                    + Environment.NewLine + "Matching value:" + Environment.NewLine + expressionResult.MatchingValue;
+                    + Environment.NewLine + "First matching value:" + Environment.NewLine + expressionResult.MatchingValue + Environment.NewLine + Environment.NewLine
+                    + Environment.NewLine + "All matching values: " + expressionResult.AllMatchingValues.ConcatList("; ");
             }
             else
             {
@@ -170,6 +181,39 @@ namespace DokuExtractorGUI
         private void btTwoLineTableTest_Click(object sender, EventArgs e)
         {
             new TwoLineTableProcessor().RunTest();
+        }
+
+        private void Form1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            isNightModeEnabled = !isNightModeEnabled;
+
+            if (isNightModeEnabled)
+            {
+                PaintAllControls(this, Color.PaleGreen, Color.Black);
+                BackColor = Color.Black;
+            }
+            else
+            {
+                PaintAllControls(this, Color.Black, SystemColors.Control);
+                BackColor = SystemColors.Control;
+            }
+            //else
+            //    foreach (Control item in this.Controls)
+            //    {
+            //        item.ForeColor = Color.DarkGreen;
+            //        item.BackColor = Color.Black;
+            //    }
+
+        }
+
+        void PaintAllControls(Control control, Color front, Color back)
+        {
+            foreach (Control item in control.Controls)
+            {
+                item.ForeColor = front;
+                item.BackColor = back;
+                PaintAllControls(item, front, back);
+            }
         }
     }
 }

@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace DokuExtractorCore
 {
+    /// <summary>
+    /// Various helper functions to make a DokuExtractor's life easier.
+    /// </summary>
     public static class HelperExtensions
     {
         /// <summary>
@@ -29,9 +32,34 @@ namespace DokuExtractorCore
             return tcs.Task;
         }
 
+        /// <summary>
+        /// Turns [Hello] into ["Hello"].
+        /// </summary>
+        /// <param name="inputText">Text that shall be encapsulated</param>
+        /// <returns></returns>
         public static string EncapsulateInDoubleQuotes(this string inputText)
         {
             return "\"" + inputText + "\"";
+        }
+
+        /// <summary>
+        /// Concatinates all strings from a collection. Each entry will be separated by the seperator from the next entry.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="seperator"></param>
+        /// <returns></returns>
+        public static string ConcatList(this IEnumerable<string> input, string seperator)
+        {
+            var builder = new StringBuilder();
+
+            foreach (var item in input)
+            {
+                builder.Append(item);
+                builder.Append(seperator);
+            }
+
+
+            return builder.ToString();
         }
     }
 }

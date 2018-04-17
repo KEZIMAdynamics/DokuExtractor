@@ -2,7 +2,7 @@
   "TemplateClassName": "Compotec",
   "TemplateGroupName": "Rechnung",
   "PreSelectionCondition": {
-    "IBAN": "DE06458500050005525977"
+    "IBANs": ["DE06458500050005525977"]
   },
   "KeyWords": [
     "COMPOTEC",

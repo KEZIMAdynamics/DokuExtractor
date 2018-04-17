@@ -23,8 +23,13 @@
     },
 	 {
       "Name": "UST-ID Nummer",
-      "TextAnchors": ["USt.-ID","UST-ID", "Unsere Ust-Id-Nr", "Ust-Id-Nr", "Ust-IdNr"],
+      "TextAnchors": ["USt.-ID","UST-ID", "Unsere Ust-Id-Nr", "Ust-Id-Nr", "Ust-IdNr", "USt.IdNr"],
       "FieldType": 5
+    },
+	 {
+      "Name": "IBAN",
+      "TextAnchors": ["IBAN", "Iban"],
+      "FieldType": 3
     }
   ],
   "CalculationFields": [
