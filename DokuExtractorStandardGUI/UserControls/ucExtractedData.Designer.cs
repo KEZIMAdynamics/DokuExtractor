@@ -83,6 +83,7 @@
             // 
             // dgvDataFields
             // 
+            this.dgvDataFields.BackgroundColor = System.Drawing.Color.White;
             this.dgvDataFields.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDataFields.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDataFields.Location = new System.Drawing.Point(0, 0);
@@ -92,6 +93,7 @@
             // 
             // dgvCalculationFields
             // 
+            this.dgvCalculationFields.BackgroundColor = System.Drawing.Color.White;
             this.dgvCalculationFields.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCalculationFields.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCalculationFields.Location = new System.Drawing.Point(0, 0);

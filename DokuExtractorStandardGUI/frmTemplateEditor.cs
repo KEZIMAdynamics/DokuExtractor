@@ -78,5 +78,15 @@ namespace DokuExtractorStandardGUI
         {
             ucDataFieldEditor1.DeleteLastDataField();
         }
+
+        private void frmTemplateEditor_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                ucTemplateSelector1.SelectionChanged -= UcTemplateSelector1_SelectionChanged;
+            }
+            catch (Exception ex)
+            { }
+        }
     }
 }

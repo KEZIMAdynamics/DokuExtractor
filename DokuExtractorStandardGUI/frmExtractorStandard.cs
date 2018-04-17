@@ -18,14 +18,13 @@ namespace DokuExtractorStandardGUI
         private string selectedFilePath = string.Empty;
         private TemplateProcessor templateProcessor = new TemplateProcessor(Application.StartupPath);
 
-        public frmExtractorStandard()
+        public frmExtractorStandard(string filePath)
         {
             InitializeComponent();
             ucFileSelector1.SelectedFileChanged += UcFileSelector1_SelectedFileChanged;
             ucViewer1.TextSelected += UcViewer1_TextSelected;
 
             var fileInfos = new List<FileInfo>();
-            var filePath = Path.Combine(Application.StartupPath, "Files");
             var files = Directory.GetFiles(filePath);
 
             foreach (var file in files)
@@ -33,6 +32,15 @@ namespace DokuExtractorStandardGUI
                 var fileInfo = new FileInfo(file);
                 fileInfos.Add(fileInfo);
             }
+
+            ucFileSelector1.LoadFiles(fileInfos);
+        }
+
+        public frmExtractorStandard(List<FileInfo> fileInfos)
+        {
+            InitializeComponent();
+            ucFileSelector1.SelectedFileChanged += UcFileSelector1_SelectedFileChanged;
+            ucViewer1.TextSelected += UcViewer1_TextSelected;
 
             ucFileSelector1.LoadFiles(fileInfos);
         }
@@ -96,6 +104,17 @@ namespace DokuExtractorStandardGUI
                 //editor.Text = "New template";
                 //editor.Show();
             }
+        }
+
+        private void frmExtractorStandard_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                ucFileSelector1.SelectedFileChanged -= UcFileSelector1_SelectedFileChanged;
+                ucViewer1.TextSelected -= UcViewer1_TextSelected;
+            }
+            catch(Exception ex)
+            { }
         }
     }
 }

@@ -28,14 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmExtractorStandard));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.ucFileSelector1 = new DokuExtractorStandardGUI.UserControls.ucFileSelector();
             this.ucViewer1 = new DokuExtractorStandardGUI.UserControls.ucViewer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.ucExtractedData1 = new DokuExtractorStandardGUI.UserControls.ucExtractedData();
-            this.butTemplateEditor = new System.Windows.Forms.Button();
             this.butGo = new System.Windows.Forms.Button();
+            this.butTemplateEditor = new System.Windows.Forms.Button();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabExtractedData = new System.Windows.Forms.TabPage();
+            this.tabSingleTemplateEditor = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -48,6 +52,8 @@
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabExtractedData.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -63,8 +69,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer3);
-            this.splitContainer1.Size = new System.Drawing.Size(946, 538);
-            this.splitContainer1.SplitterDistance = 696;
+            this.splitContainer1.Size = new System.Drawing.Size(962, 607);
+            this.splitContainer1.SplitterDistance = 707;
             this.splitContainer1.TabIndex = 0;
             // 
             // splitContainer2
@@ -80,8 +86,8 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.ucViewer1);
-            this.splitContainer2.Size = new System.Drawing.Size(696, 538);
-            this.splitContainer2.SplitterDistance = 181;
+            this.splitContainer2.Size = new System.Drawing.Size(707, 607);
+            this.splitContainer2.SplitterDistance = 183;
             this.splitContainer2.TabIndex = 0;
             // 
             // ucFileSelector1
@@ -91,7 +97,7 @@
             this.ucFileSelector1.Location = new System.Drawing.Point(0, 0);
             this.ucFileSelector1.Name = "ucFileSelector1";
             this.ucFileSelector1.Padding = new System.Windows.Forms.Padding(3);
-            this.ucFileSelector1.Size = new System.Drawing.Size(181, 538);
+            this.ucFileSelector1.Size = new System.Drawing.Size(183, 607);
             this.ucFileSelector1.TabIndex = 0;
             // 
             // ucViewer1
@@ -99,54 +105,45 @@
             this.ucViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucViewer1.Location = new System.Drawing.Point(0, 0);
             this.ucViewer1.Name = "ucViewer1";
-            this.ucViewer1.Size = new System.Drawing.Size(511, 538);
+            this.ucViewer1.Size = new System.Drawing.Size(520, 607);
             this.ucViewer1.TabIndex = 0;
+            this.ucViewer1.ViewerPluginPath = "G:\\DokuExtractor\\GdPicturePdfViewer\\bin\\Debug\\GdPicturePdfViewer.dll";
             // 
             // splitContainer3
             // 
             this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer3.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.splitContainer3.IsSplitterFixed = true;
             this.splitContainer3.Location = new System.Drawing.Point(0, 0);
             this.splitContainer3.Name = "splitContainer3";
             this.splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
             // splitContainer3.Panel1
             // 
-            this.splitContainer3.Panel1.Controls.Add(this.ucExtractedData1);
+            this.splitContainer3.Panel1.Controls.Add(this.tabControl1);
             // 
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.butGo);
             this.splitContainer3.Panel2.Controls.Add(this.butTemplateEditor);
-            this.splitContainer3.Size = new System.Drawing.Size(246, 538);
-            this.splitContainer3.SplitterDistance = 438;
+            this.splitContainer3.Size = new System.Drawing.Size(251, 607);
+            this.splitContainer3.SplitterDistance = 560;
             this.splitContainer3.TabIndex = 0;
             // 
             // ucExtractedData1
             // 
             this.ucExtractedData1.BackColor = System.Drawing.Color.White;
             this.ucExtractedData1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucExtractedData1.Location = new System.Drawing.Point(0, 0);
+            this.ucExtractedData1.Location = new System.Drawing.Point(3, 3);
             this.ucExtractedData1.Name = "ucExtractedData1";
-            this.ucExtractedData1.Size = new System.Drawing.Size(246, 438);
+            this.ucExtractedData1.Size = new System.Drawing.Size(237, 528);
             this.ucExtractedData1.TabIndex = 0;
-            // 
-            // butTemplateEditor
-            // 
-            this.butTemplateEditor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.butTemplateEditor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.butTemplateEditor.Location = new System.Drawing.Point(138, 58);
-            this.butTemplateEditor.Name = "butTemplateEditor";
-            this.butTemplateEditor.Size = new System.Drawing.Size(105, 35);
-            this.butTemplateEditor.TabIndex = 0;
-            this.butTemplateEditor.Text = "Template Editor";
-            this.butTemplateEditor.UseVisualStyleBackColor = true;
-            this.butTemplateEditor.Click += new System.EventHandler(this.butTemplateEditor_Click);
             // 
             // butGo
             // 
             this.butGo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butGo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.butGo.Location = new System.Drawing.Point(27, 58);
+            this.butGo.Location = new System.Drawing.Point(32, 5);
             this.butGo.Name = "butGo";
             this.butGo.Size = new System.Drawing.Size(105, 35);
             this.butGo.TabIndex = 1;
@@ -154,15 +151,61 @@
             this.butGo.UseVisualStyleBackColor = true;
             this.butGo.Click += new System.EventHandler(this.butGo_Click);
             // 
+            // butTemplateEditor
+            // 
+            this.butTemplateEditor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.butTemplateEditor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.butTemplateEditor.Location = new System.Drawing.Point(143, 5);
+            this.butTemplateEditor.Name = "butTemplateEditor";
+            this.butTemplateEditor.Size = new System.Drawing.Size(105, 35);
+            this.butTemplateEditor.TabIndex = 0;
+            this.butTemplateEditor.Text = "Template Editor";
+            this.butTemplateEditor.UseVisualStyleBackColor = true;
+            this.butTemplateEditor.Click += new System.EventHandler(this.butTemplateEditor_Click);
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabExtractedData);
+            this.tabControl1.Controls.Add(this.tabSingleTemplateEditor);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(251, 560);
+            this.tabControl1.TabIndex = 1;
+            // 
+            // tabExtractedData
+            // 
+            this.tabExtractedData.Controls.Add(this.ucExtractedData1);
+            this.tabExtractedData.Location = new System.Drawing.Point(4, 22);
+            this.tabExtractedData.Name = "tabExtractedData";
+            this.tabExtractedData.Padding = new System.Windows.Forms.Padding(3);
+            this.tabExtractedData.Size = new System.Drawing.Size(243, 534);
+            this.tabExtractedData.TabIndex = 0;
+            this.tabExtractedData.Text = "Extracted Data";
+            this.tabExtractedData.UseVisualStyleBackColor = true;
+            // 
+            // tabSingleTemplateEditor
+            // 
+            this.tabSingleTemplateEditor.Location = new System.Drawing.Point(4, 22);
+            this.tabSingleTemplateEditor.Name = "tabSingleTemplateEditor";
+            this.tabSingleTemplateEditor.Padding = new System.Windows.Forms.Padding(3);
+            this.tabSingleTemplateEditor.Size = new System.Drawing.Size(243, 534);
+            this.tabSingleTemplateEditor.TabIndex = 1;
+            this.tabSingleTemplateEditor.Text = "Single Template Editor";
+            this.tabSingleTemplateEditor.UseVisualStyleBackColor = true;
+            // 
             // frmExtractorStandard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(946, 538);
+            this.ClientSize = new System.Drawing.Size(962, 607);
             this.Controls.Add(this.splitContainer1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmExtractorStandard";
-            this.Text = "frmExtractorStandard";
+            this.Text = "DokuExtractor";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmExtractorStandard_FormClosing);
             this.Load += new System.EventHandler(this.frmExtractorStandard_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -176,6 +219,8 @@
             this.splitContainer3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
+            this.tabExtractedData.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -190,6 +235,9 @@
         private UserControls.ucExtractedData ucExtractedData1;
         private System.Windows.Forms.Button butTemplateEditor;
         private System.Windows.Forms.Button butGo;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabExtractedData;
+        private System.Windows.Forms.TabPage tabSingleTemplateEditor;
     }
 }
 

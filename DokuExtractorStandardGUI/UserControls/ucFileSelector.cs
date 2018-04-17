@@ -14,6 +14,9 @@ namespace DokuExtractorStandardGUI.UserControls
     public partial class ucFileSelector : UserControl
     {
         public delegate void SelectedFileChangedHandler(string newPath);
+        /// <summary>
+        /// Fired, when selected file changed (contains path of the now selected file)
+        /// </summary>
         public event SelectedFileChangedHandler SelectedFileChanged;
 
         public ucFileSelector()
@@ -21,6 +24,10 @@ namespace DokuExtractorStandardGUI.UserControls
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Loads files into the data grid's data source of the file selector
+        /// </summary>
+        /// <param name="fileInfos"></param>
         public void LoadFiles(List<FileInfo> fileInfos)
         {
             dataGridView1.DataSource = fileInfos;

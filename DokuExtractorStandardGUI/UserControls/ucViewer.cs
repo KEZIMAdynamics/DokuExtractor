@@ -13,9 +13,15 @@ namespace DokuExtractorStandardGUI.UserControls
 {
     public partial class ucViewer : UserControl
     {
+        /// <summary>
+        /// Path of the used viewer plugin for viewing PDF files
+        /// </summary>
         public string ViewerPluginPath { get; set; } = @"G:\DokuExtractor\GdPicturePdfViewer\bin\Debug\GdPicturePdfViewer.dll";
 
         public delegate void TextSelectedHandler(string selectedText);
+        /// <summary>
+        /// Fired, when some text has been selected within the viewer (contains the selected text)
+        /// </summary>
         public event TextSelectedHandler TextSelected;
 
         ucViewerBase viewerControlBase;
@@ -33,7 +39,6 @@ namespace DokuExtractorStandardGUI.UserControls
 
         private void LoadViewerPlugin(string pluginPath)
         {
-            //var viewerControl = new ucViewerBase();
             var plugin = Assembly.LoadFrom(pluginPath);
 
             var types = plugin.GetTypes();
@@ -58,6 +63,10 @@ namespace DokuExtractorStandardGUI.UserControls
             TextSelected?.Invoke(selectedText);
         }
 
+        /// <summary>
+        /// Loads a PDF file into the file viewer
+        /// </summary>
+        /// <param name="pdfPath">Path of the PDF file</param>
         public void LoadPdf(string pdfPath)
         {
             viewerControlBase?.LoadPdf(pdfPath);

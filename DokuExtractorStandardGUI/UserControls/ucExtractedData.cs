@@ -18,6 +18,10 @@ namespace DokuExtractorStandardGUI.UserControls
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Shows the content of the extraction result
+        /// </summary>
+        /// <param name="extractionResult">Extraction result of type FieldExtractionResult</param>
         public void ShowExtractedData(FieldExtractionResult extractionResult)
         {
             txtClassName.Text = extractionResult.TemplateClass;
