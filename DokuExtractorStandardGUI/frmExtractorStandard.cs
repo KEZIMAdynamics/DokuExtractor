@@ -116,7 +116,7 @@ namespace DokuExtractorStandardGUI
             else
             {
                 ucResultAndEditor1.SwitchTab(true);
-                template = templateProcessor.AutoCreateTemplate("NewTemplate", inputString);
+                template = templateProcessor.AutoCreateClassTemplate("NewTemplate", inputString);
                 var json = templateProcessor.ExtractDataAsJson(template, groupTemplates, inputString);
 
                 ucResultAndEditor1.ShowPropertiesAndDataFields(template);

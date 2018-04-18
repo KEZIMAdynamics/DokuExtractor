@@ -24,8 +24,8 @@ namespace DokuExtractorStandardGUI.UserControls
         /// <param name="extractionResult">Extraction result of type FieldExtractionResult</param>
         public void ShowExtractedData(FieldExtractionResult extractionResult)
         {
-            txtClassName.Text = extractionResult.TemplateClass;
-            txtGroupName.Text = extractionResult.TemplateName;
+            txtClassName.Text = extractionResult.TemplateClassName;
+            txtGroupName.Text = extractionResult.TemplateGroupName;
 
             dgvDataFields.DataSource = extractionResult.DataFields;
             dgvCalculationFields.DataSource = extractionResult.CalculationFields;
@@ -38,8 +38,8 @@ namespace DokuExtractorStandardGUI.UserControls
         {
             var retVal = new FieldExtractionResult();
 
-            retVal.TemplateClass = txtClassName.Text;
-            retVal.TemplateName = txtGroupName.Text;
+            retVal.TemplateClassName = txtClassName.Text;
+            retVal.TemplateGroupName = txtGroupName.Text;
 
             foreach (DataFieldResult dataField in dgvDataFields.DataSource as List<DataFieldResult>)
             {

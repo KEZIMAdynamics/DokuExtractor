@@ -36,7 +36,13 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             {
                 txtClassName.Text = this.classTemplate.TemplateClassName;
                 txtGroupName.Text = this.classTemplate.TemplateGroupName;
-                txtIban.Text = this.classTemplate.PreSelectionCondition.IBANs;
+
+                txtIban.Text = string.Empty;
+                if (this.classTemplate.PreSelectionCondition.IBANs != null)
+                    foreach (var item in this.classTemplate.PreSelectionCondition.IBANs)
+                    {
+                        txtIban.Text = txtIban.Text + item + Environment.NewLine;
+                    }
 
                 txtKeyWords.Text = string.Empty;
                 if (this.classTemplate.KeyWords != null)
@@ -56,14 +62,20 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
 
             retVal.TemplateClassName = txtClassName.Text;
             retVal.TemplateGroupName = txtGroupName.Text;
-            retVal.PreSelectionCondition.IBANs = txtIban.Text;
 
             var splitArray = new string[1];
             splitArray[0] = Environment.NewLine;
-            var regexArray = txtKeyWords.Text.Split(splitArray, StringSplitOptions.RemoveEmptyEntries);
 
+            var regexArrayIbans = txtIban.Text.Split(splitArray, StringSplitOptions.RemoveEmptyEntries);
+            retVal.PreSelectionCondition.IBANs = new List<string>();
+            foreach (var item in regexArrayIbans)
+            {
+                retVal.PreSelectionCondition.IBANs.Add(item);
+            }
+
+            var regexArrayKeyWords = txtKeyWords.Text.Split(splitArray, StringSplitOptions.RemoveEmptyEntries);
             retVal.KeyWords = new List<string>();
-            foreach (var item in regexArray)
+            foreach (var item in regexArrayKeyWords)
             {
                 retVal.KeyWords.Add(item);
             }

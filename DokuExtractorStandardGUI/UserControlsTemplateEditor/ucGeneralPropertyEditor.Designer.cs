@@ -99,11 +99,13 @@
             // 
             // txtIban
             // 
-            this.txtIban.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtIban.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtIban.Location = new System.Drawing.Point(6, 116);
+            this.txtIban.Multiline = true;
             this.txtIban.Name = "txtIban";
-            this.txtIban.Size = new System.Drawing.Size(586, 20);
+            this.txtIban.Size = new System.Drawing.Size(586, 345);
             this.txtIban.TabIndex = 6;
             // 
             // txtKeyWords
