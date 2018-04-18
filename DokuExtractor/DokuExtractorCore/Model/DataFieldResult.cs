@@ -6,8 +6,14 @@ using System.Threading.Tasks;
 
 namespace DokuExtractorCore.Model
 {
+    /// <summary>
+    /// Result for a single DataField. Used in FielExtractionResult.
+    /// </summary>
     public class DataFieldResult
     {
+        /// <summary>
+        /// Field name
+        /// </summary>
         public string Name { get; set; } = string.Empty;
         public string Value { get; set; } = string.Empty;
         public DataFieldTypes FieldType { get; set; }

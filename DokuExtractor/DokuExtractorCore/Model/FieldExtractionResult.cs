@@ -7,19 +7,19 @@ using System.Threading.Tasks;
 namespace DokuExtractorCore.Model
 {
     /// <summary>
-    /// Contains the extracted data fields.
+    /// Contains the extracted data fields for a document.
     /// </summary>
     public class FieldExtractionResult
     {
         /// <summary>
         /// Identifies the template which was used to create the result
         /// </summary>
-        public string TemplateName { get; set; } = string.Empty;
+        public string TemplateClassName { get; set; } = string.Empty;
 
         /// <summary>
         /// Which class or category does the template belong to? (Rechnung, Angebot, Lieferschein etc)
         /// </summary>
-        public string TemplateClass { get; set; } = string.Empty;
+        public string TemplateGroupName { get; set; } = string.Empty;
 
         /// <summary>
         /// Contains the extracted data fields.

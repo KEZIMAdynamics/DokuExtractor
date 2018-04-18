@@ -8,6 +8,6 @@ namespace DokuExtractorCore.Model
 {
     public class PreKeyWordSelectionArgs
     {
-        public string IBAN { get; set; } = string.Empty;
+        public List<string> IBANs { get; set; } = new List<string>();
     }
 }

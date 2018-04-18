@@ -36,7 +36,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             {
                 txtClassName.Text = this.classTemplate.TemplateClassName;
                 txtGroupName.Text = this.classTemplate.TemplateGroupName;
-                txtIban.Text = this.classTemplate.PreSelectionCondition.IBAN;
+                txtIban.Text = this.classTemplate.PreSelectionCondition.IBANs;
 
                 txtKeyWords.Text = string.Empty;
                 if (this.classTemplate.KeyWords != null)
@@ -56,7 +56,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
 
             retVal.TemplateClassName = txtClassName.Text;
             retVal.TemplateGroupName = txtGroupName.Text;
-            retVal.PreSelectionCondition.IBAN = txtIban.Text;
+            retVal.PreSelectionCondition.IBANs = txtIban.Text;
 
             var splitArray = new string[1];
             splitArray[0] = Environment.NewLine;
