@@ -20,6 +20,14 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             InitializeComponent();
         }
 
+        private void ucGeneralPropertyEditor_Load(object sender, EventArgs e)
+        {
+            splitContainer1.SplitterDistance = splitContainer1.Width / 2;
+        }
+
+        /// <summary>
+        /// Shows the general properties of a class template
+        /// </summary>
         public void ShowGeneralProperties(DocumentClassTemplate classTemplate)
         {
             this.classTemplate = classTemplate;
@@ -39,6 +47,9 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             }
         }
 
+        /// <summary>
+        /// Returns the class template with changed general properties
+        /// </summary>
         public DocumentClassTemplate GetDocumentClassTemplateWithChangedGeneralProperties()
         {
             var retVal = this.classTemplate;

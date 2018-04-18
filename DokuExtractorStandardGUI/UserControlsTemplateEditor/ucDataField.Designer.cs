@@ -70,7 +70,9 @@
             "Text",
             "Date",
             "Currency",
-            "IBAN"});
+            "IBAN",
+            "AnchorLessIBAN",
+            "VatId"});
             this.lbxFieldType.Location = new System.Drawing.Point(3, 71);
             this.lbxFieldType.Name = "lbxFieldType";
             this.lbxFieldType.Size = new System.Drawing.Size(284, 69);

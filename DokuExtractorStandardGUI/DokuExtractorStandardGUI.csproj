@@ -77,6 +77,12 @@
     <Compile Include="UserControlsTemplateEditor\ucGeneralPropertyEditor.Designer.cs">
       <DependentUpon>ucGeneralPropertyEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControlsTemplateEditor\ucSingleTemplateEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlsTemplateEditor\ucSingleTemplateEditor.Designer.cs">
+      <DependentUpon>ucSingleTemplateEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControlsTemplateEditor\ucTemplateSelector.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -94,6 +100,12 @@
     </Compile>
     <Compile Include="UserControls\ucFileSelector.Designer.cs">
       <DependentUpon>ucFileSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ucResultAndEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ucResultAndEditor.Designer.cs">
+      <DependentUpon>ucResultAndEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\ucViewer.cs">
       <SubType>UserControl</SubType>
@@ -131,6 +143,9 @@
     <EmbeddedResource Include="UserControlsTemplateEditor\ucGeneralPropertyEditor.resx">
       <DependentUpon>ucGeneralPropertyEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControlsTemplateEditor\ucSingleTemplateEditor.resx">
+      <DependentUpon>ucSingleTemplateEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControlsTemplateEditor\ucTemplateSelector.resx">
       <DependentUpon>ucTemplateSelector.cs</DependentUpon>
     </EmbeddedResource>
@@ -139,6 +154,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ucFileSelector.resx">
       <DependentUpon>ucFileSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ucResultAndEditor.resx">
+      <DependentUpon>ucResultAndEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ucViewer.resx">
       <DependentUpon>ucViewer.cs</DependentUpon>

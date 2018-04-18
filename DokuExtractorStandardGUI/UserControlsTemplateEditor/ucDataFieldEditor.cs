@@ -21,11 +21,17 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Adds a new data field to the user control
+        /// </summary>
         public void AddDataField()
         {
             flowLayoutPanel1.Controls.Add(new ucDataField());
         }
 
+        /// <summary>
+        /// Deletes the last (added) data field from the user control
+        /// </summary>
         public void DeleteLastDataField()
         {
             List<Control> listControls = new List<Control>();
@@ -40,6 +46,9 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
                 flowLayoutPanel1.Controls.Remove(lastControl);
         }
 
+        /// <summary>
+        /// Shows the data fields of a class template
+        /// </summary>
         public void ShowDataFields(DocumentClassTemplate classTemplate)
         {
             this.classTemplate = classTemplate;
@@ -64,6 +73,9 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
                 }
         }
 
+        /// <summary>
+        /// Returns the class template with changed data fields
+        /// </summary>
         public DocumentClassTemplate GetDocumentClassTemplateWithChangedDataFields()
         {
             var retVal = this.classTemplate;

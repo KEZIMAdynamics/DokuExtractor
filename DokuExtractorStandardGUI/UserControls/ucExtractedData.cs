@@ -30,5 +30,28 @@ namespace DokuExtractorStandardGUI.UserControls
             dgvDataFields.DataSource = extractionResult.DataFields;
             dgvCalculationFields.DataSource = extractionResult.CalculationFields;
         }
+
+        /// <summary>
+        /// Returns the shown (and maybe editted) extraction result
+        /// </summary>
+        public FieldExtractionResult GetFieldExtractionResult()
+        {
+            var retVal = new FieldExtractionResult();
+
+            retVal.TemplateClass = txtClassName.Text;
+            retVal.TemplateName = txtGroupName.Text;
+
+            foreach (DataFieldResult dataField in dgvDataFields.DataSource as List<DataFieldResult>)
+            {
+                retVal.DataFields.Add(dataField);
+            }
+
+            foreach (CalculationFieldResult calcField in dgvCalculationFields.DataSource as List<CalculationFieldResult>)
+            {
+                retVal.CalculationFields.Add(calcField);
+            }
+
+            return retVal;
+        }
     }
 }

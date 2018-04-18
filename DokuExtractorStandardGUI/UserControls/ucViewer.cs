@@ -37,6 +37,10 @@ namespace DokuExtractorStandardGUI.UserControls
                 LoadViewerPlugin(ViewerPluginPath);
         }
 
+        /// <summary>
+        /// Loads the viewer plugin, which shall be used for viewing PDF files
+        /// </summary>
+        /// <param name="pluginPath"></param>
         private void LoadViewerPlugin(string pluginPath)
         {
             var plugin = Assembly.LoadFrom(pluginPath);
@@ -58,11 +62,6 @@ namespace DokuExtractorStandardGUI.UserControls
             }
         }
 
-        private void ViewerControlBase_TextSelected(string selectedText)
-        {
-            TextSelected?.Invoke(selectedText);
-        }
-
         /// <summary>
         /// Loads a PDF file into the file viewer
         /// </summary>
@@ -70,6 +69,11 @@ namespace DokuExtractorStandardGUI.UserControls
         public void LoadPdf(string pdfPath)
         {
             viewerControlBase?.LoadPdf(pdfPath);
+        }
+
+        private void ViewerControlBase_TextSelected(string selectedText)
+        {
+            TextSelected?.Invoke(selectedText);
         }
     }
 }

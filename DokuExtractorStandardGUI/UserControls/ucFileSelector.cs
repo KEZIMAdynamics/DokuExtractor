@@ -19,6 +19,8 @@ namespace DokuExtractorStandardGUI.UserControls
         /// </summary>
         public event SelectedFileChangedHandler SelectedFileChanged;
 
+        private BindingList<FileInfo> fileInfos = new BindingList<FileInfo>();
+
         public ucFileSelector()
         {
             InitializeComponent();
@@ -27,10 +29,43 @@ namespace DokuExtractorStandardGUI.UserControls
         /// <summary>
         /// Loads files into the data grid's data source of the file selector
         /// </summary>
-        /// <param name="fileInfos"></param>
         public void LoadFiles(List<FileInfo> fileInfos)
         {
-            dataGridView1.DataSource = fileInfos;
+            this.fileInfos = new BindingList<FileInfo>(fileInfos);
+            dataGridView1.DataSource = this.fileInfos;
+        }
+
+        /// <summary>
+        /// Adds an additional list of FileInfos to the FileSelector
+        /// </summary>
+        public void AddFilesToQueue(List<FileInfo> additionalFileInfos)
+        {
+            foreach (var fileInfo in additionalFileInfos)
+            {
+                this.fileInfos.Add(fileInfo);
+            }
+        }
+
+        /// <summary>
+        /// Removes a file from the list of FileInfos of the FileSelctor
+        /// </summary>
+        public void RemoveFileFromQueue(string filePath)
+        {
+            var removableFileInfo = fileInfos.Where(x => x.FullName == filePath).FirstOrDefault();
+            if (removableFileInfo != null)
+                this.fileInfos.Remove(removableFileInfo);
+        }
+
+        /// <summary>
+        /// Deletes a file physically and removes the file from the list of FileInfos of the FileSelector
+        /// </summary>
+        /// <param name="filePath"></param>
+        public void DeleteFile(string filePath)
+        {
+            if (File.Exists(filePath))
+                File.Delete(filePath);
+
+            RemoveFileFromQueue(filePath);
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)

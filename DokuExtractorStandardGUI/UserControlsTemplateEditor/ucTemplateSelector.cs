@@ -24,6 +24,10 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Loads a string value list of template names to the TemplateSelector
+        /// </summary>
+        /// <param name="templateNames">List of template names</param>
         public void LoadTemplates(List<StringValue> templateNames)
         {
             dataGridView1.DataSource = templateNames;
@@ -34,7 +38,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             foreach (DataGridViewRow row in dataGridView1.SelectedRows)
             {
                 var className = row.Cells["Value"]?.Value?.ToString();
-                SelectionChanged?.Invoke(className);                
+                SelectionChanged?.Invoke(className);
                 break;
             }
         }

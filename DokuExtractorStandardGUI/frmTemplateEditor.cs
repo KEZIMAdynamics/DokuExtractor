@@ -30,8 +30,7 @@ namespace DokuExtractorStandardGUI
         private void UcTemplateSelector1_SelectionChanged(string templateName)
         {
             this.selectedClassTemplate = this.classTemplates.Where(x => x.TemplateClassName == templateName).FirstOrDefault();
-            ucDataFieldEditor1.ShowDataFields(this.selectedClassTemplate);
-            ucGeneralPropertyEditor1.ShowGeneralProperties(this.selectedClassTemplate);
+            ucSingleTemplateEditor1.ShowPropertiesAndDataFields(this.selectedClassTemplate);
         }
 
         private void frmTemplateEditor_Load(object sender, EventArgs e)
@@ -47,8 +46,8 @@ namespace DokuExtractorStandardGUI
 
         private void butSaveTemplate_Click(object sender, EventArgs e)
         {
-            this.selectedClassTemplate = ucGeneralPropertyEditor1.GetDocumentClassTemplateWithChangedGeneralProperties();
-            var classTemplateWithChangedDataFields = ucDataFieldEditor1.GetDocumentClassTemplateWithChangedDataFields();
+            this.selectedClassTemplate = ucSingleTemplateEditor1.GetDocumentClassTemplateWithChangedGeneralProperties();
+            var classTemplateWithChangedDataFields = ucSingleTemplateEditor1.GetDocumentClassTemplateWithChangedDataFields();
             this.selectedClassTemplate.DataFields = classTemplateWithChangedDataFields.DataFields;
 
 
@@ -71,12 +70,12 @@ namespace DokuExtractorStandardGUI
 
         private void butAddDataField_Click(object sender, EventArgs e)
         {
-            ucDataFieldEditor1.AddDataField();
+            ucSingleTemplateEditor1.AddDataField();
         }
 
         private void butDeleteDataField_Click(object sender, EventArgs e)
         {
-            ucDataFieldEditor1.DeleteLastDataField();
+            ucSingleTemplateEditor1.DeleteLastDataField();
         }
 
         private void frmTemplateEditor_FormClosing(object sender, FormClosingEventArgs e)
