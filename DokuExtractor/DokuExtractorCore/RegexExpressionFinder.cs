@@ -49,7 +49,25 @@ namespace DokuExtractorCore
 
         List<string> VatIdExpressions = new List<string>()
         {
-        @"([a-zA-Z]{2}\s?[0-9a-zA-Z]{3}\s?[0-9]{3}\s?[0-9a-zA-Z]{3}\s?[0-9a-zA-Z]{0,1})"
+        @"([a-zA-Z]{2}\s?[0-9a-zA-Z]{3}\s?[0-9]{3}\s?[0-9a-zA-Z]{3,4})\s",
+        @"([a-zA-Z]{2}\s?[0-9a-zA-Z]{3}\s?[0-9]{3}\s?[0-9a-zA-Z]{3,4})"
+        };
+
+        List<string> termExpressions = new List<string>()
+        {
+         @"(.+?)\s",
+         @"(.+?\s.+?)\s",
+         @"(.+?\s.+?\s.+?)\s",
+         @"(.+?\s.+?\s.+?\s.+?)\s",
+         @"(.+?\s.+?\s.+?\s.+?\s.+?)\s",
+         @"(.+?\s.+?\s.+?\s.+?\s.+?\s.+?)\s",
+         @"(.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?)\s",
+         @"(.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?)\s",
+         @"(.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?)\s"
+         //@"(\d+.\d{3},\d{2})",
+         //@"(\d+,\d{2})",
+         //@"(\d+'\d{2})",
+         //@"(\d+\D\d{2})"
         };
 
         /// <summary>
@@ -86,6 +104,9 @@ namespace DokuExtractorCore
                     break;
                 case DataFieldTypes.VatId:
                     regexResult = RegHeart(textAnchor, targetValue, VatIdExpressions, new List<string>() { @"\s+", @"\s+.\s+", @"\s+\w+\s+", @"\s+\w+\s+\w+\s+", @"\s+\w+\s+\w+\s+\w+\s+", @".+\s+", @".+\s+\w+", @".+\s+\w+\s+", @".+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+", @".+\s+\w+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+\w+\s+", @".+\/" }, inputText, returnFirstMatchOnly);
+                    break;
+                case DataFieldTypes.Term:
+                    regexResult = RegHeart(textAnchor, targetValue, termExpressions, new List<string>() { @"\s+", @".\s+", @"\s+.\s+", @"\s+\w+\s+", @"\s+\w+\s+\w+\s+", @"\s+\w+\s+\w+\s+\w+\s+", @".+\s+", @".+\s+\w+", @".+\s+\w+\s+", @".+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+", @".+\s+\w+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+\w+\s+", @".+\/" }, inputText, returnFirstMatchOnly);
                     break;
                 default:
                     break;
@@ -135,7 +156,7 @@ namespace DokuExtractorCore
                                 retVal.RegexExpression = regexText;
                                 retVal.MatchingValue = matches[0].Groups[1].Value;
                                 retVal.AllMatchingValues = new List<string>();
-                                foreach (Match item in matches )
+                                foreach (Match item in matches)
                                 {
                                     retVal.AllMatchingValues.Add(item.Groups[1].Value);
                                 }

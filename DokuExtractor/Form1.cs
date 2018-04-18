@@ -17,7 +17,7 @@ namespace DokuExtractorGUI
     public partial class Form1 : Form
     {
         TemplateProcessor processor = new TemplateProcessor(Application.StartupPath);
-        bool isNightModeEnabled = true;
+        bool isNightModeEnabled = false;
 
         public Form1()
         {
@@ -107,7 +107,7 @@ namespace DokuExtractorGUI
                         {
                             Name = "Netto Brutto Vergleich",
                             CalculationExpression = "[Rechnungssumme Netto]+[Betrag MwSt]",
-                            ValidationExpression = "[Rechnungssumme Brutto]",
+                            ValidationExpressions = new List<string>(){ "[Rechnungssumme Brutto]"},
                             FieldType = DataFieldTypes.Currency
                         }
                     }

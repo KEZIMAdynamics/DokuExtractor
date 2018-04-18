@@ -16,6 +16,7 @@ namespace DokuExtractorCore.Model
         Currency,
         IBAN,
         AnchorLessIBAN,
-        VatId
+        VatId,
+        Term
     }
 }

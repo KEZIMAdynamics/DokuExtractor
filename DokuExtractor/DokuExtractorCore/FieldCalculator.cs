@@ -17,10 +17,10 @@ namespace DokuExtractorCore
     {
         public double Calculate(CalculationFieldTemplate calculationField, List<DataFieldResult> datafields)
         {
-            return Calculate(calculationField.CalculationExpression, datafields);
+            return Calculate(calculationField.CalculationExpression, calculationField.CalculationExpressionPrecision, datafields);
         }
 
-        public double Calculate(string expression, List<DataFieldResult> datafields)
+        public double Calculate(string expression, int precision, List<DataFieldResult> datafields)
         {
             var filledExpression = expression;
 
@@ -37,6 +37,9 @@ namespace DokuExtractorCore
             var linqFunction = linqExpression.Compile();
 
             var retVal = linqFunction();
+            if (precision >= 0)
+                retVal = Math.Round(retVal, precision);
+
             return retVal;
         }
 
@@ -48,18 +51,24 @@ namespace DokuExtractorCore
         /// <returns></returns>
         public CalculationFieldResult CompareExpressionResults(CalculationFieldTemplate calculationField, List<DataFieldResult> datafields)
         {
-            var retVal = CompareExpressionResults(calculationField.CalculationExpression, calculationField.ValidationExpression, datafields);
+            var retVal = CompareExpressionResults(calculationField.CalculationExpression, calculationField.CalculationExpressionPrecision,
+                calculationField.ValidationExpressions, calculationField.CalculationExpressionPrecision, datafields);
             retVal.Name = calculationField.Name;
             retVal.FieldType = calculationField.FieldType;
             return retVal;
         }
 
-        public CalculationFieldResult CompareExpressionResults(string calculationExpression, string validationExpression, List<DataFieldResult> datafields)
+        public CalculationFieldResult CompareExpressionResults(string calculationExpression, int calculationValuePrecision, List<string> validationExpressions, int validationValuePrecision, List<DataFieldResult> datafields)
         {
             var retVal = new CalculationFieldResult();
-            retVal.CalculationValue = Calculate(calculationExpression, datafields);
-            retVal.ValidationValue = Calculate(validationExpression, datafields);
-            retVal.CalculationEqualsValidation = (retVal.CalculationValue == retVal.ValidationValue);
+            retVal.ValidationValues = new List<double>();
+            retVal.CalculationValue = Calculate(calculationExpression, calculationValuePrecision, datafields);
+            foreach (var item in validationExpressions)
+            {
+                retVal.ValidationValues.Add(Calculate(item, validationValuePrecision, datafields));
+            }
+
+            retVal.CalculationEqualsValidation = retVal.ValidationValues.Contains(retVal.CalculationValue);
             return retVal;
         }
 
@@ -68,7 +77,7 @@ namespace DokuExtractorCore
             if (string.IsNullOrEmpty(inputText))
                 return "0";
 
-            var retVal = inputText.Replace("‚",","); // Replce Comma with ASCII Code Dec130 with comma with ASCII Code Dec44 to unfuck OCR results
+            var retVal = inputText.Replace("‚", ","); // Replce Comma with ASCII Code Dec130 with comma with ASCII Code Dec44 to unfuck OCR results
             // TODO: Stabilize function against further funny characters
 
             var temp = double.Parse(retVal, System.Globalization.NumberStyles.Currency);

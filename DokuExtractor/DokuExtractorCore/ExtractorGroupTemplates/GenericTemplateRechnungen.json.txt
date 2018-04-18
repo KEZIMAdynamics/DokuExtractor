@@ -37,7 +37,14 @@
       "Name": "Netto Brutto Vergleich",
       "FieldType": 2,
       "CalculationExpression": "[Rechnungssumme Netto]+[Betrag MwSt]",
-      "ValidationExpression": "[Rechnungssumme Brutto]"
+      "ValidationExpressions": ["[Rechnungssumme Brutto]"]
+    },
+	{
+      "Name": "Ust-Satz Berechnung Prozent",
+      "FieldType": 2,
+      "CalculationExpression": "([Betrag MwSt]/[Rechnungssumme Netto])*100",
+	  "CalculationExpressionPrecision": 1,
+      "ValidationExpressions": ["19", "7"]
     }
   ]
 }

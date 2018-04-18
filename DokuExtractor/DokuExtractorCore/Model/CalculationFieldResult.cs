@@ -29,7 +29,7 @@ namespace DokuExtractorCore.Model
         /// <summary>
         /// The resulting value of the second / validation expression.
         /// </summary>
-        public double ValidationValue { get; set; }
+        public List<double> ValidationValues { get; set; }
 
         /// <summary>
         /// Does the calculation value equal the validation value?

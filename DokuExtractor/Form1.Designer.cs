@@ -151,7 +151,8 @@
             "Currency",
             "IBAN",
             "AnchorLessIBAN",
-            "VatId"});
+            "VatId",
+            "Term"});
             this.listBox1.Location = new System.Drawing.Point(913, 49);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(120, 95);
