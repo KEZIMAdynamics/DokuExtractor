@@ -12,63 +12,77 @@ namespace DokuExtractorCore
 {
     public class RegexExpressionFinder
     {
-        List<string> dateExpressions = new List<string>()
-        {
-         @"(\d+.\d{2}.\d+)",@"([a-zA-Z]+ \d+ , \d+)",@"(\d{2}-\d{2}-\d{4})",
-         @"([\s,\d]+-[A-Z,a-z]{3}-\d{4})",@"(\d{1,2}\w+,\d{4})",@"(\d{1,2}\. \w+ \d{4})",
-         @"(\d{4}-\d{2}-\d{2})",@"(\w+,\d{4})",@"(\d{1,2}\w+,\d{4})",@"(\d{1,2}\.\w+\d{4})",
-         @"(\d+\D+\s+\w+\s+\d+)",@"(\d+\. .+ \d{4})",
-         @"(\d{2}-\w+-\d{4})",@"(\w{1,10}\d+,\d{4})",@"(\w{3,}\d{1,2},\d{4})",@"(\d{1,2}.+\s+\d{4})",
-         @"(\d{2}\/\d{2}\/\d{4})",@"(\d+/\d+/\d+)",@"(\d+/\d+/\d{4})",@"(\d{1,2}\/\d{1,2}\/\d{4})",
-         @"(\d{4}-\d{2}-\d{2})",@"(\d{4}-\d{2}-\d{2})",@"(\d{1,2}\/\d{1,2}\/\d{4})",@"(\d{2}\,\d{2}\,\d{4})",
-         @"(\w+\s*\d+,\s*\d{4})",@"(\d{1,2}-\d{1,2}-\d{4})",@"(\d{2}/\d{2}/\d{4})",@"(\d{1,2}\.\d{1,2}\.\d{4})",@"(\d{2}.+,\s\d{4})",@"(\d+\.\d+\s\d+\s\d)"
+        RegexExpressions expressions = new RegexExpressions();
+        //List<string> dateExpressions = new List<string>()
+        //{
+        // @"(\d+.\d{2}.\d+)",@"([a-zA-Z]+ \d+ , \d+)",@"(\d{2}-\d{2}-\d{4})",
+        // @"([\s,\d]+-[A-Z,a-z]{3}-\d{4})",@"(\d{1,2}\w+,\d{4})",@"(\d{1,2}\. \w+ \d{4})",
+        // @"(\d{4}-\d{2}-\d{2})",@"(\w+,\d{4})",@"(\d{1,2}\w+,\d{4})",@"(\d{1,2}\.\w+\d{4})",
+        // @"(\d+\D+\s+\w+\s+\d+)",@"(\d+\. .+ \d{4})",
+        // @"(\d{2}-\w+-\d{4})",@"(\w{1,10}\d+,\d{4})",@"(\w{3,}\d{1,2},\d{4})",@"(\d{1,2}.+\s+\d{4})",
+        // @"(\d{2}\/\d{2}\/\d{4})",@"(\d+/\d+/\d+)",@"(\d+/\d+/\d{4})",@"(\d{1,2}\/\d{1,2}\/\d{4})",
+        // @"(\d{4}-\d{2}-\d{2})",@"(\d{4}-\d{2}-\d{2})",@"(\d{1,2}\/\d{1,2}\/\d{4})",@"(\d{2}\,\d{2}\,\d{4})",
+        // @"(\w+\s*\d+,\s*\d{4})",@"(\d{1,2}-\d{1,2}-\d{4})",@"(\d{2}/\d{2}/\d{4})",@"(\d{1,2}\.\d{1,2}\.\d{4})",@"(\d{2}.+,\s\d{4})",@"(\d+\.\d+\s\d+\s\d)"
 
-        };
+        //};
 
-        List<string> currencyExpressions = new List<string>()
-        {
-         @"(\d+.?\d{0,3},\d{2})",
-         @"(\d+,\d{2})\D",
-         @"(\d+'\d{2})\D",
-         @"(\d+\D\d{2})\D",
-         @"(\d+.\d{3},\d{2})",
-         @"(\d+,\d{2})",
-         @"(\d+'\d{2})",
-         @"(\d+\D\d{2})"
-        };
+        //List<string> currencyExpressions = new List<string>()
+        //{
+        // @"(\d+.?\d{0,3},\d{2})",
+        // @"(\d+,\d{2})\D",
+        // @"(\d+'\d{2})\D",
+        // @"(\d+\D\d{2})\D",
+        // @"(\d+.\d{3},\d{2})",
+        // @"(\d+,\d{2})",
+        // @"(\d+'\d{2})",
+        // @"(\d+\D\d{2})"
+        //};
 
-        List<string> IBANExpressions = new List<string>()
-        {
-        @"([a-zA-Z]{2}\d{2}\s?[0-9a-zA-Z]{4}\s?[0-9a-zA-Z]{4}\s?[0-9a-zA-Z]{4}\s?[0-9a-zA-Z]{4}\s?[0-9a-zA-Z]{2})"
-        };
+        //List<string> IBANExpressions = new List<string>()
+        //{
+        //@"([a-zA-Z]{2}\d{2}\s?[0-9a-zA-Z]{4}\s?[0-9a-zA-Z]{4}\s?[0-9a-zA-Z]{4}\s?[0-9a-zA-Z]{4}\s?[0-9a-zA-Z]{2})"
+        //};
 
-        List<string> WildCardIBANExpressions = new List<string>()
-        {
-        @"([a-zA-Z]{2}\d{2}\s?[0-9a-zA-Z]{4}\s?[0-9a-zA-Z]{4}\s?[0-9a-zA-Z]{4}\s?[0-9a-zA-Z]{4}\s?[0-9a-zA-Z]{2})"
-        };
+        //List<string> WildCardIBANExpressions = new List<string>()
+        //{
+        //@"([a-zA-Z]{2}\d{2}\s?[0-9a-zA-Z]{4}\s?[0-9a-zA-Z]{4}\s?[0-9a-zA-Z]{4}\s?[0-9a-zA-Z]{4}\s?[0-9a-zA-Z]{2})"
+        //};
 
-        List<string> VatIdExpressions = new List<string>()
-        {
-        @"([a-zA-Z]{2}\s?[0-9a-zA-Z]{3}\s?[0-9]{3}\s?[0-9a-zA-Z]{3,4})\s",
-        @"([a-zA-Z]{2}\s?[0-9a-zA-Z]{3}\s?[0-9]{3}\s?[0-9a-zA-Z]{3,4})"
-        };
+        //List<string> VatIdExpressions = new List<string>()
+        //{
+        //@"([a-zA-Z]{2}\s?[0-9a-zA-Z]{3}\s?[0-9]{3}\s?[0-9a-zA-Z]{3,4})\s",
+        //@"([a-zA-Z]{2}\s?[0-9a-zA-Z]{3}\s?[0-9]{3}\s?[0-9a-zA-Z]{3,4})"
+        //};
 
-        List<string> termExpressions = new List<string>()
-        {
-         @"(.+?)\s",
-         @"(.+?\s.+?)\s",
-         @"(.+?\s.+?\s.+?)\s",
-         @"(.+?\s.+?\s.+?\s.+?)\s",
-         @"(.+?\s.+?\s.+?\s.+?\s.+?)\s",
-         @"(.+?\s.+?\s.+?\s.+?\s.+?\s.+?)\s",
-         @"(.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?)\s",
-         @"(.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?)\s",
-         @"(.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?)\s"
-         //@"(\d+.\d{3},\d{2})",
-         //@"(\d+,\d{2})",
-         //@"(\d+'\d{2})",
-         //@"(\d+\D\d{2})"
-        };
+        //List<string> termExpressions = new List<string>()
+        //{
+        // @"(.+?)\s",
+        // @"(.+?\s.+?)\s",
+        // @"(.+?\s.+?\s.+?)\s",
+        // @"(.+?\s.+?\s.+?\s.+?)\s",
+        // @"(.+?\s.+?\s.+?\s.+?\s.+?)\s",
+        // @"(.+?\s.+?\s.+?\s.+?\s.+?\s.+?)\s",
+        // @"(.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?)\s",
+        // @"(.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?)\s",
+        // @"(.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?)\s",
+        // @"(.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?)\s",
+        // @"(.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?)\s",
+        // @"(.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?)\s",
+        // @"(.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?)\s",
+        // @"(.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?)\s",
+        // @"(.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?)\s",
+        // @"(.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?)\s",
+        // @"(.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?)\s",
+        // @"(.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?)\s",
+        // @"(.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?)\s",
+        // @"(.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?)\s",
+        // @"(.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?)\s",
+        // @"(.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?\s.+?)\s"
+        // //@"(\d+.\d{3},\d{2})",
+        // //@"(\d+,\d{2})",
+        // //@"(\d+'\d{2})",
+        // //@"(\d+\D\d{2})"
+        //};
 
         /// <summary>
         /// Tries to find a regex expression to match the target value in an input text based on a text anchor and the type of the target value. 
@@ -79,9 +93,12 @@ namespace DokuExtractorCore
         /// <param name="dataFieldType">Indicates the type of data that the regex expression shall match. Different types (e.g. dates and currencies) are matched with different regex expressions. Therefore it is important to specify the correct type.</param>
         /// <param name="regexResult">The result containing the regex expression and matching value (if any)</param>
         /// <returns></returns>
-        public bool TryFindRegexMatchExpress(string inputText, string targetValue, string textAnchor, DataFieldTypes dataFieldType, bool returnFirstMatchOnly, out RegexExpressionFinderResult regexResult)
+        public bool TryFindRegexMatchExpress(string inputText, string textAnchor, string targetValue, DataFieldTypes dataFieldType, bool returnFirstMatchOnly, out RegexExpressionFinderResult regexResult)
         {
             regexResult = new RegexExpressionFinderResult();
+
+            textAnchor = textAnchor.Trim();
+            targetValue = targetValue.Trim();
 
 
             switch (dataFieldType)
@@ -90,23 +107,22 @@ namespace DokuExtractorCore
                     regexResult = RegHeart(textAnchor, targetValue, new List<string>() { @"(\w+)" }, new List<string>() { @"\s+" }, inputText, returnFirstMatchOnly);
                     break;
                 case DataFieldTypes.Date:
-                    regexResult = RegHeart(textAnchor, targetValue, dateExpressions, new List<string>() { @"\s+", @"\s+.\s+", @"\s+\w+\s+", @"\s+\w+\s+\w+\s+", @"\s+\w+\s+\w+\s+\w+\s+", @".+\s+", @".+\s+\w+", @".+\s+\w+\s+", @".+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+", @".+\s+\w+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+\w+\s+", @".+\/" }, inputText, returnFirstMatchOnly);
+                    regexResult = RegHeart(textAnchor, targetValue, expressions.GeneralDateExpressions, expressions.SpecificDateExpressions, inputText, returnFirstMatchOnly);
                     break;
                 case DataFieldTypes.Currency:
-                    regexResult = RegHeart(textAnchor, targetValue, currencyExpressions, new List<string>() { @"\s+", @"\s+.\s+", @"\s+\w+\s+", @"\s+\w+\s+\w+\s+", @"\s+\w+\s+\w+\s+\w+\s+", @".+\s+", @".+\s+\w+", @".+\s+\w+\s+", @".+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+", @".+\s+\w+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+\w+\s+", @".+\/", @"\s+\w+\s+\d+,\d{2}\s+",
-                        @"\s+\d+,\d{2}\s+\w+\s+" }, inputText, returnFirstMatchOnly);
+                    regexResult = RegHeart(textAnchor, targetValue, expressions.GeneralCurrencyExpressions, expressions.SpecificCurrencyExpressions, inputText, returnFirstMatchOnly);
                     break;
                 case DataFieldTypes.IBAN:
-                    regexResult = RegHeart(textAnchor, targetValue, IBANExpressions, new List<string>() { @"\s+", @"\s+.\s+", @"\s+\w+\s+", @"\s+\w+\s+\w+\s+", @"\s+\w+\s+\w+\s+\w+\s+", @".+\s+", @".+\s+\w+", @".+\s+\w+\s+", @".+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+", @".+\s+\w+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+\w+\s+", @".+\/" }, inputText, returnFirstMatchOnly);
+                    regexResult = RegHeart(textAnchor, targetValue, expressions.GeneralIBANExpressions, expressions.SpecificIBANExpressions, inputText, returnFirstMatchOnly);
                     break;
                 case DataFieldTypes.AnchorLessIBAN:
-                    regexResult = RegHeart(textAnchor, targetValue, WildCardIBANExpressions, new List<string>() { string.Empty }, inputText, returnFirstMatchOnly);
+                    regexResult = RegHeart(textAnchor, targetValue, expressions.GeneralAnchorlessIBANExpressions, expressions.SpecificAnchorlessIBANExpressions, inputText, returnFirstMatchOnly);
                     break;
                 case DataFieldTypes.VatId:
-                    regexResult = RegHeart(textAnchor, targetValue, VatIdExpressions, new List<string>() { @"\s+", @"\s+.\s+", @"\s+\w+\s+", @"\s+\w+\s+\w+\s+", @"\s+\w+\s+\w+\s+\w+\s+", @".+\s+", @".+\s+\w+", @".+\s+\w+\s+", @".+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+", @".+\s+\w+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+\w+\s+", @".+\/" }, inputText, returnFirstMatchOnly);
+                    regexResult = RegHeart(textAnchor, targetValue, expressions.GeneralVatIdExpressions, expressions.SpecificVatIdExpressions, inputText, returnFirstMatchOnly);
                     break;
                 case DataFieldTypes.Term:
-                    regexResult = RegHeart(textAnchor, targetValue, termExpressions, new List<string>() { @"\s+", @".\s+", @"\s+.\s+", @"\s+\w+\s+", @"\s+\w+\s+\w+\s+", @"\s+\w+\s+\w+\s+\w+\s+", @".+\s+", @".+\s+\w+", @".+\s+\w+\s+", @".+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+", @".+\s+\w+\s+\w+\s+\w+", @".+\s+\w+\s+\w+\s+\w+\s+", @".+\/" }, inputText, returnFirstMatchOnly);
+                    regexResult = RegHeart(textAnchor, targetValue, expressions.GeneralTermExpressions, expressions.SpecificTermExpressions, inputText, returnFirstMatchOnly);
                     break;
                 default:
                     break;
@@ -115,7 +131,7 @@ namespace DokuExtractorCore
             return regexResult.Success;
         }
 
-        private RegexExpressionFinderResult RegHeart(string textAnchor, string targetValue, List<string> specificExpressions, List<string> generalExpressions, string inputText, bool returnFirstMatchOnly)
+        private RegexExpressionFinderResult RegHeart(string textAnchor, string targetValue, List<string> generalExpressions, List<string> specificExpressions, string inputText, bool returnFirstMatchOnly)
         {
             var loopCounter = 0;
             var stopWatch = new Stopwatch();
@@ -123,52 +139,55 @@ namespace DokuExtractorCore
 
             var retVal = new RegexExpressionFinderResult();
 
-            foreach (var specificExpression in specificExpressions)
-            {
-                foreach (var generalExpression in generalExpressions)
+            if (Regex.IsMatch(inputText, Regex.Escape(textAnchor)))
+                foreach (var specificExpression in specificExpressions)
                 {
-                    loopCounter++;
-                    var regexText = Regex.Escape(textAnchor) + generalExpression + specificExpression;
-                    if (returnFirstMatchOnly)
+                    foreach (var generalExpression in generalExpressions)
                     {
-                        var match = Regex.Match(inputText, regexText);
-                        if (match.Success)
+                        loopCounter++;
+                        var regexText = Regex.Escape(textAnchor) + generalExpression + specificExpression;
+                        if (returnFirstMatchOnly)
                         {
-                            if (match.Groups[1].Value == targetValue || targetValue == string.Empty)
+                            var match = Regex.Match(inputText, regexText);
+                            if (match.Success)
                             {
-                                retVal.RegexExpression = regexText;
-                                retVal.MatchingValue = match.Groups[1].Value;
-                                retVal.AllMatchingValues = new List<string>() { match.Groups[1].Value };
-                                Debug.Print(regexText + Environment.NewLine + "Regex runs until result: " + loopCounter + Environment.NewLine + "Duration: " + stopWatch.Elapsed.ToString());
-                                retVal.Success = true;
-                                return retVal;
-                            }
-
-                        }
-                    }
-                    else
-                    {
-                        var matches = Regex.Matches(inputText, regexText);
-                        if (matches.Count > 0)
-                        {
-                            if (matches[0].Groups[1].Value == targetValue || targetValue == string.Empty)
-                            {
-                                retVal.RegexExpression = regexText;
-                                retVal.MatchingValue = matches[0].Groups[1].Value;
-                                retVal.AllMatchingValues = new List<string>();
-                                foreach (Match item in matches)
+                                if (match.Groups[1].Value == targetValue || targetValue == string.Empty)
                                 {
-                                    retVal.AllMatchingValues.Add(item.Groups[1].Value);
+                                    retVal.RegexExpression = regexText;
+                                    retVal.MatchingValue = match.Groups[1].Value;
+                                    retVal.AllMatchingValues = new List<string>() { match.Groups[1].Value };
+                                    Debug.Print(regexText + Environment.NewLine + "Regex runs until result: " + loopCounter + Environment.NewLine + "Duration: " + stopWatch.Elapsed.ToString());
+                                    retVal.Success = true;
+                                    return retVal;
                                 }
-                                Debug.Print(regexText + Environment.NewLine + "Regex runs until result: " + loopCounter + Environment.NewLine + "Duration: " + stopWatch.Elapsed.ToString());
-                                retVal.Success = true;
-                                return retVal;
+
                             }
                         }
-                    }
+                        else
+                        {
+                            var matches = Regex.Matches(inputText, regexText);
+                            if (matches.Count > 0)
+                            {
+                                if (matches[0].Groups[1].Value == targetValue || targetValue == string.Empty)
+                                {
+                                    retVal.RegexExpression = regexText;
+                                    retVal.MatchingValue = matches[0].Groups[1].Value;
+                                    retVal.AllMatchingValues = new List<string>();
+                                    foreach (Match item in matches)
+                                    {
+                                        retVal.AllMatchingValues.Add(item.Groups[1].Value);
+                                    }
+                                    Debug.Print(regexText + Environment.NewLine + "Regex runs until result for '" + textAnchor + "': " + loopCounter + Environment.NewLine + "Duration: " + stopWatch.Elapsed.ToString());
+                                    retVal.Success = true;
+                                    return retVal;
+                                }
+                            }
+                        }
 
+                    }
                 }
-            }
+
+       //     Debug.Print("Regex expression for " + textAnchor + " not found. Regex runs: " + loopCounter + Environment.NewLine + "Duration: " + stopWatch.Elapsed.ToString());
 
             return retVal;
         }

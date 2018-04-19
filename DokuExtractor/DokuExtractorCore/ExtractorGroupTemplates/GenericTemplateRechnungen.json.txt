@@ -2,8 +2,18 @@
   "TemplateGroupName": "Rechnung",
   "DataFields": [
     {
-      "Name": "Datum",
+      "Name": "Rechnungsnummer",
+      "TextAnchors": ["Rechnungsnummer","Rechnung Nummer","Rechnungsnr", "Rechnung Nr"],
+      "FieldType": 6
+    },
+    {
+      "Name": "Rechnungsdatum",
       "TextAnchors": ["Rechnungsdatum","Datum"],
+      "FieldType": 1
+    },
+	{
+      "Name": "Leistungsdatum",
+      "TextAnchors": ["Lieferdatum","Leistungsdatum"],
       "FieldType": 1
     },
     {
@@ -21,15 +31,20 @@
       "TextAnchors": ["Bruttobetrag", "Bruttogesamt", "Betrag Brutto","Gesamtbetrag","Rechnungsbetrag","Rechnungssumme"],
       "FieldType": 2
     },
-	 {
+	{
       "Name": "UST-ID Nummer",
       "TextAnchors": ["USt.-ID","UST-ID", "Unsere Ust-Id-Nr", "Ust-Id-Nr", "Ust-IdNr", "USt.IdNr"],
       "FieldType": 5
     },
-	 {
+	{
       "Name": "IBAN",
       "TextAnchors": ["IBAN", "Iban"],
       "FieldType": 3
+    },
+	{
+      "Name": "Zahlungsbedingungen",
+      "TextAnchors": ["Zahlungsbedingungen","Zahlbar","Zahlung", "Rechnung Nr"],
+      "FieldType": 6
     }
   ],
   "CalculationFields": [
@@ -40,7 +55,7 @@
       "ValidationExpressions": ["[Rechnungssumme Brutto]"]
     },
 	{
-      "Name": "Ust-Satz Berechnung Prozent",
+      "Name": "Steuersatz Prozent",
       "FieldType": 2,
       "CalculationExpression": "([Betrag MwSt]/[Rechnungssumme Netto])*100",
 	  "CalculationExpressionPrecision": 1,
