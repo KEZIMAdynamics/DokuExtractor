@@ -14,6 +14,8 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
 {
     public partial class ucTemplateSelector : UserControl
     {
+        public BindingList<StringValue> TemplateNames { get; set; } = new BindingList<StringValue>();
+
         public delegate void SelectionChangedHandler(string templateName);
         public event SelectionChangedHandler SelectionChanged;
 
@@ -30,17 +32,33 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         /// <param name="templateNames">List of template names</param>
         public void LoadTemplates(List<StringValue> templateNames)
         {
-            dataGridView1.DataSource = templateNames;
+            TemplateNames = new BindingList<StringValue>(templateNames);
+            dataGridView1.DataSource = TemplateNames;
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
-            {
-                var className = row.Cells["Value"]?.Value?.ToString();
-                SelectionChanged?.Invoke(className);
-                break;
-            }
+            var selectedRows = dataGridView1.SelectedRows;
+            if(selectedRows != null)
+                foreach (DataGridViewRow row in selectedRows)
+                {
+                    var templateName = row.DataBoundItem as StringValue;
+                    if (templateName != null)
+                        FireSelectionChanged(templateName.Value);
+                    break;
+                }
+
+            //foreach (DataGridViewRow row in selectedRows)
+            //{
+            //    var className = row.Cells["Value"]?.Value?.ToString();
+            //    SelectionChanged?.Invoke(className);
+            //    break;
+            //}
+        }
+
+        private void FireSelectionChanged(string templateName)
+        {
+            SelectionChanged?.Invoke(templateName);
         }
     }
 }
