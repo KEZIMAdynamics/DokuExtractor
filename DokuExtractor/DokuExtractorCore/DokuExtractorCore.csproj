@@ -64,6 +64,7 @@
     <Compile Include="Model\FieldExtractionResult.cs" />
     <Compile Include="Model\PreKeyWordSelectionArgs.cs" />
     <Compile Include="Model\RegexExpressionFinderResult.cs" />
+    <Compile Include="Model\RegexExpressions.cs" />
     <Compile Include="Model\StringValue.cs" />
     <Compile Include="Model\Tables\TableColumn.cs" />
     <Compile Include="Model\Tables\TableLine.cs" />

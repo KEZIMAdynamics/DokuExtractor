@@ -124,13 +124,13 @@ namespace DokuExtractorGUI
 
         private void btFindRegexExpression_Click(object sender, EventArgs e)
         {
-            tbRegexFullString.Text = tbRegexFullString.Text.Trim(' ');
+            tbRegexTextAnchor.Text = tbRegexTextAnchor.Text.Trim(' ');
             var finder = new RegexExpressionFinder();
 
             DataFieldTypes type = (DataFieldTypes)Enum.Parse(typeof(DataFieldTypes), listBox1.SelectedItem.ToString(), true);
 
             RegexExpressionFinderResult expressionResult;
-            if (finder.TryFindRegexMatchExpress(tbInhalt.Text, tbRegexHalfString.Text, tbRegexFullString.Text, type, false, out expressionResult))
+            if (finder.TryFindRegexMatchExpress(tbInhalt.Text, tbRegexTextAnchor.Text, tbRegexTargetValue.Text,  type, false, out expressionResult))
             {
                 tbExtractedData.Text = "Regex expression found:" + Environment.NewLine + expressionResult.RegexExpression + Environment.NewLine
                     + Environment.NewLine + "First matching value:" + Environment.NewLine + expressionResult.MatchingValue + Environment.NewLine + Environment.NewLine

@@ -16,6 +16,7 @@ namespace DokuExtractorCore
         public string TemplateClassDirectory { get; set; }
         public string TemplateGroupDirectory { get; set; }
         string appRootPath;
+        RegexExpressionFinder finder = new RegexExpressionFinder();
 
         /// <summary>
         /// For ease of use, Class and Group jsons can be copied to the appRootPath directory into the folders "ExtractorClassTemplates" and "ExtractorGroupTemplates".
@@ -353,7 +354,7 @@ namespace DokuExtractorCore
                 foreach (var anchor in item.TextAnchors)
                 {
                     RegexExpressionFinderResult expressionResult;
-                    if (TryFindRegexMatchExpress(inputText, string.Empty, anchor, item.FieldType, true, out expressionResult))
+                    if (TryFindRegexMatchExpress(inputText, anchor, string.Empty, item.FieldType, true, out expressionResult))
                     {
                         newDataField.RegexExpressions = new List<string>() { expressionResult.RegexExpression };
                         break;
@@ -403,15 +404,15 @@ namespace DokuExtractorCore
         /// Tries to generate / find a regex expression. <seealso cref="RegexExpressionFinder.TryFindRegexMatchExpress(string, string, string, DataFieldTypes, out RegexExpressionFinderResult)"/>
         /// </summary>
         /// <param name="inputText"></param>
-        /// <param name="regexHalfString"></param>
-        /// <param name="regexFullString"></param>
+        /// <param name="targetValue"></param>
+        /// <param name="textAnchor"></param>
         /// <param name="dataFieldType"></param>
         /// <param name="regexMatchExpression"></param>
         /// <returns></returns>
-        public bool TryFindRegexMatchExpress(string inputText, string regexHalfString, string regexFullString, DataFieldTypes dataFieldType, bool returnFirstMatchOnly, out RegexExpressionFinderResult regexMatchExpression)
+        public bool TryFindRegexMatchExpress(string inputText, string textAnchor, string targetValue, DataFieldTypes dataFieldType, bool returnFirstMatchOnly, out RegexExpressionFinderResult regexMatchExpression)
         {
-            var finder = new RegexExpressionFinder();
-            return finder.TryFindRegexMatchExpress(inputText, regexHalfString, regexFullString, dataFieldType, false, out regexMatchExpression);
+           
+            return finder.TryFindRegexMatchExpress(inputText, textAnchor, targetValue, dataFieldType, false, out regexMatchExpression);
 
         }
     }

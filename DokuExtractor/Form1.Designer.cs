@@ -36,8 +36,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tbExtractedData = new System.Windows.Forms.TextBox();
             this.btOpenTemplateDir = new System.Windows.Forms.Button();
-            this.tbRegexFullString = new System.Windows.Forms.TextBox();
-            this.tbRegexHalfString = new System.Windows.Forms.TextBox();
+            this.tbRegexTextAnchor = new System.Windows.Forms.TextBox();
+            this.tbRegexTargetValue = new System.Windows.Forms.TextBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.btFindRegexExpression = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -126,21 +126,21 @@
             this.btOpenTemplateDir.UseVisualStyleBackColor = true;
             this.btOpenTemplateDir.Click += new System.EventHandler(this.btOpenTemplateDir_Click);
             // 
-            // tbRegexFullString
+            // tbRegexTextAnchor
             // 
-            this.tbRegexFullString.Location = new System.Drawing.Point(17, 45);
-            this.tbRegexFullString.Multiline = true;
-            this.tbRegexFullString.Name = "tbRegexFullString";
-            this.tbRegexFullString.Size = new System.Drawing.Size(421, 99);
-            this.tbRegexFullString.TabIndex = 9;
+            this.tbRegexTextAnchor.Location = new System.Drawing.Point(17, 45);
+            this.tbRegexTextAnchor.Multiline = true;
+            this.tbRegexTextAnchor.Name = "tbRegexTextAnchor";
+            this.tbRegexTextAnchor.Size = new System.Drawing.Size(421, 99);
+            this.tbRegexTextAnchor.TabIndex = 9;
             // 
-            // tbRegexHalfString
+            // tbRegexTargetValue
             // 
-            this.tbRegexHalfString.Location = new System.Drawing.Point(497, 45);
-            this.tbRegexHalfString.Multiline = true;
-            this.tbRegexHalfString.Name = "tbRegexHalfString";
-            this.tbRegexHalfString.Size = new System.Drawing.Size(397, 99);
-            this.tbRegexHalfString.TabIndex = 10;
+            this.tbRegexTargetValue.Location = new System.Drawing.Point(497, 45);
+            this.tbRegexTargetValue.Multiline = true;
+            this.tbRegexTargetValue.Name = "tbRegexTargetValue";
+            this.tbRegexTargetValue.Size = new System.Drawing.Size(397, 99);
+            this.tbRegexTargetValue.TabIndex = 10;
             // 
             // listBox1
             // 
@@ -173,27 +173,27 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(14, 29);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(50, 13);
+            this.label3.Size = new System.Drawing.Size(64, 13);
             this.label3.TabIndex = 13;
-            this.label3.Text = "FullString";
+            this.label3.Text = "Text anchor";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(494, 29);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(53, 13);
+            this.label4.Size = new System.Drawing.Size(67, 13);
             this.label4.TabIndex = 14;
-            this.label4.Text = "HalfString";
+            this.label4.Text = "Target value";
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.tbRegexFullString);
+            this.groupBox1.Controls.Add(this.tbRegexTextAnchor);
             this.groupBox1.Controls.Add(this.btFindRegexExpression);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.listBox1);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.tbRegexHalfString);
+            this.groupBox1.Controls.Add(this.tbRegexTargetValue);
             this.groupBox1.Location = new System.Drawing.Point(12, 699);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(1263, 155);
@@ -272,8 +272,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tbExtractedData;
         private System.Windows.Forms.Button btOpenTemplateDir;
-        private System.Windows.Forms.TextBox tbRegexFullString;
-        private System.Windows.Forms.TextBox tbRegexHalfString;
+        private System.Windows.Forms.TextBox tbRegexTextAnchor;
+        private System.Windows.Forms.TextBox tbRegexTargetValue;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button btFindRegexExpression;
         private System.Windows.Forms.Label label3;
