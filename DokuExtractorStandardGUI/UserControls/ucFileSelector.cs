@@ -13,13 +13,13 @@ namespace DokuExtractorStandardGUI.UserControls
 {
     public partial class ucFileSelector : UserControl
     {
+        public BindingList<FileInfo> FileInfos { get; set; } = new BindingList<FileInfo>();
+
         public delegate void SelectedFileChangedHandler(string newPath);
         /// <summary>
         /// Fired, when selected file changed (contains path of the now selected file)
         /// </summary>
         public event SelectedFileChangedHandler SelectedFileChanged;
-
-        private BindingList<FileInfo> fileInfos = new BindingList<FileInfo>();
 
         public ucFileSelector()
         {
@@ -31,8 +31,8 @@ namespace DokuExtractorStandardGUI.UserControls
         /// </summary>
         public void LoadFiles(List<FileInfo> fileInfos)
         {
-            this.fileInfos = new BindingList<FileInfo>(fileInfos);
-            dataGridView1.DataSource = this.fileInfos;
+            this.FileInfos = new BindingList<FileInfo>(fileInfos);
+            dataGridView1.DataSource = this.FileInfos;
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace DokuExtractorStandardGUI.UserControls
         {
             foreach (var fileInfo in additionalFileInfos)
             {
-                this.fileInfos.Add(fileInfo);
+                this.FileInfos.Add(fileInfo);
             }
         }
 
@@ -51,9 +51,9 @@ namespace DokuExtractorStandardGUI.UserControls
         /// </summary>
         public void RemoveFileFromQueue(string filePath)
         {
-            var removableFileInfo = fileInfos.Where(x => x.FullName == filePath).FirstOrDefault();
+            var removableFileInfo = FileInfos.Where(x => x.FullName == filePath).FirstOrDefault();
             if (removableFileInfo != null)
-                this.fileInfos.Remove(removableFileInfo);
+                this.FileInfos.Remove(removableFileInfo);
         }
 
         /// <summary>
@@ -74,10 +74,16 @@ namespace DokuExtractorStandardGUI.UserControls
             if (selectedRows != null)
                 foreach (DataGridViewRow row in selectedRows)
                 {
-                    var newPath = row.Cells["FullName"]?.Value?.ToString();
-                    if (newPath != null)
-                        FireSelectedFileChanged(newPath);
-                    break;
+                    var fileInfo = row.DataBoundItem as FileInfo;
+                    if(fileInfo != null)
+                    {
+                        FireSelectedFileChanged(fileInfo.FullName);
+                    }
+
+                    //var newPath = row.Cells["Name"]?.Value?.ToString();
+                    //if (newPath != null)
+                    //    FireSelectedFileChanged(newPath);
+                    //break;
                 }
         }
 
