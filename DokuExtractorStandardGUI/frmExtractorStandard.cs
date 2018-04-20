@@ -17,15 +17,23 @@ namespace DokuExtractorStandardGUI
     {
         private List<DocumentClassTemplate> classTemplates { get; set; } = new List<DocumentClassTemplate>();
 
+        private Guid regexHelperID = Guid.Empty;
+        private DataFieldTypes regexHelperFieldType = DataFieldTypes.Text;
+        private bool isAnchorSelectionRunning = false;
+        private bool isValueSelectionRunning = false;
+        private string regexHelperAnchorText = string.Empty;
+        private string regexHelperValueText = string.Empty;
+
         private string selectedFilePath = string.Empty;
         private TemplateProcessor templateProcessor = new TemplateProcessor(Application.StartupPath);
 
-        public frmExtractorStandard(string filePath)
+        public frmExtractorStandard(string filePath, bool allowEditTemplates = false)
         {
             InitializeComponent();
             ucFileSelector1.SelectedFileChanged += UcFileSelector1_SelectedFileChanged;
             ucViewer1.TextSelected += UcViewer1_TextSelected;
             ucResultAndEditor1.TabSwitched += UcResultAndEditor1_TabSwitched;
+            ucResultAndEditor1.RegexExpressionHelper += UcResultAndEditor1_RegexExpressionHelper;
 
             var fileInfos = new List<FileInfo>();
             var files = Directory.GetFiles(filePath);
@@ -36,17 +44,33 @@ namespace DokuExtractorStandardGUI
                 fileInfos.Add(fileInfo);
             }
 
+            if (allowEditTemplates == false)
+                DisableBuiltInEditor();
+
             ucFileSelector1.LoadFiles(fileInfos);
         }
 
-        public frmExtractorStandard(List<FileInfo> fileInfos)
+        public frmExtractorStandard(List<FileInfo> fileInfos, bool allowEditTemplates = false)
         {
             InitializeComponent();
             ucFileSelector1.SelectedFileChanged += UcFileSelector1_SelectedFileChanged;
             ucViewer1.TextSelected += UcViewer1_TextSelected;
             ucResultAndEditor1.TabSwitched += UcResultAndEditor1_TabSwitched;
+            ucResultAndEditor1.RegexExpressionHelper += UcResultAndEditor1_RegexExpressionHelper;
+
+            if (allowEditTemplates == false)
+                DisableBuiltInEditor();
 
             ucFileSelector1.LoadFiles(fileInfos);
+        }
+
+        public void DisableBuiltInEditor()
+        {
+            ucResultAndEditor1.DisableBuiltInEditor();
+            butAddDataField.Visible = false;
+            butDeleteDataField.Visible = false;
+            butSaveTemplate.Visible = false;
+            butTemplateEditor.Visible = false;
         }
 
         private void frmExtractorStandard_Load(object sender, EventArgs e)
@@ -57,16 +81,65 @@ namespace DokuExtractorStandardGUI
             UcResultAndEditor1_TabSwitched(false);
         }
 
-        private void UcViewer1_TextSelected(string selectedText)
+        private async void UcViewer1_TextSelected(string selectedText)
         {
             //TODO
-            MessageBox.Show(selectedText);
+            if (isAnchorSelectionRunning)
+            {
+                this.regexHelperAnchorText = selectedText;
+                isAnchorSelectionRunning = false;
+                isValueSelectionRunning = true;
+                lblInstruction.Text = "Select a value!";
+            }
+            else if (isValueSelectionRunning)
+            {
+                this.regexHelperValueText = selectedText;
+                isValueSelectionRunning = false;
+                lblInstruction.Text = string.Empty;
+
+                var loader = new PdfTextLoader();
+                var inputString = await loader.GetTextFromPdf(selectedFilePath, false);
+
+                var regexResult = new RegexExpressionFinderResult();
+                if (templateProcessor.TryFindRegexMatchExpress(inputString, regexHelperValueText, regexHelperAnchorText, regexHelperFieldType, false, out regexResult))
+                {
+                    var matchingValues = string.Empty;
+                    foreach (var matchingValue in regexResult.AllMatchingValues)
+                    {
+                        matchingValues = matchingValues + Environment.NewLine + matchingValue;
+                    }
+
+                    var result = MessageBox.Show("Do you accept the following result?" + Environment.NewLine + Environment.NewLine + "Regex Expression: " + regexResult.RegexExpression
+                                 + Environment.NewLine + "Matching Values: " + matchingValues, "", MessageBoxButtons.YesNo);
+
+                    if (result == DialogResult.Yes)
+                    {
+                        var additionalRegex = MessageBox.Show("Do you want to add this expression as an ADDITIONAL expression?", "", MessageBoxButtons.YesNo);
+                        if (additionalRegex == DialogResult.Yes)
+                            ChangeOrAddRegexExpression(this.regexHelperID, regexResult.RegexExpression, true);
+                        else
+                            ChangeOrAddRegexExpression(this.regexHelperID, regexResult.RegexExpression, false);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Could not get a regex expression finder result!");
+                }
+
+                EnableOrDisableControlsAndButtons(true);
+            }
+        }
+
+        private void ChangeOrAddRegexExpression(Guid regexHelperID, string regex, bool additionalRegex)
+        {
+            ucResultAndEditor1.ChangeOrAddRegexExpression(regexHelperID, regex, additionalRegex);
         }
 
         private void UcFileSelector1_SelectedFileChanged(string newPath)
         {
             this.selectedFilePath = newPath;
             ucViewer1.LoadPdf(newPath);
+            ucResultAndEditor1.ShowPropertiesAndDataFields(new DocumentClassTemplate());
         }
 
 
@@ -84,6 +157,28 @@ namespace DokuExtractorStandardGUI
                 butAddDataField.Enabled = false;
                 butDeleteDataField.Enabled = false;
             }
+        }
+
+        private void UcResultAndEditor1_RegexExpressionHelper(Guid id, DataFieldTypes dataFieldType)
+        {
+            //TODO
+            EnableOrDisableControlsAndButtons(false);
+
+            regexHelperID = id;
+            regexHelperFieldType = dataFieldType;
+            isAnchorSelectionRunning = true;
+            lblInstruction.Text = "Select an anchor!";
+        }
+
+        private void EnableOrDisableControlsAndButtons(bool enablingState)
+        {
+            ucFileSelector1.Enabled = enablingState;
+            ucResultAndEditor1.Enabled = enablingState;
+            butSaveTemplate.Enabled = enablingState;
+            butAddDataField.Enabled = enablingState;
+            butDeleteDataField.Enabled = enablingState;
+            butGo.Enabled = enablingState;
+            butOk.Enabled = enablingState;
         }
 
         private void butTemplateEditor_Click(object sender, EventArgs e)

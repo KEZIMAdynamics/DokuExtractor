@@ -33,7 +33,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.lbxFieldType = new System.Windows.Forms.ListBox();
             this.txtRegexExpression = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblRegexExpression = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtName
@@ -86,21 +86,21 @@
             this.txtRegexExpression.Size = new System.Drawing.Size(284, 99);
             this.txtRegexExpression.TabIndex = 4;
             // 
-            // label3
+            // lblRegex
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(0, 153);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(97, 13);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Regex Expressions";
+            this.lblRegexExpression.AutoSize = true;
+            this.lblRegexExpression.Location = new System.Drawing.Point(0, 153);
+            this.lblRegexExpression.Name = "lblRegex";
+            this.lblRegexExpression.Size = new System.Drawing.Size(97, 13);
+            this.lblRegexExpression.TabIndex = 5;
+            this.lblRegexExpression.Text = "Regex Expressions";
             // 
             // ucDataField
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lblRegexExpression);
             this.Controls.Add(this.txtRegexExpression);
             this.Controls.Add(this.lbxFieldType);
             this.Controls.Add(this.label2);
@@ -121,6 +121,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListBox lbxFieldType;
         private System.Windows.Forms.TextBox txtRegexExpression;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblRegexExpression;
     }
 }

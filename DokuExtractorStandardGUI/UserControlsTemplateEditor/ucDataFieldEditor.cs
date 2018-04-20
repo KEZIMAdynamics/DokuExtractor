@@ -14,6 +14,12 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
 {
     public partial class ucDataFieldEditor : UserControl
     {
+        public delegate void RegexExpressionHelperHandler(Guid id, DataFieldTypes dataFieldType);
+        /// <summary>
+        /// Fired, when user wishes to start the regex expression helper
+        /// </summary>
+        public event RegexExpressionHelperHandler RegexExpressionHelper;
+
         private DocumentClassTemplate classTemplate = new DocumentClassTemplate();
 
         public ucDataFieldEditor()
@@ -26,7 +32,10 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         /// </summary>
         public void AddDataField()
         {
-            flowLayoutPanel1.Controls.Add(new ucDataField());
+            var newDataField = new ucDataField();
+            newDataField.Tag = Guid.NewGuid();
+            newDataField.RegexExpressionHelper += FireRegexExpressionHelper;
+            flowLayoutPanel1.Controls.Add(newDataField);
         }
 
         /// <summary>
@@ -34,14 +43,14 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         /// </summary>
         public void DeleteLastDataField()
         {
-            List<Control> listControls = new List<Control>();
+            var controlList = new List<Control>();
 
             foreach (Control control in flowLayoutPanel1.Controls)
             {
-                listControls.Add(control);
+                controlList.Add(control);
             }
 
-            var lastControl = listControls.LastOrDefault();
+            var lastControl = controlList.LastOrDefault();
             if (lastControl != null)
                 flowLayoutPanel1.Controls.Remove(lastControl);
         }
@@ -53,14 +62,14 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         {
             this.classTemplate = classTemplate;
 
-            List<Control> listControls = new List<Control>();
+            var controlList = new List<Control>();
 
             foreach (Control control in flowLayoutPanel1.Controls)
             {
-                listControls.Add(control);
+                controlList.Add(control);
             }
 
-            foreach (Control control in listControls)
+            foreach (Control control in controlList)
             {
                 flowLayoutPanel1.Controls.Remove(control);
                 control.Dispose();
@@ -69,7 +78,10 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             if (this.classTemplate != null && this.classTemplate.DataFields != null)
                 foreach (var item in this.classTemplate.DataFields)
                 {
-                    flowLayoutPanel1.Controls.Add(new ucDataField(item));
+                    var newDataField = new ucDataField(item);
+                    newDataField.Tag = Guid.NewGuid();
+                    newDataField.RegexExpressionHelper += FireRegexExpressionHelper;
+                    flowLayoutPanel1.Controls.Add(newDataField);
                 }
         }
 
@@ -92,6 +104,41 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             return retVal;
         }
 
+        public void ActivateRegexExpressionHelper()
+        {
+            foreach (Control control in flowLayoutPanel1.Controls)
+            {
+                var dataFieldControl = control as ucDataField;
+                if (dataFieldControl != null)
+                {
+                    dataFieldControl.ActivateRegexExpressionHelper();
+                }
+            }
+        }
+
+        public void ChangeOrAddRegexExpression(Guid regexHelperID, string regex, bool additionalRegex)
+        {
+            //TODO
+            foreach (Control control in flowLayoutPanel1.Controls)
+            {
+                var dataFieldControl = control as ucDataField;
+                if (dataFieldControl != null)
+                {
+                    try
+                    {
+                        var id = (Guid)(dataFieldControl.Tag);
+                        if (id == regexHelperID)
+                        {
+                            dataFieldControl.ChangeOrAddRegexExpression(regex, additionalRegex);
+                            return;
+                        }
+                    }
+                    catch (Exception ex)
+                    { }
+                }
+            }
+        }
+
         private DataFieldTemplate GetDataFieldTemplateFromUcDataField(Control ucDataFieldControl)
         {
             var retVal = new DataFieldTemplate();
@@ -112,6 +159,11 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
                 }
             }
             return retVal;
+        }
+
+        private void FireRegexExpressionHelper(Guid id, DataFieldTypes dataFieldType)
+        {
+            RegexExpressionHelper?.Invoke(id, dataFieldType);
         }
     }
 }

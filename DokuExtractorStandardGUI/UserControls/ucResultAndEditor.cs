@@ -19,9 +19,24 @@ namespace DokuExtractorStandardGUI.UserControls
         /// </summary>
         public event TabSwitchedHandler TabSwitched;
 
+        public delegate void RegexExpressionHelperHandler(Guid id, DataFieldTypes dataFieldType);
+        /// <summary>
+        /// Fired, when user wishes to start the regex expression helper
+        /// </summary>
+        public event RegexExpressionHelperHandler RegexExpressionHelper;
+
         public ucResultAndEditor()
         {
             InitializeComponent();
+            ucSingleTemplateEditor1.RegexExpressionHelper += FireRegexExpressionHelper;
+        }
+
+        /// <summary>
+        /// Disables the built in editor
+        /// </summary>
+        public void DisableBuiltInEditor()
+        {
+            tabSingleTemplateEditor.Enabled = false;
         }
 
         /// <summary>
@@ -44,6 +59,7 @@ namespace DokuExtractorStandardGUI.UserControls
         {
             ucExtractedData1.ShowExtractedData(result);
             ucSingleTemplateEditor1.ShowPropertiesAndDataFields(classTemplate);
+            ucSingleTemplateEditor1.ActivateRegexExpressionHelper();
         }
 
         /// <summary>
@@ -53,6 +69,7 @@ namespace DokuExtractorStandardGUI.UserControls
         {
             ucSingleTemplateEditor1.ShowPropertiesAndDataFields(classTemplate);
             ucExtractedData1.ShowExtractedData(new FieldExtractionResult());
+            ucSingleTemplateEditor1.ActivateRegexExpressionHelper();
         }
 
         /// <summary>
@@ -74,6 +91,7 @@ namespace DokuExtractorStandardGUI.UserControls
         public void AddDataField()
         {
             ucSingleTemplateEditor1.AddDataField();
+            ucSingleTemplateEditor1.ActivateRegexExpressionHelper();
         }
 
         /// <summary>
@@ -92,6 +110,11 @@ namespace DokuExtractorStandardGUI.UserControls
             return ucExtractedData1.GetFieldExtractionResult();
         }
 
+        public void ChangeOrAddRegexExpression(Guid regexHelperID, string regex, bool additionalRegex)
+        {
+            ucSingleTemplateEditor1.ChangeOrAddRegexExpression(regexHelperID, regex, additionalRegex);
+        }
+
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tabControl1.SelectedTab == tabSingleTemplateEditor)
@@ -103,6 +126,11 @@ namespace DokuExtractorStandardGUI.UserControls
         private void FireTabSwitched(bool switchedToSingleTemplateEditor)
         {
             TabSwitched?.Invoke(switchedToSingleTemplateEditor);
+        }
+
+        private void FireRegexExpressionHelper(Guid id, DataFieldTypes dataFieldType)
+        {
+            RegexExpressionHelper?.Invoke(id, dataFieldType);
         }
     }
 }

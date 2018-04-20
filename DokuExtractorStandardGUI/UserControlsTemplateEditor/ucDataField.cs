@@ -13,7 +13,13 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
 {
     public partial class ucDataField : UserControl
     {
-        public string NameText { get { return txtName.Text; }  }
+        public delegate void RegexExpressionHelperHandler(Guid id, DataFieldTypes dataFieldType);
+        /// <summary>
+        /// Fired, when user wishes to start the regex expression helper
+        /// </summary>
+        public event RegexExpressionHelperHandler RegexExpressionHelper;
+
+        public string NameText { get { return txtName.Text; } }
         public int FieldTypeInt { get { return lbxFieldType.SelectedIndex; } }
         public string RegexText { get { return txtRegexExpression.Text; } }
 
@@ -41,6 +47,41 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
                 {
                     txtRegexExpression.Text = txtRegexExpression.Text + item + Environment.NewLine;
                 }
+        }
+
+        public void ActivateRegexExpressionHelper()
+        {
+            txtRegexExpression.Enabled = false;
+            lblRegexExpression.Font = new Font(lblRegexExpression.Font.Name, lblRegexExpression.Font.SizeInPoints, FontStyle.Underline);
+            lblRegexExpression.DoubleClick += LblRegexExpression_DoubleClick;
+        }
+
+        public void ChangeOrAddRegexExpression(string regex, bool additionalRegex)
+        {
+            if (additionalRegex)
+                txtRegexExpression.Text = txtRegexExpression.Text + regex + Environment.NewLine;
+            else
+                txtRegexExpression.Text = regex;
+        }
+
+        private void LblRegexExpression_DoubleClick(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show("Start Regex Expression Helper?", "", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                try
+                {
+                    var id = (Guid)(this.Tag);
+                    FireRegexExpressionHelper(id, (DataFieldTypes)FieldTypeInt);
+                }
+                catch (Exception ex)
+                { }
+            }
+        }
+
+        private void FireRegexExpressionHelper(Guid id, DataFieldTypes dataFieldType)
+        {
+            RegexExpressionHelper?.Invoke(id, dataFieldType);
         }
     }
 }
