@@ -72,7 +72,8 @@
             "Currency",
             "IBAN",
             "AnchorLessIBAN",
-            "VatId"});
+            "VatId",
+            "Term"});
             this.lbxFieldType.Location = new System.Drawing.Point(3, 71);
             this.lbxFieldType.Name = "lbxFieldType";
             this.lbxFieldType.Size = new System.Drawing.Size(284, 69);
@@ -86,11 +87,11 @@
             this.txtRegexExpression.Size = new System.Drawing.Size(284, 99);
             this.txtRegexExpression.TabIndex = 4;
             // 
-            // lblRegex
+            // lblRegexExpression
             // 
             this.lblRegexExpression.AutoSize = true;
             this.lblRegexExpression.Location = new System.Drawing.Point(0, 153);
-            this.lblRegexExpression.Name = "lblRegex";
+            this.lblRegexExpression.Name = "lblRegexExpression";
             this.lblRegexExpression.Size = new System.Drawing.Size(97, 13);
             this.lblRegexExpression.TabIndex = 5;
             this.lblRegexExpression.Text = "Regex Expressions";

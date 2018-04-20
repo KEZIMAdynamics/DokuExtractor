@@ -96,7 +96,7 @@
             this.gdViewer1.ScrollLargeChange = ((short)(50));
             this.gdViewer1.ScrollSmallChange = ((short)(1));
             this.gdViewer1.SilentMode = true;
-            this.gdViewer1.Size = new System.Drawing.Size(522, 516);
+            this.gdViewer1.Size = new System.Drawing.Size(575, 516);
             this.gdViewer1.TabIndex = 0;
             this.gdViewer1.ViewRotation = System.Drawing.RotateFlipType.RotateNoneFlipNone;
             this.gdViewer1.Zoom = 1D;
@@ -130,7 +130,7 @@
             this.thumbnailEx1.RotateExif = true;
             this.thumbnailEx1.SelectedThumbnailBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
             this.thumbnailEx1.ShowText = true;
-            this.thumbnailEx1.Size = new System.Drawing.Size(263, 516);
+            this.thumbnailEx1.Size = new System.Drawing.Size(210, 516);
             this.thumbnailEx1.TabIndex = 0;
             this.thumbnailEx1.TextMarginLeft = 0;
             this.thumbnailEx1.TextMarginTop = 0;
@@ -145,6 +145,8 @@
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainer1.IsSplitterFixed = true;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
             this.splitContainer1.Name = "splitContainer1";
             // 
@@ -156,7 +158,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.gdViewer1);
             this.splitContainer1.Size = new System.Drawing.Size(789, 516);
-            this.splitContainer1.SplitterDistance = 263;
+            this.splitContainer1.SplitterDistance = 210;
             this.splitContainer1.TabIndex = 1;
             // 
             // ucGdPicturePdfViewer

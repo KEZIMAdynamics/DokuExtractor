@@ -156,6 +156,7 @@
             this.extensionDataGridViewTextBoxColumn.HeaderText = "Extension";
             this.extensionDataGridViewTextBoxColumn.Name = "extensionDataGridViewTextBoxColumn";
             this.extensionDataGridViewTextBoxColumn.ReadOnly = true;
+            this.extensionDataGridViewTextBoxColumn.Visible = false;
             this.extensionDataGridViewTextBoxColumn.Width = 78;
             // 
             // creationTimeDataGridViewTextBoxColumn
@@ -164,6 +165,7 @@
             this.creationTimeDataGridViewTextBoxColumn.DataPropertyName = "CreationTime";
             this.creationTimeDataGridViewTextBoxColumn.HeaderText = "CreationTime";
             this.creationTimeDataGridViewTextBoxColumn.Name = "creationTimeDataGridViewTextBoxColumn";
+            this.creationTimeDataGridViewTextBoxColumn.Visible = false;
             this.creationTimeDataGridViewTextBoxColumn.Width = 94;
             // 
             // creationTimeUtcDataGridViewTextBoxColumn
