@@ -13,6 +13,9 @@ namespace DokuExtractorStandardGUI.UserControls
 {
     public partial class ucExtractedData : UserControl
     {
+        public BindingList<DataFieldResult> DataFieldResults { get; set; } = new BindingList<DataFieldResult>();
+        public BindingList<CalculationFieldResult> CalculationFieldResults { get; set; } = new BindingList<CalculationFieldResult>();
+
         public ucExtractedData()
         {
             InitializeComponent();
@@ -26,6 +29,9 @@ namespace DokuExtractorStandardGUI.UserControls
         {
             txtClassName.Text = extractionResult.TemplateClassName;
             txtGroupName.Text = extractionResult.TemplateGroupName;
+
+            DataFieldResults = new BindingList<DataFieldResult>(extractionResult.DataFields);
+            CalculationFieldResults = new BindingList<CalculationFieldResult>(extractionResult.CalculationFields);
 
             dgvDataFields.DataSource = extractionResult.DataFields;
             dgvCalculationFields.DataSource = extractionResult.CalculationFields;

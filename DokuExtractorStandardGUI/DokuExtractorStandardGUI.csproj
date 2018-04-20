@@ -164,6 +164,7 @@
     <EmbeddedResource Include="UserControls\ucViewerBase.resx">
       <DependentUpon>ucViewerBase.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Properties\DataSources\DokuExtractorStandardGUI.UserControls.ucExtractedData.datasource" />
     <None Include="Properties\DataSources\DokuExtractorStandardGUI.UserControls.ucFileSelector.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
