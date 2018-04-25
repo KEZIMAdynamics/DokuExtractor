@@ -17,7 +17,7 @@ namespace DokuExtractorStandardGUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmExtractorStandard(Path.Combine(Application.StartupPath, "Files")));
+            Application.Run(new frmExtractorStandard(Path.Combine(Application.StartupPath, "Files"), true));
         }
     }
 }
