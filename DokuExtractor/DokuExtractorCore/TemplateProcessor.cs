@@ -163,7 +163,6 @@ namespace DokuExtractorCore
         public DocumentGroupTemplate GetDocumentGroupTemplateByName(string groupName)
         {
             var templates = LoadGroupTemplatesFromDisk();
-
             return templates.Where(x => x.TemplateGroupName == groupName).FirstOrDefault();
         }
 
@@ -302,6 +301,11 @@ namespace DokuExtractorCore
                 }
             }
 
+            var conditionProcessor = new ConditionalFieldProcessor();
+            foreach (var item in template.ConditionalFields)
+            {
+                retVal.ConditionalFields.Add(conditionProcessor.ProcessConditions(inputText, item));
+            }
 
             return retVal;
         }
@@ -363,6 +367,8 @@ namespace DokuExtractorCore
 
                 retVal.DataFields.Add(newDataField);
             }
+
+            retVal.ConditionalFields = genericRechnung.ConditionalFields;
 
             return retVal;
         }

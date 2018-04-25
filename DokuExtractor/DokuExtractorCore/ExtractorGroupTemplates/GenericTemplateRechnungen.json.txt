@@ -61,5 +61,20 @@
 	  "CalculationExpressionPrecision": 1,
       "ValidationExpressions": ["19", "7"]
     }
+  ],
+  "ConditionFields": [
+    {
+      "Name": "Hugo",
+      "ConditionValues": [
+        {
+          "Condition": "",
+          "Value": "Fallback wert"
+        },
+		{
+          "Condition": "Compotec",
+          "Value": "Compotec Sonderwert"
+        }
+      ]
+    }
   ]
 }

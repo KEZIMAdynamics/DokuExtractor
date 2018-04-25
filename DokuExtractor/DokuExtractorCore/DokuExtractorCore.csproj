@@ -52,9 +52,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConditionalFieldProcessor.cs" />
     <Compile Include="FieldCalculator.cs" />
     <Compile Include="HelperExtensions.cs" />
     <Compile Include="Model\CalculationFieldResult.cs" />
+    <Compile Include="Model\ConditionalFieldResult.cs" />
+    <Compile Include="Model\ConditionValue.cs" />
+    <Compile Include="Model\ConditionalFieldTemplate.cs" />
     <Compile Include="Model\DataFieldGroupTemplate.cs" />
     <Compile Include="Model\DataFieldResult.cs" />
     <Compile Include="Model\DataFieldTypes.cs" />

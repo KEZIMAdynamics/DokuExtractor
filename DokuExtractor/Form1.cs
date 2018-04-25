@@ -110,7 +110,22 @@ namespace DokuExtractorGUI
                             ValidationExpressions = new List<string>(){ "[Rechnungssumme Brutto]"},
                             FieldType = DataFieldTypes.Currency
                         }
+                    },
+                ConditionalFields = new List<ConditionalFieldTemplate>()
+                {
+                    new ConditionalFieldTemplate()
+                    {
+                        Name = "Bedingung",
+                         ConditionValues = new List<ConditionValue>()
+                         {
+                              new ConditionValue()
+                              {
+                                   Condition = "hello",
+                                    Value = "ERFÜLlt"
+                              }
+                         }
                     }
+                }
 
             });
 
@@ -130,7 +145,7 @@ namespace DokuExtractorGUI
             DataFieldTypes type = (DataFieldTypes)Enum.Parse(typeof(DataFieldTypes), listBox1.SelectedItem.ToString(), true);
 
             RegexExpressionFinderResult expressionResult;
-            if (finder.TryFindRegexMatchExpress(tbInhalt.Text, tbRegexTextAnchor.Text, tbRegexTargetValue.Text,  type, false, out expressionResult))
+            if (finder.TryFindRegexMatchExpress(tbInhalt.Text, tbRegexTextAnchor.Text, tbRegexTargetValue.Text, type, false, out expressionResult))
             {
                 tbExtractedData.Text = "Regex expression found:" + Environment.NewLine + expressionResult.RegexExpression + Environment.NewLine
                     + Environment.NewLine + "First matching value:" + Environment.NewLine + expressionResult.MatchingValue + Environment.NewLine + Environment.NewLine

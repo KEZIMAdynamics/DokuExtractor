@@ -27,6 +27,11 @@ namespace DokuExtractorCore.Model
         public List<DataFieldResult> DataFields { get; set; } = new List<DataFieldResult>();
 
         /// <summary>
+        /// Contains the evaluaed conditional data fields. 
+        /// </summary>
+        public List<ConditionalFieldResult> ConditionalFields { get; set; } = new List<ConditionalFieldResult>();
+
+        /// <summary>
         /// Contains calculation results based on extracted data fields.
         /// </summary>
         public List<CalculationFieldResult> CalculationFields { get; set; } = new List<CalculationFieldResult>();
