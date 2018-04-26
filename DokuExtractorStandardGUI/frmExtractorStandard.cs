@@ -181,8 +181,9 @@ namespace DokuExtractorStandardGUI
         {
             var templateProcessor = new TemplateProcessor(Application.StartupPath);
             var classTemplates = templateProcessor.LoadClassTemplatesFromDisk();
+            var groupTemplates = templateProcessor.LoadGroupTemplatesFromDisk();
 
-            var templateEditor = new frmTemplateEditor(classTemplates);
+            var templateEditor = new frmTemplateEditor(classTemplates, groupTemplates);
             templateEditor.Show();
         }
 

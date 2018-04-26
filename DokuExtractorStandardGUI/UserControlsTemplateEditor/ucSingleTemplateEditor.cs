@@ -33,7 +33,6 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         /// <summary>
         /// Shows general properties and data fields of a class template
         /// </summary>
-        /// <param name="classTemplate"></param>
         public void ShowPropertiesAndDataFields(DocumentClassTemplate classTemplate)
         {
             ShowGeneralProperties(classTemplate);
@@ -41,11 +40,28 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         }
 
         /// <summary>
-        /// Adds a new data field to ucDataField
+        /// Shows general properties and data fields of a group template
+        /// </summary>
+        public void ShowPropertiesAndDataFields(DocumentGroupTemplate groupTemplate)
+        {
+            ShowGeneralProperties(groupTemplate);
+            ShowDataFields(groupTemplate);
+        }
+
+        /// <summary>
+        /// Adds a new data field to ucDataFieldEditor
         /// </summary>
         public void AddDataField()
         {
             ucDataFieldEditor1.AddDataField();
+        }
+
+        /// <summary>
+        /// Adds a new data field (group template) to ucDataFieldEditor
+        /// </summary>
+        public void AddDataFieldGroup()
+        {
+            ucDataFieldEditor1.AddDataFieldGroup();
         }
 
         /// <summary>
@@ -57,11 +73,24 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         }
 
         /// <summary>
+        /// Returns the group template with changed general properties
+        /// </summary>
+        public DocumentGroupTemplate GetDocumentGroupTemplateWithChangedGeneralProperties()
+        {
+            return ucGeneralPropertyEditor1.GetDocumentGroupTemplateWithChangedGeneralProperties();
+        }
+
+        /// <summary>
         /// Returns the class template with changed data fields
         /// </summary>
         public DocumentClassTemplate GetDocumentClassTemplateWithChangedDataFields()
         {
             return ucDataFieldEditor1.GetDocumentClassTemplateWithChangedDataFields();
+        }
+
+        public DocumentGroupTemplate GetDocumentGroupTemplateWithChangedDataFields()
+        {
+            return ucDataFieldEditor1.GetDocumentGroupTemplateWithChangedDataFields();
         }
 
         public void ChangeOrAddRegexExpression(Guid regexHelperID, string regex, bool additionalRegex)
@@ -78,11 +107,24 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         }
 
         /// <summary>
+        /// Shows the general properties of a group template
+        /// </summary>
+        private void ShowGeneralProperties(DocumentGroupTemplate groupTemplate)
+        {
+            ucGeneralPropertyEditor1.ShowGeneralProperties(groupTemplate);
+        }
+
+        /// <summary>
         /// Shows the data fields of a class template
         /// </summary>
         private void ShowDataFields(DocumentClassTemplate classTemplate)
         {
             ucDataFieldEditor1.ShowDataFields(classTemplate);
+        }
+
+        private void ShowDataFields(DocumentGroupTemplate groupTemplate)
+        {
+            ucDataFieldEditor1.ShowDataFields(groupTemplate);
         }
 
         private void FireRegexExpressionHelper(Guid id, DataFieldTypes dataFieldType)

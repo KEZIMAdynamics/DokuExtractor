@@ -41,15 +41,16 @@
             // 
             this.txtName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtName.Location = new System.Drawing.Point(3, 20);
+            this.txtName.Location = new System.Drawing.Point(10, 20);
+            this.txtName.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(286, 20);
+            this.txtName.Size = new System.Drawing.Size(272, 20);
             this.txtName.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(0, 4);
+            this.label1.Location = new System.Drawing.Point(7, 4);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 1;
@@ -58,7 +59,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 55);
+            this.label2.Location = new System.Drawing.Point(7, 55);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(56, 13);
             this.label2.TabIndex = 2;
@@ -75,23 +76,25 @@
             "AnchorLessIBAN",
             "VatId",
             "Term"});
-            this.lbxFieldType.Location = new System.Drawing.Point(3, 71);
+            this.lbxFieldType.Location = new System.Drawing.Point(10, 71);
+            this.lbxFieldType.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.lbxFieldType.Name = "lbxFieldType";
-            this.lbxFieldType.Size = new System.Drawing.Size(284, 69);
+            this.lbxFieldType.Size = new System.Drawing.Size(270, 69);
             this.lbxFieldType.TabIndex = 3;
             // 
             // txtRegexExpression
             // 
-            this.txtRegexExpression.Location = new System.Drawing.Point(3, 169);
+            this.txtRegexExpression.Location = new System.Drawing.Point(10, 169);
+            this.txtRegexExpression.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.txtRegexExpression.Multiline = true;
             this.txtRegexExpression.Name = "txtRegexExpression";
-            this.txtRegexExpression.Size = new System.Drawing.Size(284, 99);
+            this.txtRegexExpression.Size = new System.Drawing.Size(270, 95);
             this.txtRegexExpression.TabIndex = 4;
             // 
             // lblRegexExpression
             // 
             this.lblRegexExpression.AutoSize = true;
-            this.lblRegexExpression.Location = new System.Drawing.Point(0, 153);
+            this.lblRegexExpression.Location = new System.Drawing.Point(7, 153);
             this.lblRegexExpression.Name = "lblRegexExpression";
             this.lblRegexExpression.Size = new System.Drawing.Size(97, 13);
             this.lblRegexExpression.TabIndex = 5;
@@ -99,19 +102,22 @@
             // 
             // butDeleteDataField
             // 
-            this.butDeleteDataField.Location = new System.Drawing.Point(3, 277);
+            this.butDeleteDataField.BackColor = System.Drawing.Color.White;
+            this.butDeleteDataField.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.butDeleteDataField.Location = new System.Drawing.Point(10, 270);
+            this.butDeleteDataField.Margin = new System.Windows.Forms.Padding(10, 3, 10, 10);
             this.butDeleteDataField.Name = "butDeleteDataField";
-            this.butDeleteDataField.Size = new System.Drawing.Size(284, 23);
+            this.butDeleteDataField.Size = new System.Drawing.Size(270, 23);
             this.butDeleteDataField.TabIndex = 6;
             this.butDeleteDataField.Text = "Delete Data Field";
-            this.butDeleteDataField.UseVisualStyleBackColor = true;
+            this.butDeleteDataField.UseVisualStyleBackColor = false;
             this.butDeleteDataField.Click += new System.EventHandler(this.butDeleteDataField_Click);
             // 
             // ucDataField
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.Controls.Add(this.butDeleteDataField);
             this.Controls.Add(this.lblRegexExpression);
             this.Controls.Add(this.txtRegexExpression);

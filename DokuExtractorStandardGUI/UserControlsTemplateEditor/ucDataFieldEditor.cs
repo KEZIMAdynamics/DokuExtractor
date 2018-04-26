@@ -21,6 +21,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         public event RegexExpressionHelperHandler RegexExpressionHelper;
 
         private DocumentClassTemplate classTemplate = new DocumentClassTemplate();
+        private DocumentGroupTemplate groupTemplate = new DocumentGroupTemplate();
 
         public ucDataFieldEditor()
         {
@@ -35,6 +36,17 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             var newDataField = new ucDataField();
             newDataField.Tag = Guid.NewGuid();
             newDataField.RegexExpressionHelper += FireRegexExpressionHelper;
+            newDataField.DataFieldEraser += DeleteDataField;
+            flowLayoutPanel1.Controls.Add(newDataField);
+        }
+
+        /// <summary>
+        /// Adds a new data field (group template) to the user control
+        /// </summary>
+        public void AddDataFieldGroup()
+        {
+            var newDataField = new ucDataFieldGroup();
+            newDataField.Tag = Guid.NewGuid();
             newDataField.DataFieldEraser += DeleteDataField;
             flowLayoutPanel1.Controls.Add(newDataField);
         }
@@ -96,6 +108,36 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         }
 
         /// <summary>
+        /// Shows the data fields of a group template
+        /// </summary>
+        public void ShowDataFields(DocumentGroupTemplate groupTemplate)
+        {
+            this.groupTemplate = groupTemplate;
+
+            var controlList = new List<Control>();
+
+            foreach (Control control in flowLayoutPanel1.Controls)
+            {
+                controlList.Add(control);
+            }
+
+            foreach (Control control in controlList)
+            {
+                flowLayoutPanel1.Controls.Remove(control);
+                control.Dispose();
+            }
+
+            if (this.groupTemplate != null && this.groupTemplate.DataFields != null)
+                foreach (var item in this.groupTemplate.DataFields)
+                {
+                    var newDataField = new ucDataFieldGroup(item);
+                    newDataField.Tag = Guid.NewGuid();
+                    newDataField.DataFieldEraser += DeleteDataField;
+                    flowLayoutPanel1.Controls.Add(newDataField);
+                }
+        }
+
+        /// <summary>
         /// Returns the class template with changed data fields
         /// </summary>
         public DocumentClassTemplate GetDocumentClassTemplateWithChangedDataFields()
@@ -106,6 +148,25 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             foreach (Control control in flowLayoutPanel1.Controls)
             {
                 var newDataField = GetDataFieldTemplateFromUcDataField(control);
+                newDataFields.Add(newDataField);
+            }
+
+            retVal.DataFields = newDataFields;
+
+            return retVal;
+        }
+
+        /// <summary>
+        /// Returns the group template with changed data fields
+        /// </summary>
+        public DocumentGroupTemplate GetDocumentGroupTemplateWithChangedDataFields()
+        {
+            var retVal = this.groupTemplate;
+            var newDataFields = new List<DataFieldGroupTemplate>();
+
+            foreach (Control control in flowLayoutPanel1.Controls)
+            {
+                var newDataField = GetDataFieldGroupTemplateFromUcDataField(control);
                 newDataFields.Add(newDataField);
             }
 
@@ -166,6 +227,28 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
                 foreach (var item in regexArray)
                 {
                     retVal.RegexExpressions.Add(item);
+                }
+            }
+            return retVal;
+        }
+
+        private DataFieldGroupTemplate GetDataFieldGroupTemplateFromUcDataField(Control ucDataFieldGroupControl)
+        {
+            var retVal = new DataFieldGroupTemplate();
+            var ucDataFieldGroup = ucDataFieldGroupControl as ucDataFieldGroup;
+
+            if (ucDataFieldGroup != null)
+            {
+                retVal.Name = ucDataFieldGroup.NameText;
+                retVal.FieldType = (DataFieldTypes)(ucDataFieldGroup.FieldTypeInt);
+
+                var splitArray = new string[1];
+                splitArray[0] = Environment.NewLine;
+                var regexArray = ucDataFieldGroup.TextAnchorsText.Split(splitArray, StringSplitOptions.RemoveEmptyEntries);
+
+                foreach (var item in regexArray)
+                {
+                    retVal.TextAnchors.Add(item);
                 }
             }
             return retVal;

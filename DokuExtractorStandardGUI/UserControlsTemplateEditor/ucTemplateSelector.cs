@@ -14,6 +14,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
 {
     public partial class ucTemplateSelector : UserControl
     {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public BindingList<StringValue> TemplateNames { get; set; } = new BindingList<StringValue>();
 
         public delegate void SelectionChangedHandler(string templateName);
@@ -39,7 +40,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
             var selectedRows = dataGridView1.SelectedRows;
-            if(selectedRows != null)
+            if (selectedRows != null)
                 foreach (DataGridViewRow row in selectedRows)
                 {
                     var templateName = row.DataBoundItem as StringValue;

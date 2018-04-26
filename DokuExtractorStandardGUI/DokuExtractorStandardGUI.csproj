@@ -59,6 +59,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserControlsTemplateEditor\ucClassTemplateEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlsTemplateEditor\ucClassTemplateEditor.Designer.cs">
+      <DependentUpon>ucClassTemplateEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControlsTemplateEditor\ucDataField.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -71,11 +77,23 @@
     <Compile Include="UserControlsTemplateEditor\ucDataFieldEditor.Designer.cs">
       <DependentUpon>ucDataFieldEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControlsTemplateEditor\ucDataFieldGroup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlsTemplateEditor\ucDataFieldGroup.Designer.cs">
+      <DependentUpon>ucDataFieldGroup.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControlsTemplateEditor\ucGeneralPropertyEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UserControlsTemplateEditor\ucGeneralPropertyEditor.Designer.cs">
       <DependentUpon>ucGeneralPropertyEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlsTemplateEditor\ucGroupTemplateEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlsTemplateEditor\ucGroupTemplateEditor.Designer.cs">
+      <DependentUpon>ucGroupTemplateEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControlsTemplateEditor\ucSingleTemplateEditor.cs">
       <SubType>UserControl</SubType>
@@ -134,14 +152,23 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UserControlsTemplateEditor\ucClassTemplateEditor.resx">
+      <DependentUpon>ucClassTemplateEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControlsTemplateEditor\ucDataField.resx">
       <DependentUpon>ucDataField.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControlsTemplateEditor\ucDataFieldEditor.resx">
       <DependentUpon>ucDataFieldEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControlsTemplateEditor\ucDataFieldGroup.resx">
+      <DependentUpon>ucDataFieldGroup.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControlsTemplateEditor\ucGeneralPropertyEditor.resx">
       <DependentUpon>ucGeneralPropertyEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlsTemplateEditor\ucGroupTemplateEditor.resx">
+      <DependentUpon>ucGroupTemplateEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControlsTemplateEditor\ucSingleTemplateEditor.resx">
       <DependentUpon>ucSingleTemplateEditor.cs</DependentUpon>
