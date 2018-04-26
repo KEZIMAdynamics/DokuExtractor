@@ -35,24 +35,33 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             var newDataField = new ucDataField();
             newDataField.Tag = Guid.NewGuid();
             newDataField.RegexExpressionHelper += FireRegexExpressionHelper;
+            newDataField.DataFieldEraser += DeleteDataField;
             flowLayoutPanel1.Controls.Add(newDataField);
         }
 
         /// <summary>
-        /// Deletes the last (added) data field from the user control
+        /// Deletes a data field from the user control
         /// </summary>
-        public void DeleteLastDataField()
+        public void DeleteDataField(Guid toDeleteID)
         {
-            var controlList = new List<Control>();
-
             foreach (Control control in flowLayoutPanel1.Controls)
             {
-                controlList.Add(control);
+                var dataFieldControl = control as ucDataField;
+                if (dataFieldControl != null)
+                {
+                    try
+                    {
+                        var id = (Guid)(dataFieldControl.Tag);
+                        if (id == toDeleteID)
+                        {
+                            flowLayoutPanel1.Controls.Remove(control);
+                            return;
+                        }
+                    }
+                    catch (Exception ex)
+                    { }
+                }
             }
-
-            var lastControl = controlList.LastOrDefault();
-            if (lastControl != null)
-                flowLayoutPanel1.Controls.Remove(lastControl);
         }
 
         /// <summary>
@@ -81,6 +90,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
                     var newDataField = new ucDataField(item);
                     newDataField.Tag = Guid.NewGuid();
                     newDataField.RegexExpressionHelper += FireRegexExpressionHelper;
+                    newDataField.DataFieldEraser += DeleteDataField;
                     flowLayoutPanel1.Controls.Add(newDataField);
                 }
         }

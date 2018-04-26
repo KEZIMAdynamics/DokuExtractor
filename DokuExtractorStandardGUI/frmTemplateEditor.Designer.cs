@@ -31,11 +31,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTemplateEditor));
             this.butSaveTemplate = new System.Windows.Forms.Button();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.butDeleteDataField = new System.Windows.Forms.Button();
+            this.ucSingleTemplateEditor1 = new DokuExtractorStandardGUI.UserControlsTemplateEditor.ucSingleTemplateEditor();
             this.butAddDataField = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.ucTemplateSelector1 = new DokuExtractorStandardGUI.UserControlsTemplateEditor.ucTemplateSelector();
-            this.ucSingleTemplateEditor1 = new DokuExtractorStandardGUI.UserControlsTemplateEditor.ucSingleTemplateEditor();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
@@ -72,30 +71,26 @@
             // 
             // splitContainer2.Panel2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.butDeleteDataField);
             this.splitContainer2.Panel2.Controls.Add(this.butAddDataField);
             this.splitContainer2.Panel2.Controls.Add(this.butSaveTemplate);
             this.splitContainer2.Size = new System.Drawing.Size(734, 579);
             this.splitContainer2.SplitterDistance = 525;
             this.splitContainer2.TabIndex = 0;
             // 
-            // butDeleteDataField
+            // ucSingleTemplateEditor1
             // 
-            this.butDeleteDataField.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.butDeleteDataField.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.butDeleteDataField.Location = new System.Drawing.Point(385, 12);
-            this.butDeleteDataField.Name = "butDeleteDataField";
-            this.butDeleteDataField.Size = new System.Drawing.Size(170, 35);
-            this.butDeleteDataField.TabIndex = 4;
-            this.butDeleteDataField.Text = "Delete Data Field";
-            this.butDeleteDataField.UseVisualStyleBackColor = true;
-            this.butDeleteDataField.Click += new System.EventHandler(this.butDeleteDataField_Click);
+            this.ucSingleTemplateEditor1.BackColor = System.Drawing.Color.White;
+            this.ucSingleTemplateEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucSingleTemplateEditor1.Location = new System.Drawing.Point(0, 0);
+            this.ucSingleTemplateEditor1.Name = "ucSingleTemplateEditor1";
+            this.ucSingleTemplateEditor1.Size = new System.Drawing.Size(734, 525);
+            this.ucSingleTemplateEditor1.TabIndex = 0;
             // 
             // butAddDataField
             // 
             this.butAddDataField.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butAddDataField.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.butAddDataField.Location = new System.Drawing.Point(209, 12);
+            this.butAddDataField.Location = new System.Drawing.Point(385, 12);
             this.butAddDataField.Name = "butAddDataField";
             this.butAddDataField.Size = new System.Drawing.Size(170, 35);
             this.butAddDataField.TabIndex = 3;
@@ -129,15 +124,6 @@
             this.ucTemplateSelector1.Size = new System.Drawing.Size(366, 579);
             this.ucTemplateSelector1.TabIndex = 0;
             // 
-            // ucSingleTemplateEditor1
-            // 
-            this.ucSingleTemplateEditor1.BackColor = System.Drawing.Color.White;
-            this.ucSingleTemplateEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucSingleTemplateEditor1.Location = new System.Drawing.Point(0, 0);
-            this.ucSingleTemplateEditor1.Name = "ucSingleTemplateEditor1";
-            this.ucSingleTemplateEditor1.Size = new System.Drawing.Size(734, 525);
-            this.ucSingleTemplateEditor1.TabIndex = 0;
-            // 
             // frmTemplateEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -169,7 +155,6 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private UserControlsTemplateEditor.ucTemplateSelector ucTemplateSelector1;
         private System.Windows.Forms.Button butAddDataField;
-        private System.Windows.Forms.Button butDeleteDataField;
         private UserControlsTemplateEditor.ucSingleTemplateEditor ucSingleTemplateEditor1;
     }
 }

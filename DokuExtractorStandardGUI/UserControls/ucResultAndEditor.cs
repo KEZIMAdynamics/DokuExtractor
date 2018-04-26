@@ -95,14 +95,6 @@ namespace DokuExtractorStandardGUI.UserControls
         }
 
         /// <summary>
-        /// Deletes the last (added) data field from ucDataField
-        /// </summary>
-        public void DeleteDataField()
-        {
-            ucSingleTemplateEditor1.DeleteLastDataField();
-        }
-
-        /// <summary>
         /// Returns the shown (and maybe editted) extraction result of ucExtractedData
         /// </summary>
         public FieldExtractionResult GetFieldExtractionResult()

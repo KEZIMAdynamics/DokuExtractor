@@ -37,7 +37,6 @@
             this.ucResultAndEditor1 = new DokuExtractorStandardGUI.UserControls.ucResultAndEditor();
             this.lblInstruction = new System.Windows.Forms.Label();
             this.butOk = new System.Windows.Forms.Button();
-            this.butDeleteDataField = new System.Windows.Forms.Button();
             this.butAddDataField = new System.Windows.Forms.Button();
             this.butSaveTemplate = new System.Windows.Forms.Button();
             this.butGo = new System.Windows.Forms.Button();
@@ -127,7 +126,6 @@
             // 
             this.splitContainer3.Panel2.Controls.Add(this.lblInstruction);
             this.splitContainer3.Panel2.Controls.Add(this.butOk);
-            this.splitContainer3.Panel2.Controls.Add(this.butDeleteDataField);
             this.splitContainer3.Panel2.Controls.Add(this.butAddDataField);
             this.splitContainer3.Panel2.Controls.Add(this.butSaveTemplate);
             this.splitContainer3.Panel2.Controls.Add(this.butGo);
@@ -168,25 +166,13 @@
             this.butOk.UseVisualStyleBackColor = true;
             this.butOk.Click += new System.EventHandler(this.butOk_Click);
             // 
-            // butDeleteDataField
-            // 
-            this.butDeleteDataField.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.butDeleteDataField.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.butDeleteDataField.Location = new System.Drawing.Point(392, 53);
-            this.butDeleteDataField.Name = "butDeleteDataField";
-            this.butDeleteDataField.Size = new System.Drawing.Size(105, 35);
-            this.butDeleteDataField.TabIndex = 4;
-            this.butDeleteDataField.Text = "Delete Data Field";
-            this.butDeleteDataField.UseVisualStyleBackColor = true;
-            this.butDeleteDataField.Click += new System.EventHandler(this.butDeleteDataField_Click);
-            // 
             // butAddDataField
             // 
             this.butAddDataField.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butAddDataField.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.butAddDataField.Location = new System.Drawing.Point(281, 53);
             this.butAddDataField.Name = "butAddDataField";
-            this.butAddDataField.Size = new System.Drawing.Size(105, 35);
+            this.butAddDataField.Size = new System.Drawing.Size(216, 35);
             this.butAddDataField.TabIndex = 3;
             this.butAddDataField.Text = "Add Data Field";
             this.butAddDataField.UseVisualStyleBackColor = true;
@@ -268,7 +254,6 @@
         private System.Windows.Forms.Button butSaveTemplate;
         private UserControls.ucResultAndEditor ucResultAndEditor1;
         private System.Windows.Forms.Button butAddDataField;
-        private System.Windows.Forms.Button butDeleteDataField;
         private System.Windows.Forms.Button butOk;
         private System.Windows.Forms.Label lblInstruction;
     }

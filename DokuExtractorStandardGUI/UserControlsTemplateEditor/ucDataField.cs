@@ -19,6 +19,12 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         /// </summary>
         public event RegexExpressionHelperHandler RegexExpressionHelper;
 
+        public delegate void DataFieldEraserHandler(Guid id);
+        /// <summary>
+        /// Fired, when butDeleteDataField was clicked
+        /// </summary>
+        public event DataFieldEraserHandler DataFieldEraser;
+
         public string NameText { get { return txtName.Text; } }
         public int FieldTypeInt { get { return lbxFieldType.SelectedIndex; } }
         public string RegexText { get { return txtRegexExpression.Text; } }
@@ -79,9 +85,25 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             }
         }
 
+        private void butDeleteDataField_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var id = (Guid)(this.Tag);
+                FireDataFieldEraser(id);
+            }
+            catch (Exception ex)
+            { }
+        }
+
         private void FireRegexExpressionHelper(Guid id, DataFieldTypes dataFieldType)
         {
             RegexExpressionHelper?.Invoke(id, dataFieldType);
+        }
+
+        private void FireDataFieldEraser(Guid id)
+        {
+            DataFieldEraser?.Invoke(id);
         }
     }
 }

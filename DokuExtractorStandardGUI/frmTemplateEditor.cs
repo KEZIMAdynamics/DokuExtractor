@@ -73,11 +73,6 @@ namespace DokuExtractorStandardGUI
             ucSingleTemplateEditor1.AddDataField();
         }
 
-        private void butDeleteDataField_Click(object sender, EventArgs e)
-        {
-            ucSingleTemplateEditor1.DeleteLastDataField();
-        }
-
         private void frmTemplateEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
             try

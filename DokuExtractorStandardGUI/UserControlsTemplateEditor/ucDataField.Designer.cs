@@ -34,6 +34,7 @@
             this.lbxFieldType = new System.Windows.Forms.ListBox();
             this.txtRegexExpression = new System.Windows.Forms.TextBox();
             this.lblRegexExpression = new System.Windows.Forms.Label();
+            this.butDeleteDataField = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtName
@@ -96,11 +97,22 @@
             this.lblRegexExpression.TabIndex = 5;
             this.lblRegexExpression.Text = "Regex Expressions";
             // 
+            // butDeleteDataField
+            // 
+            this.butDeleteDataField.Location = new System.Drawing.Point(3, 277);
+            this.butDeleteDataField.Name = "butDeleteDataField";
+            this.butDeleteDataField.Size = new System.Drawing.Size(284, 23);
+            this.butDeleteDataField.TabIndex = 6;
+            this.butDeleteDataField.Text = "Delete Data Field";
+            this.butDeleteDataField.UseVisualStyleBackColor = true;
+            this.butDeleteDataField.Click += new System.EventHandler(this.butDeleteDataField_Click);
+            // 
             // ucDataField
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.Controls.Add(this.butDeleteDataField);
             this.Controls.Add(this.lblRegexExpression);
             this.Controls.Add(this.txtRegexExpression);
             this.Controls.Add(this.lbxFieldType);
@@ -108,7 +120,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtName);
             this.Name = "ucDataField";
-            this.Size = new System.Drawing.Size(292, 273);
+            this.Size = new System.Drawing.Size(292, 303);
             this.Load += new System.EventHandler(this.ucDataField_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -123,5 +135,6 @@
         private System.Windows.Forms.ListBox lbxFieldType;
         private System.Windows.Forms.TextBox txtRegexExpression;
         private System.Windows.Forms.Label lblRegexExpression;
+        private System.Windows.Forms.Button butDeleteDataField;
     }
 }

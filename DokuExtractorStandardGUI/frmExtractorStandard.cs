@@ -68,7 +68,6 @@ namespace DokuExtractorStandardGUI
         {
             ucResultAndEditor1.DisableBuiltInEditor();
             butAddDataField.Visible = false;
-            butDeleteDataField.Visible = false;
             butSaveTemplate.Visible = false;
             butTemplateEditor.Visible = false;
         }
@@ -149,13 +148,11 @@ namespace DokuExtractorStandardGUI
             {
                 butSaveTemplate.Enabled = true;
                 butAddDataField.Enabled = true;
-                butDeleteDataField.Enabled = true;
             }
             else
             {
                 butSaveTemplate.Enabled = false;
                 butAddDataField.Enabled = false;
-                butDeleteDataField.Enabled = false;
             }
         }
 
@@ -176,7 +173,6 @@ namespace DokuExtractorStandardGUI
             ucResultAndEditor1.Enabled = enablingState;
             butSaveTemplate.Enabled = enablingState;
             butAddDataField.Enabled = enablingState;
-            butDeleteDataField.Enabled = enablingState;
             butGo.Enabled = enablingState;
             butOk.Enabled = enablingState;
         }
@@ -259,11 +255,6 @@ namespace DokuExtractorStandardGUI
         private void butAddDataField_Click(object sender, EventArgs e)
         {
             ucResultAndEditor1.AddDataField();
-        }
-
-        private void butDeleteDataField_Click(object sender, EventArgs e)
-        {
-            ucResultAndEditor1.DeleteDataField();
         }
     }
 }
