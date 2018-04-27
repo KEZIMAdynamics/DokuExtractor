@@ -9,7 +9,7 @@ namespace DokuExtractorCore.Model
     /// <summary>
     /// Template for a single DataField. Used in DocumentClassTemplate.
     /// </summary>
-    public class DataFieldTemplate
+    public class DataFieldClassTemplate
     {
         /// <summary>
         /// Field name

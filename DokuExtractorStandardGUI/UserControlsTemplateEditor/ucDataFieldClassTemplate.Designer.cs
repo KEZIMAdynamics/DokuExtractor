@@ -1,6 +1,6 @@
 ﻿namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
 {
-    partial class ucDataField
+    partial class ucDataFieldClassTemplate
     {
         /// <summary> 
         /// Erforderliche Designervariable.

@@ -11,7 +11,7 @@ using DokuExtractorCore.Model;
 
 namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
 {
-    public partial class ucDataField : UserControl
+    public partial class ucDataFieldClassTemplate : UserControl
     {
         public delegate void RegexExpressionHelperHandler(Guid id, DataFieldTypes dataFieldType);
         /// <summary>
@@ -29,14 +29,14 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         public int FieldTypeInt { get { return lbxFieldType.SelectedIndex; } }
         public string RegexText { get { return txtRegexExpression.Text; } }
 
-        private DataFieldTemplate dataField { get; set; } = new DataFieldTemplate();
+        private DataFieldClassTemplate dataField { get; set; } = new DataFieldClassTemplate();
 
-        public ucDataField()
+        public ucDataFieldClassTemplate()
         {
             InitializeComponent();
         }
 
-        public ucDataField(DataFieldTemplate dataField)
+        public ucDataFieldClassTemplate(DataFieldClassTemplate dataField)
         {
             InitializeComponent();
             this.dataField = dataField;

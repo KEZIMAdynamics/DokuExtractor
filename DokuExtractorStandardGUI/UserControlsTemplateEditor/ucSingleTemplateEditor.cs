@@ -51,17 +51,17 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         /// <summary>
         /// Adds a new data field to ucDataFieldEditor
         /// </summary>
-        public void AddDataField()
+        public void AddDataFieldClassTemplate()
         {
-            ucDataFieldEditor1.AddDataField();
+            ucDataFieldEditor1.AddDataFieldClassTemplate();
         }
 
         /// <summary>
         /// Adds a new data field (group template) to ucDataFieldEditor
         /// </summary>
-        public void AddDataFieldGroup()
+        public void AddDataFieldGroupTemplate()
         {
-            ucDataFieldEditor1.AddDataFieldGroup();
+            ucDataFieldEditor1.AddDataFieldGroupTemplate();
         }
 
         /// <summary>

@@ -11,7 +11,7 @@ using DokuExtractorCore.Model;
 
 namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
 {
-    public partial class ucDataFieldGroup : UserControl
+    public partial class ucDataFieldGroupTemplate : UserControl
     {
         public delegate void DataFieldEraserHandler(Guid id);
         /// <summary>
@@ -25,12 +25,12 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
 
         private DataFieldGroupTemplate dataFieldGroup { get; set; } = new DataFieldGroupTemplate();
 
-        public ucDataFieldGroup()
+        public ucDataFieldGroupTemplate()
         {
             InitializeComponent();
         }
 
-        public ucDataFieldGroup(DataFieldGroupTemplate dataFieldGroup)
+        public ucDataFieldGroupTemplate(DataFieldGroupTemplate dataFieldGroup)
         {
             InitializeComponent();
             this.dataFieldGroup = dataFieldGroup;

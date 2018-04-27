@@ -29,36 +29,61 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         }
 
         /// <summary>
-        /// Adds a new data field to the user control
+        /// Adds a new data field (class template) to the user control
         /// </summary>
-        public void AddDataField()
+        public void AddDataFieldClassTemplate()
         {
-            var newDataField = new ucDataField();
+            var newDataField = new ucDataFieldClassTemplate();
             newDataField.Tag = Guid.NewGuid();
             newDataField.RegexExpressionHelper += FireRegexExpressionHelper;
-            newDataField.DataFieldEraser += DeleteDataField;
+            newDataField.DataFieldEraser += DeleteDataFieldClassTemplate;
             flowLayoutPanel1.Controls.Add(newDataField);
         }
 
         /// <summary>
         /// Adds a new data field (group template) to the user control
         /// </summary>
-        public void AddDataFieldGroup()
+        public void AddDataFieldGroupTemplate()
         {
-            var newDataField = new ucDataFieldGroup();
+            var newDataField = new ucDataFieldGroupTemplate();
             newDataField.Tag = Guid.NewGuid();
-            newDataField.DataFieldEraser += DeleteDataField;
+            newDataField.DataFieldEraser += DeleteDataFieldClassTemplate;
             flowLayoutPanel1.Controls.Add(newDataField);
         }
 
         /// <summary>
-        /// Deletes a data field from the user control
+        /// Deletes a data field (class template) from the user control
         /// </summary>
-        public void DeleteDataField(Guid toDeleteID)
+        public void DeleteDataFieldClassTemplate(Guid toDeleteID)
         {
             foreach (Control control in flowLayoutPanel1.Controls)
             {
-                var dataFieldControl = control as ucDataField;
+                var dataFieldControl = control as ucDataFieldClassTemplate;
+                if (dataFieldControl != null)
+                {
+                    try
+                    {
+                        var id = (Guid)(dataFieldControl.Tag);
+                        if (id == toDeleteID)
+                        {
+                            flowLayoutPanel1.Controls.Remove(control);
+                            return;
+                        }
+                    }
+                    catch (Exception ex)
+                    { }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Deletes a data field (group template) from the user control
+        /// </summary>
+        public void DeleteDataFieldGroupTemplate(Guid toDeleteID)
+        {
+            foreach (Control control in flowLayoutPanel1.Controls)
+            {
+                var dataFieldControl = control as ucDataFieldGroupTemplate;
                 if (dataFieldControl != null)
                 {
                     try
@@ -99,10 +124,10 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             if (this.classTemplate != null && this.classTemplate.DataFields != null)
                 foreach (var item in this.classTemplate.DataFields)
                 {
-                    var newDataField = new ucDataField(item);
+                    var newDataField = new ucDataFieldClassTemplate(item);
                     newDataField.Tag = Guid.NewGuid();
                     newDataField.RegexExpressionHelper += FireRegexExpressionHelper;
-                    newDataField.DataFieldEraser += DeleteDataField;
+                    newDataField.DataFieldEraser += DeleteDataFieldClassTemplate;
                     flowLayoutPanel1.Controls.Add(newDataField);
                 }
         }
@@ -130,9 +155,9 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             if (this.groupTemplate != null && this.groupTemplate.DataFields != null)
                 foreach (var item in this.groupTemplate.DataFields)
                 {
-                    var newDataField = new ucDataFieldGroup(item);
+                    var newDataField = new ucDataFieldGroupTemplate(item);
                     newDataField.Tag = Guid.NewGuid();
-                    newDataField.DataFieldEraser += DeleteDataField;
+                    newDataField.DataFieldEraser += DeleteDataFieldGroupTemplate;
                     flowLayoutPanel1.Controls.Add(newDataField);
                 }
         }
@@ -143,11 +168,11 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         public DocumentClassTemplate GetDocumentClassTemplateWithChangedDataFields()
         {
             var retVal = this.classTemplate;
-            var newDataFields = new List<DataFieldTemplate>();
+            var newDataFields = new List<DataFieldClassTemplate>();
 
             foreach (Control control in flowLayoutPanel1.Controls)
             {
-                var newDataField = GetDataFieldTemplateFromUcDataField(control);
+                var newDataField = GetDataFieldClassTemplateFromUcDataField(control);
                 newDataFields.Add(newDataField);
             }
 
@@ -179,7 +204,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         {
             foreach (Control control in flowLayoutPanel1.Controls)
             {
-                var dataFieldControl = control as ucDataField;
+                var dataFieldControl = control as ucDataFieldClassTemplate;
                 if (dataFieldControl != null)
                 {
                     dataFieldControl.ActivateRegexExpressionHelper();
@@ -192,7 +217,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             //TODO
             foreach (Control control in flowLayoutPanel1.Controls)
             {
-                var dataFieldControl = control as ucDataField;
+                var dataFieldControl = control as ucDataFieldClassTemplate;
                 if (dataFieldControl != null)
                 {
                     try
@@ -210,10 +235,10 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             }
         }
 
-        private DataFieldTemplate GetDataFieldTemplateFromUcDataField(Control ucDataFieldControl)
+        private DataFieldClassTemplate GetDataFieldClassTemplateFromUcDataField(Control ucDataFieldControl)
         {
-            var retVal = new DataFieldTemplate();
-            var ucDataField = ucDataFieldControl as ucDataField;
+            var retVal = new DataFieldClassTemplate();
+            var ucDataField = ucDataFieldControl as ucDataFieldClassTemplate;
 
             if (ucDataField != null)
             {
@@ -235,16 +260,16 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         private DataFieldGroupTemplate GetDataFieldGroupTemplateFromUcDataField(Control ucDataFieldGroupControl)
         {
             var retVal = new DataFieldGroupTemplate();
-            var ucDataFieldGroup = ucDataFieldGroupControl as ucDataFieldGroup;
+            var ucDataFieldGroupTemplate = ucDataFieldGroupControl as ucDataFieldGroupTemplate;
 
-            if (ucDataFieldGroup != null)
+            if (ucDataFieldGroupTemplate != null)
             {
-                retVal.Name = ucDataFieldGroup.NameText;
-                retVal.FieldType = (DataFieldTypes)(ucDataFieldGroup.FieldTypeInt);
+                retVal.Name = ucDataFieldGroupTemplate.NameText;
+                retVal.FieldType = (DataFieldTypes)(ucDataFieldGroupTemplate.FieldTypeInt);
 
                 var splitArray = new string[1];
                 splitArray[0] = Environment.NewLine;
-                var regexArray = ucDataFieldGroup.TextAnchorsText.Split(splitArray, StringSplitOptions.RemoveEmptyEntries);
+                var regexArray = ucDataFieldGroupTemplate.TextAnchorsText.Split(splitArray, StringSplitOptions.RemoveEmptyEntries);
 
                 foreach (var item in regexArray)
                 {

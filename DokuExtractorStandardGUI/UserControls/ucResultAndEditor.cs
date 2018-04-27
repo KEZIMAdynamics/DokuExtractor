@@ -90,7 +90,7 @@ namespace DokuExtractorStandardGUI.UserControls
         /// </summary>
         public void AddDataField()
         {
-            ucSingleTemplateEditor1.AddDataField();
+            ucSingleTemplateEditor1.AddDataFieldClassTemplate();
             ucSingleTemplateEditor1.ActivateRegexExpressionHelper();
         }
 

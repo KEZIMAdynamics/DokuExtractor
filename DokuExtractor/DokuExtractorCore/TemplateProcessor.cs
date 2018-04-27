@@ -353,7 +353,7 @@ namespace DokuExtractorCore
 
             foreach (var item in genericRechnung.DataFields.ToList())
             {
-                var newDataField = new DataFieldTemplate() { Name = item.Name, FieldType = item.FieldType };
+                var newDataField = new DataFieldClassTemplate() { Name = item.Name, FieldType = item.FieldType };
 
                 foreach (var anchor in item.TextAnchors)
                 {

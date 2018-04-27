@@ -71,7 +71,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
 
         private void butAddDataField_Click(object sender, EventArgs e)
         {
-            ucSingleTemplateEditor1.AddDataFieldGroup();
+            ucSingleTemplateEditor1.AddDataFieldGroupTemplate();
         }
     }
 }
