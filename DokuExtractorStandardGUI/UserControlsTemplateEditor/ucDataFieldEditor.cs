@@ -48,7 +48,39 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             var newDataField = new ucDataFieldGroupTemplate();
             newDataField.Tag = Guid.NewGuid();
             newDataField.DataFieldEraser += DeleteDataFieldClassTemplate;
+
+            var ucCalculationFieldTemplateList = new List<ucCalculationFieldTemplate>();
+            foreach (var control in flowLayoutPanel1.Controls)
+            {
+                if (control.GetType() == typeof(ucCalculationFieldTemplate))
+                    ucCalculationFieldTemplateList.Add(control as ucCalculationFieldTemplate);
+            }
+
+            foreach (var calcControl in ucCalculationFieldTemplateList)
+            {
+                var id = (Guid)(calcControl.Tag);
+                foreach (Control control in flowLayoutPanel1.Controls)
+                {
+                    if (control.GetType() == typeof(ucCalculationFieldTemplate))
+                        if (id == (Guid)(((ucCalculationFieldTemplate)control).Tag))
+                            flowLayoutPanel1.Controls.Remove(control);
+                }
+            }
+
             flowLayoutPanel1.Controls.Add(newDataField);
+
+            foreach (var calcControl in ucCalculationFieldTemplateList)
+            {
+                flowLayoutPanel1.Controls.Add(calcControl);
+            }
+        }
+
+        public void AddCalculationField()
+        {
+            var newCalculationField = new ucCalculationFieldTemplate();
+            newCalculationField.Tag = Guid.NewGuid();
+            newCalculationField.CalculationFieldEraser += DeleteCalculationField;
+            flowLayoutPanel1.Controls.Add(newCalculationField);
         }
 
         /// <summary>
@@ -84,6 +116,28 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             foreach (Control control in flowLayoutPanel1.Controls)
             {
                 var dataFieldControl = control as ucDataFieldGroupTemplate;
+                if (dataFieldControl != null)
+                {
+                    try
+                    {
+                        var id = (Guid)(dataFieldControl.Tag);
+                        if (id == toDeleteID)
+                        {
+                            flowLayoutPanel1.Controls.Remove(control);
+                            return;
+                        }
+                    }
+                    catch (Exception ex)
+                    { }
+                }
+            }
+        }
+
+        public void DeleteCalculationField(Guid toDeleteID)
+        {
+            foreach (Control control in flowLayoutPanel1.Controls)
+            {
+                var dataFieldControl = control as ucCalculationFieldTemplate;
                 if (dataFieldControl != null)
                 {
                     try
@@ -159,6 +213,15 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
                     newDataField.Tag = Guid.NewGuid();
                     newDataField.DataFieldEraser += DeleteDataFieldGroupTemplate;
                     flowLayoutPanel1.Controls.Add(newDataField);
+                }
+
+            if (this.groupTemplate != null && this.groupTemplate.CalculationFields != null)
+                foreach (var item in this.groupTemplate.CalculationFields)
+                {
+                    var newCalculationField = new ucCalculationFieldTemplate(item);
+                    newCalculationField.Tag = Guid.NewGuid();
+                    newCalculationField.CalculationFieldEraser += DeleteCalculationField;
+                    flowLayoutPanel1.Controls.Add(newCalculationField);
                 }
         }
 

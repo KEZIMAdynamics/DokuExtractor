@@ -43,7 +43,6 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
                 this.selectedGroupTemplate = this.groupTemplates.Where(x => x.TemplateGroupName == templateName).FirstOrDefault();
                 ucSingleTemplateEditor1.ShowPropertiesAndDataFields(this.selectedGroupTemplate);
             }
-
         }
 
         private void butSaveTemplate_Click(object sender, EventArgs e)
@@ -72,6 +71,11 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         private void butAddDataField_Click(object sender, EventArgs e)
         {
             ucSingleTemplateEditor1.AddDataFieldGroupTemplate();
+        }
+
+        private void butAddCalculationField_Click(object sender, EventArgs e)
+        {
+            ucSingleTemplateEditor1.AddCalculationField();
         }
     }
 }

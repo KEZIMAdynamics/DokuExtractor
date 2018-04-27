@@ -29,27 +29,27 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         public int FieldTypeInt { get { return lbxFieldType.SelectedIndex; } }
         public string RegexText { get { return txtRegexExpression.Text; } }
 
-        private DataFieldClassTemplate dataField { get; set; } = new DataFieldClassTemplate();
+        private DataFieldClassTemplate dataFieldClassTemplate { get; set; } = new DataFieldClassTemplate();
 
         public ucDataFieldClassTemplate()
         {
             InitializeComponent();
         }
 
-        public ucDataFieldClassTemplate(DataFieldClassTemplate dataField)
+        public ucDataFieldClassTemplate(DataFieldClassTemplate dataFieldClassTemplate)
         {
             InitializeComponent();
-            this.dataField = dataField;
+            this.dataFieldClassTemplate = dataFieldClassTemplate;
         }
 
         private void ucDataField_Load(object sender, EventArgs e)
         {
-            txtName.Text = this.dataField.Name;
+            txtName.Text = this.dataFieldClassTemplate.Name;
 
-            lbxFieldType.SelectedIndex = (int)(this.dataField.FieldType);
+            lbxFieldType.SelectedIndex = (int)(this.dataFieldClassTemplate.FieldType);
 
-            if (dataField.RegexExpressions != null)
-                foreach (var item in dataField.RegexExpressions)
+            if (dataFieldClassTemplate.RegexExpressions != null)
+                foreach (var item in dataFieldClassTemplate.RegexExpressions)
                 {
                     txtRegexExpression.Text = txtRegexExpression.Text + item + Environment.NewLine;
                 }

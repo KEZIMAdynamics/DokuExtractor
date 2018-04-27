@@ -23,27 +23,27 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         public int FieldTypeInt { get { return lbxFieldType.SelectedIndex; } }
         public string TextAnchorsText { get { return txtTextAnchors.Text; } }
 
-        private DataFieldGroupTemplate dataFieldGroup { get; set; } = new DataFieldGroupTemplate();
+        private DataFieldGroupTemplate dataFieldGroupTemplate { get; set; } = new DataFieldGroupTemplate();
 
         public ucDataFieldGroupTemplate()
         {
             InitializeComponent();
         }
 
-        public ucDataFieldGroupTemplate(DataFieldGroupTemplate dataFieldGroup)
+        public ucDataFieldGroupTemplate(DataFieldGroupTemplate dataFieldGroupTemplate)
         {
             InitializeComponent();
-            this.dataFieldGroup = dataFieldGroup;
+            this.dataFieldGroupTemplate = dataFieldGroupTemplate;
         }
 
         private void ucDataFieldGroup_Load(object sender, EventArgs e)
         {
-            txtName.Text = this.dataFieldGroup.Name;
+            txtName.Text = this.dataFieldGroupTemplate.Name;
 
-            lbxFieldType.SelectedIndex = (int)(this.dataFieldGroup.FieldType);
+            lbxFieldType.SelectedIndex = (int)(this.dataFieldGroupTemplate.FieldType);
 
-            if (dataFieldGroup.TextAnchors != null)
-                foreach (var item in dataFieldGroup.TextAnchors)
+            if (dataFieldGroupTemplate.TextAnchors != null)
+                foreach (var item in dataFieldGroupTemplate.TextAnchors)
                 {
                     txtTextAnchors.Text = txtTextAnchors.Text + item + Environment.NewLine;
                 }

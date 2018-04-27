@@ -44,7 +44,7 @@
             this.txtName.Location = new System.Drawing.Point(10, 20);
             this.txtName.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(272, 20);
+            this.txtName.Size = new System.Drawing.Size(270, 20);
             this.txtName.TabIndex = 0;
             // 
             // label1
@@ -113,7 +113,7 @@
             this.butDeleteDataField.UseVisualStyleBackColor = false;
             this.butDeleteDataField.Click += new System.EventHandler(this.butDeleteDataField_Click);
             // 
-            // ucDataField
+            // ucDataFieldClassTemplate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -125,7 +125,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtName);
-            this.Name = "ucDataField";
+            this.Name = "ucDataFieldClassTemplate";
             this.Size = new System.Drawing.Size(292, 303);
             this.Load += new System.EventHandler(this.ucDataField_Load);
             this.ResumeLayout(false);

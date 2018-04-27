@@ -34,6 +34,7 @@
             this.ucSingleTemplateEditor1 = new DokuExtractorStandardGUI.UserControlsTemplateEditor.ucSingleTemplateEditor();
             this.butAddDataField = new System.Windows.Forms.Button();
             this.butSaveTemplate = new System.Windows.Forms.Button();
+            this.butAddCalculationField = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -84,6 +85,7 @@
             // 
             // splitContainer2.Panel2
             // 
+            this.splitContainer2.Panel2.Controls.Add(this.butAddCalculationField);
             this.splitContainer2.Panel2.Controls.Add(this.butAddDataField);
             this.splitContainer2.Panel2.Controls.Add(this.butSaveTemplate);
             this.splitContainer2.Size = new System.Drawing.Size(578, 433);
@@ -103,7 +105,7 @@
             // 
             this.butAddDataField.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butAddDataField.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.butAddDataField.Location = new System.Drawing.Point(229, 12);
+            this.butAddDataField.Location = new System.Drawing.Point(53, 12);
             this.butAddDataField.Name = "butAddDataField";
             this.butAddDataField.Size = new System.Drawing.Size(170, 35);
             this.butAddDataField.TabIndex = 3;
@@ -122,6 +124,18 @@
             this.butSaveTemplate.Text = "Save selected Template";
             this.butSaveTemplate.UseVisualStyleBackColor = true;
             this.butSaveTemplate.Click += new System.EventHandler(this.butSaveTemplate_Click);
+            // 
+            // butAddCalculationField
+            // 
+            this.butAddCalculationField.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.butAddCalculationField.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.butAddCalculationField.Location = new System.Drawing.Point(229, 12);
+            this.butAddCalculationField.Name = "butAddCalculationField";
+            this.butAddCalculationField.Size = new System.Drawing.Size(170, 35);
+            this.butAddCalculationField.TabIndex = 4;
+            this.butAddCalculationField.Text = "Add Calculation Field";
+            this.butAddCalculationField.UseVisualStyleBackColor = true;
+            this.butAddCalculationField.Click += new System.EventHandler(this.butAddCalculationField_Click);
             // 
             // ucGroupTemplateEditor
             // 
@@ -151,5 +165,6 @@
         private ucSingleTemplateEditor ucSingleTemplateEditor1;
         private System.Windows.Forms.Button butAddDataField;
         private System.Windows.Forms.Button butSaveTemplate;
+        private System.Windows.Forms.Button butAddCalculationField;
     }
 }

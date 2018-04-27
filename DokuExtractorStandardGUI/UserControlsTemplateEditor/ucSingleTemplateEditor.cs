@@ -64,6 +64,11 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             ucDataFieldEditor1.AddDataFieldGroupTemplate();
         }
 
+        public void AddCalculationField()
+        {
+            ucDataFieldEditor1.AddCalculationField();
+        }
+
         /// <summary>
         /// Returns the class template with changed general properties
         /// </summary>

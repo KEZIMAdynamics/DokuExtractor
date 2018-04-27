@@ -59,6 +59,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserControlsTemplateEditor\ucCalculationFieldTemplate.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlsTemplateEditor\ucCalculationFieldTemplate.Designer.cs">
+      <DependentUpon>ucCalculationFieldTemplate.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControlsTemplateEditor\ucClassTemplateEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -152,6 +158,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UserControlsTemplateEditor\ucCalculationFieldTemplate.resx">
+      <DependentUpon>ucCalculationFieldTemplate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControlsTemplateEditor\ucClassTemplateEditor.resx">
       <DependentUpon>ucClassTemplateEditor.cs</DependentUpon>
     </EmbeddedResource>
