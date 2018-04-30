@@ -82,7 +82,6 @@ namespace DokuExtractorStandardGUI
 
         private async void UcViewer1_TextSelected(string selectedText)
         {
-            //TODO
             if (isAnchorSelectionRunning)
             {
                 this.regexHelperAnchorText = selectedText;
@@ -158,7 +157,6 @@ namespace DokuExtractorStandardGUI
 
         private void UcResultAndEditor1_RegexExpressionHelper(Guid id, DataFieldTypes dataFieldType)
         {
-            //TODO
             EnableOrDisableControlsAndButtons(false);
 
             regexHelperID = id;

@@ -75,6 +75,9 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             }
         }
 
+        /// <summary>
+        /// Adds a new calculation field to the user control
+        /// </summary>
         public void AddCalculationField()
         {
             var newCalculationField = new ucCalculationFieldTemplate();
@@ -133,6 +136,10 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             }
         }
 
+        /// <summary>
+        /// Deletes a calculation field from the user control
+        /// </summary>
+        /// <param name="toDeleteID"></param>
         public void DeleteCalculationField(Guid toDeleteID)
         {
             foreach (Control control in flowLayoutPanel1.Controls)
@@ -263,6 +270,9 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             return retVal;
         }
 
+        /// <summary>
+        /// Activates the regex expression helper for defining regex expressions
+        /// </summary>
         public void ActivateRegexExpressionHelper()
         {
             foreach (Control control in flowLayoutPanel1.Controls)
@@ -277,7 +287,6 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
 
         public void ChangeOrAddRegexExpression(Guid regexHelperID, string regex, bool additionalRegex)
         {
-            //TODO
             foreach (Control control in flowLayoutPanel1.Controls)
             {
                 var dataFieldControl = control as ucDataFieldClassTemplate;

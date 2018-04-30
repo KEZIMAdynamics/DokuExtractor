@@ -55,6 +55,9 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
                 }
         }
 
+        /// <summary>
+        /// Activates the regex expression helper for defining regex expressions
+        /// </summary>
         public void ActivateRegexExpressionHelper()
         {
             txtRegexExpression.Enabled = false;

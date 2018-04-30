@@ -25,6 +25,9 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             ucDataFieldEditor1.RegexExpressionHelper += FireRegexExpressionHelper;
         }
 
+        /// <summary>
+        /// Activates the regex expression helper for defining regex expressions
+        /// </summary>
         public void ActivateRegexExpressionHelper()
         {
             ucDataFieldEditor1.ActivateRegexExpressionHelper();
@@ -127,6 +130,10 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             ucDataFieldEditor1.ShowDataFields(classTemplate);
         }
 
+        /// <summary>
+        /// Shows the data fields of a group template
+        /// </summary>
+        /// <param name="groupTemplate"></param>
         private void ShowDataFields(DocumentGroupTemplate groupTemplate)
         {
             ucDataFieldEditor1.ShowDataFields(groupTemplate);

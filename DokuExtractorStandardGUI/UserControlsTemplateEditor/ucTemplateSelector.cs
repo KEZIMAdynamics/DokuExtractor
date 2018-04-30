@@ -48,13 +48,6 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
                         FireSelectionChanged(templateName.Value);
                     break;
                 }
-
-            //foreach (DataGridViewRow row in selectedRows)
-            //{
-            //    var className = row.Cells["Value"]?.Value?.ToString();
-            //    SelectionChanged?.Invoke(className);
-            //    break;
-            //}
         }
 
         private void FireSelectionChanged(string templateName)

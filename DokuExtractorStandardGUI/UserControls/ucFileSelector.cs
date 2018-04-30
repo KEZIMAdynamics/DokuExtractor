@@ -78,10 +78,6 @@ namespace DokuExtractorStandardGUI.UserControls
                     if(fileInfo != null)
                         FireSelectedFileChanged(fileInfo.FullName);
                     break;
-                    //var newPath = row.Cells["Name"]?.Value?.ToString();
-                    //if (newPath != null)
-                    //    FireSelectedFileChanged(newPath);
-                    //break;
                 }
         }
 
