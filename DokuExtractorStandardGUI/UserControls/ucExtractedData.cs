@@ -38,6 +38,22 @@ namespace DokuExtractorStandardGUI.UserControls
         }
 
         /// <summary>
+        /// Checks, if all data fields are filled with data
+        /// </summary>
+        public bool CheckIfAllDataFieldsAreFilled()
+        {
+            foreach (DataFieldResult dataField in dgvDataFields.DataSource as List<DataFieldResult>)
+            {
+                if (string.IsNullOrWhiteSpace(dataField.Value))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        /// <summary>
         /// Returns the shown (and maybe editted) extraction result
         /// </summary>
         public FieldExtractionResult GetFieldExtractionResult()

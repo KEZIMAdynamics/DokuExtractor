@@ -95,6 +95,14 @@ namespace DokuExtractorStandardGUI.UserControls
         }
 
         /// <summary>
+        /// Checks, if all data fields are filled with data
+        /// </summary>
+        public bool CheckIfAllDataFieldsAreFilled()
+        {
+            return ucExtractedData1.CheckIfAllDataFieldsAreFilled();
+        }
+
+        /// <summary>
         /// Returns the shown (and maybe editted) extraction result of ucExtractedData
         /// </summary>
         public FieldExtractionResult GetFieldExtractionResult()

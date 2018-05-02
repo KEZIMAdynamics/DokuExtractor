@@ -27,7 +27,7 @@ namespace DokuExtractorStandardGUI
         private string selectedFilePath = string.Empty;
         private TemplateProcessor templateProcessor = new TemplateProcessor(Application.StartupPath);
 
-        public frmExtractorStandard(string filePath, bool allowEditTemplates = false)
+        public frmExtractorStandard(string filePath, bool allowEditTemplates = false, string culture = "en-US")
         {
             InitializeComponent();
             ucFileSelector1.SelectedFileChanged += UcFileSelector1_SelectedFileChanged;
@@ -50,7 +50,7 @@ namespace DokuExtractorStandardGUI
             ucFileSelector1.LoadFiles(fileInfos);
         }
 
-        public frmExtractorStandard(List<FileInfo> fileInfos, bool allowEditTemplates = false)
+        public frmExtractorStandard(List<FileInfo> fileInfos, bool allowEditTemplates = false, string culture = "en-US")
         {
             InitializeComponent();
             ucFileSelector1.SelectedFileChanged += UcFileSelector1_SelectedFileChanged;
@@ -64,20 +64,20 @@ namespace DokuExtractorStandardGUI
             ucFileSelector1.LoadFiles(fileInfos);
         }
 
-        public void DisableBuiltInEditor()
-        {
-            ucResultAndEditor1.DisableBuiltInEditor();
-            butAddDataField.Visible = false;
-            butSaveTemplate.Visible = false;
-            butTemplateEditor.Visible = false;
-        }
-
         private void frmExtractorStandard_Load(object sender, EventArgs e)
         {
             this.CenterToScreen();
             this.WindowState = FormWindowState.Maximized;
 
             UcResultAndEditor1_TabSwitched(false);
+        }
+
+        public void DisableBuiltInEditor()
+        {
+            ucResultAndEditor1.DisableBuiltInEditor();
+            butAddDataField.Visible = false;
+            butSaveTemplate.Visible = false;
+            butTemplateEditor.Visible = false;
         }
 
         private async void UcViewer1_TextSelected(string selectedText)
@@ -215,8 +215,13 @@ namespace DokuExtractorStandardGUI
 
         private void butOk_Click(object sender, EventArgs e)
         {
-            var result = ucResultAndEditor1.GetFieldExtractionResult();
-            ucFileSelector1.RemoveFileFromQueue(selectedFilePath);
+            if (ucResultAndEditor1.CheckIfAllDataFieldsAreFilled() == true)
+            {
+                var result = ucResultAndEditor1.GetFieldExtractionResult();
+                ucFileSelector1.RemoveFileFromQueue(selectedFilePath);
+            }
+            else
+                MessageBox.Show("Please fill values of all data fields.");
         }
 
         private void butSaveTemplate_Click(object sender, EventArgs e)
