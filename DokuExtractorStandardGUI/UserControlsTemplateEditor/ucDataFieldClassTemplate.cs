@@ -29,7 +29,8 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         public int FieldTypeInt { get { return lbxFieldType.SelectedIndex; } }
         public string RegexText { get { return txtRegexExpression.Text; } }
 
-        private DataFieldClassTemplate dataFieldClassTemplate { get; set; } = new DataFieldClassTemplate();
+                private DataFieldClassTemplate dataFieldClassTemplate { get; set; } = new DataFieldClassTemplate();
+        private bool isRegexExpressionHelperActivated = false;
 
         public ucDataFieldClassTemplate()
         {
@@ -62,7 +63,11 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         {
             txtRegexExpression.Enabled = false;
             lblRegexExpression.Font = new Font(lblRegexExpression.Font.Name, lblRegexExpression.Font.SizeInPoints, FontStyle.Underline);
-            lblRegexExpression.DoubleClick += LblRegexExpression_DoubleClick;
+            if (isRegexExpressionHelperActivated == false)
+            {
+                lblRegexExpression.DoubleClick += LblRegexExpression_DoubleClick;
+                isRegexExpressionHelperActivated = true;
+            }
         }
 
         public void ChangeOrAddRegexExpression(string regex, bool additionalRegex)

@@ -199,7 +199,7 @@ namespace DokuExtractorStandardGUI
             if (matchingTemplateResult.IsMatchSuccessfull)
             {
                 ucResultAndEditor1.SwitchTab(false);
-                MessageBox.Show("Yay, template found: " + template.TemplateClassName);
+                MessageBox.Show("Template found: " + template.TemplateClassName);
                 var result = templateProcessor.ExtractData(template, groupTemplates, inputString);
                 ucResultAndEditor1.ShowExtractedData(result, template);
             }
