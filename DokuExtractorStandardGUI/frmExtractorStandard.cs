@@ -99,7 +99,7 @@ namespace DokuExtractorStandardGUI
                 var inputString = await loader.GetTextFromPdf(selectedFilePath, false);
 
                 var regexResult = new RegexExpressionFinderResult();
-                if (templateProcessor.TryFindRegexMatchExpress(inputString, regexHelperValueText, regexHelperAnchorText, regexHelperFieldType, false, out regexResult))
+                if (templateProcessor.TryFindRegexMatchExpress(inputString, regexHelperAnchorText, regexHelperValueText, regexHelperFieldType, false, out regexResult))
                 {
                     var matchingValues = string.Empty;
                     foreach (var matchingValue in regexResult.AllMatchingValues)
@@ -121,7 +121,7 @@ namespace DokuExtractorStandardGUI
                 }
                 else
                 {
-                    MessageBox.Show("Could not get a regex expression finder result!");
+                    MessageBox.Show("Could not get a regex expression finder result!", "No regex expression found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
                 EnableOrDisableControlsAndButtons(true);
@@ -199,17 +199,19 @@ namespace DokuExtractorStandardGUI
             if (matchingTemplateResult.IsMatchSuccessfull)
             {
                 ucResultAndEditor1.SwitchTab(false);
-                MessageBox.Show("Template found: " + template.TemplateClassName);
+                MessageBox.Show("Template found: " + template.TemplateClassName, "Template found", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 var result = templateProcessor.ExtractData(template, groupTemplates, inputString);
                 ucResultAndEditor1.ShowExtractedData(result, template);
             }
             else
             {
                 ucResultAndEditor1.SwitchTab(true);
+
                 template = templateProcessor.AutoCreateClassTemplate("NewTemplate", inputString);
                 var json = templateProcessor.ExtractDataAsJson(template, groupTemplates, inputString);
-
                 ucResultAndEditor1.ShowPropertiesAndDataFields(template);
+
+                MessageBox.Show("No Template found. New Template was generated.", "No Template found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -221,7 +223,7 @@ namespace DokuExtractorStandardGUI
                 ucFileSelector1.RemoveFileFromQueue(selectedFilePath);
             }
             else
-                MessageBox.Show("Please fill values of all data fields.");
+                MessageBox.Show("Please fill values of all data fields.", "Empty/Invalid values detected", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void butSaveTemplate_Click(object sender, EventArgs e)
@@ -241,7 +243,7 @@ namespace DokuExtractorStandardGUI
             templateDummyList.Add(newTemplate);
             templateProcessor.SaveTemplates(templateDummyList);
 
-            MessageBox.Show("Template saved.");
+            MessageBox.Show("Template saved.", "Template saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void frmExtractorStandard_FormClosing(object sender, FormClosingEventArgs e)
@@ -251,6 +253,8 @@ namespace DokuExtractorStandardGUI
                 ucFileSelector1.SelectedFileChanged -= UcFileSelector1_SelectedFileChanged;
                 ucViewer1.TextSelected -= UcViewer1_TextSelected;
                 ucResultAndEditor1.TabSwitched -= UcResultAndEditor1_TabSwitched;
+                ucResultAndEditor1.RegexExpressionHelper -= UcResultAndEditor1_RegexExpressionHelper;
+
             }
             catch (Exception ex)
             { }

@@ -65,7 +65,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             templateDummyList.Add(this.selectedClassTemplate);
             templateProcessor.SaveTemplates(templateDummyList);
 
-            MessageBox.Show("Class Template saved.");
+            MessageBox.Show("Class Template saved.", "Template saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void butAddDataField_Click(object sender, EventArgs e)

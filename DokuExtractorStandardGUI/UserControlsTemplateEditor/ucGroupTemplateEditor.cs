@@ -65,7 +65,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             templateDummyList.Add(this.selectedGroupTemplate);
             templateProcessor.SaveTemplates(templateDummyList);
 
-            MessageBox.Show("Group Template saved.");
+            MessageBox.Show("Group Template saved.", "Template saved.", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void butAddDataField_Click(object sender, EventArgs e)
