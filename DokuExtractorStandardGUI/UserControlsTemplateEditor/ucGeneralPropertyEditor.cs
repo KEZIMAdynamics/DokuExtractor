@@ -24,7 +24,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
 
         private void ucGeneralPropertyEditor_Load(object sender, EventArgs e)
         {
-            Localization();
+            Localize();
             splitContainer1.SplitterDistance = splitContainer1.Width / 2;
         }
 
@@ -133,7 +133,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             return retVal;
         }
 
-        private void Localization()
+        private void Localize()
         {
             lblClassName.Text = Translation.LanguageStrings.TemplateClassName;
             lblGroupName.Text = Translation.LanguageStrings.TemplateGroupName;

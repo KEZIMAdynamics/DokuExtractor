@@ -26,7 +26,7 @@ namespace DokuExtractorStandardGUI.UserControls
 
         private void ucExtractedData_Load(object sender, EventArgs e)
         {
-            Localization();
+            Localize();
         }
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace DokuExtractorStandardGUI.UserControls
             return retVal;
         }
 
-        private void Localization()
+        private void Localize()
         {
             lblTemplateClassName.Text = Translation.LanguageStrings.TemplateClassName;
             lblTemplateGroupName.Text = Translation.LanguageStrings.TemplateGroupName;

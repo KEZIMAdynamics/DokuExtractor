@@ -46,7 +46,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
 
         private void ucDataField_Load(object sender, EventArgs e)
         {
-            Localization();
+            Localize();
 
             txtName.Text = this.dataFieldClassTemplate.Name;
 
@@ -81,7 +81,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
                 txtRegexExpression.Text = regex;
         }
 
-        private void Localization()
+        private void Localize()
         {
             lblName.Text = Translation.LanguageStrings.DataFieldName;
             lblFieldType.Text = Translation.LanguageStrings.DataFieldType;
@@ -98,7 +98,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
 
         private void LblRegexExpression_DoubleClick(object sender, EventArgs e)
         {
-            var result = MessageBox.Show("Start Regex Expression Helper?", "", MessageBoxButtons.YesNo);
+            var result = MessageBox.Show(Translation.LanguageStrings.MsgAskStartRegexExpressionHelper, string.Empty, MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes)
             {
                 try

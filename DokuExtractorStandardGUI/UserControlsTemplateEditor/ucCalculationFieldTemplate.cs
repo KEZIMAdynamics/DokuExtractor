@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DokuExtractorCore.Model;
+using DokuExtractorStandardGUI.Localization;
 
 namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
 {
@@ -43,6 +44,8 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         {
             txtName.Text = this.calculationFieldTemplate.Name;
 
+            Localize();
+
             lbxFieldType.SelectedIndex = (int)(this.calculationFieldTemplate.FieldType);
 
             txtCalculationExpression.Text = this.calculationFieldTemplate.CalculationExpression;
@@ -54,6 +57,22 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
                     txtValidationExpressions.Text = txtValidationExpressions.Text + item + Environment.NewLine;
                 }
             cbxValidationPrecision.SelectedText = this.calculationFieldTemplate.CalculationExpressionPrecision.ToString();
+        }
+
+        private void Localize()
+        {
+            lblName.Text = Translation.LanguageStrings.CalculationFieldName;
+            lblFieldType.Text = Translation.LanguageStrings.CalculationFieldType;
+            lblCalculationExpression.Text = Translation.LanguageStrings.CalculationExpression;
+            lblValidationExpressions.Text = Translation.LanguageStrings.ValidationExpressions;
+            butDeleteCalculationField.Text = Translation.LanguageStrings.ButDeleteCalculationField;
+            lbxFieldType.Items[(int)(DataFieldTypes.Text)] = Translation.LanguageStrings.FieldTypeText;
+            lbxFieldType.Items[(int)(DataFieldTypes.Date)] = Translation.LanguageStrings.FieldTypeDate;
+            lbxFieldType.Items[(int)(DataFieldTypes.Currency)] = Translation.LanguageStrings.FieldTypeCurrency;
+            lbxFieldType.Items[(int)(DataFieldTypes.IBAN)] = Translation.LanguageStrings.FieldTypeIban;
+            lbxFieldType.Items[(int)(DataFieldTypes.AnchorLessIBAN)] = Translation.LanguageStrings.FieldTypeAnchorlessIban;
+            lbxFieldType.Items[(int)(DataFieldTypes.VatId)] = Translation.LanguageStrings.FieldTypeVatId;
+            lbxFieldType.Items[(int)(DataFieldTypes.Term)] = Translation.LanguageStrings.FieldTypeTerm;
         }
 
         private void butDeleteCalculationField_Click(object sender, EventArgs e)

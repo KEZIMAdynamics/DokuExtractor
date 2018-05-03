@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\DokuExtractor\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -56,6 +59,12 @@
     </Compile>
     <Compile Include="frmTemplateEditor.Designer.cs">
       <DependentUpon>frmTemplateEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Localization\frmLanguageEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Localization\frmLanguageEditor.Designer.cs">
+      <DependentUpon>frmLanguageEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Localization\LanguageStrings.cs" />
     <Compile Include="Localization\Translation.cs" />
@@ -151,6 +160,9 @@
     <EmbeddedResource Include="frmTemplateEditor.resx">
       <DependentUpon>frmTemplateEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Localization\frmLanguageEditor.resx">
+      <DependentUpon>frmLanguageEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -202,6 +214,8 @@
     <EmbeddedResource Include="UserControls\ucViewerBase.resx">
       <DependentUpon>ucViewerBase.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\DataSources\DokuExtractorStandardGUI.Localization.frmLanguageEditor.datasource" />
     <None Include="Properties\DataSources\DokuExtractorStandardGUI.UserControls.ucExtractedData.datasource" />
     <None Include="Properties\DataSources\DokuExtractorStandardGUI.UserControls.ucFileSelector.datasource" />
     <None Include="Properties\DataSources\DokuExtractorStandardGUI.UserControlsTemplateEditor.ucTemplateSelector.datasource" />

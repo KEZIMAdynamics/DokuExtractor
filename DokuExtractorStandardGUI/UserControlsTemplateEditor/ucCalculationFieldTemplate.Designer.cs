@@ -32,8 +32,8 @@
             this.lblValidationExpressions = new System.Windows.Forms.Label();
             this.txtValidationExpressions = new System.Windows.Forms.TextBox();
             this.lbxFieldType = new System.Windows.Forms.ListBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblFieldType = new System.Windows.Forms.Label();
+            this.lblName = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
             this.txtCalculationExpression = new System.Windows.Forms.TextBox();
             this.lblCalculationExpression = new System.Windows.Forms.Label();
@@ -89,23 +89,23 @@
             this.lbxFieldType.Size = new System.Drawing.Size(270, 69);
             this.lbxFieldType.TabIndex = 17;
             // 
-            // label2
+            // lblFieldType
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 58);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(56, 13);
-            this.label2.TabIndex = 16;
-            this.label2.Text = "Field Type";
+            this.lblFieldType.AutoSize = true;
+            this.lblFieldType.Location = new System.Drawing.Point(9, 58);
+            this.lblFieldType.Name = "lblFieldType";
+            this.lblFieldType.Size = new System.Drawing.Size(56, 13);
+            this.lblFieldType.TabIndex = 16;
+            this.lblFieldType.Text = "Field Type";
             // 
-            // label1
+            // lblName
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 7);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 15;
-            this.label1.Text = "Name";
+            this.lblName.AutoSize = true;
+            this.lblName.Location = new System.Drawing.Point(9, 7);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(35, 13);
+            this.lblName.TabIndex = 15;
+            this.lblName.Text = "Name";
             // 
             // txtName
             // 
@@ -189,8 +189,8 @@
             this.Controls.Add(this.lblValidationExpressions);
             this.Controls.Add(this.txtValidationExpressions);
             this.Controls.Add(this.lbxFieldType);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblFieldType);
+            this.Controls.Add(this.lblName);
             this.Controls.Add(this.txtName);
             this.Name = "ucCalculationFieldTemplate";
             this.Size = new System.Drawing.Size(292, 303);
@@ -206,8 +206,8 @@
         private System.Windows.Forms.Label lblValidationExpressions;
         private System.Windows.Forms.TextBox txtValidationExpressions;
         private System.Windows.Forms.ListBox lbxFieldType;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblFieldType;
+        private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.TextBox txtCalculationExpression;
         private System.Windows.Forms.Label lblCalculationExpression;

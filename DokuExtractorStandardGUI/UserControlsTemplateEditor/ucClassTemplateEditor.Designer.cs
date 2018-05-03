@@ -131,6 +131,7 @@
             this.Controls.Add(this.splitContainer1);
             this.Name = "ucClassTemplateEditor";
             this.Size = new System.Drawing.Size(688, 471);
+            this.Load += new System.EventHandler(this.ucClassTemplateEditor_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();

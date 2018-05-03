@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DokuExtractorCore.Model;
 using DokuExtractorCore;
+using DokuExtractorStandardGUI.Localization;
 
 namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
 {
@@ -20,6 +21,11 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         public ucClassTemplateEditor()
         {
             InitializeComponent();
+        }
+
+        private void ucClassTemplateEditor_Load(object sender, EventArgs e)
+        {
+            Localize();
         }
 
         public void InitializeClassTemplateEditor(List<DocumentClassTemplate> classTemplates)
@@ -34,6 +40,12 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             }
 
             ucTemplateSelector1.LoadTemplates(classTemplateNameList);
+        }
+
+        private void Localize()
+        {
+            butAddDataField.Text = Translation.LanguageStrings.ButAddDataField;
+            butSaveTemplate.Text = Translation.LanguageStrings.ButSaveTemplate;
         }
 
         private void UcTemplateSelector1_SelectionChanged(string templateName)
@@ -65,7 +77,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             templateDummyList.Add(this.selectedClassTemplate);
             templateProcessor.SaveTemplates(templateDummyList);
 
-            MessageBox.Show("Class Template saved.", "Template saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(Translation.LanguageStrings.MsgClassTemplateSaved, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void butAddDataField_Click(object sender, EventArgs e)

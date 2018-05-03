@@ -1,5 +1,6 @@
 ﻿using DokuExtractorCore;
 using DokuExtractorCore.Model;
+using DokuExtractorStandardGUI.Localization;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,8 +31,15 @@ namespace DokuExtractorStandardGUI
 
         private void frmTemplateEditor_Load(object sender, EventArgs e)
         {
+            Localize();
             ucClassTemplateEditor1.InitializeClassTemplateEditor(classTemplates);
             ucGroupTemplateEditor1.InitializeGroupTemplateEditor(groupTemplates);
+        }
+
+        private void Localize()
+        {
+            tabClassTemplateEditor.Text = Translation.LanguageStrings.ClassTemplateEditor;
+            tabGroupTemplateEditor.Text = Translation.LanguageStrings.GroupTemplateEditor;
         }
     }
 }

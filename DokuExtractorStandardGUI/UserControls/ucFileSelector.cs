@@ -31,7 +31,7 @@ namespace DokuExtractorStandardGUI.UserControls
 
         private void ucFileSelector_Load(object sender, EventArgs e)
         {
-            Localization();
+            Localize();
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace DokuExtractorStandardGUI.UserControls
             RemoveFileFromQueue(filePath);
         }
 
-        private void Localization()
+        private void Localize()
         {
             dataGridView1.Columns["col" + nameof(FileInfo.Name)].HeaderText = Translation.LanguageStrings.FileName;
             dataGridView1.Columns["col" + nameof(FileInfo.Length)].HeaderText = Translation.LanguageStrings.FileLength;

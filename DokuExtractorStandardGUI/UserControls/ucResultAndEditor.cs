@@ -34,7 +34,7 @@ namespace DokuExtractorStandardGUI.UserControls
 
         private void ucResultAndEditor_Load(object sender, EventArgs e)
         {
-            Localization();
+            Localize();
         }
 
         /// <summary>
@@ -121,7 +121,7 @@ namespace DokuExtractorStandardGUI.UserControls
             ucSingleTemplateEditor1.ChangeOrAddRegexExpression(regexHelperID, regex, additionalRegex);
         }
 
-        private void Localization()
+        private void Localize()
         {
             tabExtractedData.Text = Translation.LanguageStrings.ExtractedData;
             tabSingleTemplateEditor.Text = Translation.LanguageStrings.SingleTemplateEditor;

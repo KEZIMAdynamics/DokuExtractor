@@ -32,9 +32,9 @@
             this.ucTemplateSelector1 = new DokuExtractorStandardGUI.UserControlsTemplateEditor.ucTemplateSelector();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.ucSingleTemplateEditor1 = new DokuExtractorStandardGUI.UserControlsTemplateEditor.ucSingleTemplateEditor();
+            this.butAddCalculationField = new System.Windows.Forms.Button();
             this.butAddDataField = new System.Windows.Forms.Button();
             this.butSaveTemplate = new System.Windows.Forms.Button();
-            this.butAddCalculationField = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -101,6 +101,18 @@
             this.ucSingleTemplateEditor1.Size = new System.Drawing.Size(578, 379);
             this.ucSingleTemplateEditor1.TabIndex = 0;
             // 
+            // butAddCalculationField
+            // 
+            this.butAddCalculationField.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.butAddCalculationField.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.butAddCalculationField.Location = new System.Drawing.Point(229, 12);
+            this.butAddCalculationField.Name = "butAddCalculationField";
+            this.butAddCalculationField.Size = new System.Drawing.Size(170, 35);
+            this.butAddCalculationField.TabIndex = 4;
+            this.butAddCalculationField.Text = "Add Calculation Field";
+            this.butAddCalculationField.UseVisualStyleBackColor = true;
+            this.butAddCalculationField.Click += new System.EventHandler(this.butAddCalculationField_Click);
+            // 
             // butAddDataField
             // 
             this.butAddDataField.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -125,18 +137,6 @@
             this.butSaveTemplate.UseVisualStyleBackColor = true;
             this.butSaveTemplate.Click += new System.EventHandler(this.butSaveTemplate_Click);
             // 
-            // butAddCalculationField
-            // 
-            this.butAddCalculationField.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.butAddCalculationField.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.butAddCalculationField.Location = new System.Drawing.Point(229, 12);
-            this.butAddCalculationField.Name = "butAddCalculationField";
-            this.butAddCalculationField.Size = new System.Drawing.Size(170, 35);
-            this.butAddCalculationField.TabIndex = 4;
-            this.butAddCalculationField.Text = "Add Calculation Field";
-            this.butAddCalculationField.UseVisualStyleBackColor = true;
-            this.butAddCalculationField.Click += new System.EventHandler(this.butAddCalculationField_Click);
-            // 
             // ucGroupTemplateEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -145,6 +145,7 @@
             this.Controls.Add(this.splitContainer1);
             this.Name = "ucGroupTemplateEditor";
             this.Size = new System.Drawing.Size(868, 433);
+            this.Load += new System.EventHandler(this.ucGroupTemplateEditor_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();

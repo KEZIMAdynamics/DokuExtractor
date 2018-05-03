@@ -34,27 +34,34 @@
             this.lblTemplateGroupName = new System.Windows.Forms.Label();
             this.lblTemplateClassName = new System.Windows.Forms.Label();
             this.dgvDataFields = new System.Windows.Forms.DataGridView();
-            this.dataFieldResultsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.ucExtractedDataBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dgvCalculationFields = new System.Windows.Forms.DataGridView();
-            this.calculationFieldResultsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataFieldResultsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.calculationFieldResultsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ucExtractedDataBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.colCalcName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCalcCalculationValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCalcCalculationEqualsValidation = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colCalcFieldType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFieldType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCalcName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCalcFieldType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCalcCalculationValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCalcCalculationEqualsValidation = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDataFields)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataFieldResultsBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ucExtractedDataBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCalculationFields)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.calculationFieldResultsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataFieldResultsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.calculationFieldResultsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ucExtractedDataBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // txtGroupName
@@ -111,15 +118,6 @@
             this.dgvDataFields.Size = new System.Drawing.Size(494, 251);
             this.dgvDataFields.TabIndex = 10;
             // 
-            // dataFieldResultsBindingSource
-            // 
-            this.dataFieldResultsBindingSource.DataMember = "DataFieldResults";
-            this.dataFieldResultsBindingSource.DataSource = this.ucExtractedDataBindingSource;
-            // 
-            // ucExtractedDataBindingSource
-            // 
-            this.ucExtractedDataBindingSource.DataSource = typeof(DokuExtractorStandardGUI.UserControls.ucExtractedData);
-            // 
             // dgvCalculationFields
             // 
             this.dgvCalculationFields.AutoGenerateColumns = false;
@@ -127,20 +125,15 @@
             this.dgvCalculationFields.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCalculationFields.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colCalcName,
-            this.colCalcFieldType,
             this.colCalcCalculationValue,
-            this.colCalcCalculationEqualsValidation});
+            this.colCalcCalculationEqualsValidation,
+            this.colCalcFieldType});
             this.dgvCalculationFields.DataSource = this.calculationFieldResultsBindingSource;
             this.dgvCalculationFields.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCalculationFields.Location = new System.Drawing.Point(0, 0);
             this.dgvCalculationFields.Name = "dgvCalculationFields";
             this.dgvCalculationFields.Size = new System.Drawing.Size(494, 247);
             this.dgvCalculationFields.TabIndex = 11;
-            // 
-            // calculationFieldResultsBindingSource
-            // 
-            this.calculationFieldResultsBindingSource.DataMember = "CalculationFieldResults";
-            this.calculationFieldResultsBindingSource.DataSource = this.ucExtractedDataBindingSource;
             // 
             // splitContainer1
             // 
@@ -161,6 +154,116 @@
             this.splitContainer1.Size = new System.Drawing.Size(494, 502);
             this.splitContainer1.SplitterDistance = 251;
             this.splitContainer1.TabIndex = 12;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "FieldType";
+            this.dataGridViewTextBoxColumn1.HeaderText = "FieldType";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Width = 78;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "FieldType";
+            this.dataGridViewTextBoxColumn2.HeaderText = "FieldType";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.Width = 78;
+            // 
+            // dataFieldResultsBindingSource
+            // 
+            this.dataFieldResultsBindingSource.DataMember = "DataFieldResults";
+            this.dataFieldResultsBindingSource.DataSource = this.ucExtractedDataBindingSource;
+            // 
+            // calculationFieldResultsBindingSource
+            // 
+            this.calculationFieldResultsBindingSource.DataMember = "CalculationFieldResults";
+            this.calculationFieldResultsBindingSource.DataSource = this.ucExtractedDataBindingSource;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "FieldType";
+            this.dataGridViewTextBoxColumn3.HeaderText = "FieldType";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            this.dataGridViewTextBoxColumn3.Width = 78;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "FieldType";
+            this.dataGridViewTextBoxColumn4.HeaderText = "FieldType";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.dataGridViewTextBoxColumn4.Width = 78;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "FieldType";
+            this.dataGridViewTextBoxColumn5.HeaderText = "FieldType";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "FieldType";
+            this.dataGridViewTextBoxColumn6.HeaderText = "FieldType";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            this.dataGridViewTextBoxColumn6.Width = 78;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn7.DataPropertyName = "FieldType";
+            this.dataGridViewTextBoxColumn7.HeaderText = "FieldType";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            // 
+            // ucExtractedDataBindingSource
+            // 
+            this.ucExtractedDataBindingSource.DataSource = typeof(DokuExtractorStandardGUI.UserControls.ucExtractedData);
+            // 
+            // colCalcName
+            // 
+            this.colCalcName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colCalcName.DataPropertyName = "Name";
+            this.colCalcName.HeaderText = "Name";
+            this.colCalcName.Name = "colCalcName";
+            this.colCalcName.ReadOnly = true;
+            this.colCalcName.Width = 60;
+            // 
+            // colCalcCalculationValue
+            // 
+            this.colCalcCalculationValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colCalcCalculationValue.DataPropertyName = "CalculationValue";
+            this.colCalcCalculationValue.HeaderText = "CalculationValue";
+            this.colCalcCalculationValue.Name = "colCalcCalculationValue";
+            this.colCalcCalculationValue.Width = 111;
+            // 
+            // colCalcCalculationEqualsValidation
+            // 
+            this.colCalcCalculationEqualsValidation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colCalcCalculationEqualsValidation.DataPropertyName = "CalculationEqualsValidation";
+            this.colCalcCalculationEqualsValidation.HeaderText = "CalculationEqualsValidation";
+            this.colCalcCalculationEqualsValidation.Name = "colCalcCalculationEqualsValidation";
+            this.colCalcCalculationEqualsValidation.ReadOnly = true;
+            this.colCalcCalculationEqualsValidation.Width = 143;
+            // 
+            // colCalcFieldType
+            // 
+            this.colCalcFieldType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colCalcFieldType.DataPropertyName = "FieldType";
+            this.colCalcFieldType.HeaderText = "FieldType";
+            this.colCalcFieldType.Name = "colCalcFieldType";
+            this.colCalcFieldType.ReadOnly = true;
+            this.colCalcFieldType.Width = 78;
             // 
             // colName
             // 
@@ -186,42 +289,8 @@
             this.colFieldType.HeaderText = "FieldType";
             this.colFieldType.Name = "colFieldType";
             this.colFieldType.ReadOnly = true;
+            this.colFieldType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colFieldType.Width = 78;
-            // 
-            // colCalcName
-            // 
-            this.colCalcName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colCalcName.DataPropertyName = "Name";
-            this.colCalcName.HeaderText = "Name";
-            this.colCalcName.Name = "colCalcName";
-            this.colCalcName.ReadOnly = true;
-            this.colCalcName.Width = 60;
-            // 
-            // colCalcFieldType
-            // 
-            this.colCalcFieldType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colCalcFieldType.DataPropertyName = "FieldType";
-            this.colCalcFieldType.HeaderText = "FieldType";
-            this.colCalcFieldType.Name = "colCalcFieldType";
-            this.colCalcFieldType.ReadOnly = true;
-            this.colCalcFieldType.Width = 78;
-            // 
-            // colCalcCalculationValue
-            // 
-            this.colCalcCalculationValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colCalcCalculationValue.DataPropertyName = "CalculationValue";
-            this.colCalcCalculationValue.HeaderText = "CalculationValue";
-            this.colCalcCalculationValue.Name = "colCalcCalculationValue";
-            this.colCalcCalculationValue.Width = 111;
-            // 
-            // colCalcCalculationEqualsValidation
-            // 
-            this.colCalcCalculationEqualsValidation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colCalcCalculationEqualsValidation.DataPropertyName = "CalculationEqualsValidation";
-            this.colCalcCalculationEqualsValidation.HeaderText = "CalculationEqualsValidation";
-            this.colCalcCalculationEqualsValidation.Name = "colCalcCalculationEqualsValidation";
-            this.colCalcCalculationEqualsValidation.ReadOnly = true;
-            this.colCalcCalculationEqualsValidation.Width = 143;
             // 
             // ucExtractedData
             // 
@@ -237,14 +306,14 @@
             this.Size = new System.Drawing.Size(531, 600);
             this.Load += new System.EventHandler(this.ucExtractedData_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDataFields)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataFieldResultsBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ucExtractedDataBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCalculationFields)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.calculationFieldResultsBindingSource)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataFieldResultsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.calculationFieldResultsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ucExtractedDataBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -262,12 +331,19 @@
         private System.Windows.Forms.BindingSource ucExtractedDataBindingSource;
         private System.Windows.Forms.BindingSource dataFieldResultsBindingSource;
         private System.Windows.Forms.BindingSource calculationFieldResultsBindingSource;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colValue;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFieldType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCalcName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCalcFieldType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCalcCalculationValue;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colCalcCalculationEqualsValidation;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colValue;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFieldType;
     }
 }

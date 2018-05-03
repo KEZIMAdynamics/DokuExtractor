@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DokuExtractorCore.Model;
 using DokuExtractorCore;
+using DokuExtractorStandardGUI.Localization;
 
 namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
 {
@@ -20,6 +21,11 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         public ucGroupTemplateEditor()
         {
             InitializeComponent();
+        }
+
+        private void ucGroupTemplateEditor_Load(object sender, EventArgs e)
+        {
+            Localize();
         }
 
         public void InitializeGroupTemplateEditor(List<DocumentGroupTemplate> groupTemplates)
@@ -34,6 +40,13 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             }
 
             ucTemplateSelector1.LoadTemplates(groupTemplateNameList);
+        }
+
+        private void Localize()
+        {
+            butAddDataField.Text = Translation.LanguageStrings.ButAddDataField;
+            butAddCalculationField.Text = Translation.LanguageStrings.ButAddCalculationField;
+            butSaveTemplate.Text = Translation.LanguageStrings.ButSaveTemplate;
         }
 
         private void UcTemplateSelector1_SelectionChanged(string templateName)
@@ -65,7 +78,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             templateDummyList.Add(this.selectedGroupTemplate);
             templateProcessor.SaveTemplates(templateDummyList);
 
-            MessageBox.Show("Group Template saved.", "Template saved.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(Translation.LanguageStrings.MsgGroupTemplateSaved, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void butAddDataField_Click(object sender, EventArgs e)

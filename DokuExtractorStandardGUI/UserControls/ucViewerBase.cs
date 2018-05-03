@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DokuExtractorStandardGUI.Localization;
 
 namespace DokuExtractorStandardGUI.UserControls
 {
@@ -22,7 +23,7 @@ namespace DokuExtractorStandardGUI.UserControls
 
         public virtual void LoadPdf(string pdfPath)
         {
-            MessageBox.Show("DLL not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(Translation.LanguageStrings.MsgDllNotFound, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         public void FireTextSelected(string selectedText)
