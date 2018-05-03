@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ namespace DokuExtractorStandardGUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmExtractorStandard(Path.Combine(Application.StartupPath, "Files"), true));
+            Application.Run(new frmExtractorStandard(Path.Combine(Application.StartupPath, "Files"), new CultureInfo("en-US"), true));
         }
     }
 }

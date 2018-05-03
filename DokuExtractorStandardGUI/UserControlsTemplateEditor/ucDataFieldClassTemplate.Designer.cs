@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.txtName = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblName = new System.Windows.Forms.Label();
+            this.lblFieldType = new System.Windows.Forms.Label();
             this.lbxFieldType = new System.Windows.Forms.ListBox();
             this.txtRegexExpression = new System.Windows.Forms.TextBox();
             this.lblRegexExpression = new System.Windows.Forms.Label();
@@ -47,23 +47,23 @@
             this.txtName.Size = new System.Drawing.Size(270, 20);
             this.txtName.TabIndex = 0;
             // 
-            // label1
+            // lblName
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 4);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Name";
+            this.lblName.AutoSize = true;
+            this.lblName.Location = new System.Drawing.Point(7, 4);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(35, 13);
+            this.lblName.TabIndex = 1;
+            this.lblName.Text = "Name";
             // 
-            // label2
+            // lblFieldType
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(7, 55);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(56, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Field Type";
+            this.lblFieldType.AutoSize = true;
+            this.lblFieldType.Location = new System.Drawing.Point(7, 55);
+            this.lblFieldType.Name = "lblFieldType";
+            this.lblFieldType.Size = new System.Drawing.Size(56, 13);
+            this.lblFieldType.TabIndex = 2;
+            this.lblFieldType.Text = "Field Type";
             // 
             // lbxFieldType
             // 
@@ -122,8 +122,8 @@
             this.Controls.Add(this.lblRegexExpression);
             this.Controls.Add(this.txtRegexExpression);
             this.Controls.Add(this.lbxFieldType);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblFieldType);
+            this.Controls.Add(this.lblName);
             this.Controls.Add(this.txtName);
             this.Name = "ucDataFieldClassTemplate";
             this.Size = new System.Drawing.Size(292, 303);
@@ -136,8 +136,8 @@
         #endregion
 
         private System.Windows.Forms.TextBox txtName;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblName;
+        private System.Windows.Forms.Label lblFieldType;
         private System.Windows.Forms.ListBox lbxFieldType;
         private System.Windows.Forms.TextBox txtRegexExpression;
         private System.Windows.Forms.Label lblRegexExpression;

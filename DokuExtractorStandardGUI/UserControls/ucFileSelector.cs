@@ -8,11 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using DokuExtractorStandardGUI.Localization;
 
 namespace DokuExtractorStandardGUI.UserControls
 {
     public partial class ucFileSelector : UserControl
     {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public BindingList<FileInfo> FileInfos { get; set; } = new BindingList<FileInfo>();
 
         public delegate void SelectedFileChangedHandler(string newPath);
@@ -24,6 +26,12 @@ namespace DokuExtractorStandardGUI.UserControls
         public ucFileSelector()
         {
             InitializeComponent();
+        }
+
+
+        private void ucFileSelector_Load(object sender, EventArgs e)
+        {
+            Localization();
         }
 
         /// <summary>
@@ -68,6 +76,13 @@ namespace DokuExtractorStandardGUI.UserControls
             RemoveFileFromQueue(filePath);
         }
 
+        private void Localization()
+        {
+            dataGridView1.Columns["col" + nameof(FileInfo.Name)].HeaderText = Translation.LanguageStrings.FileName;
+            dataGridView1.Columns["col" + nameof(FileInfo.Length)].HeaderText = Translation.LanguageStrings.FileLength;
+            dataGridView1.Columns["col" + nameof(FileInfo.LastWriteTime)].HeaderText = Translation.LanguageStrings.LastWriteTime;
+        }
+
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
             var selectedRows = dataGridView1.SelectedRows;
@@ -75,7 +90,7 @@ namespace DokuExtractorStandardGUI.UserControls
                 foreach (DataGridViewRow row in selectedRows)
                 {
                     var fileInfo = row.DataBoundItem as FileInfo;
-                    if(fileInfo != null)
+                    if (fileInfo != null)
                         FireSelectedFileChanged(fileInfo.FullName);
                     break;
                 }

@@ -32,21 +32,21 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.fileInfosBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.ucFileSelectorBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lengthDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.directoryNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.directoryDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.isReadOnlyDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.existsDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.fullNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.extensionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.creationTimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.creationTimeUtcDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lastAccessTimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lastAccessTimeUtcDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lastWriteTimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lastWriteTimeUtcDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.attributesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDirectoryName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDirectory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colIsReadOnly = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colExists = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colFullName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colExtension = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCreationTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCreationTimeUtc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLastAccessTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLastAccessTimeUtc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLastWriteTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLastWriteTimeUtc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAttributes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileInfosBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ucFileSelectorBindingSource)).BeginInit();
@@ -58,21 +58,21 @@
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.nameDataGridViewTextBoxColumn,
-            this.lengthDataGridViewTextBoxColumn,
-            this.directoryNameDataGridViewTextBoxColumn,
-            this.directoryDataGridViewTextBoxColumn,
-            this.isReadOnlyDataGridViewCheckBoxColumn,
-            this.existsDataGridViewCheckBoxColumn,
-            this.fullNameDataGridViewTextBoxColumn,
-            this.extensionDataGridViewTextBoxColumn,
-            this.creationTimeDataGridViewTextBoxColumn,
-            this.creationTimeUtcDataGridViewTextBoxColumn,
-            this.lastAccessTimeDataGridViewTextBoxColumn,
-            this.lastAccessTimeUtcDataGridViewTextBoxColumn,
-            this.lastWriteTimeDataGridViewTextBoxColumn,
-            this.lastWriteTimeUtcDataGridViewTextBoxColumn,
-            this.attributesDataGridViewTextBoxColumn});
+            this.colName,
+            this.colLength,
+            this.colDirectoryName,
+            this.colDirectory,
+            this.colIsReadOnly,
+            this.colExists,
+            this.colFullName,
+            this.colExtension,
+            this.colCreationTime,
+            this.colCreationTimeUtc,
+            this.colLastAccessTime,
+            this.colLastAccessTimeUtc,
+            this.colLastWriteTime,
+            this.colLastWriteTimeUtc,
+            this.colAttributes});
             this.dataGridView1.DataSource = this.fileInfosBindingSource;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
@@ -92,123 +92,123 @@
             // 
             this.ucFileSelectorBindingSource.DataSource = typeof(DokuExtractorStandardGUI.UserControls.ucFileSelector);
             // 
-            // nameDataGridViewTextBoxColumn
+            // colName
             // 
-            this.nameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
-            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
-            this.nameDataGridViewTextBoxColumn.Width = 60;
+            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colName.DataPropertyName = "Name";
+            this.colName.HeaderText = "Name";
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            this.colName.Width = 60;
             // 
-            // lengthDataGridViewTextBoxColumn
+            // colLength
             // 
-            this.lengthDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.lengthDataGridViewTextBoxColumn.DataPropertyName = "Length";
-            this.lengthDataGridViewTextBoxColumn.HeaderText = "Length";
-            this.lengthDataGridViewTextBoxColumn.Name = "lengthDataGridViewTextBoxColumn";
-            this.lengthDataGridViewTextBoxColumn.ReadOnly = true;
-            this.lengthDataGridViewTextBoxColumn.Width = 65;
+            this.colLength.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colLength.DataPropertyName = "Length";
+            this.colLength.HeaderText = "Length";
+            this.colLength.Name = "colLength";
+            this.colLength.ReadOnly = true;
+            this.colLength.Width = 65;
             // 
-            // directoryNameDataGridViewTextBoxColumn
+            // colDirectoryName
             // 
-            this.directoryNameDataGridViewTextBoxColumn.DataPropertyName = "DirectoryName";
-            this.directoryNameDataGridViewTextBoxColumn.HeaderText = "DirectoryName";
-            this.directoryNameDataGridViewTextBoxColumn.Name = "directoryNameDataGridViewTextBoxColumn";
-            this.directoryNameDataGridViewTextBoxColumn.ReadOnly = true;
-            this.directoryNameDataGridViewTextBoxColumn.Visible = false;
+            this.colDirectoryName.DataPropertyName = "DirectoryName";
+            this.colDirectoryName.HeaderText = "DirectoryName";
+            this.colDirectoryName.Name = "colDirectoryName";
+            this.colDirectoryName.ReadOnly = true;
+            this.colDirectoryName.Visible = false;
             // 
-            // directoryDataGridViewTextBoxColumn
+            // colDirectory
             // 
-            this.directoryDataGridViewTextBoxColumn.DataPropertyName = "Directory";
-            this.directoryDataGridViewTextBoxColumn.HeaderText = "Directory";
-            this.directoryDataGridViewTextBoxColumn.Name = "directoryDataGridViewTextBoxColumn";
-            this.directoryDataGridViewTextBoxColumn.ReadOnly = true;
-            this.directoryDataGridViewTextBoxColumn.Visible = false;
+            this.colDirectory.DataPropertyName = "Directory";
+            this.colDirectory.HeaderText = "Directory";
+            this.colDirectory.Name = "colDirectory";
+            this.colDirectory.ReadOnly = true;
+            this.colDirectory.Visible = false;
             // 
-            // isReadOnlyDataGridViewCheckBoxColumn
+            // colIsReadOnly
             // 
-            this.isReadOnlyDataGridViewCheckBoxColumn.DataPropertyName = "IsReadOnly";
-            this.isReadOnlyDataGridViewCheckBoxColumn.HeaderText = "IsReadOnly";
-            this.isReadOnlyDataGridViewCheckBoxColumn.Name = "isReadOnlyDataGridViewCheckBoxColumn";
-            this.isReadOnlyDataGridViewCheckBoxColumn.Visible = false;
+            this.colIsReadOnly.DataPropertyName = "IsReadOnly";
+            this.colIsReadOnly.HeaderText = "IsReadOnly";
+            this.colIsReadOnly.Name = "colIsReadOnly";
+            this.colIsReadOnly.Visible = false;
             // 
-            // existsDataGridViewCheckBoxColumn
+            // colExists
             // 
-            this.existsDataGridViewCheckBoxColumn.DataPropertyName = "Exists";
-            this.existsDataGridViewCheckBoxColumn.HeaderText = "Exists";
-            this.existsDataGridViewCheckBoxColumn.Name = "existsDataGridViewCheckBoxColumn";
-            this.existsDataGridViewCheckBoxColumn.ReadOnly = true;
-            this.existsDataGridViewCheckBoxColumn.Visible = false;
+            this.colExists.DataPropertyName = "Exists";
+            this.colExists.HeaderText = "Exists";
+            this.colExists.Name = "colExists";
+            this.colExists.ReadOnly = true;
+            this.colExists.Visible = false;
             // 
-            // fullNameDataGridViewTextBoxColumn
+            // colFullName
             // 
-            this.fullNameDataGridViewTextBoxColumn.DataPropertyName = "FullName";
-            this.fullNameDataGridViewTextBoxColumn.HeaderText = "FullName";
-            this.fullNameDataGridViewTextBoxColumn.Name = "fullNameDataGridViewTextBoxColumn";
-            this.fullNameDataGridViewTextBoxColumn.ReadOnly = true;
-            this.fullNameDataGridViewTextBoxColumn.Visible = false;
+            this.colFullName.DataPropertyName = "FullName";
+            this.colFullName.HeaderText = "FullName";
+            this.colFullName.Name = "colFullName";
+            this.colFullName.ReadOnly = true;
+            this.colFullName.Visible = false;
             // 
-            // extensionDataGridViewTextBoxColumn
+            // colExtension
             // 
-            this.extensionDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.extensionDataGridViewTextBoxColumn.DataPropertyName = "Extension";
-            this.extensionDataGridViewTextBoxColumn.HeaderText = "Extension";
-            this.extensionDataGridViewTextBoxColumn.Name = "extensionDataGridViewTextBoxColumn";
-            this.extensionDataGridViewTextBoxColumn.ReadOnly = true;
-            this.extensionDataGridViewTextBoxColumn.Visible = false;
-            this.extensionDataGridViewTextBoxColumn.Width = 78;
+            this.colExtension.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colExtension.DataPropertyName = "Extension";
+            this.colExtension.HeaderText = "Extension";
+            this.colExtension.Name = "colExtension";
+            this.colExtension.ReadOnly = true;
+            this.colExtension.Visible = false;
+            this.colExtension.Width = 78;
             // 
-            // creationTimeDataGridViewTextBoxColumn
+            // colCreationTime
             // 
-            this.creationTimeDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.creationTimeDataGridViewTextBoxColumn.DataPropertyName = "CreationTime";
-            this.creationTimeDataGridViewTextBoxColumn.HeaderText = "CreationTime";
-            this.creationTimeDataGridViewTextBoxColumn.Name = "creationTimeDataGridViewTextBoxColumn";
-            this.creationTimeDataGridViewTextBoxColumn.Visible = false;
-            this.creationTimeDataGridViewTextBoxColumn.Width = 94;
+            this.colCreationTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colCreationTime.DataPropertyName = "CreationTime";
+            this.colCreationTime.HeaderText = "CreationTime";
+            this.colCreationTime.Name = "colCreationTime";
+            this.colCreationTime.Visible = false;
+            this.colCreationTime.Width = 94;
             // 
-            // creationTimeUtcDataGridViewTextBoxColumn
+            // colCreationTimeUtc
             // 
-            this.creationTimeUtcDataGridViewTextBoxColumn.DataPropertyName = "CreationTimeUtc";
-            this.creationTimeUtcDataGridViewTextBoxColumn.HeaderText = "CreationTimeUtc";
-            this.creationTimeUtcDataGridViewTextBoxColumn.Name = "creationTimeUtcDataGridViewTextBoxColumn";
-            this.creationTimeUtcDataGridViewTextBoxColumn.Visible = false;
+            this.colCreationTimeUtc.DataPropertyName = "CreationTimeUtc";
+            this.colCreationTimeUtc.HeaderText = "CreationTimeUtc";
+            this.colCreationTimeUtc.Name = "colCreationTimeUtc";
+            this.colCreationTimeUtc.Visible = false;
             // 
-            // lastAccessTimeDataGridViewTextBoxColumn
+            // colLastAccessTime
             // 
-            this.lastAccessTimeDataGridViewTextBoxColumn.DataPropertyName = "LastAccessTime";
-            this.lastAccessTimeDataGridViewTextBoxColumn.HeaderText = "LastAccessTime";
-            this.lastAccessTimeDataGridViewTextBoxColumn.Name = "lastAccessTimeDataGridViewTextBoxColumn";
-            this.lastAccessTimeDataGridViewTextBoxColumn.Visible = false;
+            this.colLastAccessTime.DataPropertyName = "LastAccessTime";
+            this.colLastAccessTime.HeaderText = "LastAccessTime";
+            this.colLastAccessTime.Name = "colLastAccessTime";
+            this.colLastAccessTime.Visible = false;
             // 
-            // lastAccessTimeUtcDataGridViewTextBoxColumn
+            // colLastAccessTimeUtc
             // 
-            this.lastAccessTimeUtcDataGridViewTextBoxColumn.DataPropertyName = "LastAccessTimeUtc";
-            this.lastAccessTimeUtcDataGridViewTextBoxColumn.HeaderText = "LastAccessTimeUtc";
-            this.lastAccessTimeUtcDataGridViewTextBoxColumn.Name = "lastAccessTimeUtcDataGridViewTextBoxColumn";
-            this.lastAccessTimeUtcDataGridViewTextBoxColumn.Visible = false;
+            this.colLastAccessTimeUtc.DataPropertyName = "LastAccessTimeUtc";
+            this.colLastAccessTimeUtc.HeaderText = "LastAccessTimeUtc";
+            this.colLastAccessTimeUtc.Name = "colLastAccessTimeUtc";
+            this.colLastAccessTimeUtc.Visible = false;
             // 
-            // lastWriteTimeDataGridViewTextBoxColumn
+            // colLastWriteTime
             // 
-            this.lastWriteTimeDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.lastWriteTimeDataGridViewTextBoxColumn.DataPropertyName = "LastWriteTime";
-            this.lastWriteTimeDataGridViewTextBoxColumn.HeaderText = "LastWriteTime";
-            this.lastWriteTimeDataGridViewTextBoxColumn.Name = "lastWriteTimeDataGridViewTextBoxColumn";
+            this.colLastWriteTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colLastWriteTime.DataPropertyName = "LastWriteTime";
+            this.colLastWriteTime.HeaderText = "LastWriteTime";
+            this.colLastWriteTime.Name = "colLastWriteTime";
             // 
-            // lastWriteTimeUtcDataGridViewTextBoxColumn
+            // colLastWriteTimeUtc
             // 
-            this.lastWriteTimeUtcDataGridViewTextBoxColumn.DataPropertyName = "LastWriteTimeUtc";
-            this.lastWriteTimeUtcDataGridViewTextBoxColumn.HeaderText = "LastWriteTimeUtc";
-            this.lastWriteTimeUtcDataGridViewTextBoxColumn.Name = "lastWriteTimeUtcDataGridViewTextBoxColumn";
-            this.lastWriteTimeUtcDataGridViewTextBoxColumn.Visible = false;
+            this.colLastWriteTimeUtc.DataPropertyName = "LastWriteTimeUtc";
+            this.colLastWriteTimeUtc.HeaderText = "LastWriteTimeUtc";
+            this.colLastWriteTimeUtc.Name = "colLastWriteTimeUtc";
+            this.colLastWriteTimeUtc.Visible = false;
             // 
-            // attributesDataGridViewTextBoxColumn
+            // colAttributes
             // 
-            this.attributesDataGridViewTextBoxColumn.DataPropertyName = "Attributes";
-            this.attributesDataGridViewTextBoxColumn.HeaderText = "Attributes";
-            this.attributesDataGridViewTextBoxColumn.Name = "attributesDataGridViewTextBoxColumn";
-            this.attributesDataGridViewTextBoxColumn.Visible = false;
+            this.colAttributes.DataPropertyName = "Attributes";
+            this.colAttributes.HeaderText = "Attributes";
+            this.colAttributes.Name = "colAttributes";
+            this.colAttributes.Visible = false;
             // 
             // ucFileSelector
             // 
@@ -218,6 +218,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Name = "ucFileSelector";
             this.Size = new System.Drawing.Size(451, 490);
+            this.Load += new System.EventHandler(this.ucFileSelector_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileInfosBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ucFileSelectorBindingSource)).EndInit();
@@ -230,20 +231,20 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.BindingSource fileInfosBindingSource;
         private System.Windows.Forms.BindingSource ucFileSelectorBindingSource;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn lengthDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn directoryNameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn directoryDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn isReadOnlyDataGridViewCheckBoxColumn;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn existsDataGridViewCheckBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fullNameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn extensionDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn creationTimeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn creationTimeUtcDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn lastAccessTimeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn lastAccessTimeUtcDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn lastWriteTimeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn lastWriteTimeUtcDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn attributesDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLength;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDirectoryName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDirectory;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn colIsReadOnly;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn colExists;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFullName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colExtension;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreationTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreationTimeUtc;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLastAccessTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLastAccessTimeUtc;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLastWriteTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLastWriteTimeUtc;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAttributes;
     }
 }

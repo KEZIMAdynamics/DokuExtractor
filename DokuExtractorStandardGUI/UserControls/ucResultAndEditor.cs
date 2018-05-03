@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DokuExtractorCore.Model;
+using DokuExtractorStandardGUI.Localization;
 
 namespace DokuExtractorStandardGUI.UserControls
 {
@@ -29,6 +30,11 @@ namespace DokuExtractorStandardGUI.UserControls
         {
             InitializeComponent();
             ucSingleTemplateEditor1.RegexExpressionHelper += FireRegexExpressionHelper;
+        }
+
+        private void ucResultAndEditor_Load(object sender, EventArgs e)
+        {
+            Localization();
         }
 
         /// <summary>
@@ -113,6 +119,12 @@ namespace DokuExtractorStandardGUI.UserControls
         public void ChangeOrAddRegexExpression(Guid regexHelperID, string regex, bool additionalRegex)
         {
             ucSingleTemplateEditor1.ChangeOrAddRegexExpression(regexHelperID, regex, additionalRegex);
+        }
+
+        private void Localization()
+        {
+            tabExtractedData.Text = Translation.LanguageStrings.ExtractedData;
+            tabSingleTemplateEditor.Text = Translation.LanguageStrings.SingleTemplateEditor;
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)

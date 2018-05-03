@@ -1,10 +1,12 @@
 ﻿using DokuExtractorCore;
 using DokuExtractorCore.Model;
+using DokuExtractorStandardGUI.Localization;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -27,7 +29,7 @@ namespace DokuExtractorStandardGUI
         private string selectedFilePath = string.Empty;
         private TemplateProcessor templateProcessor = new TemplateProcessor(Application.StartupPath);
 
-        public frmExtractorStandard(string filePath, bool allowEditTemplates = false, string culture = "en-US")
+        public frmExtractorStandard(string filePath, CultureInfo culture, bool allowEditTemplates = false)
         {
             InitializeComponent();
             ucFileSelector1.SelectedFileChanged += UcFileSelector1_SelectedFileChanged;
@@ -50,7 +52,7 @@ namespace DokuExtractorStandardGUI
             ucFileSelector1.LoadFiles(fileInfos);
         }
 
-        public frmExtractorStandard(List<FileInfo> fileInfos, bool allowEditTemplates = false, string culture = "en-US")
+        public frmExtractorStandard(List<FileInfo> fileInfos, CultureInfo culture, bool allowEditTemplates = false)
         {
             InitializeComponent();
             ucFileSelector1.SelectedFileChanged += UcFileSelector1_SelectedFileChanged;
@@ -66,6 +68,7 @@ namespace DokuExtractorStandardGUI
 
         private void frmExtractorStandard_Load(object sender, EventArgs e)
         {
+            Localization();
             this.CenterToScreen();
             this.WindowState = FormWindowState.Maximized;
 
@@ -80,6 +83,21 @@ namespace DokuExtractorStandardGUI
             butTemplateEditor.Visible = false;
         }
 
+        private void Localization(CultureInfo culture)
+        {
+            //TODO: Load language file
+        }
+
+        private void Localization()
+        {
+            butGo.Text = Translation.LanguageStrings.ButGo;
+            butOk.Text = Translation.LanguageStrings.ButOk;
+            butAddDataField.Text = Translation.LanguageStrings.ButAddDataField;
+            butSaveTemplate.Text = Translation.LanguageStrings.ButSaveTemplate;
+            butTemplateEditor.Text = Translation.LanguageStrings.ButTemplateEditor;
+            butLanguageEditor.Text = Translation.LanguageStrings.ButLanguageEditor;
+        }
+
         private async void UcViewer1_TextSelected(string selectedText)
         {
             if (isAnchorSelectionRunning)
@@ -87,7 +105,7 @@ namespace DokuExtractorStandardGUI
                 this.regexHelperAnchorText = selectedText;
                 isAnchorSelectionRunning = false;
                 isValueSelectionRunning = true;
-                lblInstruction.Text = "Select a value!";
+                lblInstruction.Text = Translation.LanguageStrings.InstructionSelectValue;
             }
             else if (isValueSelectionRunning)
             {
@@ -162,7 +180,7 @@ namespace DokuExtractorStandardGUI
             regexHelperID = id;
             regexHelperFieldType = dataFieldType;
             isAnchorSelectionRunning = true;
-            lblInstruction.Text = "Select an anchor!";
+            lblInstruction.Text = Translation.LanguageStrings.InstructionSelectAnchor;
         }
 
         private void EnableOrDisableControlsAndButtons(bool enablingState)
@@ -263,6 +281,11 @@ namespace DokuExtractorStandardGUI
         private void butAddDataField_Click(object sender, EventArgs e)
         {
             ucResultAndEditor1.AddDataField();
+        }
+
+        private void butLanguageEditor_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

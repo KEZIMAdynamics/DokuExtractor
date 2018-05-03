@@ -8,17 +8,25 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DokuExtractorCore.Model;
+using DokuExtractorStandardGUI.Localization;
 
 namespace DokuExtractorStandardGUI.UserControls
 {
     public partial class ucExtractedData : UserControl
     {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public BindingList<DataFieldResult> DataFieldResults { get; set; } = new BindingList<DataFieldResult>();
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public BindingList<CalculationFieldResult> CalculationFieldResults { get; set; } = new BindingList<CalculationFieldResult>();
 
         public ucExtractedData()
         {
             InitializeComponent();
+        }
+
+        private void ucExtractedData_Load(object sender, EventArgs e)
+        {
+            Localization();
         }
 
         /// <summary>
@@ -74,6 +82,21 @@ namespace DokuExtractorStandardGUI.UserControls
             }
 
             return retVal;
+        }
+
+        private void Localization()
+        {
+            lblTemplateClassName.Text = Translation.LanguageStrings.TemplateClassName;
+            lblTemplateGroupName.Text = Translation.LanguageStrings.TemplateGroupName;
+
+            dgvDataFields.Columns["col" + nameof(DataFieldResult.Name)].HeaderText = Translation.LanguageStrings.DataFieldName;
+            dgvDataFields.Columns["col" + nameof(DataFieldResult.Value)].HeaderText = Translation.LanguageStrings.DataFieldValue;
+            dgvDataFields.Columns["col" + nameof(DataFieldResult.FieldType)].HeaderText = Translation.LanguageStrings.DataFieldType;
+
+            dgvCalculationFields.Columns["colCalc" + nameof(CalculationFieldResult.Name)].HeaderText = Translation.LanguageStrings.CalculationFieldName;
+            dgvCalculationFields.Columns["colCalc" + nameof(CalculationFieldResult.CalculationValue)].HeaderText = Translation.LanguageStrings.CalculationValue;
+            dgvCalculationFields.Columns["colCalc" + nameof(CalculationFieldResult.FieldType)].HeaderText = Translation.LanguageStrings.CalculationFieldType;
+            dgvCalculationFields.Columns["colCalc" + nameof(CalculationFieldResult.CalculationEqualsValidation)].HeaderText = Translation.LanguageStrings.CalculationEqualsValidation;
         }
     }
 }

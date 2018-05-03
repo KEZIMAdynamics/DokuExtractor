@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DokuExtractorCore.Model;
+using DokuExtractorStandardGUI.Localization;
 
 namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
 {
@@ -23,6 +24,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
 
         private void ucGeneralPropertyEditor_Load(object sender, EventArgs e)
         {
+            Localization();
             splitContainer1.SplitterDistance = splitContainer1.Width / 2;
         }
 
@@ -129,6 +131,14 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             }
 
             return retVal;
+        }
+
+        private void Localization()
+        {
+            lblClassName.Text = Translation.LanguageStrings.TemplateClassName;
+            lblGroupName.Text = Translation.LanguageStrings.TemplateGroupName;
+            lblIban.Text = Translation.LanguageStrings.Iban;
+            lblKeywords.Text = Translation.LanguageStrings.Keywords;
         }
     }
 }

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DokuExtractorCore.Model;
+using DokuExtractorStandardGUI.Localization;
 
 namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
 {
@@ -29,7 +30,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         public int FieldTypeInt { get { return lbxFieldType.SelectedIndex; } }
         public string RegexText { get { return txtRegexExpression.Text; } }
 
-                private DataFieldClassTemplate dataFieldClassTemplate { get; set; } = new DataFieldClassTemplate();
+        private DataFieldClassTemplate dataFieldClassTemplate { get; set; } = new DataFieldClassTemplate();
         private bool isRegexExpressionHelperActivated = false;
 
         public ucDataFieldClassTemplate()
@@ -45,6 +46,8 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
 
         private void ucDataField_Load(object sender, EventArgs e)
         {
+            Localization();
+
             txtName.Text = this.dataFieldClassTemplate.Name;
 
             lbxFieldType.SelectedIndex = (int)(this.dataFieldClassTemplate.FieldType);
@@ -76,6 +79,21 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
                 txtRegexExpression.Text = txtRegexExpression.Text + regex + Environment.NewLine;
             else
                 txtRegexExpression.Text = regex;
+        }
+
+        private void Localization()
+        {
+            lblName.Text = Translation.LanguageStrings.DataFieldName;
+            lblFieldType.Text = Translation.LanguageStrings.DataFieldType;
+            lblRegexExpression.Text = Translation.LanguageStrings.DataFieldRegexExpressions;
+            butDeleteDataField.Text = Translation.LanguageStrings.ButDeleteDataField;
+            lbxFieldType.Items[(int)(DataFieldTypes.Text)] = Translation.LanguageStrings.FieldTypeText;
+            lbxFieldType.Items[(int)(DataFieldTypes.Date)] = Translation.LanguageStrings.FieldTypeDate;
+            lbxFieldType.Items[(int)(DataFieldTypes.Currency)] = Translation.LanguageStrings.FieldTypeCurrency;
+            lbxFieldType.Items[(int)(DataFieldTypes.IBAN)] = Translation.LanguageStrings.FieldTypeIban;
+            lbxFieldType.Items[(int)(DataFieldTypes.AnchorLessIBAN)] = Translation.LanguageStrings.FieldTypeAnchorlessIban;
+            lbxFieldType.Items[(int)(DataFieldTypes.VatId)] = Translation.LanguageStrings.FieldTypeVatId;
+            lbxFieldType.Items[(int)(DataFieldTypes.Term)] = Translation.LanguageStrings.FieldTypeTerm;
         }
 
         private void LblRegexExpression_DoubleClick(object sender, EventArgs e)
