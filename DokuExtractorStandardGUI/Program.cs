@@ -18,7 +18,7 @@ namespace DokuExtractorStandardGUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmExtractorStandard(Path.Combine(Application.StartupPath, "Files"), Path.Combine(Application.StartupPath, "Files", "Language"), new CultureInfo("de-DE"), "hes", true));
+            Application.Run(new frmExtractorStandard(Path.Combine(Application.StartupPath, "Files"), Path.Combine(Application.StartupPath, "Files", "Language"), new CultureInfo("de-DE"), "", true));
         }
     }
 }

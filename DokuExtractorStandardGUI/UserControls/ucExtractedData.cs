@@ -9,15 +9,16 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DokuExtractorCore.Model;
 using DokuExtractorStandardGUI.Localization;
+using DokuExtractorStandardGUI.Model;
 
 namespace DokuExtractorStandardGUI.UserControls
 {
     public partial class ucExtractedData : UserControl
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public BindingList<DataFieldResult> DataFieldResults { get; set; } = new BindingList<DataFieldResult>();
+        public BindingList<DataFieldResultDisplay> DataFieldResultsDisplayBinding { get; set; } = new BindingList<DataFieldResultDisplay>();
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public BindingList<CalculationFieldResult> CalculationFieldResults { get; set; } = new BindingList<CalculationFieldResult>();
+        public BindingList<CalculationFieldResultDisplay> CalculationFieldResultsDisplayBinding { get; set; } = new BindingList<CalculationFieldResultDisplay>();
 
         public ucExtractedData()
         {
@@ -38,11 +39,34 @@ namespace DokuExtractorStandardGUI.UserControls
             txtClassName.Text = extractionResult.TemplateClassName;
             txtGroupName.Text = extractionResult.TemplateGroupName;
 
-            DataFieldResults = new BindingList<DataFieldResult>(extractionResult.DataFields);
-            CalculationFieldResults = new BindingList<CalculationFieldResult>(extractionResult.CalculationFields);
+            DataFieldResultsDisplayBinding = new BindingList<DataFieldResultDisplay>();
+            foreach (var dataField in extractionResult.DataFields)
+            {
+                DataFieldResultsDisplayBinding.Add(new DataFieldResultDisplay()
+                {
+                    Name = dataField.Name,
+                    Value = dataField.Value,
+                    FieldType = dataField.FieldType,
+                    FieldTypeDisplayValue = Translation.TranslateFieldTypeEnum(dataField.FieldType)
+                });
+            }
 
-            dgvDataFields.DataSource = extractionResult.DataFields;
-            dgvCalculationFields.DataSource = extractionResult.CalculationFields;
+            CalculationFieldResultsDisplayBinding = new BindingList<CalculationFieldResultDisplay>();
+            foreach (var calcField in extractionResult.CalculationFields)
+            {
+                CalculationFieldResultsDisplayBinding.Add(new CalculationFieldResultDisplay()
+                {
+                    Name = calcField.Name,
+                    CalculationValue = calcField.CalculationValue,
+                    ValidationValues = calcField.ValidationValues,
+                    CalculationEqualsValidation = calcField.CalculationEqualsValidation,
+                    FieldType = calcField.FieldType,
+                    FieldTypeDisplayValue = Translation.TranslateFieldTypeEnum(calcField.FieldType)
+                });
+            }
+
+            dgvDataFields.DataSource = DataFieldResultsDisplayBinding;
+            dgvCalculationFields.DataSource = CalculationFieldResultsDisplayBinding;
         }
 
         /// <summary>
@@ -50,9 +74,25 @@ namespace DokuExtractorStandardGUI.UserControls
         /// </summary>
         public bool CheckIfAllDataFieldsAreFilled()
         {
-            foreach (DataFieldResult dataField in dgvDataFields.DataSource as List<DataFieldResult>)
+            foreach (DataFieldResultDisplay dataField in dgvDataFields.DataSource as BindingList<DataFieldResultDisplay>)
             {
                 if (string.IsNullOrWhiteSpace(dataField.Value))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Checks, if all calculation results equal with their validation value(s)
+        /// </summary>
+        public bool CheckIfAllCalculationResultsEqualValidation()
+        {
+            foreach (CalculationFieldResultDisplay calcField in dgvCalculationFields.DataSource as BindingList<CalculationFieldResultDisplay>)
+            {
+                if (calcField.CalculationEqualsValidation == false)
                 {
                     return false;
                 }
@@ -71,12 +111,12 @@ namespace DokuExtractorStandardGUI.UserControls
             retVal.TemplateClassName = txtClassName.Text;
             retVal.TemplateGroupName = txtGroupName.Text;
 
-            foreach (DataFieldResult dataField in dgvDataFields.DataSource as List<DataFieldResult>)
+            foreach (DataFieldResultDisplay dataField in dgvDataFields.DataSource as List<DataFieldResultDisplay>)
             {
                 retVal.DataFields.Add(dataField);
             }
 
-            foreach (CalculationFieldResult calcField in dgvCalculationFields.DataSource as List<CalculationFieldResult>)
+            foreach (CalculationFieldResultDisplay calcField in dgvCalculationFields.DataSource as List<CalculationFieldResultDisplay>)
             {
                 retVal.CalculationFields.Add(calcField);
             }
@@ -89,14 +129,14 @@ namespace DokuExtractorStandardGUI.UserControls
             lblTemplateClassName.Text = Translation.LanguageStrings.TemplateClassName;
             lblTemplateGroupName.Text = Translation.LanguageStrings.TemplateGroupName;
 
-            dgvDataFields.Columns["col" + nameof(DataFieldResult.Name)].HeaderText = Translation.LanguageStrings.DataFieldName;
-            dgvDataFields.Columns["col" + nameof(DataFieldResult.Value)].HeaderText = Translation.LanguageStrings.DataFieldValue;
-            dgvDataFields.Columns["col" + nameof(DataFieldResult.FieldType)].HeaderText = Translation.LanguageStrings.DataFieldType;
+            dgvDataFields.Columns["colDat" + nameof(DataFieldResultDisplay.Name)].HeaderText = Translation.LanguageStrings.DataFieldName;
+            dgvDataFields.Columns["colDat" + nameof(DataFieldResultDisplay.Value)].HeaderText = Translation.LanguageStrings.DataFieldValue;
+            dgvDataFields.Columns["colDat" + nameof(DataFieldResultDisplay.FieldTypeDisplayValue)].HeaderText = Translation.LanguageStrings.DataFieldType;
 
-            dgvCalculationFields.Columns["colCalc" + nameof(CalculationFieldResult.Name)].HeaderText = Translation.LanguageStrings.CalculationFieldName;
-            dgvCalculationFields.Columns["colCalc" + nameof(CalculationFieldResult.CalculationValue)].HeaderText = Translation.LanguageStrings.CalculationValue;
-            dgvCalculationFields.Columns["colCalc" + nameof(CalculationFieldResult.FieldType)].HeaderText = Translation.LanguageStrings.CalculationFieldType;
-            dgvCalculationFields.Columns["colCalc" + nameof(CalculationFieldResult.CalculationEqualsValidation)].HeaderText = Translation.LanguageStrings.CalculationEqualsValidation;
+            dgvCalculationFields.Columns["colCalc" + nameof(CalculationFieldResultDisplay.Name)].HeaderText = Translation.LanguageStrings.CalculationFieldName;
+            dgvCalculationFields.Columns["colCalc" + nameof(CalculationFieldResultDisplay.CalculationValue)].HeaderText = Translation.LanguageStrings.CalculationValue;
+            dgvCalculationFields.Columns["colCalc" + nameof(CalculationFieldResultDisplay.FieldTypeDisplayValue)].HeaderText = Translation.LanguageStrings.CalculationFieldType;
+            dgvCalculationFields.Columns["colCalc" + nameof(CalculationFieldResultDisplay.CalculationEqualsValidation)].HeaderText = Translation.LanguageStrings.CalculationEqualsValidation;
         }
     }
 }

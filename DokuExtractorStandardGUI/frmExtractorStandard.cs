@@ -237,7 +237,7 @@ namespace DokuExtractorStandardGUI
 
         private void butOk_Click(object sender, EventArgs e)
         {
-            if (ucResultAndEditor1.CheckIfAllDataFieldsAreFilled() == true)
+            if (ucResultAndEditor1.CheckIfAllDataFieldsAreFilled() == true && ucResultAndEditor1.CheckIfAllCalculationResultsEqualValidation() == true)
             {
                 var result = ucResultAndEditor1.GetFieldExtractionResult();
                 ucFileSelector1.RemoveFileFromQueue(selectedFilePath);

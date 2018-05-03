@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using DokuExtractorCore.Model;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -80,6 +81,29 @@ namespace DokuExtractorStandardGUI.Localization
                     File.Delete(filePath);
                 }
                 File.WriteAllText(filePath, languageJson);
+            }
+        }
+
+        public static string TranslateFieldTypeEnum(DataFieldTypes fieldType)
+        {
+            switch (fieldType)
+            {
+                case DataFieldTypes.Text:
+                    return LanguageStrings.FieldTypeText;
+                case DataFieldTypes.Date:
+                    return LanguageStrings.FieldTypeDate;
+                case DataFieldTypes.Currency:
+                    return LanguageStrings.FieldTypeCurrency;
+                case DataFieldTypes.IBAN:
+                    return LanguageStrings.FieldTypeIban;
+                case DataFieldTypes.AnchorLessIBAN:
+                    return LanguageStrings.FieldTypeAnchorlessIban;
+                case DataFieldTypes.VatId:
+                    return LanguageStrings.FieldTypeVatId;
+                case DataFieldTypes.Term:
+                    return LanguageStrings.FieldTypeTerm;
+                default:
+                    return string.Empty;
             }
         }
     }

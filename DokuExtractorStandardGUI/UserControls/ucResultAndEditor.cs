@@ -109,6 +109,14 @@ namespace DokuExtractorStandardGUI.UserControls
         }
 
         /// <summary>
+        /// Checks, if all calculation results equal with their validation value(s)
+        /// </summary>
+        public bool CheckIfAllCalculationResultsEqualValidation()
+        {
+            return ucExtractedData1.CheckIfAllCalculationResultsEqualValidation();
+        }
+
+        /// <summary>
         /// Returns the shown (and maybe editted) extraction result of ucExtractedData
         /// </summary>
         public FieldExtractionResult GetFieldExtractionResult()

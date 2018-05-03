@@ -68,6 +68,8 @@
     </Compile>
     <Compile Include="Localization\LanguageStrings.cs" />
     <Compile Include="Localization\Translation.cs" />
+    <Compile Include="Model\CalculationFieldResultDisplay.cs" />
+    <Compile Include="Model\DataFieldResultDisplay.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserControlsTemplateEditor\ucCalculationFieldTemplate.cs">
