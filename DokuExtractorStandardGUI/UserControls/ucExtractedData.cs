@@ -15,10 +15,18 @@ namespace DokuExtractorStandardGUI.UserControls
 {
     public partial class ucExtractedData : UserControl
     {
+        public delegate void ConditionalFieldCellDoubleClickHandler(object sender, DataGridViewCellEventArgs e);
+        /// <summary>
+        /// Fired, when a cell in dgvConditionalFields has been double clicked
+        /// </summary>
+        public event ConditionalFieldCellDoubleClickHandler ConditionalFieldCellDoubleClick;
+
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public BindingList<DataFieldResultDisplay> DataFieldResultsDisplayBinding { get; set; } = new BindingList<DataFieldResultDisplay>();
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public BindingList<CalculationFieldResultDisplay> CalculationFieldResultsDisplayBinding { get; set; } = new BindingList<CalculationFieldResultDisplay>();
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public BindingList<ConditionalFieldResult> ConditionalFieldResultBinding { get; set; } = new BindingList<ConditionalFieldResult>();
 
         public ucExtractedData()
         {
@@ -65,8 +73,11 @@ namespace DokuExtractorStandardGUI.UserControls
                 });
             }
 
+            ConditionalFieldResultBinding = new BindingList<ConditionalFieldResult>(extractionResult.ConditionalFields);
+
             dgvDataFields.DataSource = DataFieldResultsDisplayBinding;
             dgvCalculationFields.DataSource = CalculationFieldResultsDisplayBinding;
+            dgvConditionalFields.DataSource = ConditionalFieldResultBinding;
         }
 
         /// <summary>
@@ -124,6 +135,16 @@ namespace DokuExtractorStandardGUI.UserControls
             return retVal;
         }
 
+        private void dgvConditionalFields_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            FireConditionalFieldCellDoubleClick(sender, e);
+        }
+
+        private void FireConditionalFieldCellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            ConditionalFieldCellDoubleClick?.Invoke(sender, e);
+        }
+
         private void Localize()
         {
             lblTemplateClassName.Text = Translation.LanguageStrings.TemplateClassName;
@@ -137,6 +158,9 @@ namespace DokuExtractorStandardGUI.UserControls
             dgvCalculationFields.Columns["colCalc" + nameof(CalculationFieldResultDisplay.CalculationValue)].HeaderText = Translation.LanguageStrings.CalculationValue;
             dgvCalculationFields.Columns["colCalc" + nameof(CalculationFieldResultDisplay.FieldTypeDisplayValue)].HeaderText = Translation.LanguageStrings.CalculationFieldType;
             dgvCalculationFields.Columns["colCalc" + nameof(CalculationFieldResultDisplay.CalculationEqualsValidation)].HeaderText = Translation.LanguageStrings.CalculationEqualsValidation;
+
+            dgvConditionalFields.Columns["colCond" + nameof(ConditionalFieldResult.Name)].HeaderText = Translation.LanguageStrings.ConditionalFieldName;
+            dgvConditionalFields.Columns["colCond" + nameof(ConditionalFieldResult.Value)].HeaderText = Translation.LanguageStrings.ConditionValue;
         }
     }
 }

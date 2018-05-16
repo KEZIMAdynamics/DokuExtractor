@@ -34,6 +34,7 @@
             this.ucSingleTemplateEditor1 = new DokuExtractorStandardGUI.UserControlsTemplateEditor.ucSingleTemplateEditor();
             this.butAddDataField = new System.Windows.Forms.Button();
             this.butSaveTemplate = new System.Windows.Forms.Button();
+            this.butAddConditionalField = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -57,8 +58,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(688, 471);
-            this.splitContainer1.SplitterDistance = 227;
+            this.splitContainer1.Size = new System.Drawing.Size(979, 497);
+            this.splitContainer1.SplitterDistance = 323;
             this.splitContainer1.TabIndex = 1;
             // 
             // ucTemplateSelector1
@@ -67,7 +68,7 @@
             this.ucTemplateSelector1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucTemplateSelector1.Location = new System.Drawing.Point(0, 0);
             this.ucTemplateSelector1.Name = "ucTemplateSelector1";
-            this.ucTemplateSelector1.Size = new System.Drawing.Size(227, 471);
+            this.ucTemplateSelector1.Size = new System.Drawing.Size(323, 497);
             this.ucTemplateSelector1.TabIndex = 0;
             // 
             // splitContainer2
@@ -84,10 +85,11 @@
             // 
             // splitContainer2.Panel2
             // 
+            this.splitContainer2.Panel2.Controls.Add(this.butAddConditionalField);
             this.splitContainer2.Panel2.Controls.Add(this.butAddDataField);
             this.splitContainer2.Panel2.Controls.Add(this.butSaveTemplate);
-            this.splitContainer2.Size = new System.Drawing.Size(457, 471);
-            this.splitContainer2.SplitterDistance = 417;
+            this.splitContainer2.Size = new System.Drawing.Size(652, 497);
+            this.splitContainer2.SplitterDistance = 440;
             this.splitContainer2.TabIndex = 0;
             // 
             // ucSingleTemplateEditor1
@@ -96,16 +98,16 @@
             this.ucSingleTemplateEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucSingleTemplateEditor1.Location = new System.Drawing.Point(0, 0);
             this.ucSingleTemplateEditor1.Name = "ucSingleTemplateEditor1";
-            this.ucSingleTemplateEditor1.Size = new System.Drawing.Size(457, 417);
+            this.ucSingleTemplateEditor1.Size = new System.Drawing.Size(652, 440);
             this.ucSingleTemplateEditor1.TabIndex = 0;
             // 
             // butAddDataField
             // 
             this.butAddDataField.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butAddDataField.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.butAddDataField.Location = new System.Drawing.Point(108, 12);
+            this.butAddDataField.Location = new System.Drawing.Point(337, 3);
             this.butAddDataField.Name = "butAddDataField";
-            this.butAddDataField.Size = new System.Drawing.Size(170, 35);
+            this.butAddDataField.Size = new System.Drawing.Size(100, 47);
             this.butAddDataField.TabIndex = 3;
             this.butAddDataField.Text = "Add Data Field";
             this.butAddDataField.UseVisualStyleBackColor = true;
@@ -115,13 +117,25 @@
             // 
             this.butSaveTemplate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butSaveTemplate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.butSaveTemplate.Location = new System.Drawing.Point(284, 12);
+            this.butSaveTemplate.Location = new System.Drawing.Point(549, 3);
             this.butSaveTemplate.Name = "butSaveTemplate";
-            this.butSaveTemplate.Size = new System.Drawing.Size(170, 35);
+            this.butSaveTemplate.Size = new System.Drawing.Size(100, 47);
             this.butSaveTemplate.TabIndex = 0;
             this.butSaveTemplate.Text = "Save selected Template";
             this.butSaveTemplate.UseVisualStyleBackColor = true;
             this.butSaveTemplate.Click += new System.EventHandler(this.butSaveTemplate_Click);
+            // 
+            // butAddConditionalField
+            // 
+            this.butAddConditionalField.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.butAddConditionalField.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.butAddConditionalField.Location = new System.Drawing.Point(443, 3);
+            this.butAddConditionalField.Name = "butAddConditionalField";
+            this.butAddConditionalField.Size = new System.Drawing.Size(100, 47);
+            this.butAddConditionalField.TabIndex = 4;
+            this.butAddConditionalField.Text = "Add Conditional Field";
+            this.butAddConditionalField.UseVisualStyleBackColor = true;
+            this.butAddConditionalField.Click += new System.EventHandler(this.butAddConditionalField_Click);
             // 
             // ucClassTemplateEditor
             // 
@@ -130,7 +144,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.splitContainer1);
             this.Name = "ucClassTemplateEditor";
-            this.Size = new System.Drawing.Size(688, 471);
+            this.Size = new System.Drawing.Size(979, 497);
             this.Load += new System.EventHandler(this.ucClassTemplateEditor_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -152,5 +166,6 @@
         private ucSingleTemplateEditor ucSingleTemplateEditor1;
         private System.Windows.Forms.Button butAddDataField;
         private System.Windows.Forms.Button butSaveTemplate;
+        private System.Windows.Forms.Button butAddConditionalField;
     }
 }

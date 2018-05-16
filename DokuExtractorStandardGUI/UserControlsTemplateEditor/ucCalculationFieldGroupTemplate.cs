@@ -12,7 +12,7 @@ using DokuExtractorStandardGUI.Localization;
 
 namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
 {
-    public partial class ucCalculationFieldTemplate : UserControl
+    public partial class ucCalculationFieldGroupTemplate : UserControl
     {
         public delegate void CalculationFieldEraserHandler(Guid id);
         /// <summary>
@@ -22,19 +22,19 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
 
         public string NameText { get { return txtName.Text; } }
         public int FieldTypeInt { get { return lbxFieldType.SelectedIndex; } }
-        public string TextCalculationExpression { get { return txtCalculationExpression.Text; } }
-        public int CalculationPrecision { get { var retVal = -1; int.TryParse(cbxCalculationPrecision.SelectedText, out retVal); return retVal; } }
-        public string TextValidationExpression { get { return txtValidationExpressions.Text; } }
-        public int ValidationPrecision { get { var retVal = -1; int.TryParse(cbxValidationPrecision.SelectedText, out retVal); return retVal; } }
+        public string CalculationExpressionText { get { return txtCalculationExpression.Text; } }
+        public int CalculationPrecisionInt { get { var retVal = -1; int.TryParse(cbxCalculationPrecision.SelectedText, out retVal); return retVal; } }
+        public string ValidationExpressionText { get { return txtValidationExpressions.Text; } }
+        public int ValidationPrecisionInt { get { var retVal = -1; int.TryParse(cbxValidationPrecision.SelectedText, out retVal); return retVal; } }
 
         private CalculationFieldTemplate calculationFieldTemplate { get; set; } = new CalculationFieldTemplate();
 
-        public ucCalculationFieldTemplate()
+        public ucCalculationFieldGroupTemplate()
         {
             InitializeComponent();
         }
 
-        public ucCalculationFieldTemplate(CalculationFieldTemplate calculationFieldTemplate)
+        public ucCalculationFieldGroupTemplate(CalculationFieldTemplate calculationFieldTemplate)
         {
             InitializeComponent();
             this.calculationFieldTemplate = calculationFieldTemplate;

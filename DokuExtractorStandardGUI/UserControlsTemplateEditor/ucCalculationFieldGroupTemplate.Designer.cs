@@ -1,6 +1,6 @@
 ﻿namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
 {
-    partial class ucCalculationFieldTemplate
+    partial class ucCalculationFieldGroupTemplate
     {
         /// <summary> 
         /// Erforderliche Designervariable.
@@ -45,7 +45,7 @@
             // 
             this.butDeleteCalculationField.BackColor = System.Drawing.Color.White;
             this.butDeleteCalculationField.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.butDeleteCalculationField.Location = new System.Drawing.Point(12, 273);
+            this.butDeleteCalculationField.Location = new System.Drawing.Point(12, 270);
             this.butDeleteCalculationField.Margin = new System.Windows.Forms.Padding(10, 3, 10, 10);
             this.butDeleteCalculationField.Name = "butDeleteCalculationField";
             this.butDeleteCalculationField.Size = new System.Drawing.Size(270, 23);
@@ -69,7 +69,7 @@
             this.txtValidationExpressions.Margin = new System.Windows.Forms.Padding(10, 3, 3, 3);
             this.txtValidationExpressions.Multiline = true;
             this.txtValidationExpressions.Name = "txtValidationExpressions";
-            this.txtValidationExpressions.Size = new System.Drawing.Size(226, 51);
+            this.txtValidationExpressions.Size = new System.Drawing.Size(226, 48);
             this.txtValidationExpressions.TabIndex = 18;
             // 
             // lbxFieldType
@@ -130,7 +130,7 @@
             // lblCalculationExpression
             // 
             this.lblCalculationExpression.AutoSize = true;
-            this.lblCalculationExpression.Location = new System.Drawing.Point(10, 156);
+            this.lblCalculationExpression.Location = new System.Drawing.Point(9, 156);
             this.lblCalculationExpression.Name = "lblCalculationExpression";
             this.lblCalculationExpression.Size = new System.Drawing.Size(186, 13);
             this.lblCalculationExpression.TabIndex = 22;
@@ -176,7 +176,7 @@
             this.cbxValidationPrecision.Size = new System.Drawing.Size(38, 21);
             this.cbxValidationPrecision.TabIndex = 26;
             // 
-            // ucCalculationFieldTemplate
+            // ucCalculationFieldGroupTemplate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -192,7 +192,7 @@
             this.Controls.Add(this.lblFieldType);
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.txtName);
-            this.Name = "ucCalculationFieldTemplate";
+            this.Name = "ucCalculationFieldGroupTemplate";
             this.Size = new System.Drawing.Size(292, 303);
             this.Load += new System.EventHandler(this.ucCalculationFieldTemplate_Load);
             this.ResumeLayout(false);

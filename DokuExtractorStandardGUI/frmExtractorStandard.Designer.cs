@@ -32,13 +32,14 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.butLanguageEditor = new System.Windows.Forms.Button();
             this.lblInstruction = new System.Windows.Forms.Label();
             this.butOk = new System.Windows.Forms.Button();
             this.butAddDataField = new System.Windows.Forms.Button();
             this.butSaveTemplate = new System.Windows.Forms.Button();
             this.butGo = new System.Windows.Forms.Button();
             this.butTemplateEditor = new System.Windows.Forms.Button();
-            this.butLanguageEditor = new System.Windows.Forms.Button();
+            this.butAddConditionalField = new System.Windows.Forms.Button();
             this.ucFileSelector1 = new DokuExtractorStandardGUI.UserControls.ucFileSelector();
             this.ucViewer1 = new DokuExtractorStandardGUI.UserControls.ucViewer();
             this.ucResultAndEditor1 = new DokuExtractorStandardGUI.UserControls.ucResultAndEditor();
@@ -105,6 +106,7 @@
             // 
             // splitContainer3.Panel2
             // 
+            this.splitContainer3.Panel2.Controls.Add(this.butAddConditionalField);
             this.splitContainer3.Panel2.Controls.Add(this.butLanguageEditor);
             this.splitContainer3.Panel2.Controls.Add(this.lblInstruction);
             this.splitContainer3.Panel2.Controls.Add(this.butOk);
@@ -115,6 +117,18 @@
             this.splitContainer3.Size = new System.Drawing.Size(500, 836);
             this.splitContainer3.SplitterDistance = 700;
             this.splitContainer3.TabIndex = 0;
+            // 
+            // butLanguageEditor
+            // 
+            this.butLanguageEditor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.butLanguageEditor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.butLanguageEditor.Location = new System.Drawing.Point(176, 82);
+            this.butLanguageEditor.Name = "butLanguageEditor";
+            this.butLanguageEditor.Size = new System.Drawing.Size(100, 47);
+            this.butLanguageEditor.TabIndex = 7;
+            this.butLanguageEditor.Text = "Language Editor";
+            this.butLanguageEditor.UseVisualStyleBackColor = true;
+            this.butLanguageEditor.Click += new System.EventHandler(this.butLanguageEditor_Click);
             // 
             // lblInstruction
             // 
@@ -131,9 +145,9 @@
             // 
             this.butOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.butOk.Location = new System.Drawing.Point(150, 53);
+            this.butOk.Location = new System.Drawing.Point(100, 41);
             this.butOk.Name = "butOk";
-            this.butOk.Size = new System.Drawing.Size(105, 76);
+            this.butOk.Size = new System.Drawing.Size(70, 88);
             this.butOk.TabIndex = 5;
             this.butOk.Text = "OK!";
             this.butOk.UseVisualStyleBackColor = true;
@@ -143,9 +157,9 @@
             // 
             this.butAddDataField.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butAddDataField.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.butAddDataField.Location = new System.Drawing.Point(261, 53);
+            this.butAddDataField.Location = new System.Drawing.Point(176, 41);
             this.butAddDataField.Name = "butAddDataField";
-            this.butAddDataField.Size = new System.Drawing.Size(115, 35);
+            this.butAddDataField.Size = new System.Drawing.Size(153, 35);
             this.butAddDataField.TabIndex = 3;
             this.butAddDataField.Text = "Add Data Field";
             this.butAddDataField.UseVisualStyleBackColor = true;
@@ -155,9 +169,9 @@
             // 
             this.butSaveTemplate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butSaveTemplate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.butSaveTemplate.Location = new System.Drawing.Point(382, 53);
+            this.butSaveTemplate.Location = new System.Drawing.Point(282, 82);
             this.butSaveTemplate.Name = "butSaveTemplate";
-            this.butSaveTemplate.Size = new System.Drawing.Size(115, 35);
+            this.butSaveTemplate.Size = new System.Drawing.Size(100, 47);
             this.butSaveTemplate.TabIndex = 2;
             this.butSaveTemplate.Text = "Save Template";
             this.butSaveTemplate.UseVisualStyleBackColor = true;
@@ -167,9 +181,9 @@
             // 
             this.butGo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butGo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.butGo.Location = new System.Drawing.Point(39, 53);
+            this.butGo.Location = new System.Drawing.Point(24, 41);
             this.butGo.Name = "butGo";
-            this.butGo.Size = new System.Drawing.Size(105, 76);
+            this.butGo.Size = new System.Drawing.Size(70, 88);
             this.butGo.TabIndex = 1;
             this.butGo.Text = "Go!";
             this.butGo.UseVisualStyleBackColor = true;
@@ -179,25 +193,25 @@
             // 
             this.butTemplateEditor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butTemplateEditor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.butTemplateEditor.Location = new System.Drawing.Point(382, 94);
+            this.butTemplateEditor.Location = new System.Drawing.Point(388, 82);
             this.butTemplateEditor.Name = "butTemplateEditor";
-            this.butTemplateEditor.Size = new System.Drawing.Size(115, 35);
+            this.butTemplateEditor.Size = new System.Drawing.Size(100, 47);
             this.butTemplateEditor.TabIndex = 0;
             this.butTemplateEditor.Text = "Template Editor";
             this.butTemplateEditor.UseVisualStyleBackColor = true;
             this.butTemplateEditor.Click += new System.EventHandler(this.butTemplateEditor_Click);
             // 
-            // butLanguageEditor
+            // butAddConditionalField
             // 
-            this.butLanguageEditor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.butLanguageEditor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.butLanguageEditor.Location = new System.Drawing.Point(261, 94);
-            this.butLanguageEditor.Name = "butLanguageEditor";
-            this.butLanguageEditor.Size = new System.Drawing.Size(115, 35);
-            this.butLanguageEditor.TabIndex = 7;
-            this.butLanguageEditor.Text = "Language Editor";
-            this.butLanguageEditor.UseVisualStyleBackColor = true;
-            this.butLanguageEditor.Click += new System.EventHandler(this.butLanguageEditor_Click);
+            this.butAddConditionalField.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.butAddConditionalField.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.butAddConditionalField.Location = new System.Drawing.Point(335, 41);
+            this.butAddConditionalField.Name = "butAddConditionalField";
+            this.butAddConditionalField.Size = new System.Drawing.Size(153, 35);
+            this.butAddConditionalField.TabIndex = 8;
+            this.butAddConditionalField.Text = "Add Conditional Field";
+            this.butAddConditionalField.UseVisualStyleBackColor = true;
+            this.butAddConditionalField.Click += new System.EventHandler(this.butAddConditionalField_Click);
             // 
             // ucFileSelector1
             // 
@@ -270,6 +284,7 @@
         private System.Windows.Forms.Button butOk;
         private System.Windows.Forms.Label lblInstruction;
         private System.Windows.Forms.Button butLanguageEditor;
+        private System.Windows.Forms.Button butAddConditionalField;
     }
 }
 

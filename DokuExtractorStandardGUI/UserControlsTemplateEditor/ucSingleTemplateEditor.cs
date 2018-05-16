@@ -60,6 +60,14 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         }
 
         /// <summary>
+        /// Adds a new conditional field to ucDataFieldEditor
+        /// </summary>
+        public void AddConditionalField()
+        {
+            ucDataFieldEditor1.AddConditionalField();
+        }
+
+        /// <summary>
         /// Adds a new data field (group template) to ucDataFieldEditor
         /// </summary>
         public void AddDataFieldGroupTemplate()
@@ -89,16 +97,19 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         }
 
         /// <summary>
-        /// Returns the class template with changed data fields
+        /// Returns the class template with changed data fields and conditional fields
         /// </summary>
-        public DocumentClassTemplate GetDocumentClassTemplateWithChangedDataFields()
+        public DocumentClassTemplate GetDocumentClassTemplateWithChangedFields()
         {
-            return ucDataFieldEditor1.GetDocumentClassTemplateWithChangedDataFields();
+            return ucDataFieldEditor1.GetDocumentClassTemplateWithChangedFields();
         }
 
-        public DocumentGroupTemplate GetDocumentGroupTemplateWithChangedDataFields()
+        /// <summary>
+        /// Returns the group template with changed data fields and calculation fields
+        /// </summary>
+        public DocumentGroupTemplate GetDocumentGroupTemplateWithChangedFields()
         {
-            return ucDataFieldEditor1.GetDocumentGroupTemplateWithChangedDataFields();
+            return ucDataFieldEditor1.GetDocumentGroupTemplateWithChangedFields();
         }
 
         public void ChangeOrAddRegexExpression(Guid regexHelperID, string regex, bool additionalRegex)

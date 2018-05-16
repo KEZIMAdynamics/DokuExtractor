@@ -35,10 +35,7 @@ namespace DokuExtractorStandardGUI
             InitializeComponent();
             this.languageFolderPath = languageFolderPath;
             Translation.LoadLanguageFile(culture, additionalCultureInfo, languageFolderPath);
-            ucFileSelector1.SelectedFileChanged += UcFileSelector1_SelectedFileChanged;
-            ucViewer1.TextSelected += UcViewer1_TextSelected;
-            ucResultAndEditor1.TabSwitched += UcResultAndEditor1_TabSwitched;
-            ucResultAndEditor1.RegexExpressionHelper += UcResultAndEditor1_RegexExpressionHelper;
+            SubscribeOnEvents();
 
             var fileInfos = new List<FileInfo>();
             var files = Directory.GetFiles(filePath);
@@ -60,10 +57,7 @@ namespace DokuExtractorStandardGUI
             InitializeComponent();
             this.languageFolderPath = languageFolderPath;
             Translation.LoadLanguageFile(culture, additionalCultureInfo, languageFolderPath);
-            ucFileSelector1.SelectedFileChanged += UcFileSelector1_SelectedFileChanged;
-            ucViewer1.TextSelected += UcViewer1_TextSelected;
-            ucResultAndEditor1.TabSwitched += UcResultAndEditor1_TabSwitched;
-            ucResultAndEditor1.RegexExpressionHelper += UcResultAndEditor1_RegexExpressionHelper;
+            SubscribeOnEvents();
 
             if (allowEditTemplates == false)
                 DisableBuiltInEditor();
@@ -80,6 +74,15 @@ namespace DokuExtractorStandardGUI
             UcResultAndEditor1_TabSwitched(false);
         }
 
+        private void SubscribeOnEvents()
+        {
+            ucFileSelector1.SelectedFileChanged += UcFileSelector1_SelectedFileChanged;
+            ucViewer1.TextSelected += UcViewer1_TextSelected;
+            ucResultAndEditor1.TabSwitched += UcResultAndEditor1_TabSwitched;
+            ucResultAndEditor1.RegexExpressionHelper += UcResultAndEditor1_RegexExpressionHelper;
+            ucResultAndEditor1.ConditionalFieldCellDoubleClick += UcResultAndEditor1_ConditionalFieldCellDoubleClick;
+        }
+
         public void DisableBuiltInEditor()
         {
             ucResultAndEditor1.DisableBuiltInEditor();
@@ -93,6 +96,7 @@ namespace DokuExtractorStandardGUI
             butGo.Text = Translation.LanguageStrings.ButGo;
             butOk.Text = Translation.LanguageStrings.ButOk;
             butAddDataField.Text = Translation.LanguageStrings.ButAddDataField;
+            butAddConditionalField.Text = Translation.LanguageStrings.ButAddConditionalField;
             butSaveTemplate.Text = Translation.LanguageStrings.ButSaveTemplate;
             butTemplateEditor.Text = Translation.LanguageStrings.ButTemplateEditor;
             butLanguageEditor.Text = Translation.LanguageStrings.ButLanguageEditor;
@@ -166,11 +170,13 @@ namespace DokuExtractorStandardGUI
             {
                 butSaveTemplate.Enabled = true;
                 butAddDataField.Enabled = true;
+                butAddConditionalField.Enabled = true;
             }
             else
             {
                 butSaveTemplate.Enabled = false;
                 butAddDataField.Enabled = false;
+                butAddConditionalField.Enabled = false;
             }
         }
 
@@ -184,12 +190,23 @@ namespace DokuExtractorStandardGUI
             lblInstruction.Text = Translation.LanguageStrings.InstructionSelectAnchor;
         }
 
+        private void UcResultAndEditor1_ConditionalFieldCellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //var gridView = sender as DataGridView;
+
+            //if(e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            //{
+            //    var value = gridView.Rows[e.RowIndex].Cells[1].Value?.ToString();
+            //}
+        }
+
         private void EnableOrDisableControlsAndButtons(bool enablingState)
         {
             ucFileSelector1.Enabled = enablingState;
             ucResultAndEditor1.Enabled = enablingState;
             butSaveTemplate.Enabled = enablingState;
             butAddDataField.Enabled = enablingState;
+            butAddConditionalField.Enabled = enablingState;
             butGo.Enabled = enablingState;
             butOk.Enabled = enablingState;
             butLanguageEditor.Enabled = enablingState;
@@ -283,6 +300,11 @@ namespace DokuExtractorStandardGUI
         private void butAddDataField_Click(object sender, EventArgs e)
         {
             ucResultAndEditor1.AddDataField();
+        }
+
+        private void butAddConditionalField_Click(object sender, EventArgs e)
+        {
+            ucResultAndEditor1.AddConditionalField();
         }
 
         private void butLanguageEditor_Click(object sender, EventArgs e)

@@ -72,17 +72,23 @@
     <Compile Include="Model\DataFieldResultDisplay.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserControlsTemplateEditor\ucCalculationFieldTemplate.cs">
+    <Compile Include="UserControlsTemplateEditor\ucCalculationFieldGroupTemplate.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControlsTemplateEditor\ucCalculationFieldTemplate.Designer.cs">
-      <DependentUpon>ucCalculationFieldTemplate.cs</DependentUpon>
+    <Compile Include="UserControlsTemplateEditor\ucCalculationFieldGroupTemplate.Designer.cs">
+      <DependentUpon>ucCalculationFieldGroupTemplate.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControlsTemplateEditor\ucClassTemplateEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UserControlsTemplateEditor\ucClassTemplateEditor.Designer.cs">
       <DependentUpon>ucClassTemplateEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlsTemplateEditor\ucConditionalFieldClassTemplate.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlsTemplateEditor\ucConditionalFieldClassTemplate.Designer.cs">
+      <DependentUpon>ucConditionalFieldClassTemplate.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControlsTemplateEditor\ucDataFieldClassTemplate.cs">
       <SubType>UserControl</SubType>
@@ -174,11 +180,14 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="UserControlsTemplateEditor\ucCalculationFieldTemplate.resx">
-      <DependentUpon>ucCalculationFieldTemplate.cs</DependentUpon>
+    <EmbeddedResource Include="UserControlsTemplateEditor\ucCalculationFieldGroupTemplate.resx">
+      <DependentUpon>ucCalculationFieldGroupTemplate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControlsTemplateEditor\ucClassTemplateEditor.resx">
       <DependentUpon>ucClassTemplateEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlsTemplateEditor\ucConditionalFieldClassTemplate.resx">
+      <DependentUpon>ucConditionalFieldClassTemplate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControlsTemplateEditor\ucDataFieldClassTemplate.resx">
       <DependentUpon>ucDataFieldClassTemplate.cs</DependentUpon>
@@ -220,6 +229,7 @@
     <None Include="Properties\DataSources\DokuExtractorStandardGUI.Localization.frmLanguageEditor.datasource" />
     <None Include="Properties\DataSources\DokuExtractorStandardGUI.UserControls.ucExtractedData.datasource" />
     <None Include="Properties\DataSources\DokuExtractorStandardGUI.UserControls.ucFileSelector.datasource" />
+    <None Include="Properties\DataSources\DokuExtractorStandardGUI.UserControlsTemplateEditor.ucConditionalFieldClassTemplate.datasource" />
     <None Include="Properties\DataSources\DokuExtractorStandardGUI.UserControlsTemplateEditor.ucTemplateSelector.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

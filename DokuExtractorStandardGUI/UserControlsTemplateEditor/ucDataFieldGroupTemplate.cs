@@ -57,6 +57,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             lblName.Text = Translation.LanguageStrings.DataFieldName;
             lblFieldType.Text = Translation.LanguageStrings.DataFieldType;
             lblTextAnchors.Text = Translation.LanguageStrings.DataFieldGroupTemplateTextAnchors;
+            butDeleteDataField.Text = Translation.LanguageStrings.ButDeleteDataField;
             lbxFieldType.Items[(int)(DataFieldTypes.Text)] = Translation.LanguageStrings.FieldTypeText;
             lbxFieldType.Items[(int)(DataFieldTypes.Date)] = Translation.LanguageStrings.FieldTypeDate;
             lbxFieldType.Items[(int)(DataFieldTypes.Currency)] = Translation.LanguageStrings.FieldTypeCurrency;

@@ -41,7 +41,7 @@
             // 
             this.txtName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtName.Location = new System.Drawing.Point(10, 20);
+            this.txtName.Location = new System.Drawing.Point(12, 23);
             this.txtName.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(270, 20);
@@ -50,7 +50,7 @@
             // lblName
             // 
             this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(7, 4);
+            this.lblName.Location = new System.Drawing.Point(9, 7);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(35, 13);
             this.lblName.TabIndex = 1;
@@ -59,7 +59,7 @@
             // lblFieldType
             // 
             this.lblFieldType.AutoSize = true;
-            this.lblFieldType.Location = new System.Drawing.Point(7, 55);
+            this.lblFieldType.Location = new System.Drawing.Point(9, 58);
             this.lblFieldType.Name = "lblFieldType";
             this.lblFieldType.Size = new System.Drawing.Size(56, 13);
             this.lblFieldType.TabIndex = 2;
@@ -76,7 +76,7 @@
             "AnchorLessIBAN",
             "VatId",
             "Term"});
-            this.lbxFieldType.Location = new System.Drawing.Point(10, 71);
+            this.lbxFieldType.Location = new System.Drawing.Point(12, 74);
             this.lbxFieldType.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.lbxFieldType.Name = "lbxFieldType";
             this.lbxFieldType.Size = new System.Drawing.Size(270, 69);
@@ -84,17 +84,17 @@
             // 
             // txtRegexExpression
             // 
-            this.txtRegexExpression.Location = new System.Drawing.Point(10, 169);
+            this.txtRegexExpression.Location = new System.Drawing.Point(12, 172);
             this.txtRegexExpression.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.txtRegexExpression.Multiline = true;
             this.txtRegexExpression.Name = "txtRegexExpression";
-            this.txtRegexExpression.Size = new System.Drawing.Size(270, 95);
+            this.txtRegexExpression.Size = new System.Drawing.Size(270, 92);
             this.txtRegexExpression.TabIndex = 4;
             // 
             // lblRegexExpression
             // 
             this.lblRegexExpression.AutoSize = true;
-            this.lblRegexExpression.Location = new System.Drawing.Point(7, 153);
+            this.lblRegexExpression.Location = new System.Drawing.Point(9, 156);
             this.lblRegexExpression.Name = "lblRegexExpression";
             this.lblRegexExpression.Size = new System.Drawing.Size(97, 13);
             this.lblRegexExpression.TabIndex = 5;
@@ -104,7 +104,7 @@
             // 
             this.butDeleteDataField.BackColor = System.Drawing.Color.White;
             this.butDeleteDataField.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.butDeleteDataField.Location = new System.Drawing.Point(10, 270);
+            this.butDeleteDataField.Location = new System.Drawing.Point(12, 270);
             this.butDeleteDataField.Margin = new System.Windows.Forms.Padding(10, 3, 10, 10);
             this.butDeleteDataField.Name = "butDeleteDataField";
             this.butDeleteDataField.Size = new System.Drawing.Size(270, 23);

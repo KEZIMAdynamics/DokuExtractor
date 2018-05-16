@@ -16,6 +16,7 @@ namespace DokuExtractorStandardGUI.Localization
         public string ButGo { get; set; } = "Go!";
         public string ButOk { get; set; } = "OK!";
         public string ButAddDataField { get; set; } = "Add data field";
+        public string ButAddConditionalField { get; set; } = "Add conditional field";
         public string ButSaveTemplate { get; set; } = "Save template";
         public string ButTemplateEditor { get; set; } = "Template editor";
         public string ButLanguageEditor { get; set; } = "Language editor";
@@ -49,6 +50,17 @@ namespace DokuExtractorStandardGUI.Localization
 
         public string DataFieldGroupTemplateTextAnchors { get; set; } = "Text anchors";
         #endregion DataField
+
+        #region ConditionalField
+        public string ConditionalFieldName { get; set; } = "Name";
+        public string ConditionalFieldConditions { get; set; } = "Conditions";
+        public string Condition { get; set; } = "Condition";
+        public string ConditionValue { get; set; } = "Value";
+
+        public string ButAddCondition { get; set; } = "Add condition";
+        public string ButDeleteCondition { get; set; } = "Delete condition";
+        public string ButDeleteConditionalField { get; set; } = "Delete conditional field";
+        #endregion ConditionalField
 
         #region CalculationField
         public string CalculationFieldName { get; set; } = "Name";

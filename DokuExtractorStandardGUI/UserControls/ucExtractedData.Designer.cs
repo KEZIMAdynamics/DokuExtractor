@@ -34,9 +34,23 @@
             this.lblTemplateGroupName = new System.Windows.Forms.Label();
             this.lblTemplateClassName = new System.Windows.Forms.Label();
             this.dgvDataFields = new System.Windows.Forms.DataGridView();
+            this.colDatName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDatValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDatFieldType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDatFieldTypeDisplayValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataFieldResultsDisplayBindingBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.ucExtractedDataBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dgvCalculationFields = new System.Windows.Forms.DataGridView();
+            this.colCalcName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCalcFieldType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCalcFieldTypeDisplayValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCalcCalculationValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCalcCalculationEqualsValidation = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.calculationFieldResultsDisplayBindingBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.dgvConditionalFields = new System.Windows.Forms.DataGridView();
+            this.conditionalFieldResultBindingBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -44,26 +58,23 @@
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.calculationFieldResultsDisplayBindingBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.colDatName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDatValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDatFieldType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDatFieldTypeDisplayValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ucExtractedDataBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.colCalcName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCalcFieldType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCalcFieldTypeDisplayValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCalcCalculationValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCalcCalculationEqualsValidation = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colCondName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCondValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDataFields)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataFieldResultsDisplayBindingBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ucExtractedDataBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCalculationFields)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.calculationFieldResultsDisplayBindingBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.calculationFieldResultsDisplayBindingBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ucExtractedDataBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvConditionalFields)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.conditionalFieldResultBindingBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // txtGroupName
@@ -71,9 +82,9 @@
             this.txtGroupName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtGroupName.Enabled = false;
-            this.txtGroupName.Location = new System.Drawing.Point(138, 38);
+            this.txtGroupName.Location = new System.Drawing.Point(157, 38);
             this.txtGroupName.Name = "txtGroupName";
-            this.txtGroupName.Size = new System.Drawing.Size(377, 20);
+            this.txtGroupName.Size = new System.Drawing.Size(358, 20);
             this.txtGroupName.TabIndex = 9;
             // 
             // txtClassName
@@ -81,9 +92,9 @@
             this.txtClassName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtClassName.Enabled = false;
-            this.txtClassName.Location = new System.Drawing.Point(138, 12);
+            this.txtClassName.Location = new System.Drawing.Point(157, 12);
             this.txtClassName.Name = "txtClassName";
-            this.txtClassName.Size = new System.Drawing.Size(377, 20);
+            this.txtClassName.Size = new System.Drawing.Size(358, 20);
             this.txtClassName.TabIndex = 8;
             // 
             // lblTemplateGroupName
@@ -119,13 +130,52 @@
             this.dgvDataFields.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDataFields.Location = new System.Drawing.Point(0, 0);
             this.dgvDataFields.Name = "dgvDataFields";
-            this.dgvDataFields.Size = new System.Drawing.Size(494, 251);
+            this.dgvDataFields.Size = new System.Drawing.Size(494, 156);
             this.dgvDataFields.TabIndex = 10;
+            // 
+            // colDatName
+            // 
+            this.colDatName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colDatName.DataPropertyName = "Name";
+            this.colDatName.HeaderText = "Name";
+            this.colDatName.Name = "colDatName";
+            this.colDatName.ReadOnly = true;
+            this.colDatName.Width = 60;
+            // 
+            // colDatValue
+            // 
+            this.colDatValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colDatValue.DataPropertyName = "Value";
+            this.colDatValue.HeaderText = "Value";
+            this.colDatValue.Name = "colDatValue";
+            this.colDatValue.Width = 59;
+            // 
+            // colDatFieldType
+            // 
+            this.colDatFieldType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colDatFieldType.DataPropertyName = "FieldType";
+            this.colDatFieldType.HeaderText = "FieldType";
+            this.colDatFieldType.Name = "colDatFieldType";
+            this.colDatFieldType.ReadOnly = true;
+            this.colDatFieldType.Visible = false;
+            // 
+            // colDatFieldTypeDisplayValue
+            // 
+            this.colDatFieldTypeDisplayValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colDatFieldTypeDisplayValue.DataPropertyName = "FieldTypeDisplayValue";
+            this.colDatFieldTypeDisplayValue.HeaderText = "FieldTypeDisplayValue";
+            this.colDatFieldTypeDisplayValue.Name = "colDatFieldTypeDisplayValue";
+            this.colDatFieldTypeDisplayValue.ReadOnly = true;
+            this.colDatFieldTypeDisplayValue.Width = 139;
             // 
             // dataFieldResultsDisplayBindingBindingSource
             // 
             this.dataFieldResultsDisplayBindingBindingSource.DataMember = "DataFieldResultsDisplayBinding";
             this.dataFieldResultsDisplayBindingBindingSource.DataSource = this.ucExtractedDataBindingSource;
+            // 
+            // ucExtractedDataBindingSource
+            // 
+            this.ucExtractedDataBindingSource.DataSource = typeof(DokuExtractorStandardGUI.UserControls.ucExtractedData);
             // 
             // dgvCalculationFields
             // 
@@ -143,8 +193,56 @@
             this.dgvCalculationFields.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCalculationFields.Location = new System.Drawing.Point(0, 0);
             this.dgvCalculationFields.Name = "dgvCalculationFields";
-            this.dgvCalculationFields.Size = new System.Drawing.Size(494, 247);
+            this.dgvCalculationFields.Size = new System.Drawing.Size(494, 164);
             this.dgvCalculationFields.TabIndex = 11;
+            // 
+            // colCalcName
+            // 
+            this.colCalcName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colCalcName.DataPropertyName = "Name";
+            this.colCalcName.HeaderText = "Name";
+            this.colCalcName.Name = "colCalcName";
+            this.colCalcName.ReadOnly = true;
+            this.colCalcName.Width = 60;
+            // 
+            // colCalcFieldType
+            // 
+            this.colCalcFieldType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colCalcFieldType.DataPropertyName = "FieldType";
+            this.colCalcFieldType.HeaderText = "FieldType";
+            this.colCalcFieldType.Name = "colCalcFieldType";
+            this.colCalcFieldType.ReadOnly = true;
+            this.colCalcFieldType.Visible = false;
+            // 
+            // colCalcFieldTypeDisplayValue
+            // 
+            this.colCalcFieldTypeDisplayValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colCalcFieldTypeDisplayValue.DataPropertyName = "FieldTypeDisplayValue";
+            this.colCalcFieldTypeDisplayValue.HeaderText = "FieldTypeDisplayValue";
+            this.colCalcFieldTypeDisplayValue.Name = "colCalcFieldTypeDisplayValue";
+            this.colCalcFieldTypeDisplayValue.ReadOnly = true;
+            this.colCalcFieldTypeDisplayValue.Width = 139;
+            // 
+            // colCalcCalculationValue
+            // 
+            this.colCalcCalculationValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colCalcCalculationValue.DataPropertyName = "CalculationValue";
+            this.colCalcCalculationValue.HeaderText = "CalculationValue";
+            this.colCalcCalculationValue.Name = "colCalcCalculationValue";
+            this.colCalcCalculationValue.Width = 111;
+            // 
+            // colCalcCalculationEqualsValidation
+            // 
+            this.colCalcCalculationEqualsValidation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colCalcCalculationEqualsValidation.DataPropertyName = "CalculationEqualsValidation";
+            this.colCalcCalculationEqualsValidation.HeaderText = "CalculationEqualsValidation";
+            this.colCalcCalculationEqualsValidation.Name = "colCalcCalculationEqualsValidation";
+            this.colCalcCalculationEqualsValidation.Width = 143;
+            // 
+            // calculationFieldResultsDisplayBindingBindingSource
+            // 
+            this.calculationFieldResultsDisplayBindingBindingSource.DataMember = "CalculationFieldResultsDisplayBinding";
+            this.calculationFieldResultsDisplayBindingBindingSource.DataSource = this.ucExtractedDataBindingSource;
             // 
             // splitContainer1
             // 
@@ -161,10 +259,51 @@
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.dgvCalculationFields);
+            this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
             this.splitContainer1.Size = new System.Drawing.Size(494, 502);
-            this.splitContainer1.SplitterDistance = 251;
+            this.splitContainer1.SplitterDistance = 156;
             this.splitContainer1.TabIndex = 12;
+            // 
+            // splitContainer2
+            // 
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer2.Name = "splitContainer2";
+            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.dgvCalculationFields);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.dgvConditionalFields);
+            this.splitContainer2.Size = new System.Drawing.Size(494, 342);
+            this.splitContainer2.SplitterDistance = 164;
+            this.splitContainer2.TabIndex = 0;
+            // 
+            // dgvConditionalFields
+            // 
+            this.dgvConditionalFields.AllowUserToAddRows = false;
+            this.dgvConditionalFields.AutoGenerateColumns = false;
+            this.dgvConditionalFields.BackgroundColor = System.Drawing.Color.White;
+            this.dgvConditionalFields.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvConditionalFields.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colCondName,
+            this.colCondValue});
+            this.dgvConditionalFields.DataSource = this.conditionalFieldResultBindingBindingSource;
+            this.dgvConditionalFields.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvConditionalFields.GridColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.dgvConditionalFields.Location = new System.Drawing.Point(0, 0);
+            this.dgvConditionalFields.Name = "dgvConditionalFields";
+            this.dgvConditionalFields.Size = new System.Drawing.Size(494, 174);
+            this.dgvConditionalFields.TabIndex = 0;
+            this.dgvConditionalFields.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvConditionalFields_CellDoubleClick);
+            // 
+            // conditionalFieldResultBindingBindingSource
+            // 
+            this.conditionalFieldResultBindingBindingSource.DataMember = "ConditionalFieldResultBinding";
+            this.conditionalFieldResultBindingBindingSource.DataSource = this.ucExtractedDataBindingSource;
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -222,94 +361,20 @@
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             this.dataGridViewTextBoxColumn7.ReadOnly = true;
             // 
-            // calculationFieldResultsDisplayBindingBindingSource
+            // colCondName
             // 
-            this.calculationFieldResultsDisplayBindingBindingSource.DataMember = "CalculationFieldResultsDisplayBinding";
-            this.calculationFieldResultsDisplayBindingBindingSource.DataSource = this.ucExtractedDataBindingSource;
+            this.colCondName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colCondName.DataPropertyName = "Name";
+            this.colCondName.HeaderText = "Name";
+            this.colCondName.Name = "colCondName";
+            this.colCondName.ReadOnly = true;
+            this.colCondName.Width = 60;
             // 
-            // colDatName
+            // colCondValue
             // 
-            this.colDatName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colDatName.DataPropertyName = "Name";
-            this.colDatName.HeaderText = "Name";
-            this.colDatName.Name = "colDatName";
-            this.colDatName.ReadOnly = true;
-            this.colDatName.Width = 60;
-            // 
-            // colDatValue
-            // 
-            this.colDatValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colDatValue.DataPropertyName = "Value";
-            this.colDatValue.HeaderText = "Value";
-            this.colDatValue.Name = "colDatValue";
-            this.colDatValue.Width = 59;
-            // 
-            // colDatFieldType
-            // 
-            this.colDatFieldType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colDatFieldType.DataPropertyName = "FieldType";
-            this.colDatFieldType.HeaderText = "FieldType";
-            this.colDatFieldType.Name = "colDatFieldType";
-            this.colDatFieldType.ReadOnly = true;
-            this.colDatFieldType.Visible = false;
-            this.colDatFieldType.Width = 78;
-            // 
-            // colDatFieldTypeDisplayValue
-            // 
-            this.colDatFieldTypeDisplayValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colDatFieldTypeDisplayValue.DataPropertyName = "FieldTypeDisplayValue";
-            this.colDatFieldTypeDisplayValue.HeaderText = "FieldTypeDisplayValue";
-            this.colDatFieldTypeDisplayValue.Name = "colDatFieldTypeDisplayValue";
-            this.colDatFieldTypeDisplayValue.ReadOnly = true;
-            this.colDatFieldTypeDisplayValue.Width = 139;
-            // 
-            // ucExtractedDataBindingSource
-            // 
-            this.ucExtractedDataBindingSource.DataSource = typeof(DokuExtractorStandardGUI.UserControls.ucExtractedData);
-            // 
-            // colCalcName
-            // 
-            this.colCalcName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colCalcName.DataPropertyName = "Name";
-            this.colCalcName.HeaderText = "Name";
-            this.colCalcName.Name = "colCalcName";
-            this.colCalcName.ReadOnly = true;
-            this.colCalcName.Width = 60;
-            // 
-            // colCalcFieldType
-            // 
-            this.colCalcFieldType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colCalcFieldType.DataPropertyName = "FieldType";
-            this.colCalcFieldType.HeaderText = "FieldType";
-            this.colCalcFieldType.Name = "colCalcFieldType";
-            this.colCalcFieldType.ReadOnly = true;
-            this.colCalcFieldType.Visible = false;
-            this.colCalcFieldType.Width = 78;
-            // 
-            // colCalcFieldTypeDisplayValue
-            // 
-            this.colCalcFieldTypeDisplayValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colCalcFieldTypeDisplayValue.DataPropertyName = "FieldTypeDisplayValue";
-            this.colCalcFieldTypeDisplayValue.HeaderText = "FieldTypeDisplayValue";
-            this.colCalcFieldTypeDisplayValue.Name = "colCalcFieldTypeDisplayValue";
-            this.colCalcFieldTypeDisplayValue.ReadOnly = true;
-            this.colCalcFieldTypeDisplayValue.Width = 139;
-            // 
-            // colCalcCalculationValue
-            // 
-            this.colCalcCalculationValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colCalcCalculationValue.DataPropertyName = "CalculationValue";
-            this.colCalcCalculationValue.HeaderText = "CalculationValue";
-            this.colCalcCalculationValue.Name = "colCalcCalculationValue";
-            this.colCalcCalculationValue.Width = 111;
-            // 
-            // colCalcCalculationEqualsValidation
-            // 
-            this.colCalcCalculationEqualsValidation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colCalcCalculationEqualsValidation.DataPropertyName = "CalculationEqualsValidation";
-            this.colCalcCalculationEqualsValidation.HeaderText = "CalculationEqualsValidation";
-            this.colCalcCalculationEqualsValidation.Name = "colCalcCalculationEqualsValidation";
-            this.colCalcCalculationEqualsValidation.Width = 143;
+            this.colCondValue.DataPropertyName = "Value";
+            this.colCondValue.HeaderText = "Value";
+            this.colCondValue.Name = "colCondValue";
             // 
             // ucExtractedData
             // 
@@ -326,13 +391,19 @@
             this.Load += new System.EventHandler(this.ucExtractedData_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDataFields)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataFieldResultsDisplayBindingBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ucExtractedDataBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCalculationFields)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.calculationFieldResultsDisplayBindingBindingSource)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.calculationFieldResultsDisplayBindingBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ucExtractedDataBindingSource)).EndInit();
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvConditionalFields)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.conditionalFieldResultBindingBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -366,5 +437,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCalcCalculationValue;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colCalcCalculationEqualsValidation;
         private System.Windows.Forms.BindingSource calculationFieldResultsDisplayBindingBindingSource;
+        private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.DataGridView dgvConditionalFields;
+        private System.Windows.Forms.BindingSource conditionalFieldResultBindingBindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCondName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCondValue;
     }
 }

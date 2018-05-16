@@ -45,6 +45,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         private void Localize()
         {
             butAddDataField.Text = Translation.LanguageStrings.ButAddDataField;
+            butAddConditionalField.Text = Translation.LanguageStrings.ButAddConditionalField;
             butSaveTemplate.Text = Translation.LanguageStrings.ButSaveTemplate;
         }
 
@@ -60,7 +61,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         private void butSaveTemplate_Click(object sender, EventArgs e)
         {
             this.selectedClassTemplate = ucSingleTemplateEditor1.GetDocumentClassTemplateWithChangedGeneralProperties();
-            var classTemplateWithChangedDataFields = ucSingleTemplateEditor1.GetDocumentClassTemplateWithChangedDataFields();
+            var classTemplateWithChangedDataFields = ucSingleTemplateEditor1.GetDocumentClassTemplateWithChangedFields();
             this.selectedClassTemplate.DataFields = classTemplateWithChangedDataFields.DataFields;
 
 
@@ -83,6 +84,11 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         private void butAddDataField_Click(object sender, EventArgs e)
         {
             ucSingleTemplateEditor1.AddDataFieldClassTemplate();
+        }
+
+        private void butAddConditionalField_Click(object sender, EventArgs e)
+        {
+            ucSingleTemplateEditor1.AddConditionalField();
         }
     }
 }

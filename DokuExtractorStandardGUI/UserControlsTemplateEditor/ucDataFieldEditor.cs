@@ -37,7 +37,43 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             newDataField.Tag = Guid.NewGuid();
             newDataField.RegexExpressionHelper += FireRegexExpressionHelper;
             newDataField.DataFieldEraser += DeleteDataFieldClassTemplate;
+
+            var ucConditionalFieldTemplateList = new List<ucConditionalFieldClassTemplate>();
+            foreach (var control in flowLayoutPanel1.Controls)
+            {
+                if (control.GetType() == typeof(ucConditionalFieldClassTemplate))
+                    ucConditionalFieldTemplateList.Add(control as ucConditionalFieldClassTemplate);
+
+            }
+
+            foreach (var condControl in ucConditionalFieldTemplateList)
+            {
+                var id = (Guid)(condControl.Tag);
+                foreach (Control control in flowLayoutPanel1.Controls)
+                {
+                    if (control.GetType() == typeof(ucConditionalFieldClassTemplate))
+                        if (id == (Guid)(((ucConditionalFieldClassTemplate)control).Tag))
+                            flowLayoutPanel1.Controls.Remove(control);
+                }
+            }
+
             flowLayoutPanel1.Controls.Add(newDataField);
+
+            foreach (var condControl in ucConditionalFieldTemplateList)
+            {
+                flowLayoutPanel1.Controls.Add(condControl);
+            }
+        }
+
+        /// <summary>
+        /// Adds a new conditional field (class template) to the user control
+        /// </summary>
+        public void AddConditionalField()
+        {
+            var newConditionalField = new ucConditionalFieldClassTemplate();
+            newConditionalField.Tag = Guid.NewGuid();
+            newConditionalField.ConditionalFieldEraser += DeleteConditionalField;
+            flowLayoutPanel1.Controls.Add(newConditionalField);
         }
 
         /// <summary>
@@ -49,11 +85,11 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             newDataField.Tag = Guid.NewGuid();
             newDataField.DataFieldEraser += DeleteDataFieldClassTemplate;
 
-            var ucCalculationFieldTemplateList = new List<ucCalculationFieldTemplate>();
+            var ucCalculationFieldTemplateList = new List<ucCalculationFieldGroupTemplate>();
             foreach (var control in flowLayoutPanel1.Controls)
             {
-                if (control.GetType() == typeof(ucCalculationFieldTemplate))
-                    ucCalculationFieldTemplateList.Add(control as ucCalculationFieldTemplate);
+                if (control.GetType() == typeof(ucCalculationFieldGroupTemplate))
+                    ucCalculationFieldTemplateList.Add(control as ucCalculationFieldGroupTemplate);
             }
 
             foreach (var calcControl in ucCalculationFieldTemplateList)
@@ -61,8 +97,8 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
                 var id = (Guid)(calcControl.Tag);
                 foreach (Control control in flowLayoutPanel1.Controls)
                 {
-                    if (control.GetType() == typeof(ucCalculationFieldTemplate))
-                        if (id == (Guid)(((ucCalculationFieldTemplate)control).Tag))
+                    if (control.GetType() == typeof(ucCalculationFieldGroupTemplate))
+                        if (id == (Guid)(((ucCalculationFieldGroupTemplate)control).Tag))
                             flowLayoutPanel1.Controls.Remove(control);
                 }
             }
@@ -80,7 +116,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         /// </summary>
         public void AddCalculationField()
         {
-            var newCalculationField = new ucCalculationFieldTemplate();
+            var newCalculationField = new ucCalculationFieldGroupTemplate();
             newCalculationField.Tag = Guid.NewGuid();
             newCalculationField.CalculationFieldEraser += DeleteCalculationField;
             flowLayoutPanel1.Controls.Add(newCalculationField);
@@ -99,6 +135,31 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
                     try
                     {
                         var id = (Guid)(dataFieldControl.Tag);
+                        if (id == toDeleteID)
+                        {
+                            flowLayoutPanel1.Controls.Remove(control);
+                            return;
+                        }
+                    }
+                    catch (Exception ex)
+                    { }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Deletes a conditional field (class template) from the user control
+        /// </summary>
+        public void DeleteConditionalField(Guid toDeleteID)
+        {
+            foreach (Control control in flowLayoutPanel1.Controls)
+            {
+                var conditionalFieldControl = control as ucConditionalFieldClassTemplate;
+                if (conditionalFieldControl != null)
+                {
+                    try
+                    {
+                        var id = (Guid)(conditionalFieldControl.Tag);
                         if (id == toDeleteID)
                         {
                             flowLayoutPanel1.Controls.Remove(control);
@@ -144,7 +205,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         {
             foreach (Control control in flowLayoutPanel1.Controls)
             {
-                var dataFieldControl = control as ucCalculationFieldTemplate;
+                var dataFieldControl = control as ucCalculationFieldGroupTemplate;
                 if (dataFieldControl != null)
                 {
                     try
@@ -183,6 +244,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             }
 
             if (this.classTemplate != null && this.classTemplate.DataFields != null)
+            {
                 foreach (var item in this.classTemplate.DataFields)
                 {
                     var newDataField = new ucDataFieldClassTemplate(item);
@@ -191,6 +253,15 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
                     newDataField.DataFieldEraser += DeleteDataFieldClassTemplate;
                     flowLayoutPanel1.Controls.Add(newDataField);
                 }
+
+                foreach (var item in this.classTemplate.ConditionalFields)
+                {
+                    var newConditionalField = new ucConditionalFieldClassTemplate(item);
+                    newConditionalField.Tag = Guid.NewGuid();
+                    newConditionalField.ConditionalFieldEraser += DeleteConditionalField;
+                    flowLayoutPanel1.Controls.Add(newConditionalField);
+                }
+            }
         }
 
         /// <summary>
@@ -225,7 +296,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             if (this.groupTemplate != null && this.groupTemplate.CalculationFields != null)
                 foreach (var item in this.groupTemplate.CalculationFields)
                 {
-                    var newCalculationField = new ucCalculationFieldTemplate(item);
+                    var newCalculationField = new ucCalculationFieldGroupTemplate(item);
                     newCalculationField.Tag = Guid.NewGuid();
                     newCalculationField.CalculationFieldEraser += DeleteCalculationField;
                     flowLayoutPanel1.Controls.Add(newCalculationField);
@@ -233,39 +304,59 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         }
 
         /// <summary>
-        /// Returns the class template with changed data fields
+        /// Returns the class template with changed data fields and conditional fields
         /// </summary>
-        public DocumentClassTemplate GetDocumentClassTemplateWithChangedDataFields()
+        public DocumentClassTemplate GetDocumentClassTemplateWithChangedFields()
         {
             var retVal = this.classTemplate;
             var newDataFields = new List<DataFieldClassTemplate>();
+            var newConditionalFields = new List<ConditionalFieldTemplate>();
 
             foreach (Control control in flowLayoutPanel1.Controls)
             {
-                var newDataField = GetDataFieldClassTemplateFromUcDataField(control);
-                newDataFields.Add(newDataField);
+                if (control.GetType() == typeof(ucDataFieldClassTemplate))
+                {
+                    var newDataField = GetDataFieldClassTemplateFromUcDataField(control);
+                    newDataFields.Add(newDataField);
+                }
+                else if (control.GetType() == typeof(ucConditionalFieldClassTemplate))
+                {
+                    var newConditionalField = GetConditionalFieldTemplateFromUcConditianalField(control);
+                    newConditionalFields.Add(newConditionalField);
+                }
             }
 
             retVal.DataFields = newDataFields;
+            retVal.ConditionalFields = newConditionalFields;
 
             return retVal;
         }
 
         /// <summary>
-        /// Returns the group template with changed data fields
+        /// Returns the group template with changed data fields and calculation fields
         /// </summary>
-        public DocumentGroupTemplate GetDocumentGroupTemplateWithChangedDataFields()
+        public DocumentGroupTemplate GetDocumentGroupTemplateWithChangedFields()
         {
             var retVal = this.groupTemplate;
             var newDataFields = new List<DataFieldGroupTemplate>();
+            var newCalculationFields = new List<CalculationFieldTemplate>();
 
             foreach (Control control in flowLayoutPanel1.Controls)
             {
-                var newDataField = GetDataFieldGroupTemplateFromUcDataField(control);
-                newDataFields.Add(newDataField);
+                if (control.GetType() == typeof(ucDataFieldGroupTemplate))
+                {
+                    var newDataField = GetDataFieldGroupTemplateFromUcDataField(control);
+                    newDataFields.Add(newDataField);
+                }
+                else if (control.GetType() == typeof(ucCalculationFieldGroupTemplate))
+                {
+                    var newCalculaionField = GetCalculationFieldTemplateFromUcCalculationField(control);
+                    newCalculationFields.Add(newCalculaionField);
+                }
             }
 
             retVal.DataFields = newDataFields;
+            retVal.CalculationFields = newCalculationFields;
 
             return retVal;
         }
@@ -329,6 +420,19 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             return retVal;
         }
 
+        private ConditionalFieldTemplate GetConditionalFieldTemplateFromUcConditianalField(Control ucConditionalFieldControl)
+        {
+            var retVal = new ConditionalFieldTemplate();
+            var ucConditionalField = ucConditionalFieldControl as ucConditionalFieldClassTemplate;
+
+            if (ucConditionalField != null)
+            {
+                retVal.Name = ucConditionalField.NameText;
+                retVal.ConditionValues = ucConditionalField.ConditionsList;
+            }
+            return retVal;
+        }
+
         private DataFieldGroupTemplate GetDataFieldGroupTemplateFromUcDataField(Control ucDataFieldGroupControl)
         {
             var retVal = new DataFieldGroupTemplate();
@@ -346,6 +450,31 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
                 foreach (var item in regexArray)
                 {
                     retVal.TextAnchors.Add(item);
+                }
+            }
+            return retVal;
+        }
+
+        private CalculationFieldTemplate GetCalculationFieldTemplateFromUcCalculationField(Control ucCalculationFieldControl)
+        {
+            var retVal = new CalculationFieldTemplate();
+            var ucCalculationFieldGroupTemplate = ucCalculationFieldControl as ucCalculationFieldGroupTemplate;
+
+            if (ucCalculationFieldGroupTemplate != null)
+            {
+                retVal.Name = ucCalculationFieldGroupTemplate.NameText;
+                retVal.FieldType = (DataFieldTypes)(ucCalculationFieldGroupTemplate.FieldTypeInt);
+                retVal.CalculationExpression = ucCalculationFieldGroupTemplate.CalculationExpressionText;
+                retVal.CalculationExpressionPrecision = ucCalculationFieldGroupTemplate.CalculationPrecisionInt;
+                retVal.ValidationExpressionPrecision = ucCalculationFieldGroupTemplate.ValidationPrecisionInt;
+
+                var splitArray = new string[1];
+                splitArray[0] = Environment.NewLine;
+                var valexArray = ucCalculationFieldGroupTemplate.ValidationExpressionText.Split(splitArray, StringSplitOptions.RemoveEmptyEntries);
+
+                foreach (var item in valexArray)
+                {
+                    retVal.ValidationExpressions.Add(item);
                 }
             }
             return retVal;
