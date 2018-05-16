@@ -9,14 +9,8 @@ namespace DokuExtractorCore.Model
     /// <summary>
     /// Template for a single CalculationField. Used in DocumentGroupTemplate. Two expressions, with values based on data fields, can be calculated. Their result will be returned in a CalculationFieldResult.
     /// </summary>
-    public class CalculationFieldTemplate
+    public class CalculationFieldTemplate : FieldTemplateBase
     {
-
-        /// <summary>
-        /// Field name
-        /// </summary>
-        public string Name { get; set; } = string.Empty;
-
         /// <summary>
         /// Field type. Currently only <see cref="DataFieldTypes.Currency"/> operations are supported by the calculator.
         /// </summary>

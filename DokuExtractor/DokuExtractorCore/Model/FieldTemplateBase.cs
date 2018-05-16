@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace DokuExtractorCore.Model
 {
-    public class ConditionalFieldTemplate : FieldTemplateBase
+    public abstract class FieldTemplateBase
     {
-        public List<ConditionValue> ConditionValues { get; set; } = new List<ConditionValue>();
+        /// <summary>
+        /// Field name
+        /// </summary>
+        public string Name { get; set; } = string.Empty;
     }
 }

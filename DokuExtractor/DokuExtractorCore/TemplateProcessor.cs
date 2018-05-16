@@ -353,17 +353,7 @@ namespace DokuExtractorCore
 
             foreach (var item in genericRechnung.DataFields.ToList())
             {
-                var newDataField = new DataFieldTemplate() { Name = item.Name, FieldType = item.FieldType };
-
-                foreach (var anchor in item.TextAnchors)
-                {
-                    RegexExpressionFinderResult expressionResult;
-                    if (TryFindRegexMatchExpress(inputText, anchor, string.Empty, item.FieldType, true, out expressionResult))
-                    {
-                        newDataField.RegexExpressions = new List<string>() { expressionResult.RegexExpression };
-                        break;
-                    }
-                }
+                var newDataField = AutoCreateDataFieldClassTemplateFromDataFieldGroupTemplate(item, inputText);
 
                 retVal.DataFields.Add(newDataField);
             }
@@ -417,9 +407,66 @@ namespace DokuExtractorCore
         /// <returns></returns>
         public bool TryFindRegexMatchExpress(string inputText, string textAnchor, string targetValue, DataFieldTypes dataFieldType, bool returnFirstMatchOnly, out RegexExpressionFinderResult regexMatchExpression)
         {
-           
+
             return finder.TryFindRegexMatchExpress(inputText, textAnchor, targetValue, dataFieldType, false, out regexMatchExpression);
 
+        }
+
+        /// <summary>
+        /// Checks if a group template has datafields that are still missing in the class template. If a data field is missing, it will be added to the class template (including eg. automatic regexExpressionFinder magic).
+        /// Added datafields are also returned to indicate which fields were added.
+        /// </summary>
+        /// <param name="groupTemplate"></param>
+        /// <param name="classTemplate"></param>
+        /// <param name="inputText"></param>
+        /// <returns></returns>
+        public List<FieldTemplateBase> UpdateFieldsFromGroupTemplate(DocumentGroupTemplate groupTemplate, DocumentClassTemplate classTemplate, string inputText)
+        {
+            var retVal = new List<FieldTemplateBase>();
+
+            var fieldSet = groupTemplate.DataFields.Select(x => x.Name).ToHashSet();
+
+            foreach (var item in groupTemplate.DataFields.ToList())
+            {
+                if (fieldSet.Contains(item.Name) == false)
+                {
+                    var newDataField = AutoCreateDataFieldClassTemplateFromDataFieldGroupTemplate(item, inputText);
+                    classTemplate.DataFields.Add(newDataField);
+                    retVal.Add(newDataField);
+                }
+
+            }
+
+            fieldSet = groupTemplate.ConditionalFields.Select(x => x.Name).ToHashSet();
+
+            foreach (var item in classTemplate.ConditionalFields.ToList())
+            {
+                if (fieldSet.Contains(item.Name) == false)
+                {
+                    classTemplate.ConditionalFields.Add(item);
+                    retVal.Add(item);
+                }
+
+            }
+
+            return retVal;
+        }
+
+        private DataFieldTemplate AutoCreateDataFieldClassTemplateFromDataFieldGroupTemplate(DataFieldGroupTemplate groupTemplate, string documentInputText)
+        {
+            var newDataField = new DataFieldTemplate() { Name = groupTemplate.Name, FieldType = groupTemplate.FieldType };
+
+            foreach (var anchor in groupTemplate.TextAnchors)
+            {
+                RegexExpressionFinderResult expressionResult;
+                if (TryFindRegexMatchExpress(documentInputText, anchor, string.Empty, groupTemplate.FieldType, true, out expressionResult))
+                {
+                    newDataField.RegexExpressions = new List<string>() { expressionResult.RegexExpression };
+                    break;
+                }
+            }
+
+            return newDataField;
         }
     }
 }
