@@ -452,9 +452,9 @@ namespace DokuExtractorCore
             return retVal;
         }
 
-        private DataFieldTemplate AutoCreateDataFieldClassTemplateFromDataFieldGroupTemplate(DataFieldGroupTemplate groupTemplate, string documentInputText)
+        private DataFieldClassTemplate AutoCreateDataFieldClassTemplateFromDataFieldGroupTemplate(DataFieldGroupTemplate groupTemplate, string documentInputText)
         {
-            var newDataField = new DataFieldTemplate() { Name = groupTemplate.Name, FieldType = groupTemplate.FieldType };
+            var newDataField = new DataFieldClassTemplate() { Name = groupTemplate.Name, FieldType = groupTemplate.FieldType };
 
             foreach (var anchor in groupTemplate.TextAnchors)
             {
