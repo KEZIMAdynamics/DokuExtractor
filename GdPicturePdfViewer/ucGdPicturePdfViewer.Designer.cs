@@ -113,7 +113,7 @@
             this.thumbnailEx1.CheckBoxes = false;
             this.thumbnailEx1.CheckBoxesMarginLeft = 0;
             this.thumbnailEx1.CheckBoxesMarginTop = 0;
-            this.thumbnailEx1.DefaultItemTextPrefixe = "Page ";
+            this.thumbnailEx1.DefaultItemTextPrefixe = "";
             this.thumbnailEx1.DisplayAnnotations = true;
             this.thumbnailEx1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.thumbnailEx1.HorizontalTextAlignment = GdPicture14.TextAlignment.TextAlignmentCenter;

@@ -1,10 +1,12 @@
 ﻿using DokuExtractorCore;
 using DokuExtractorCore.Model;
+using DokuExtractorStandardGUI.Localization;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -26,14 +28,14 @@ namespace DokuExtractorStandardGUI
 
         private string selectedFilePath = string.Empty;
         private TemplateProcessor templateProcessor = new TemplateProcessor(Application.StartupPath);
+        private string languageFolderPath = string.Empty;
 
-        public frmExtractorStandard(string filePath, bool allowEditTemplates = false)
+        public frmExtractorStandard(string filePath, string languageFolderPath, CultureInfo culture, string additionalCultureInfo = "", bool allowEditTemplates = false)
         {
             InitializeComponent();
-            ucFileSelector1.SelectedFileChanged += UcFileSelector1_SelectedFileChanged;
-            ucViewer1.TextSelected += UcViewer1_TextSelected;
-            ucResultAndEditor1.TabSwitched += UcResultAndEditor1_TabSwitched;
-            ucResultAndEditor1.RegexExpressionHelper += UcResultAndEditor1_RegexExpressionHelper;
+            this.languageFolderPath = languageFolderPath;
+            Translation.LoadLanguageFile(culture, additionalCultureInfo, languageFolderPath);
+            SubscribeOnEvents();
 
             var fileInfos = new List<FileInfo>();
             var files = Directory.GetFiles(filePath);
@@ -50,13 +52,12 @@ namespace DokuExtractorStandardGUI
             ucFileSelector1.LoadFiles(fileInfos);
         }
 
-        public frmExtractorStandard(List<FileInfo> fileInfos, bool allowEditTemplates = false)
+        public frmExtractorStandard(List<FileInfo> fileInfos, string languageFolderPath, CultureInfo culture, string additionalCultureInfo = "", bool allowEditTemplates = false)
         {
             InitializeComponent();
-            ucFileSelector1.SelectedFileChanged += UcFileSelector1_SelectedFileChanged;
-            ucViewer1.TextSelected += UcViewer1_TextSelected;
-            ucResultAndEditor1.TabSwitched += UcResultAndEditor1_TabSwitched;
-            ucResultAndEditor1.RegexExpressionHelper += UcResultAndEditor1_RegexExpressionHelper;
+            this.languageFolderPath = languageFolderPath;
+            Translation.LoadLanguageFile(culture, additionalCultureInfo, languageFolderPath);
+            SubscribeOnEvents();
 
             if (allowEditTemplates == false)
                 DisableBuiltInEditor();
@@ -64,32 +65,51 @@ namespace DokuExtractorStandardGUI
             ucFileSelector1.LoadFiles(fileInfos);
         }
 
-        public void DisableBuiltInEditor()
-        {
-            ucResultAndEditor1.DisableBuiltInEditor();
-            butAddDataField.Visible = false;
-            butDeleteDataField.Visible = false;
-            butSaveTemplate.Visible = false;
-            butTemplateEditor.Visible = false;
-        }
-
         private void frmExtractorStandard_Load(object sender, EventArgs e)
         {
+            Localize();
             this.CenterToScreen();
             this.WindowState = FormWindowState.Maximized;
 
             UcResultAndEditor1_TabSwitched(false);
         }
 
+        private void SubscribeOnEvents()
+        {
+            ucFileSelector1.SelectedFileChanged += UcFileSelector1_SelectedFileChanged;
+            ucViewer1.TextSelected += UcViewer1_TextSelected;
+            ucResultAndEditor1.TabSwitched += UcResultAndEditor1_TabSwitched;
+            ucResultAndEditor1.RegexExpressionHelper += UcResultAndEditor1_RegexExpressionHelper;
+            ucResultAndEditor1.ConditionalFieldCellDoubleClick += UcResultAndEditor1_ConditionalFieldCellDoubleClick;
+        }
+
+        public void DisableBuiltInEditor()
+        {
+            ucResultAndEditor1.DisableBuiltInEditor();
+            butAddDataField.Visible = false;
+            butSaveTemplate.Visible = false;
+            butTemplateEditor.Visible = false;
+        }
+
+        private void Localize()
+        {
+            butGo.Text = Translation.LanguageStrings.ButGo;
+            butOk.Text = Translation.LanguageStrings.ButOk;
+            butAddDataField.Text = Translation.LanguageStrings.ButAddDataField;
+            butAddConditionalField.Text = Translation.LanguageStrings.ButAddConditionalField;
+            butSaveTemplate.Text = Translation.LanguageStrings.ButSaveTemplate;
+            butTemplateEditor.Text = Translation.LanguageStrings.ButTemplateEditor;
+            butLanguageEditor.Text = Translation.LanguageStrings.ButLanguageEditor;
+        }
+
         private async void UcViewer1_TextSelected(string selectedText)
         {
-            //TODO
             if (isAnchorSelectionRunning)
             {
                 this.regexHelperAnchorText = selectedText;
                 isAnchorSelectionRunning = false;
                 isValueSelectionRunning = true;
-                lblInstruction.Text = "Select a value!";
+                lblInstruction.Text = Translation.LanguageStrings.InstructionSelectValue;
             }
             else if (isValueSelectionRunning)
             {
@@ -101,7 +121,7 @@ namespace DokuExtractorStandardGUI
                 var inputString = await loader.GetTextFromPdf(selectedFilePath, false);
 
                 var regexResult = new RegexExpressionFinderResult();
-                if (templateProcessor.TryFindRegexMatchExpress(inputString, regexHelperValueText, regexHelperAnchorText, regexHelperFieldType, false, out regexResult))
+                if (templateProcessor.TryFindRegexMatchExpress(inputString, regexHelperAnchorText, regexHelperValueText, regexHelperFieldType, false, out regexResult))
                 {
                     var matchingValues = string.Empty;
                     foreach (var matchingValue in regexResult.AllMatchingValues)
@@ -109,12 +129,13 @@ namespace DokuExtractorStandardGUI
                         matchingValues = matchingValues + Environment.NewLine + matchingValue;
                     }
 
-                    var result = MessageBox.Show("Do you accept the following result?" + Environment.NewLine + Environment.NewLine + "Regex Expression: " + regexResult.RegexExpression
-                                 + Environment.NewLine + "Matching Values: " + matchingValues, "", MessageBoxButtons.YesNo);
+                    var result = MessageBox.Show(Translation.LanguageStrings.MsgAskAcceptRegexExpressionHelperResult + Environment.NewLine + Environment.NewLine + "Regex Expression: " + regexResult.RegexExpression
+                                 + Environment.NewLine + "Matching Values: " + matchingValues, string.Empty, MessageBoxButtons.YesNo);
 
                     if (result == DialogResult.Yes)
                     {
-                        var additionalRegex = MessageBox.Show("Do you want to add this expression as an ADDITIONAL expression?", "", MessageBoxButtons.YesNo);
+
+                        var additionalRegex = MessageBox.Show(Translation.LanguageStrings.MsgAskAdditionalRegexExpression, string.Empty, MessageBoxButtons.YesNo);
                         if (additionalRegex == DialogResult.Yes)
                             ChangeOrAddRegexExpression(this.regexHelperID, regexResult.RegexExpression, true);
                         else
@@ -123,7 +144,7 @@ namespace DokuExtractorStandardGUI
                 }
                 else
                 {
-                    MessageBox.Show("Could not get a regex expression finder result!");
+                    MessageBox.Show(Translation.LanguageStrings.MsgNoRegexExpressionFinderResult, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
                 EnableOrDisableControlsAndButtons(true);
@@ -149,25 +170,34 @@ namespace DokuExtractorStandardGUI
             {
                 butSaveTemplate.Enabled = true;
                 butAddDataField.Enabled = true;
-                butDeleteDataField.Enabled = true;
+                butAddConditionalField.Enabled = true;
             }
             else
             {
                 butSaveTemplate.Enabled = false;
                 butAddDataField.Enabled = false;
-                butDeleteDataField.Enabled = false;
+                butAddConditionalField.Enabled = false;
             }
         }
 
         private void UcResultAndEditor1_RegexExpressionHelper(Guid id, DataFieldTypes dataFieldType)
         {
-            //TODO
             EnableOrDisableControlsAndButtons(false);
 
             regexHelperID = id;
             regexHelperFieldType = dataFieldType;
             isAnchorSelectionRunning = true;
-            lblInstruction.Text = "Select an anchor!";
+            lblInstruction.Text = Translation.LanguageStrings.InstructionSelectAnchor;
+        }
+
+        private void UcResultAndEditor1_ConditionalFieldCellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //var gridView = sender as DataGridView;
+
+            //if(e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            //{
+            //    var value = gridView.Rows[e.RowIndex].Cells[1].Value?.ToString();
+            //}
         }
 
         private void EnableOrDisableControlsAndButtons(bool enablingState)
@@ -176,17 +206,19 @@ namespace DokuExtractorStandardGUI
             ucResultAndEditor1.Enabled = enablingState;
             butSaveTemplate.Enabled = enablingState;
             butAddDataField.Enabled = enablingState;
-            butDeleteDataField.Enabled = enablingState;
+            butAddConditionalField.Enabled = enablingState;
             butGo.Enabled = enablingState;
             butOk.Enabled = enablingState;
+            butLanguageEditor.Enabled = enablingState;
         }
 
         private void butTemplateEditor_Click(object sender, EventArgs e)
         {
             var templateProcessor = new TemplateProcessor(Application.StartupPath);
             var classTemplates = templateProcessor.LoadClassTemplatesFromDisk();
+            var groupTemplates = templateProcessor.LoadGroupTemplatesFromDisk();
 
-            var templateEditor = new frmTemplateEditor(classTemplates);
+            var templateEditor = new frmTemplateEditor(classTemplates, groupTemplates);
             templateEditor.Show();
         }
 
@@ -204,24 +236,33 @@ namespace DokuExtractorStandardGUI
             if (matchingTemplateResult.IsMatchSuccessfull)
             {
                 ucResultAndEditor1.SwitchTab(false);
-                MessageBox.Show("Yay, template found: " + template.TemplateClassName);
+                MessageBox.Show(Translation.LanguageStrings.MsgTemplateFound + template.TemplateClassName, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 var result = templateProcessor.ExtractData(template, groupTemplates, inputString);
                 ucResultAndEditor1.ShowExtractedData(result, template);
             }
             else
             {
                 ucResultAndEditor1.SwitchTab(true);
+
                 template = templateProcessor.AutoCreateClassTemplate("NewTemplate", inputString);
                 var json = templateProcessor.ExtractDataAsJson(template, groupTemplates, inputString);
-
                 ucResultAndEditor1.ShowPropertiesAndDataFields(template);
+
+                MessageBox.Show(Translation.LanguageStrings.MsgNoTemplateFound, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
         private void butOk_Click(object sender, EventArgs e)
         {
-            var result = ucResultAndEditor1.GetFieldExtractionResult();
-            ucFileSelector1.RemoveFileFromQueue(selectedFilePath);
+            if (ucResultAndEditor1.CheckIfAllDataFieldsAreFilled() == true 
+                && ucResultAndEditor1.CheckIfAllCalculationResultsEqualValidation() == true
+                && ucResultAndEditor1.CheckIfAllConditionalFieldsAreFilled() == true)
+            {
+                var result = ucResultAndEditor1.GetFieldExtractionResult();
+                ucFileSelector1.RemoveFileFromQueue(selectedFilePath);
+            }
+            else
+                MessageBox.Show(Translation.LanguageStrings.MsgEmptyOrInvalidValues, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void butSaveTemplate_Click(object sender, EventArgs e)
@@ -241,7 +282,7 @@ namespace DokuExtractorStandardGUI
             templateDummyList.Add(newTemplate);
             templateProcessor.SaveTemplates(templateDummyList);
 
-            MessageBox.Show("Template saved.");
+            MessageBox.Show(Translation.LanguageStrings.MsgClassTemplateSaved, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void frmExtractorStandard_FormClosing(object sender, FormClosingEventArgs e)
@@ -251,6 +292,8 @@ namespace DokuExtractorStandardGUI
                 ucFileSelector1.SelectedFileChanged -= UcFileSelector1_SelectedFileChanged;
                 ucViewer1.TextSelected -= UcViewer1_TextSelected;
                 ucResultAndEditor1.TabSwitched -= UcResultAndEditor1_TabSwitched;
+                ucResultAndEditor1.RegexExpressionHelper -= UcResultAndEditor1_RegexExpressionHelper;
+
             }
             catch (Exception ex)
             { }
@@ -261,9 +304,15 @@ namespace DokuExtractorStandardGUI
             ucResultAndEditor1.AddDataField();
         }
 
-        private void butDeleteDataField_Click(object sender, EventArgs e)
+        private void butAddConditionalField_Click(object sender, EventArgs e)
         {
-            ucResultAndEditor1.DeleteDataField();
+            ucResultAndEditor1.AddConditionalField();
+        }
+
+        private void butLanguageEditor_Click(object sender, EventArgs e)
+        {
+            var languageEditor = new frmLanguageEditor(this.languageFolderPath);
+            languageEditor.ShowDialog();
         }
     }
 }

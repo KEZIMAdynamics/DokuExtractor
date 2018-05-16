@@ -24,23 +24,28 @@ namespace DokuExtractorCore
         {
             var filledExpression = expression;
 
-            foreach (var item in datafields)
+            if (string.IsNullOrEmpty(filledExpression) == false)
             {
-                if (item.FieldType == DataFieldTypes.Currency)
-                    filledExpression = filledExpression.Replace("[" + item.Name + "]", MakeCurrencyTextParseableAsFloat(item.Value));
-                else
-                    filledExpression = filledExpression.Replace("[" + item.Name + "]", item.Value.Replace(',', '.'));
+                foreach (var item in datafields)
+                {
+                    if (item.FieldType == DataFieldTypes.Currency)
+                        filledExpression = filledExpression.Replace("[" + item.Name + "]", MakeCurrencyTextParseableAsFloat(item.Value));
+                    else
+                        filledExpression = filledExpression.Replace("[" + item.Name + "]", item.Value.Replace(',', '.'));
+                }
+
+                var calculator = new XtensibleCalculator();
+                var linqExpression = calculator.ParseExpression(filledExpression);
+                var linqFunction = linqExpression.Compile();
+
+                var retVal = linqFunction();
+                if (precision >= 0)
+                    retVal = Math.Round(retVal, precision);
+
+                return retVal;
             }
-
-            var calculator = new XtensibleCalculator();
-            var linqExpression = calculator.ParseExpression(filledExpression);
-            var linqFunction = linqExpression.Compile();
-
-            var retVal = linqFunction();
-            if (precision >= 0)
-                retVal = Math.Round(retVal, precision);
-
-            return retVal;
+            else
+                return 0;
         }
 
         /// <summary>

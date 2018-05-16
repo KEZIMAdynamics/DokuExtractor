@@ -8,17 +8,28 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DokuExtractorCore.Model;
+using DokuExtractorStandardGUI.Localization;
+using DokuExtractorStandardGUI.Model;
 
 namespace DokuExtractorStandardGUI.UserControls
 {
     public partial class ucExtractedData : UserControl
     {
-        public BindingList<DataFieldResult> DataFieldResults { get; set; } = new BindingList<DataFieldResult>();
-        public BindingList<CalculationFieldResult> CalculationFieldResults { get; set; } = new BindingList<CalculationFieldResult>();
+        public delegate void ConditionalFieldCellDoubleClickHandler(object sender, DataGridViewCellEventArgs e);
+        /// <summary>
+        /// Fired, when a cell in dgvConditionalFields has been double clicked
+        /// </summary>
+        public event ConditionalFieldCellDoubleClickHandler ConditionalFieldCellDoubleClick;
 
         public ucExtractedData()
         {
             InitializeComponent();
+            ucExtractedConditionalFields1.ConditionalFieldCellDoubleClick += FireConditionalFieldCellDoubleClick;
+        }
+
+        private void ucExtractedData_Load(object sender, EventArgs e)
+        {
+            Localize();
         }
 
         /// <summary>
@@ -30,11 +41,33 @@ namespace DokuExtractorStandardGUI.UserControls
             txtClassName.Text = extractionResult.TemplateClassName;
             txtGroupName.Text = extractionResult.TemplateGroupName;
 
-            DataFieldResults = new BindingList<DataFieldResult>(extractionResult.DataFields);
-            CalculationFieldResults = new BindingList<CalculationFieldResult>(extractionResult.CalculationFields);
+            ucExtractedDataFields1.ShowExtractedDataFields(extractionResult.DataFields);
+            ucExtractedCalculationFields1.ShowExtractedCalculationFields(extractionResult.CalculationFields);
+            ucExtractedConditionalFields1.ShowExtractedConditionalFields(extractionResult.ConditionalFields);
+        }
 
-            dgvDataFields.DataSource = extractionResult.DataFields;
-            dgvCalculationFields.DataSource = extractionResult.CalculationFields;
+        /// <summary>
+        /// Checks, if all data fields are filled with data
+        /// </summary>
+        public bool CheckIfAllDataFieldsAreFilled()
+        {
+            return ucExtractedDataFields1.CheckIfAllDataFieldsAreFilled();
+        }
+
+        /// <summary>
+        /// Checks, if all calculation results equal with their validation value(s)
+        /// </summary>
+        public bool CheckIfAllCalculationResultsEqualValidation()
+        {
+            return ucExtractedCalculationFields1.CheckIfAllCalculationResultsEqualValidation();
+        }
+
+        /// <summary>
+        /// Checks, if all conditional fields are filled with data
+        /// </summary>
+        public bool CheckIfAllConditionalFieldsAreFilled()
+        {
+            return ucExtractedConditionalFields1.CheckIfAllConditionalFieldsAreFilled();
         }
 
         /// <summary>
@@ -47,17 +80,22 @@ namespace DokuExtractorStandardGUI.UserControls
             retVal.TemplateClassName = txtClassName.Text;
             retVal.TemplateGroupName = txtGroupName.Text;
 
-            foreach (DataFieldResult dataField in dgvDataFields.DataSource as List<DataFieldResult>)
-            {
-                retVal.DataFields.Add(dataField);
-            }
-
-            foreach (CalculationFieldResult calcField in dgvCalculationFields.DataSource as List<CalculationFieldResult>)
-            {
-                retVal.CalculationFields.Add(calcField);
-            }
+            retVal.DataFields = ucExtractedDataFields1.GetDataFieldExtractionResult();
+            retVal.CalculationFields = ucExtractedCalculationFields1.GetCalculationFieldExtractionResult();
+            retVal.ConditionalFields = ucExtractedConditionalFields1.GetConditionalFieldExtractionResult();
 
             return retVal;
+        }
+
+        private void FireConditionalFieldCellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            ConditionalFieldCellDoubleClick?.Invoke(sender, e);
+        }
+
+        private void Localize()
+        {
+            lblTemplateClassName.Text = Translation.LanguageStrings.TemplateClassName;
+            lblTemplateGroupName.Text = Translation.LanguageStrings.TemplateGroupName;
         }
     }
 }

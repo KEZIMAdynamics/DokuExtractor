@@ -25,6 +25,9 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             ucDataFieldEditor1.RegexExpressionHelper += FireRegexExpressionHelper;
         }
 
+        /// <summary>
+        /// Activates the regex expression helper for defining regex expressions
+        /// </summary>
         public void ActivateRegexExpressionHelper()
         {
             ucDataFieldEditor1.ActivateRegexExpressionHelper();
@@ -33,7 +36,6 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         /// <summary>
         /// Shows general properties and data fields of a class template
         /// </summary>
-        /// <param name="classTemplate"></param>
         public void ShowPropertiesAndDataFields(DocumentClassTemplate classTemplate)
         {
             ShowGeneralProperties(classTemplate);
@@ -41,19 +43,41 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         }
 
         /// <summary>
-        /// Adds a new data field to ucDataField
+        /// Shows general properties and data fields of a group template
         /// </summary>
-        public void AddDataField()
+        public void ShowPropertiesAndDataFields(DocumentGroupTemplate groupTemplate)
         {
-            ucDataFieldEditor1.AddDataField();
+            ShowGeneralProperties(groupTemplate);
+            ShowDataFields(groupTemplate);
         }
 
         /// <summary>
-        /// Deletes the last (added) data field from ucDataField
+        /// Adds a new data field to ucDataFieldEditor
         /// </summary>
-        public void DeleteLastDataField()
+        public void AddDataFieldClassTemplate()
         {
-            ucDataFieldEditor1.DeleteLastDataField();
+            ucDataFieldEditor1.AddDataFieldClassTemplate();
+        }
+
+        /// <summary>
+        /// Adds a new conditional field to ucDataFieldEditor
+        /// </summary>
+        public void AddConditionalField()
+        {
+            ucDataFieldEditor1.AddConditionalField();
+        }
+
+        /// <summary>
+        /// Adds a new data field (group template) to ucDataFieldEditor
+        /// </summary>
+        public void AddDataFieldGroupTemplate()
+        {
+            ucDataFieldEditor1.AddDataFieldGroupTemplate();
+        }
+
+        public void AddCalculationField()
+        {
+            ucDataFieldEditor1.AddCalculationField();
         }
 
         /// <summary>
@@ -65,11 +89,27 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         }
 
         /// <summary>
-        /// Returns the class template with changed data fields
+        /// Returns the group template with changed general properties
         /// </summary>
-        public DocumentClassTemplate GetDocumentClassTemplateWithChangedDataFields()
+        public DocumentGroupTemplate GetDocumentGroupTemplateWithChangedGeneralProperties()
         {
-            return ucDataFieldEditor1.GetDocumentClassTemplateWithChangedDataFields();
+            return ucGeneralPropertyEditor1.GetDocumentGroupTemplateWithChangedGeneralProperties();
+        }
+
+        /// <summary>
+        /// Returns the class template with changed data fields and conditional fields
+        /// </summary>
+        public DocumentClassTemplate GetDocumentClassTemplateWithChangedFields()
+        {
+            return ucDataFieldEditor1.GetDocumentClassTemplateWithChangedFields();
+        }
+
+        /// <summary>
+        /// Returns the group template with changed data fields and calculation fields
+        /// </summary>
+        public DocumentGroupTemplate GetDocumentGroupTemplateWithChangedFields()
+        {
+            return ucDataFieldEditor1.GetDocumentGroupTemplateWithChangedFields();
         }
 
         public void ChangeOrAddRegexExpression(Guid regexHelperID, string regex, bool additionalRegex)
@@ -86,11 +126,28 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         }
 
         /// <summary>
+        /// Shows the general properties of a group template
+        /// </summary>
+        private void ShowGeneralProperties(DocumentGroupTemplate groupTemplate)
+        {
+            ucGeneralPropertyEditor1.ShowGeneralProperties(groupTemplate);
+        }
+
+        /// <summary>
         /// Shows the data fields of a class template
         /// </summary>
         private void ShowDataFields(DocumentClassTemplate classTemplate)
         {
             ucDataFieldEditor1.ShowDataFields(classTemplate);
+        }
+
+        /// <summary>
+        /// Shows the data fields of a group template
+        /// </summary>
+        /// <param name="groupTemplate"></param>
+        private void ShowDataFields(DocumentGroupTemplate groupTemplate)
+        {
+            ucDataFieldEditor1.ShowDataFields(groupTemplate);
         }
 
         private void FireRegexExpressionHelper(Guid id, DataFieldTypes dataFieldType)

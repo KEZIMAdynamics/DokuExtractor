@@ -31,17 +31,18 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmExtractorStandard));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.ucFileSelector1 = new DokuExtractorStandardGUI.UserControls.ucFileSelector();
-            this.ucViewer1 = new DokuExtractorStandardGUI.UserControls.ucViewer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-            this.ucResultAndEditor1 = new DokuExtractorStandardGUI.UserControls.ucResultAndEditor();
+            this.butLanguageEditor = new System.Windows.Forms.Button();
             this.lblInstruction = new System.Windows.Forms.Label();
             this.butOk = new System.Windows.Forms.Button();
-            this.butDeleteDataField = new System.Windows.Forms.Button();
             this.butAddDataField = new System.Windows.Forms.Button();
             this.butSaveTemplate = new System.Windows.Forms.Button();
             this.butGo = new System.Windows.Forms.Button();
             this.butTemplateEditor = new System.Windows.Forms.Button();
+            this.butAddConditionalField = new System.Windows.Forms.Button();
+            this.ucFileSelector1 = new DokuExtractorStandardGUI.UserControls.ucFileSelector();
+            this.ucViewer1 = new DokuExtractorStandardGUI.UserControls.ucViewer();
+            this.ucResultAndEditor1 = new DokuExtractorStandardGUI.UserControls.ucResultAndEditor();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -90,26 +91,6 @@
             this.splitContainer2.SplitterDistance = 308;
             this.splitContainer2.TabIndex = 0;
             // 
-            // ucFileSelector1
-            // 
-            this.ucFileSelector1.BackColor = System.Drawing.Color.White;
-            this.ucFileSelector1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucFileSelector1.FileInfos = ((System.ComponentModel.BindingList<System.IO.FileInfo>)(resources.GetObject("ucFileSelector1.FileInfos")));
-            this.ucFileSelector1.Location = new System.Drawing.Point(0, 0);
-            this.ucFileSelector1.Name = "ucFileSelector1";
-            this.ucFileSelector1.Padding = new System.Windows.Forms.Padding(3);
-            this.ucFileSelector1.Size = new System.Drawing.Size(308, 836);
-            this.ucFileSelector1.TabIndex = 0;
-            // 
-            // ucViewer1
-            // 
-            this.ucViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucViewer1.Location = new System.Drawing.Point(0, 0);
-            this.ucViewer1.Name = "ucViewer1";
-            this.ucViewer1.Size = new System.Drawing.Size(750, 836);
-            this.ucViewer1.TabIndex = 0;
-            this.ucViewer1.ViewerPluginPath = "G:\\DokuExtractor\\GdPicturePdfViewer\\bin\\Debug\\GdPicturePdfViewer.dll";
-            // 
             // splitContainer3
             // 
             this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -125,9 +106,10 @@
             // 
             // splitContainer3.Panel2
             // 
+            this.splitContainer3.Panel2.Controls.Add(this.butAddConditionalField);
+            this.splitContainer3.Panel2.Controls.Add(this.butLanguageEditor);
             this.splitContainer3.Panel2.Controls.Add(this.lblInstruction);
             this.splitContainer3.Panel2.Controls.Add(this.butOk);
-            this.splitContainer3.Panel2.Controls.Add(this.butDeleteDataField);
             this.splitContainer3.Panel2.Controls.Add(this.butAddDataField);
             this.splitContainer3.Panel2.Controls.Add(this.butSaveTemplate);
             this.splitContainer3.Panel2.Controls.Add(this.butGo);
@@ -136,14 +118,17 @@
             this.splitContainer3.SplitterDistance = 700;
             this.splitContainer3.TabIndex = 0;
             // 
-            // ucResultAndEditor1
+            // butLanguageEditor
             // 
-            this.ucResultAndEditor1.BackColor = System.Drawing.Color.White;
-            this.ucResultAndEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucResultAndEditor1.Location = new System.Drawing.Point(0, 0);
-            this.ucResultAndEditor1.Name = "ucResultAndEditor1";
-            this.ucResultAndEditor1.Size = new System.Drawing.Size(500, 700);
-            this.ucResultAndEditor1.TabIndex = 0;
+            this.butLanguageEditor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.butLanguageEditor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.butLanguageEditor.Location = new System.Drawing.Point(176, 82);
+            this.butLanguageEditor.Name = "butLanguageEditor";
+            this.butLanguageEditor.Size = new System.Drawing.Size(100, 47);
+            this.butLanguageEditor.TabIndex = 7;
+            this.butLanguageEditor.Text = "Language Editor";
+            this.butLanguageEditor.UseVisualStyleBackColor = true;
+            this.butLanguageEditor.Click += new System.EventHandler(this.butLanguageEditor_Click);
             // 
             // lblInstruction
             // 
@@ -160,33 +145,21 @@
             // 
             this.butOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.butOk.Location = new System.Drawing.Point(170, 53);
+            this.butOk.Location = new System.Drawing.Point(100, 41);
             this.butOk.Name = "butOk";
-            this.butOk.Size = new System.Drawing.Size(105, 76);
+            this.butOk.Size = new System.Drawing.Size(70, 88);
             this.butOk.TabIndex = 5;
             this.butOk.Text = "OK!";
             this.butOk.UseVisualStyleBackColor = true;
             this.butOk.Click += new System.EventHandler(this.butOk_Click);
             // 
-            // butDeleteDataField
-            // 
-            this.butDeleteDataField.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.butDeleteDataField.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.butDeleteDataField.Location = new System.Drawing.Point(392, 53);
-            this.butDeleteDataField.Name = "butDeleteDataField";
-            this.butDeleteDataField.Size = new System.Drawing.Size(105, 35);
-            this.butDeleteDataField.TabIndex = 4;
-            this.butDeleteDataField.Text = "Delete Data Field";
-            this.butDeleteDataField.UseVisualStyleBackColor = true;
-            this.butDeleteDataField.Click += new System.EventHandler(this.butDeleteDataField_Click);
-            // 
             // butAddDataField
             // 
             this.butAddDataField.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butAddDataField.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.butAddDataField.Location = new System.Drawing.Point(281, 53);
+            this.butAddDataField.Location = new System.Drawing.Point(176, 41);
             this.butAddDataField.Name = "butAddDataField";
-            this.butAddDataField.Size = new System.Drawing.Size(105, 35);
+            this.butAddDataField.Size = new System.Drawing.Size(153, 35);
             this.butAddDataField.TabIndex = 3;
             this.butAddDataField.Text = "Add Data Field";
             this.butAddDataField.UseVisualStyleBackColor = true;
@@ -196,9 +169,9 @@
             // 
             this.butSaveTemplate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butSaveTemplate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.butSaveTemplate.Location = new System.Drawing.Point(281, 94);
+            this.butSaveTemplate.Location = new System.Drawing.Point(282, 82);
             this.butSaveTemplate.Name = "butSaveTemplate";
-            this.butSaveTemplate.Size = new System.Drawing.Size(105, 35);
+            this.butSaveTemplate.Size = new System.Drawing.Size(100, 47);
             this.butSaveTemplate.TabIndex = 2;
             this.butSaveTemplate.Text = "Save Template";
             this.butSaveTemplate.UseVisualStyleBackColor = true;
@@ -208,9 +181,9 @@
             // 
             this.butGo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butGo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.butGo.Location = new System.Drawing.Point(59, 53);
+            this.butGo.Location = new System.Drawing.Point(24, 41);
             this.butGo.Name = "butGo";
-            this.butGo.Size = new System.Drawing.Size(105, 76);
+            this.butGo.Size = new System.Drawing.Size(70, 88);
             this.butGo.TabIndex = 1;
             this.butGo.Text = "Go!";
             this.butGo.UseVisualStyleBackColor = true;
@@ -220,13 +193,53 @@
             // 
             this.butTemplateEditor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butTemplateEditor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.butTemplateEditor.Location = new System.Drawing.Point(392, 94);
+            this.butTemplateEditor.Location = new System.Drawing.Point(388, 82);
             this.butTemplateEditor.Name = "butTemplateEditor";
-            this.butTemplateEditor.Size = new System.Drawing.Size(105, 35);
+            this.butTemplateEditor.Size = new System.Drawing.Size(100, 47);
             this.butTemplateEditor.TabIndex = 0;
             this.butTemplateEditor.Text = "Template Editor";
             this.butTemplateEditor.UseVisualStyleBackColor = true;
             this.butTemplateEditor.Click += new System.EventHandler(this.butTemplateEditor_Click);
+            // 
+            // butAddConditionalField
+            // 
+            this.butAddConditionalField.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.butAddConditionalField.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.butAddConditionalField.Location = new System.Drawing.Point(335, 41);
+            this.butAddConditionalField.Name = "butAddConditionalField";
+            this.butAddConditionalField.Size = new System.Drawing.Size(153, 35);
+            this.butAddConditionalField.TabIndex = 8;
+            this.butAddConditionalField.Text = "Add Conditional Field";
+            this.butAddConditionalField.UseVisualStyleBackColor = true;
+            this.butAddConditionalField.Click += new System.EventHandler(this.butAddConditionalField_Click);
+            // 
+            // ucFileSelector1
+            // 
+            this.ucFileSelector1.BackColor = System.Drawing.Color.White;
+            this.ucFileSelector1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucFileSelector1.Location = new System.Drawing.Point(0, 0);
+            this.ucFileSelector1.Name = "ucFileSelector1";
+            this.ucFileSelector1.Padding = new System.Windows.Forms.Padding(3);
+            this.ucFileSelector1.Size = new System.Drawing.Size(308, 836);
+            this.ucFileSelector1.TabIndex = 0;
+            // 
+            // ucViewer1
+            // 
+            this.ucViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucViewer1.Location = new System.Drawing.Point(0, 0);
+            this.ucViewer1.Name = "ucViewer1";
+            this.ucViewer1.Size = new System.Drawing.Size(750, 836);
+            this.ucViewer1.TabIndex = 0;
+            this.ucViewer1.ViewerPluginPath = "G:\\DokuExtractor\\GdPicturePdfViewer\\bin\\Debug\\GdPicturePdfViewer.dll";
+            // 
+            // ucResultAndEditor1
+            // 
+            this.ucResultAndEditor1.BackColor = System.Drawing.Color.White;
+            this.ucResultAndEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucResultAndEditor1.Location = new System.Drawing.Point(0, 0);
+            this.ucResultAndEditor1.Name = "ucResultAndEditor1";
+            this.ucResultAndEditor1.Size = new System.Drawing.Size(500, 700);
+            this.ucResultAndEditor1.TabIndex = 0;
             // 
             // frmExtractorStandard
             // 
@@ -268,9 +281,10 @@
         private System.Windows.Forms.Button butSaveTemplate;
         private UserControls.ucResultAndEditor ucResultAndEditor1;
         private System.Windows.Forms.Button butAddDataField;
-        private System.Windows.Forms.Button butDeleteDataField;
         private System.Windows.Forms.Button butOk;
         private System.Windows.Forms.Label lblInstruction;
+        private System.Windows.Forms.Button butLanguageEditor;
+        private System.Windows.Forms.Button butAddConditionalField;
     }
 }
 

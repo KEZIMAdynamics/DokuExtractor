@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DokuExtractorCore.Model;
+using DokuExtractorStandardGUI.Localization;
 
 namespace DokuExtractorStandardGUI.UserControls
 {
@@ -25,10 +26,22 @@ namespace DokuExtractorStandardGUI.UserControls
         /// </summary>
         public event RegexExpressionHelperHandler RegexExpressionHelper;
 
+        public delegate void ConditionalFieldCellDoubleClickHandler(object sender, DataGridViewCellEventArgs e);
+        /// <summary>
+        /// Fired, when a cell in dgvConditionalFields has been double clicked
+        /// </summary>
+        public event ConditionalFieldCellDoubleClickHandler ConditionalFieldCellDoubleClick;
+
         public ucResultAndEditor()
         {
             InitializeComponent();
             ucSingleTemplateEditor1.RegexExpressionHelper += FireRegexExpressionHelper;
+            ucExtractedData1.ConditionalFieldCellDoubleClick += FireConditionalFieldCellDoubleClick;
+        }
+
+        private void ucResultAndEditor_Load(object sender, EventArgs e)
+        {
+            Localize();
         }
 
         /// <summary>
@@ -79,7 +92,7 @@ namespace DokuExtractorStandardGUI.UserControls
         {
             var retVal = new DocumentClassTemplate();
             retVal = ucSingleTemplateEditor1.GetDocumentClassTemplateWithChangedGeneralProperties();
-            var classTemplateWithChangedDataFields = ucSingleTemplateEditor1.GetDocumentClassTemplateWithChangedDataFields();
+            var classTemplateWithChangedDataFields = ucSingleTemplateEditor1.GetDocumentClassTemplateWithChangedFields();
             retVal.DataFields = classTemplateWithChangedDataFields.DataFields;
 
             return retVal;
@@ -90,16 +103,40 @@ namespace DokuExtractorStandardGUI.UserControls
         /// </summary>
         public void AddDataField()
         {
-            ucSingleTemplateEditor1.AddDataField();
+            ucSingleTemplateEditor1.AddDataFieldClassTemplate();
             ucSingleTemplateEditor1.ActivateRegexExpressionHelper();
         }
 
         /// <summary>
-        /// Deletes the last (added) data field from ucDataField
+        /// Adds a new conditional field to ucDataField
         /// </summary>
-        public void DeleteDataField()
+        public void AddConditionalField()
         {
-            ucSingleTemplateEditor1.DeleteLastDataField();
+            ucSingleTemplateEditor1.AddConditionalField();
+        }
+
+        /// <summary>
+        /// Checks, if all data fields are filled with data
+        /// </summary>
+        public bool CheckIfAllDataFieldsAreFilled()
+        {
+            return ucExtractedData1.CheckIfAllDataFieldsAreFilled();
+        }
+
+        /// <summary>
+        /// Checks, if all calculation results equal with their validation value(s)
+        /// </summary>
+        public bool CheckIfAllCalculationResultsEqualValidation()
+        {
+            return ucExtractedData1.CheckIfAllCalculationResultsEqualValidation();
+        }
+
+        /// <summary>
+        /// Checks, if all conditional fields are filled with data
+        /// </summary>
+        public bool CheckIfAllConditionalFieldsAreFilled()
+        {
+            return ucExtractedData1.CheckIfAllConditionalFieldsAreFilled();
         }
 
         /// <summary>
@@ -113,6 +150,12 @@ namespace DokuExtractorStandardGUI.UserControls
         public void ChangeOrAddRegexExpression(Guid regexHelperID, string regex, bool additionalRegex)
         {
             ucSingleTemplateEditor1.ChangeOrAddRegexExpression(regexHelperID, regex, additionalRegex);
+        }
+
+        private void Localize()
+        {
+            tabExtractedData.Text = Translation.LanguageStrings.ExtractedData;
+            tabSingleTemplateEditor.Text = Translation.LanguageStrings.SingleTemplateEditor;
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
@@ -131,6 +174,11 @@ namespace DokuExtractorStandardGUI.UserControls
         private void FireRegexExpressionHelper(Guid id, DataFieldTypes dataFieldType)
         {
             RegexExpressionHelper?.Invoke(id, dataFieldType);
+        }
+
+        private void FireConditionalFieldCellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            ConditionalFieldCellDoubleClick?.Invoke(sender, e);
         }
     }
 }
