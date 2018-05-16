@@ -132,11 +132,29 @@
     <Compile Include="UserControlsTemplateEditor\ucTemplateSelector.Designer.cs">
       <DependentUpon>ucTemplateSelector.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\ucExtractedCalculationFields.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ucExtractedCalculationFields.Designer.cs">
+      <DependentUpon>ucExtractedCalculationFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ucExtractedConditionalFields.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ucExtractedConditionalFields.Designer.cs">
+      <DependentUpon>ucExtractedConditionalFields.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\ucExtractedData.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UserControls\ucExtractedData.Designer.cs">
       <DependentUpon>ucExtractedData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ucExtractedDataFields.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ucExtractedDataFields.Designer.cs">
+      <DependentUpon>ucExtractedDataFields.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\ucFileSelector.cs">
       <SubType>UserControl</SubType>
@@ -210,8 +228,17 @@
     <EmbeddedResource Include="UserControlsTemplateEditor\ucTemplateSelector.resx">
       <DependentUpon>ucTemplateSelector.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ucExtractedCalculationFields.resx">
+      <DependentUpon>ucExtractedCalculationFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ucExtractedConditionalFields.resx">
+      <DependentUpon>ucExtractedConditionalFields.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ucExtractedData.resx">
       <DependentUpon>ucExtractedData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ucExtractedDataFields.resx">
+      <DependentUpon>ucExtractedDataFields.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ucFileSelector.resx">
       <DependentUpon>ucFileSelector.cs</DependentUpon>
@@ -227,7 +254,10 @@
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\DokuExtractorStandardGUI.Localization.frmLanguageEditor.datasource" />
+    <None Include="Properties\DataSources\DokuExtractorStandardGUI.UserControls.ucExtractedCalculationFields.datasource" />
+    <None Include="Properties\DataSources\DokuExtractorStandardGUI.UserControls.ucExtractedConditionalFields.datasource" />
     <None Include="Properties\DataSources\DokuExtractorStandardGUI.UserControls.ucExtractedData.datasource" />
+    <None Include="Properties\DataSources\DokuExtractorStandardGUI.UserControls.ucExtractedDataFields.datasource" />
     <None Include="Properties\DataSources\DokuExtractorStandardGUI.UserControls.ucFileSelector.datasource" />
     <None Include="Properties\DataSources\DokuExtractorStandardGUI.UserControlsTemplateEditor.ucConditionalFieldClassTemplate.datasource" />
     <None Include="Properties\DataSources\DokuExtractorStandardGUI.UserControlsTemplateEditor.ucTemplateSelector.datasource" />
