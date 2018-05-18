@@ -62,9 +62,10 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         private void butSaveTemplate_Click(object sender, EventArgs e)
         {
             this.selectedGroupTemplate = ucSingleTemplateEditor1.GetDocumentGroupTemplateWithChangedGeneralProperties();
-            var groupTemplateWithChangedDataFields = ucSingleTemplateEditor1.GetDocumentGroupTemplateWithChangedFields();
-            this.selectedGroupTemplate.DataFields = groupTemplateWithChangedDataFields.DataFields;
-
+            var groupTemplateWithChangedFields = ucSingleTemplateEditor1.GetDocumentGroupTemplateWithChangedFields();
+            this.selectedGroupTemplate.DataFields = groupTemplateWithChangedFields.DataFields;
+            this.selectedGroupTemplate.CalculationFields = groupTemplateWithChangedFields.CalculationFields;
+            this.selectedGroupTemplate.ConditionalFields = groupTemplateWithChangedFields.ConditionalFields;
 
             var oldTemplate = this.groupTemplates.Where(x => x.TemplateGroupName == this.selectedGroupTemplate.TemplateGroupName).FirstOrDefault();
             if (oldTemplate != null)

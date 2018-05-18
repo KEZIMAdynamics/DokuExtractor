@@ -17,7 +17,7 @@ namespace DokuExtractorStandardGUI.Logic
         private static Type dataFieldClassTemplateUserControl = typeof(ucDataFieldClassTemplate);
         private static Type dataFieldGroupTemplateUserControl = typeof(ucDataFieldGroupTemplate);
         private static Type calculationFieldGroupTemplateUserControl = typeof(ucCalculationFieldGroupTemplate);
-        private static Type conditionalFieldTemplateUserControl = typeof(ucConditionalFieldClassTemplate);
+        private static Type conditionalFieldTemplateUserControl = typeof(ucConditionalFieldTemplate);
 
         public static void RegisterDataFieldClassTemplateUserControl<T>() where T : ucDataFieldClassTemplate
         {
@@ -34,7 +34,7 @@ namespace DokuExtractorStandardGUI.Logic
             calculationFieldGroupTemplateUserControl = typeof(T);
         }
 
-        public static void RegisterConditionalFieldGroupTemplateUserControl<T>() where T : ucConditionalFieldClassTemplate
+        public static void RegisterConditionalFieldGroupTemplateUserControl<T>() where T : ucConditionalFieldTemplate
         {
             conditionalFieldTemplateUserControl = typeof(T);
         }

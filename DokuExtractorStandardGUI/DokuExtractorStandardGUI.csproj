@@ -85,11 +85,11 @@
     <Compile Include="UserControlsTemplateEditor\ucClassTemplateEditor.Designer.cs">
       <DependentUpon>ucClassTemplateEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControlsTemplateEditor\ucConditionalFieldClassTemplate.cs">
+    <Compile Include="UserControlsTemplateEditor\ucConditionalFieldTemplate.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControlsTemplateEditor\ucConditionalFieldClassTemplate.Designer.cs">
-      <DependentUpon>ucConditionalFieldClassTemplate.cs</DependentUpon>
+    <Compile Include="UserControlsTemplateEditor\ucConditionalFieldTemplate.Designer.cs">
+      <DependentUpon>ucConditionalFieldTemplate.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControlsTemplateEditor\ucDataFieldClassTemplate.cs">
       <SubType>UserControl</SubType>
@@ -205,8 +205,8 @@
     <EmbeddedResource Include="UserControlsTemplateEditor\ucClassTemplateEditor.resx">
       <DependentUpon>ucClassTemplateEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControlsTemplateEditor\ucConditionalFieldClassTemplate.resx">
-      <DependentUpon>ucConditionalFieldClassTemplate.cs</DependentUpon>
+    <EmbeddedResource Include="UserControlsTemplateEditor\ucConditionalFieldTemplate.resx">
+      <DependentUpon>ucConditionalFieldTemplate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControlsTemplateEditor\ucDataFieldClassTemplate.resx">
       <DependentUpon>ucDataFieldClassTemplate.cs</DependentUpon>

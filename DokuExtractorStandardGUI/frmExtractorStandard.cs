@@ -100,7 +100,7 @@ namespace DokuExtractorStandardGUI
             TemplateUserControlSelector.RegisterDataFieldClassTemplateUserControl<ucDataFieldClassTemplate>();
             TemplateUserControlSelector.RegisterDataFieldGroupTemplateUserControl<ucDataFieldGroupTemplate>();
             TemplateUserControlSelector.RegisterCalculationFieldGroupTemplateUserControl<ucCalculationFieldGroupTemplate>();
-            TemplateUserControlSelector.RegisterConditionalFieldGroupTemplateUserControl<ucConditionalFieldClassTemplate>();
+            TemplateUserControlSelector.RegisterConditionalFieldGroupTemplateUserControl<ucConditionalFieldTemplate>();
         }
 
         private void Localize()

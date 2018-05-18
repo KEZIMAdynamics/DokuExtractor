@@ -1,6 +1,6 @@
 ﻿namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
 {
-    partial class ucConditionalFieldClassTemplate
+    partial class ucConditionalFieldTemplate
     {
         /// <summary> 
         /// Erforderliche Designervariable.
@@ -112,7 +112,7 @@
             // 
             // ucConditionalFieldClassTemplateBindingSource
             // 
-            this.ucConditionalFieldClassTemplateBindingSource.DataSource = typeof(DokuExtractorStandardGUI.UserControlsTemplateEditor.ucConditionalFieldClassTemplate);
+            this.ucConditionalFieldClassTemplateBindingSource.DataSource = typeof(DokuExtractorStandardGUI.UserControlsTemplateEditor.ucConditionalFieldTemplate);
             // 
             // butDeleteConditionalField
             // 
