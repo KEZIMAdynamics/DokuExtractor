@@ -40,7 +40,7 @@ namespace DokuExtractorStandardGUI.UserControls
                     ValidationValues = calcField.ValidationValues,
                     CalculationEqualsValidation = calcField.CalculationEqualsValidation,
                     FieldType = calcField.FieldType,
-                    FieldTypeDisplayValue = Translation.TranslateFieldTypeEnum(calcField.FieldType)
+                    FieldTypeDisplayValue = Translation.TranslateDataFieldTypeEnum(calcField.FieldType)
                 });
             }
             dgvCalculationFields.DataSource = CalculationFieldResultsDisplayBinding;
@@ -79,10 +79,10 @@ namespace DokuExtractorStandardGUI.UserControls
 
         private void Localize()
         {
-            dgvCalculationFields.Columns["colCalc" + nameof(CalculationFieldResultDisplay.Name)].HeaderText = Translation.LanguageStrings.CalculationFieldName;
-            dgvCalculationFields.Columns["colCalc" + nameof(CalculationFieldResultDisplay.CalculationValue)].HeaderText = Translation.LanguageStrings.CalculationValue;
-            dgvCalculationFields.Columns["colCalc" + nameof(CalculationFieldResultDisplay.FieldTypeDisplayValue)].HeaderText = Translation.LanguageStrings.CalculationFieldType;
-            dgvCalculationFields.Columns["colCalc" + nameof(CalculationFieldResultDisplay.CalculationEqualsValidation)].HeaderText = Translation.LanguageStrings.CalculationEqualsValidation;
+            dgvCalculationFields.Columns["col" + nameof(CalculationFieldResultDisplay.Name)].HeaderText = Translation.LanguageStrings.CalculationFieldName;
+            dgvCalculationFields.Columns["col" + nameof(CalculationFieldResultDisplay.CalculationValue)].HeaderText = Translation.LanguageStrings.CalculationValue;
+            dgvCalculationFields.Columns["col" + nameof(CalculationFieldResultDisplay.FieldTypeDisplayValue)].HeaderText = Translation.LanguageStrings.CalculationFieldType;
+            dgvCalculationFields.Columns["col" + nameof(CalculationFieldResultDisplay.CalculationEqualsValidation)].HeaderText = Translation.LanguageStrings.CalculationEqualsValidation;
         }
     }
 }

@@ -21,6 +21,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         public event ConditionalFieldEraserHandler ConditionalFieldEraser;
 
         public string NameText { get { return txtName.Text; } }
+        public int ConditionalFieldTypeInt { get { return cbxConditionalFieldType.SelectedIndex; } }
         public BindingList<ConditionValue> ConditionsBindingList { get; set; } = new BindingList<ConditionValue>();
 
         public List<ConditionValue> ConditionsList
@@ -54,6 +55,9 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             Localize();
 
             txtName.Text = this.conditionalFieldTemplate.Name;
+
+            cbxConditionalFieldType.SelectedIndex = (int)(this.conditionalFieldTemplate.ConditionalFieldType);
+
             this.ConditionsList = this.conditionalFieldTemplate.ConditionValues;
             dgvConditions.DataSource = this.ConditionsBindingList;
         }
@@ -61,10 +65,19 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         private void Localize()
         {
             lblName.Text = Translation.LanguageStrings.ConditionalFieldName;
+            lblConditionalFieldType.Text = Translation.LanguageStrings.ConditionalFieldType;
             lblConditionValues.Text = Translation.LanguageStrings.ConditionalFieldConditions;
             butAddCondition.Text = Translation.LanguageStrings.ButAddCondition;
             butDeleteCondition.Text = Translation.LanguageStrings.ButDeleteCondition;
             butDeleteConditionalField.Text = Translation.LanguageStrings.ButDeleteConditionalField;
+
+            cbxConditionalFieldType.Items[(int)(ConditionalFieldType.Text)] = Translation.LanguageStrings.ConditionalFieldTypeText;
+            cbxConditionalFieldType.Items[(int)(ConditionalFieldType.Bool)] = Translation.LanguageStrings.ConditionalFieldTypeBool;
+            cbxConditionalFieldType.Items[(int)(ConditionalFieldType.Number)] = Translation.LanguageStrings.ConditionalFieldTypeNumber;
+            cbxConditionalFieldType.Items[(int)(ConditionalFieldType.Date)] = Translation.LanguageStrings.ConditionalFieldTypeDate;
+            cbxConditionalFieldType.Items[(int)(ConditionalFieldType.UserId)] = Translation.LanguageStrings.ConditionalFieldTypeUserId;
+            cbxConditionalFieldType.Items[(int)(ConditionalFieldType.UserGroupId)] = Translation.LanguageStrings.ConditionalFieldTypeUserGroupId;
+            cbxConditionalFieldType.Items[(int)(ConditionalFieldType.UserOrUserGroupId)] = Translation.LanguageStrings.ConditionalFieldTypeUserOrUserGroupId;
 
             dgvConditions.Columns["col" + nameof(ConditionValue.Condition)].HeaderText = Translation.LanguageStrings.Condition;
             dgvConditions.Columns["col" + nameof(ConditionValue.Value)].HeaderText = Translation.LanguageStrings.ConditionValue;

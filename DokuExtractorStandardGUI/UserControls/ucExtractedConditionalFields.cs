@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DokuExtractorCore.Model;
 using DokuExtractorStandardGUI.Localization;
+using DokuExtractorStandardGUI.Model;
 
 namespace DokuExtractorStandardGUI.UserControls
 {
@@ -21,7 +22,7 @@ namespace DokuExtractorStandardGUI.UserControls
         public event ConditionalFieldCellDoubleClickHandler ConditionalFieldCellDoubleClick;
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public BindingList<ConditionalFieldResult> ConditionalFieldResultBinding { get; set; } = new BindingList<ConditionalFieldResult>();
+        public BindingList<ConditionalFieldResultDisplay> ConditionalFieldResultDisplayBinding { get; set; } = new BindingList<ConditionalFieldResultDisplay>();
 
         public ucExtractedConditionalFields()
         {
@@ -35,8 +36,18 @@ namespace DokuExtractorStandardGUI.UserControls
 
         public void ShowExtractedConditionalFields(List<ConditionalFieldResult> extractedConditionalFields)
         {
-            ConditionalFieldResultBinding = new BindingList<ConditionalFieldResult>(extractedConditionalFields);
-            dgvConditionalFields.DataSource = ConditionalFieldResultBinding;
+            ConditionalFieldResultDisplayBinding = new BindingList<ConditionalFieldResultDisplay>();
+            foreach (var condField in extractedConditionalFields)
+            {
+                ConditionalFieldResultDisplayBinding.Add(new ConditionalFieldResultDisplay()
+                {
+                    Name = condField.Name,
+                    Value = condField.Value,
+                    ConditionalFieldType = condField.ConditionalFieldType,
+                    ConditionalFieldTypeDisplayValue = Translation.TranslateConditionalFieldTypeEnum(condField.ConditionalFieldType)
+                });
+            }
+            dgvConditionalFields.DataSource = ConditionalFieldResultDisplayBinding;
         }
 
         /// <summary>
@@ -44,7 +55,7 @@ namespace DokuExtractorStandardGUI.UserControls
         /// </summary>
         public bool CheckIfAllConditionalFieldsAreFilled()
         {
-            foreach (ConditionalFieldResult condField in dgvConditionalFields.DataSource as BindingList<ConditionalFieldResult>)
+            foreach (ConditionalFieldResultDisplay condField in dgvConditionalFields.DataSource as BindingList<ConditionalFieldResultDisplay>)
             {
                 if (string.IsNullOrWhiteSpace(condField.Value))
                 {
@@ -62,7 +73,7 @@ namespace DokuExtractorStandardGUI.UserControls
         {
             var retVal = new List<ConditionalFieldResult>();
 
-            foreach (ConditionalFieldResult condField in dgvConditionalFields.DataSource as BindingList<ConditionalFieldResult>)
+            foreach (ConditionalFieldResultDisplay condField in dgvConditionalFields.DataSource as BindingList<ConditionalFieldResultDisplay>)
             {
                 retVal.Add(condField);
             }
@@ -72,8 +83,9 @@ namespace DokuExtractorStandardGUI.UserControls
 
         private void Localize()
         {
-            dgvConditionalFields.Columns["colCond" + nameof(ConditionalFieldResult.Name)].HeaderText = Translation.LanguageStrings.ConditionalFieldName;
-            dgvConditionalFields.Columns["colCond" + nameof(ConditionalFieldResult.Value)].HeaderText = Translation.LanguageStrings.ConditionValue;
+            dgvConditionalFields.Columns["col" + nameof(ConditionalFieldResultDisplay.Name)].HeaderText = Translation.LanguageStrings.ConditionalFieldName;
+            dgvConditionalFields.Columns["col" + nameof(ConditionalFieldResultDisplay.Value)].HeaderText = Translation.LanguageStrings.ConditionValue;
+            dgvConditionalFields.Columns["col" + nameof(ConditionalFieldResultDisplay.ConditionalFieldTypeDisplayValue)].HeaderText = Translation.LanguageStrings.ConditionalFieldType;
         }
 
         private void dgvConditionalFields_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

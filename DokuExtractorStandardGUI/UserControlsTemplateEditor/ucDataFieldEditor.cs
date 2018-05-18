@@ -488,6 +488,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             if (ucConditionalField != null)
             {
                 retVal.Name = ucConditionalField.NameText;
+                retVal.ConditionalFieldType = (ConditionalFieldType)(ucConditionalField.ConditionalFieldTypeInt);
                 retVal.ConditionValues = ucConditionalField.ConditionsList;
             }
             return retVal;

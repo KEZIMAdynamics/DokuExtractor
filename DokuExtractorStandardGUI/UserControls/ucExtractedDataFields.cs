@@ -38,7 +38,7 @@ namespace DokuExtractorStandardGUI.UserControls
                     Name = dataField.Name,
                     Value = dataField.Value,
                     FieldType = dataField.FieldType,
-                    FieldTypeDisplayValue = Translation.TranslateFieldTypeEnum(dataField.FieldType)
+                    FieldTypeDisplayValue = Translation.TranslateDataFieldTypeEnum(dataField.FieldType)
                 });
             }
 

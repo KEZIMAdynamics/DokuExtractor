@@ -54,11 +54,12 @@ namespace DokuExtractorStandardGUI.Localization
         #region ConditionalField
         public string ConditionalFieldName { get; set; } = "Name";
         public string ConditionalFieldConditions { get; set; } = "Conditions";
+        public string ConditionalFieldType { get; set; } = "Type";
         public string Condition { get; set; } = "Condition";
         public string ConditionValue { get; set; } = "Value";
 
-        public string ButAddCondition { get; set; } = "Add condition";
-        public string ButDeleteCondition { get; set; } = "Delete condition";
+        public string ButAddCondition { get; set; } = "+";
+        public string ButDeleteCondition { get; set; } = "-";
         public string ButDeleteConditionalField { get; set; } = "Delete conditional field";
         #endregion ConditionalField
 
@@ -82,6 +83,16 @@ namespace DokuExtractorStandardGUI.Localization
         public string FieldTypeVatId { get; set; } = "VAT ID";
         public string FieldTypeTerm { get; set; } = "Term";
         #endregion FieldType
+
+        #region ConditionalFieldType
+        public string ConditionalFieldTypeText { get; set; } = "Text";
+        public string ConditionalFieldTypeBool { get; set; } = "Bool";
+        public string ConditionalFieldTypeNumber { get; set; } = "Number";
+        public string ConditionalFieldTypeDate { get; set; } = "Date";
+        public string ConditionalFieldTypeUserId { get; set; } = "User ID";
+        public string ConditionalFieldTypeUserGroupId { get; set; } = "User group ID";
+        public string ConditionalFieldTypeUserOrUserGroupId { get; set; } = "User or user group ID";
+        #endregion ConditionalFieldType
 
         #region GeneralPropertyEditor
         public string Iban { get; set; } = "IBAN";

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DokuExtractorStandardGUI.Model
 {
-    public class CalculationFieldResultDisplay : DokuExtractorCore.Model.CalculationFieldResult
+    public class CalculationFieldResultDisplay : CalculationFieldResult
     {
         public string FieldTypeDisplayValue { get; set; } = string.Empty;
     }

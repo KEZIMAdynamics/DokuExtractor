@@ -12,6 +12,6 @@ namespace DokuExtractorCore.Model
     public class DataFieldClassTemplate : FieldTemplateBase
     {
         public List<string> RegexExpressions { get; set; } = new List<string>();
-        public DataFieldType FieldType { get; set; }
+        public DataFieldType FieldType { get; set; } = DataFieldType.Text;
     }
 }

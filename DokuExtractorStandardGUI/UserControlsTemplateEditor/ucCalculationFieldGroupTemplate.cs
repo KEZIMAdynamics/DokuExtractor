@@ -21,7 +21,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         public event CalculationFieldEraserHandler CalculationFieldEraser;
 
         public string NameText { get { return txtName.Text; } }
-        public int FieldTypeInt { get { return lbxFieldType.SelectedIndex; } }
+        public int FieldTypeInt { get { return cbxFieldType.SelectedIndex; } }
         public string CalculationExpressionText { get { return txtCalculationExpression.Text; } }
         public int CalculationPrecisionInt { get { var retVal = -1; int.TryParse(cbxCalculationPrecision.SelectedText, out retVal); return retVal; } }
         public string ValidationExpressionText { get { return txtValidationExpressions.Text; } }
@@ -46,7 +46,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
 
             Localize();
 
-            lbxFieldType.SelectedIndex = (int)(this.calculationFieldTemplate.FieldType);
+            cbxFieldType.SelectedIndex = (int)(this.calculationFieldTemplate.FieldType);
 
             txtCalculationExpression.Text = this.calculationFieldTemplate.CalculationExpression;
             cbxCalculationPrecision.SelectedText = this.calculationFieldTemplate.CalculationExpressionPrecision.ToString();
@@ -66,13 +66,13 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             lblCalculationExpression.Text = Translation.LanguageStrings.CalculationExpression;
             lblValidationExpressions.Text = Translation.LanguageStrings.ValidationExpressions;
             butDeleteCalculationField.Text = Translation.LanguageStrings.ButDeleteCalculationField;
-            lbxFieldType.Items[(int)(DataFieldType.Text)] = Translation.LanguageStrings.FieldTypeText;
-            lbxFieldType.Items[(int)(DataFieldType.Date)] = Translation.LanguageStrings.FieldTypeDate;
-            lbxFieldType.Items[(int)(DataFieldType.Currency)] = Translation.LanguageStrings.FieldTypeCurrency;
-            lbxFieldType.Items[(int)(DataFieldType.IBAN)] = Translation.LanguageStrings.FieldTypeIban;
-            lbxFieldType.Items[(int)(DataFieldType.AnchorLessIBAN)] = Translation.LanguageStrings.FieldTypeAnchorlessIban;
-            lbxFieldType.Items[(int)(DataFieldType.VatId)] = Translation.LanguageStrings.FieldTypeVatId;
-            lbxFieldType.Items[(int)(DataFieldType.Term)] = Translation.LanguageStrings.FieldTypeTerm;
+            cbxFieldType.Items[(int)(DataFieldType.Text)] = Translation.LanguageStrings.FieldTypeText;
+            cbxFieldType.Items[(int)(DataFieldType.Date)] = Translation.LanguageStrings.FieldTypeDate;
+            cbxFieldType.Items[(int)(DataFieldType.Currency)] = Translation.LanguageStrings.FieldTypeCurrency;
+            cbxFieldType.Items[(int)(DataFieldType.IBAN)] = Translation.LanguageStrings.FieldTypeIban;
+            cbxFieldType.Items[(int)(DataFieldType.AnchorLessIBAN)] = Translation.LanguageStrings.FieldTypeAnchorlessIban;
+            cbxFieldType.Items[(int)(DataFieldType.VatId)] = Translation.LanguageStrings.FieldTypeVatId;
+            cbxFieldType.Items[(int)(DataFieldType.Term)] = Translation.LanguageStrings.FieldTypeTerm;
         }
 
         private void butDeleteCalculationField_Click(object sender, EventArgs e)

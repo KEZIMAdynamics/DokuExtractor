@@ -1,5 +1,4 @@
 ﻿using DokuExtractorCore.Model;
-using DokuExtractorStandardGUI.Localization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace DokuExtractorStandardGUI.Model
 {
-    public class DataFieldResultDisplay : DataFieldResult
+    public class ConditionalFieldResultDisplay : ConditionalFieldResult
     {
-        public string FieldTypeDisplayValue { get; set; } = string.Empty;
+        public string ConditionalFieldTypeDisplayValue { get; set; } = string.Empty;
     }
 }

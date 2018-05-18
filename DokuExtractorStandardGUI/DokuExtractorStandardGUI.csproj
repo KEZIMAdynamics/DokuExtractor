@@ -70,6 +70,7 @@
     <Compile Include="Localization\Translation.cs" />
     <Compile Include="Logic\TemplateUserControlSelector.cs" />
     <Compile Include="Model\CalculationFieldResultDisplay.cs" />
+    <Compile Include="Model\ConditionalFieldResultDisplay.cs" />
     <Compile Include="Model\DataFieldResultDisplay.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

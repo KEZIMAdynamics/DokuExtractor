@@ -84,7 +84,7 @@ namespace DokuExtractorStandardGUI.Localization
             }
         }
 
-        public static string TranslateFieldTypeEnum(DataFieldType fieldType)
+        public static string TranslateDataFieldTypeEnum(DataFieldType fieldType)
         {
             switch (fieldType)
             {
@@ -102,6 +102,29 @@ namespace DokuExtractorStandardGUI.Localization
                     return LanguageStrings.FieldTypeVatId;
                 case DataFieldType.Term:
                     return LanguageStrings.FieldTypeTerm;
+                default:
+                    return string.Empty;
+            }
+        }
+
+        public static string TranslateConditionalFieldTypeEnum(ConditionalFieldType conditionalFieldType)
+        {
+            switch (conditionalFieldType)
+            {
+                case ConditionalFieldType.Text:
+                    return LanguageStrings.ConditionalFieldTypeText;
+                case ConditionalFieldType.Bool:
+                    return LanguageStrings.ConditionalFieldTypeBool;
+                case ConditionalFieldType.Number:
+                    return LanguageStrings.ConditionalFieldTypeNumber;
+                case ConditionalFieldType.Date:
+                    return LanguageStrings.ConditionalFieldTypeDate;
+                case ConditionalFieldType.UserId:
+                    return LanguageStrings.ConditionalFieldTypeUserId;
+                case ConditionalFieldType.UserGroupId:
+                    return LanguageStrings.ConditionalFieldTypeUserGroupId;
+                case ConditionalFieldType.UserOrUserGroupId:
+                    return LanguageStrings.ConditionalFieldTypeUserOrUserGroupId;
                 default:
                     return string.Empty;
             }
