@@ -12,9 +12,9 @@ namespace DokuExtractorCore.Model
     public class CalculationFieldTemplate : FieldTemplateBase
     {
         /// <summary>
-        /// Field type. Currently only <see cref="DataFieldTypes.Currency"/> operations are supported by the calculator.
+        /// Field type. Currently only <see cref="DataFieldType.Currency"/> operations are supported by the calculator.
         /// </summary>
-        public DataFieldTypes FieldType { get; set; } = DataFieldTypes.Currency;
+        public DataFieldType FieldType { get; set; } = DataFieldType.Currency;
 
         /// <summary>
         /// Allows common arithmetic operations with data field values. Data field values need to be enclosed by [].

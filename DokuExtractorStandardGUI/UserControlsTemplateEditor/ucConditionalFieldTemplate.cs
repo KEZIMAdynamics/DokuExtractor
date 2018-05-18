@@ -12,7 +12,7 @@ using DokuExtractorStandardGUI.Localization;
 
 namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
 {
-    public partial class ucConditionalFieldClassTemplate : UserControl
+    public partial class ucConditionalFieldTemplate : UserControl
     {
         public delegate void ConditionalFieldEraserHandler(Guid id);
         /// <summary>
@@ -38,12 +38,12 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
 
         private ConditionalFieldTemplate conditionalFieldTemplate { get; set; } = new ConditionalFieldTemplate();
 
-        public ucConditionalFieldClassTemplate()
+        public ucConditionalFieldTemplate()
         {
             InitializeComponent();
         }
 
-        public ucConditionalFieldClassTemplate(ConditionalFieldTemplate dataFieldClassTemplate)
+        public ucConditionalFieldTemplate(ConditionalFieldTemplate dataFieldClassTemplate)
         {
             InitializeComponent();
             this.conditionalFieldTemplate = dataFieldClassTemplate;
@@ -101,6 +101,11 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         private void FireConditionalFieldEraser(Guid id)
         {
             ConditionalFieldEraser?.Invoke(id);
+        }
+
+        private void dgvConditions_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

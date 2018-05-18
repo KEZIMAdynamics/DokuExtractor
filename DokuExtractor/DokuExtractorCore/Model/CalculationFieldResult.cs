@@ -17,9 +17,9 @@ namespace DokuExtractorCore.Model
         public string Name { get; set; } = string.Empty;
 
         /// <summary>
-        /// Field type. Currently only <see cref="DataFieldTypes.Currency"/> operations are supported by the calculator.
+        /// Field type. Currently only <see cref="DataFieldType.Currency"/> operations are supported by the calculator.
         /// </summary>
-        public DataFieldTypes FieldType { get; set; } = DataFieldTypes.Currency;
+        public DataFieldType FieldType { get; set; } = DataFieldType.Currency;
 
         /// <summary>
         /// The resulting value of the first expression.

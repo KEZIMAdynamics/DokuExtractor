@@ -90,7 +90,7 @@ namespace DokuExtractorGUI
                   //           RegexExpressions = new List<string>(){ "/d/" },
                              TextAnchors = new List<string>(){ "Datum", "Datum:" },
                              //RegexHalfString = "Auto ",
-                              FieldType = DataFieldTypes.Date
+                              FieldType = DataFieldType.Date
                         },
                         new DokuExtractorCore.Model.DataFieldGroupTemplate()
                         {
@@ -98,7 +98,7 @@ namespace DokuExtractorGUI
                     //        RegexExpressions = new List<string>(){"/s/" },
                             TextAnchors = new List<string>(){ "Summe", "Summe:" },
                             //RegexHalfString = "Flugzeug ",
-                              FieldType = DataFieldTypes.Currency
+                              FieldType = DataFieldType.Currency
                         }
                    },
                 CalculationFields = new List<CalculationFieldTemplate>()
@@ -108,7 +108,7 @@ namespace DokuExtractorGUI
                             Name = "Netto Brutto Vergleich",
                             CalculationExpression = "[Rechnungssumme Netto]+[Betrag MwSt]",
                             ValidationExpressions = new List<string>(){ "[Rechnungssumme Brutto]"},
-                            FieldType = DataFieldTypes.Currency
+                            FieldType = DataFieldType.Currency
                         }
                     },
                 ConditionalFields = new List<ConditionalFieldTemplate>()
@@ -142,7 +142,7 @@ namespace DokuExtractorGUI
             tbRegexTextAnchor.Text = tbRegexTextAnchor.Text.Trim(' ');
             var finder = new RegexExpressionFinder();
 
-            DataFieldTypes type = (DataFieldTypes)Enum.Parse(typeof(DataFieldTypes), listBox1.SelectedItem.ToString(), true);
+            DataFieldType type = (DataFieldType)Enum.Parse(typeof(DataFieldType), listBox1.SelectedItem.ToString(), true);
 
             RegexExpressionFinderResult expressionResult;
             if (finder.TryFindRegexMatchExpress(tbInhalt.Text, tbRegexTextAnchor.Text, tbRegexTargetValue.Text, type, false, out expressionResult))

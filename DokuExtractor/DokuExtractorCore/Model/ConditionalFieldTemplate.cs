@@ -9,5 +9,6 @@ namespace DokuExtractorCore.Model
     public class ConditionalFieldTemplate : FieldTemplateBase
     {
         public List<ConditionValue> ConditionValues { get; set; } = new List<ConditionValue>();
+        public ConditionalFieldType ConditionalFieldType { get; set; } = ConditionalFieldType.Text;
     }
 }

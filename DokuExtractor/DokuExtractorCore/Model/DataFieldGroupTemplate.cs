@@ -17,6 +17,6 @@ namespace DokuExtractorCore.Model
         /// </summary>
         public string Name { get; set; } = string.Empty;
         public List<string> TextAnchors { get; set; } = new List<string>();
-        public DataFieldTypes FieldType { get; set; }
+        public DataFieldType FieldType { get; set; }
     }
 }

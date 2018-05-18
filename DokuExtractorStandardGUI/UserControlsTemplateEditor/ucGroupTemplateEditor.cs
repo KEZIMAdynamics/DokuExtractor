@@ -46,6 +46,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         {
             butAddDataField.Text = Translation.LanguageStrings.ButAddDataField;
             butAddCalculationField.Text = Translation.LanguageStrings.ButAddCalculationField;
+            butAddConditionalField.Text = Translation.LanguageStrings.ButAddConditionalField;
             butSaveTemplate.Text = Translation.LanguageStrings.ButSaveTemplate;
         }
 
@@ -61,9 +62,10 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         private void butSaveTemplate_Click(object sender, EventArgs e)
         {
             this.selectedGroupTemplate = ucSingleTemplateEditor1.GetDocumentGroupTemplateWithChangedGeneralProperties();
-            var groupTemplateWithChangedDataFields = ucSingleTemplateEditor1.GetDocumentGroupTemplateWithChangedFields();
-            this.selectedGroupTemplate.DataFields = groupTemplateWithChangedDataFields.DataFields;
-
+            var groupTemplateWithChangedFields = ucSingleTemplateEditor1.GetDocumentGroupTemplateWithChangedFields();
+            this.selectedGroupTemplate.DataFields = groupTemplateWithChangedFields.DataFields;
+            this.selectedGroupTemplate.CalculationFields = groupTemplateWithChangedFields.CalculationFields;
+            this.selectedGroupTemplate.ConditionalFields = groupTemplateWithChangedFields.ConditionalFields;
 
             var oldTemplate = this.groupTemplates.Where(x => x.TemplateGroupName == this.selectedGroupTemplate.TemplateGroupName).FirstOrDefault();
             if (oldTemplate != null)
@@ -89,6 +91,11 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         private void butAddCalculationField_Click(object sender, EventArgs e)
         {
             ucSingleTemplateEditor1.AddCalculationField();
+        }
+
+        private void butAddConditionalField_Click(object sender, EventArgs e)
+        {
+            ucSingleTemplateEditor1.AddConditionalField();
         }
     }
 }
