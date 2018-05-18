@@ -15,11 +15,24 @@ namespace DokuExtractorCore
     /// </summary>
     public class FieldCalculator
     {
+        /// <summary>
+        /// Calculates the value for a given calculation field based on the supplied datafields (if datafields are part of the calculation expression)
+        /// </summary>
+        /// <param name="calculationField"></param>
+        /// <param name="datafields"></param>
+        /// <returns></returns>
         public double Calculate(CalculationFieldTemplate calculationField, List<DataFieldResult> datafields)
         {
             return Calculate(calculationField.CalculationExpression, calculationField.CalculationExpressionPrecision, datafields);
         }
 
+        /// <summary>
+        /// Calculates the value for a given calculation expression based on the supplied datafields (if datafields are part of the calculation expression)
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <param name="precision"></param>
+        /// <param name="datafields"></param>
+        /// <returns></returns>
         public double Calculate(string expression, int precision, List<DataFieldResult> datafields)
         {
             var filledExpression = expression;
@@ -63,6 +76,16 @@ namespace DokuExtractorCore
             return retVal;
         }
 
+        /// <summary>
+        /// First calculates the value for a given calculation expression and all given validation expressions based on the supplied datafields (if datafields are part of the calculation expression)
+        /// Then checks if the calculation result value matches at least one validation result value.
+        /// </summary>
+        /// <param name="calculationExpression"></param>
+        /// <param name="calculationValuePrecision"></param>
+        /// <param name="validationExpressions"></param>
+        /// <param name="validationValuePrecision"></param>
+        /// <param name="datafields"></param>
+        /// <returns></returns>
         public CalculationFieldResult CompareExpressionResults(string calculationExpression, int calculationValuePrecision, List<string> validationExpressions, int validationValuePrecision, List<DataFieldResult> datafields)
         {
             var retVal = new CalculationFieldResult();
@@ -77,6 +100,11 @@ namespace DokuExtractorCore
             return retVal;
         }
 
+        /// <summary>
+        /// Preprocesses a currency type string value so that it can later be parsed as a float / double value. Helps e.g. to turn "5,000,83"/"5.000,83"/"5,000.83" to "5000.83" 
+        /// </summary>
+        /// <param name="inputText"></param>
+        /// <returns></returns>
         public string MakeCurrencyTextParseableAsFloat(string inputText)
         {
             if (string.IsNullOrEmpty(inputText))

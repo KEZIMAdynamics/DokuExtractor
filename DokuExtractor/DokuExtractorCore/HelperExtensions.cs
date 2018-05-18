@@ -62,6 +62,12 @@ namespace DokuExtractorCore
             return builder.ToString();
         }
 
+        /// <summary>
+        /// Turns a string enumerable into a hash set.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="ignoreDoubleEntries">Decides what to do if the string enumerable contains more than one entry with the same value. True: Ignore the additional ones and just add it to the hash set once. False: Throw exception. </param>
+        /// <returns></returns>
         public static HashSet<string> ToHashSet(this IEnumerable<string> input, bool ignoreDoubleEntries = true)
         {
             var retVal = new HashSet<string>();
