@@ -11,7 +11,14 @@ namespace DokuExtractorCore.Model
     /// </summary>
     public class TemplateMachResult
     {
+        /// <summary>
+        /// The matching template, if a match was found.
+        /// </summary>
         public DocumentClassTemplate Template { get; set; } = new DocumentClassTemplate();
+
+        /// <summary>
+        /// Indicates if a match was found.
+        /// </summary>
         public bool IsMatchSuccessfull { get; set; }
     }
 }

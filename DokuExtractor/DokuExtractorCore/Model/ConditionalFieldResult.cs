@@ -6,10 +6,19 @@ using System.Threading.Tasks;
 
 namespace DokuExtractorCore.Model
 {
-    public class ConditionalFieldResult
+    /// <summary>
+    /// Result of an evaluated conditional field.
+    /// </summary>
+    public class ConditionalFieldResult : FieldResultBase
     {
-        public string Name { get; set; } = string.Empty;
+        /// <summary>
+        /// Value of the processed conditional field.
+        /// </summary>
         public string Value { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Type of the processed conditional field.
+        /// </summary>
         public ConditionalFieldType ConditionalFieldType { get; set; } = ConditionalFieldType.Text;
     }
 }

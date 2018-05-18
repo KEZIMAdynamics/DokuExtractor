@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace DokuExtractorCore.Model
 {
     /// <summary>
-    /// Base class for field templates in case enumerations are needed
+    /// Base class for field results in case enumerations are needed
     /// </summary>
-    public abstract class FieldTemplateBase
+    public abstract class FieldResultBase
     {
         /// <summary>
         /// Field name
