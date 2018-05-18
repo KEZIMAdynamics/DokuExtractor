@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace DokuExtractorCore.Model
 {
+    /// <summary>
+    /// Contains a value and its corresponding condition
+    /// </summary>
     public class ConditionValue
     {
         /// <summary>

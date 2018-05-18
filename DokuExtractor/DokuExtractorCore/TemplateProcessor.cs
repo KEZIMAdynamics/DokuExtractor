@@ -397,12 +397,13 @@ namespace DokuExtractorCore
         }
 
         /// <summary>
-        /// Tries to generate / find a regex expression. <seealso cref="RegexExpressionFinder.TryFindRegexMatchExpress(string, string, string, DataFieldType, out RegexExpressionFinderResult)"/>
+        /// Tries to generate / find a regex expression. <seealso cref="RegexExpressionFinder.TryFindRegexMatchExpress(string, string, string, DataFieldType,bool, out RegexExpressionFinderResult)"/>
         /// </summary>
         /// <param name="inputText"></param>
         /// <param name="targetValue"></param>
         /// <param name="textAnchor"></param>
         /// <param name="dataFieldType"></param>
+        /// <param name="returnFirstMatchOnly"></param>
         /// <param name="regexMatchExpression"></param>
         /// <returns></returns>
         public bool TryFindRegexMatchExpress(string inputText, string textAnchor, string targetValue, DataFieldType dataFieldType, bool returnFirstMatchOnly, out RegexExpressionFinderResult regexMatchExpression)

@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace DokuExtractorCore
 {
+    /// <summary>
+    /// Finds matching regex expressions based on supplied information.
+    /// </summary>
     public class RegexExpressionFinder
     {
         RegexExpressions expressions = new RegexExpressions();
@@ -91,6 +94,7 @@ namespace DokuExtractorCore
         /// <param name="targetValue">The value that the regex expression needs to find. If targetValue is empty, the expression will match the next occurence of the correct dataFieldType after the text anchor.</param>
         /// <param name="textAnchor">The text anchor associated to the regex expression</param>
         /// <param name="dataFieldType">Indicates the type of data that the regex expression shall match. Different types (e.g. dates and currencies) are matched with different regex expressions. Therefore it is important to specify the correct type.</param>
+        /// <param name="returnFirstMatchOnly"></param>
         /// <param name="regexResult">The result containing the regex expression and matching value (if any)</param>
         /// <returns></returns>
         public bool TryFindRegexMatchExpress(string inputText, string textAnchor, string targetValue, DataFieldType dataFieldType, bool returnFirstMatchOnly, out RegexExpressionFinderResult regexResult)
