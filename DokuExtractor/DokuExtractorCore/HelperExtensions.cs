@@ -61,5 +61,23 @@ namespace DokuExtractorCore
 
             return builder.ToString();
         }
+
+        public static HashSet<string> ToHashSet(this IEnumerable<string> input, bool ignoreDoubleEntries = true)
+        {
+            var retVal = new HashSet<string>();
+
+            foreach (var item in input)
+            {
+                if (ignoreDoubleEntries)
+                {
+                    if (retVal.Contains(item) == false)
+                        retVal.Add(item);
+                }
+                else
+                    retVal.Add(item);
+            }
+
+            return retVal;
+        }
     }
 }
