@@ -11,9 +11,19 @@ using System.Text.RegularExpressions;
 
 namespace DokuExtractorCore
 {
+    /// <summary>
+    /// Extracts data from text based on templates.
+    /// </summary>
     public class TemplateProcessor
     {
+        /// <summary>
+        /// Directory where document class templates are located if they shall be loaded from disk.
+        /// </summary>
         public string TemplateClassDirectory { get; set; }
+
+        /// <summary>
+        /// Directory where document group templates are located if they shall be loaded from disk.
+        /// </summary>
         public string TemplateGroupDirectory { get; set; }
         string appRootPath;
         RegexExpressionFinder finder = new RegexExpressionFinder();
