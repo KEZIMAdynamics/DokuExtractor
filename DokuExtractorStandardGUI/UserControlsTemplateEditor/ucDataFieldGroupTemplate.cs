@@ -58,13 +58,13 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             lblFieldType.Text = Translation.LanguageStrings.DataFieldType;
             lblTextAnchors.Text = Translation.LanguageStrings.DataFieldGroupTemplateTextAnchors;
             butDeleteDataField.Text = Translation.LanguageStrings.ButDeleteDataField;
-            lbxFieldType.Items[(int)(DataFieldTypes.Text)] = Translation.LanguageStrings.FieldTypeText;
-            lbxFieldType.Items[(int)(DataFieldTypes.Date)] = Translation.LanguageStrings.FieldTypeDate;
-            lbxFieldType.Items[(int)(DataFieldTypes.Currency)] = Translation.LanguageStrings.FieldTypeCurrency;
-            lbxFieldType.Items[(int)(DataFieldTypes.IBAN)] = Translation.LanguageStrings.FieldTypeIban;
-            lbxFieldType.Items[(int)(DataFieldTypes.AnchorLessIBAN)] = Translation.LanguageStrings.FieldTypeAnchorlessIban;
-            lbxFieldType.Items[(int)(DataFieldTypes.VatId)] = Translation.LanguageStrings.FieldTypeVatId;
-            lbxFieldType.Items[(int)(DataFieldTypes.Term)] = Translation.LanguageStrings.FieldTypeTerm;
+            lbxFieldType.Items[(int)(DataFieldType.Text)] = Translation.LanguageStrings.FieldTypeText;
+            lbxFieldType.Items[(int)(DataFieldType.Date)] = Translation.LanguageStrings.FieldTypeDate;
+            lbxFieldType.Items[(int)(DataFieldType.Currency)] = Translation.LanguageStrings.FieldTypeCurrency;
+            lbxFieldType.Items[(int)(DataFieldType.IBAN)] = Translation.LanguageStrings.FieldTypeIban;
+            lbxFieldType.Items[(int)(DataFieldType.AnchorLessIBAN)] = Translation.LanguageStrings.FieldTypeAnchorlessIban;
+            lbxFieldType.Items[(int)(DataFieldType.VatId)] = Translation.LanguageStrings.FieldTypeVatId;
+            lbxFieldType.Items[(int)(DataFieldType.Term)] = Translation.LanguageStrings.FieldTypeTerm;
         }
 
         private void butDeleteDataField_Click(object sender, EventArgs e)

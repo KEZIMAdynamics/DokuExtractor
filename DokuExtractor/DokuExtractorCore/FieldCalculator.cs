@@ -28,7 +28,7 @@ namespace DokuExtractorCore
             {
                 foreach (var item in datafields)
                 {
-                    if (item.FieldType == DataFieldTypes.Currency)
+                    if (item.FieldType == DataFieldType.Currency)
                         filledExpression = filledExpression.Replace("[" + item.Name + "]", MakeCurrencyTextParseableAsFloat(item.Value));
                     else
                         filledExpression = filledExpression.Replace("[" + item.Name + "]", item.Value.Replace(',', '.'));

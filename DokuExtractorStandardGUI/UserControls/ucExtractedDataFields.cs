@@ -61,6 +61,9 @@ namespace DokuExtractorStandardGUI.UserControls
             return true;
         }
 
+        /// <summary>
+        /// Returns the shown (and maybe editted) data field extraction result
+        /// </summary>
         public List<DataFieldResult> GetDataFieldExtractionResult()
         {
             var retVal = new List<DataFieldResult>();

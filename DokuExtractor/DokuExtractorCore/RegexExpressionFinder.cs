@@ -93,7 +93,7 @@ namespace DokuExtractorCore
         /// <param name="dataFieldType">Indicates the type of data that the regex expression shall match. Different types (e.g. dates and currencies) are matched with different regex expressions. Therefore it is important to specify the correct type.</param>
         /// <param name="regexResult">The result containing the regex expression and matching value (if any)</param>
         /// <returns></returns>
-        public bool TryFindRegexMatchExpress(string inputText, string textAnchor, string targetValue, DataFieldTypes dataFieldType, bool returnFirstMatchOnly, out RegexExpressionFinderResult regexResult)
+        public bool TryFindRegexMatchExpress(string inputText, string textAnchor, string targetValue, DataFieldType dataFieldType, bool returnFirstMatchOnly, out RegexExpressionFinderResult regexResult)
         {
             regexResult = new RegexExpressionFinderResult();
 
@@ -103,25 +103,25 @@ namespace DokuExtractorCore
 
             switch (dataFieldType)
             {
-                case DataFieldTypes.Text:
+                case DataFieldType.Text:
                     regexResult = RegHeart(textAnchor, targetValue, new List<string>() { @"(\w+)" }, new List<string>() { @"\s+" }, inputText, returnFirstMatchOnly);
                     break;
-                case DataFieldTypes.Date:
+                case DataFieldType.Date:
                     regexResult = RegHeart(textAnchor, targetValue, expressions.GeneralDateExpressions, expressions.SpecificDateExpressions, inputText, returnFirstMatchOnly);
                     break;
-                case DataFieldTypes.Currency:
+                case DataFieldType.Currency:
                     regexResult = RegHeart(textAnchor, targetValue, expressions.GeneralCurrencyExpressions, expressions.SpecificCurrencyExpressions, inputText, returnFirstMatchOnly);
                     break;
-                case DataFieldTypes.IBAN:
+                case DataFieldType.IBAN:
                     regexResult = RegHeart(textAnchor, targetValue, expressions.GeneralIBANExpressions, expressions.SpecificIBANExpressions, inputText, returnFirstMatchOnly);
                     break;
-                case DataFieldTypes.AnchorLessIBAN:
+                case DataFieldType.AnchorLessIBAN:
                     regexResult = RegHeart(textAnchor, targetValue, expressions.GeneralAnchorlessIBANExpressions, expressions.SpecificAnchorlessIBANExpressions, inputText, returnFirstMatchOnly);
                     break;
-                case DataFieldTypes.VatId:
+                case DataFieldType.VatId:
                     regexResult = RegHeart(textAnchor, targetValue, expressions.GeneralVatIdExpressions, expressions.SpecificVatIdExpressions, inputText, returnFirstMatchOnly);
                     break;
-                case DataFieldTypes.Term:
+                case DataFieldType.Term:
                     regexResult = RegHeart(textAnchor, targetValue, expressions.GeneralTermExpressions, expressions.SpecificTermExpressions, inputText, returnFirstMatchOnly);
                     break;
                 default:

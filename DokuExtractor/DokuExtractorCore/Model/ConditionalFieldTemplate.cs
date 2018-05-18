@@ -10,5 +10,6 @@ namespace DokuExtractorCore.Model
     {
         public string Name { get; set; } = string.Empty;
         public List<ConditionValue> ConditionValues { get; set; } = new List<ConditionValue>();
+        public ConditionalFieldType ConditionalFieldType { get; set; } = ConditionalFieldType.Text;
     }
 }

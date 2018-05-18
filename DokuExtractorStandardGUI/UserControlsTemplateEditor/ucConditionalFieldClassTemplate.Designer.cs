@@ -33,13 +33,13 @@
             this.txtName = new System.Windows.Forms.TextBox();
             this.lblConditionValues = new System.Windows.Forms.Label();
             this.dgvConditions = new System.Windows.Forms.DataGridView();
+            this.colCondition = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.conditionsBindingListBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.ucConditionalFieldClassTemplateBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.butDeleteConditionalField = new System.Windows.Forms.Button();
             this.butAddCondition = new System.Windows.Forms.Button();
             this.butDeleteCondition = new System.Windows.Forms.Button();
-            this.colCondition = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ucConditionalFieldClassTemplateBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvConditions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.conditionsBindingListBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ucConditionalFieldClassTemplateBindingSource)).BeginInit();
@@ -87,11 +87,32 @@
             this.dgvConditions.Name = "dgvConditions";
             this.dgvConditions.Size = new System.Drawing.Size(270, 154);
             this.dgvConditions.TabIndex = 12;
+            this.dgvConditions.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvConditions_CellDoubleClick);
+            // 
+            // colCondition
+            // 
+            this.colCondition.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colCondition.DataPropertyName = "Condition";
+            this.colCondition.HeaderText = "Condition";
+            this.colCondition.Name = "colCondition";
+            this.colCondition.Width = 76;
+            // 
+            // colValue
+            // 
+            this.colValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colValue.DataPropertyName = "Value";
+            this.colValue.HeaderText = "Value";
+            this.colValue.Name = "colValue";
+            this.colValue.Width = 59;
             // 
             // conditionsBindingListBindingSource
             // 
             this.conditionsBindingListBindingSource.DataMember = "ConditionsBindingList";
             this.conditionsBindingListBindingSource.DataSource = this.ucConditionalFieldClassTemplateBindingSource;
+            // 
+            // ucConditionalFieldClassTemplateBindingSource
+            // 
+            this.ucConditionalFieldClassTemplateBindingSource.DataSource = typeof(DokuExtractorStandardGUI.UserControlsTemplateEditor.ucConditionalFieldClassTemplate);
             // 
             // butDeleteConditionalField
             // 
@@ -131,26 +152,6 @@
             this.butDeleteCondition.Text = "Delete Condition";
             this.butDeleteCondition.UseVisualStyleBackColor = false;
             this.butDeleteCondition.Click += new System.EventHandler(this.butDeleteCondition_Click);
-            // 
-            // colCondition
-            // 
-            this.colCondition.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colCondition.DataPropertyName = "Condition";
-            this.colCondition.HeaderText = "Condition";
-            this.colCondition.Name = "colCondition";
-            this.colCondition.Width = 76;
-            // 
-            // colValue
-            // 
-            this.colValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colValue.DataPropertyName = "Value";
-            this.colValue.HeaderText = "Value";
-            this.colValue.Name = "colValue";
-            this.colValue.Width = 59;
-            // 
-            // ucConditionalFieldClassTemplateBindingSource
-            // 
-            this.ucConditionalFieldClassTemplateBindingSource.DataSource = typeof(DokuExtractorStandardGUI.UserControlsTemplateEditor.ucConditionalFieldClassTemplate);
             // 
             // ucConditionalFieldClassTemplate
             // 

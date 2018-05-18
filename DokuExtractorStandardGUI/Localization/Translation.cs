@@ -84,23 +84,23 @@ namespace DokuExtractorStandardGUI.Localization
             }
         }
 
-        public static string TranslateFieldTypeEnum(DataFieldTypes fieldType)
+        public static string TranslateFieldTypeEnum(DataFieldType fieldType)
         {
             switch (fieldType)
             {
-                case DataFieldTypes.Text:
+                case DataFieldType.Text:
                     return LanguageStrings.FieldTypeText;
-                case DataFieldTypes.Date:
+                case DataFieldType.Date:
                     return LanguageStrings.FieldTypeDate;
-                case DataFieldTypes.Currency:
+                case DataFieldType.Currency:
                     return LanguageStrings.FieldTypeCurrency;
-                case DataFieldTypes.IBAN:
+                case DataFieldType.IBAN:
                     return LanguageStrings.FieldTypeIban;
-                case DataFieldTypes.AnchorLessIBAN:
+                case DataFieldType.AnchorLessIBAN:
                     return LanguageStrings.FieldTypeAnchorlessIban;
-                case DataFieldTypes.VatId:
+                case DataFieldType.VatId:
                     return LanguageStrings.FieldTypeVatId;
-                case DataFieldTypes.Term:
+                case DataFieldType.Term:
                     return LanguageStrings.FieldTypeTerm;
                 default:
                     return string.Empty;

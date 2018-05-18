@@ -12,7 +12,7 @@ namespace DokuExtractorCore
     {
         public ConditionalFieldResult ProcessConditions(string inputText, ConditionalFieldTemplate fieldTemplate)
         {
-            var retVal = new ConditionalFieldResult() { Name = fieldTemplate.Name };
+            var retVal = new ConditionalFieldResult() { Name = fieldTemplate.Name, ConditionalFieldType = fieldTemplate.ConditionalFieldType };
 
             foreach (var item in fieldTemplate.ConditionValues)
             {

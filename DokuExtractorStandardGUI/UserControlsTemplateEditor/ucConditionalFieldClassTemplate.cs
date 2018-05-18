@@ -102,5 +102,10 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         {
             ConditionalFieldEraser?.Invoke(id);
         }
+
+        private void dgvConditions_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

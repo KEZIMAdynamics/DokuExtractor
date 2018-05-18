@@ -20,7 +20,7 @@ namespace DokuExtractorStandardGUI.UserControls
         /// </summary>
         public event TabSwitchedHandler TabSwitched;
 
-        public delegate void RegexExpressionHelperHandler(Guid id, DataFieldTypes dataFieldType);
+        public delegate void RegexExpressionHelperHandler(Guid id, DataFieldType dataFieldType);
         /// <summary>
         /// Fired, when user wishes to start the regex expression helper
         /// </summary>
@@ -171,7 +171,7 @@ namespace DokuExtractorStandardGUI.UserControls
             TabSwitched?.Invoke(switchedToSingleTemplateEditor);
         }
 
-        private void FireRegexExpressionHelper(Guid id, DataFieldTypes dataFieldType)
+        private void FireRegexExpressionHelper(Guid id, DataFieldType dataFieldType)
         {
             RegexExpressionHelper?.Invoke(id, dataFieldType);
         }

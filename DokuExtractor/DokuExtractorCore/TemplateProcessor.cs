@@ -177,7 +177,7 @@ namespace DokuExtractorCore
             var retVal = new List<DocumentClassTemplate>();
 
             RegexExpressionFinderResult regexResult;
-            if (TryFindRegexMatchExpress(inputText, string.Empty, string.Empty, DataFieldTypes.AnchorLessIBAN, false, out regexResult))
+            if (TryFindRegexMatchExpress(inputText, string.Empty, string.Empty, DataFieldType.AnchorLessIBAN, false, out regexResult))
             {
                 var templateDict = new Dictionary<string, DocumentClassTemplate>();
                 foreach (var item in templates)
@@ -339,7 +339,7 @@ namespace DokuExtractorCore
             retVal.TemplateGroupName = genericRechnung.TemplateGroupName;
 
             RegexExpressionFinderResult regexResult;
-            if (TryFindRegexMatchExpress(inputText, string.Empty, string.Empty, DataFieldTypes.AnchorLessIBAN, false, out regexResult))
+            if (TryFindRegexMatchExpress(inputText, string.Empty, string.Empty, DataFieldType.AnchorLessIBAN, false, out regexResult))
             {
                 // retVal.PreSelectionCondition.IBANs = regexResult.MatchingValue.Replace(" ", string.Empty).ToUpper();
                 foreach (var item in regexResult.AllMatchingValues)
@@ -407,7 +407,7 @@ namespace DokuExtractorCore
         }
 
         /// <summary>
-        /// Tries to generate / find a regex expression. <seealso cref="RegexExpressionFinder.TryFindRegexMatchExpress(string, string, string, DataFieldTypes, out RegexExpressionFinderResult)"/>
+        /// Tries to generate / find a regex expression. <seealso cref="RegexExpressionFinder.TryFindRegexMatchExpress(string, string, string, DataFieldType, out RegexExpressionFinderResult)"/>
         /// </summary>
         /// <param name="inputText"></param>
         /// <param name="targetValue"></param>
@@ -415,7 +415,7 @@ namespace DokuExtractorCore
         /// <param name="dataFieldType"></param>
         /// <param name="regexMatchExpression"></param>
         /// <returns></returns>
-        public bool TryFindRegexMatchExpress(string inputText, string textAnchor, string targetValue, DataFieldTypes dataFieldType, bool returnFirstMatchOnly, out RegexExpressionFinderResult regexMatchExpression)
+        public bool TryFindRegexMatchExpress(string inputText, string textAnchor, string targetValue, DataFieldType dataFieldType, bool returnFirstMatchOnly, out RegexExpressionFinderResult regexMatchExpression)
         {
            
             return finder.TryFindRegexMatchExpress(inputText, textAnchor, targetValue, dataFieldType, false, out regexMatchExpression);

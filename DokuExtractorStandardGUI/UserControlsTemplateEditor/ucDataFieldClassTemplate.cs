@@ -14,7 +14,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
 {
     public partial class ucDataFieldClassTemplate : UserControl
     {
-        public delegate void RegexExpressionHelperHandler(Guid id, DataFieldTypes dataFieldType);
+        public delegate void RegexExpressionHelperHandler(Guid id, DataFieldType dataFieldType);
         /// <summary>
         /// Fired, when user wishes to start the regex expression helper
         /// </summary>
@@ -87,13 +87,13 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             lblFieldType.Text = Translation.LanguageStrings.DataFieldType;
             lblRegexExpression.Text = Translation.LanguageStrings.DataFieldRegexExpressions;
             butDeleteDataField.Text = Translation.LanguageStrings.ButDeleteDataField;
-            lbxFieldType.Items[(int)(DataFieldTypes.Text)] = Translation.LanguageStrings.FieldTypeText;
-            lbxFieldType.Items[(int)(DataFieldTypes.Date)] = Translation.LanguageStrings.FieldTypeDate;
-            lbxFieldType.Items[(int)(DataFieldTypes.Currency)] = Translation.LanguageStrings.FieldTypeCurrency;
-            lbxFieldType.Items[(int)(DataFieldTypes.IBAN)] = Translation.LanguageStrings.FieldTypeIban;
-            lbxFieldType.Items[(int)(DataFieldTypes.AnchorLessIBAN)] = Translation.LanguageStrings.FieldTypeAnchorlessIban;
-            lbxFieldType.Items[(int)(DataFieldTypes.VatId)] = Translation.LanguageStrings.FieldTypeVatId;
-            lbxFieldType.Items[(int)(DataFieldTypes.Term)] = Translation.LanguageStrings.FieldTypeTerm;
+            lbxFieldType.Items[(int)(DataFieldType.Text)] = Translation.LanguageStrings.FieldTypeText;
+            lbxFieldType.Items[(int)(DataFieldType.Date)] = Translation.LanguageStrings.FieldTypeDate;
+            lbxFieldType.Items[(int)(DataFieldType.Currency)] = Translation.LanguageStrings.FieldTypeCurrency;
+            lbxFieldType.Items[(int)(DataFieldType.IBAN)] = Translation.LanguageStrings.FieldTypeIban;
+            lbxFieldType.Items[(int)(DataFieldType.AnchorLessIBAN)] = Translation.LanguageStrings.FieldTypeAnchorlessIban;
+            lbxFieldType.Items[(int)(DataFieldType.VatId)] = Translation.LanguageStrings.FieldTypeVatId;
+            lbxFieldType.Items[(int)(DataFieldType.Term)] = Translation.LanguageStrings.FieldTypeTerm;
         }
 
         private void LblRegexExpression_DoubleClick(object sender, EventArgs e)
@@ -104,7 +104,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
                 try
                 {
                     var id = (Guid)(this.Tag);
-                    FireRegexExpressionHelper(id, (DataFieldTypes)FieldTypeInt);
+                    FireRegexExpressionHelper(id, (DataFieldType)FieldTypeInt);
                 }
                 catch (Exception ex)
                 { }
@@ -122,7 +122,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             { }
         }
 
-        private void FireRegexExpressionHelper(Guid id, DataFieldTypes dataFieldType)
+        private void FireRegexExpressionHelper(Guid id, DataFieldType dataFieldType)
         {
             RegexExpressionHelper?.Invoke(id, dataFieldType);
         }

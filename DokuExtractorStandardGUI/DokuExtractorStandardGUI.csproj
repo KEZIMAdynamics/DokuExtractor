@@ -68,6 +68,7 @@
     </Compile>
     <Compile Include="Localization\LanguageStrings.cs" />
     <Compile Include="Localization\Translation.cs" />
+    <Compile Include="Logic\TemplateUserControlSelector.cs" />
     <Compile Include="Model\CalculationFieldResultDisplay.cs" />
     <Compile Include="Model\DataFieldResultDisplay.cs" />
     <Compile Include="Program.cs" />

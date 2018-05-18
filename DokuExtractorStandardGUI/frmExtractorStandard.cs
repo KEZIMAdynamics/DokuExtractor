@@ -1,6 +1,8 @@
 ﻿using DokuExtractorCore;
 using DokuExtractorCore.Model;
 using DokuExtractorStandardGUI.Localization;
+using DokuExtractorStandardGUI.Logic;
+using DokuExtractorStandardGUI.UserControlsTemplateEditor;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,7 +22,7 @@ namespace DokuExtractorStandardGUI
         private List<DocumentClassTemplate> classTemplates { get; set; } = new List<DocumentClassTemplate>();
 
         private Guid regexHelperID = Guid.Empty;
-        private DataFieldTypes regexHelperFieldType = DataFieldTypes.Text;
+        private DataFieldType regexHelperFieldType = DataFieldType.Text;
         private bool isAnchorSelectionRunning = false;
         private bool isValueSelectionRunning = false;
         private string regexHelperAnchorText = string.Empty;
@@ -67,6 +69,7 @@ namespace DokuExtractorStandardGUI
 
         private void frmExtractorStandard_Load(object sender, EventArgs e)
         {
+            RegisterTemplateUserControls();
             Localize();
             this.CenterToScreen();
             this.WindowState = FormWindowState.Maximized;
@@ -89,6 +92,15 @@ namespace DokuExtractorStandardGUI
             butAddDataField.Visible = false;
             butSaveTemplate.Visible = false;
             butTemplateEditor.Visible = false;
+        }
+
+        private void RegisterTemplateUserControls()
+        {
+            //To change user controls of the data field templates, change type here (the choosen user control has to be a derivation of the origin user control):
+            TemplateUserControlSelector.RegisterDataFieldClassTemplateUserControl<ucDataFieldClassTemplate>();
+            TemplateUserControlSelector.RegisterDataFieldGroupTemplateUserControl<ucDataFieldGroupTemplate>();
+            TemplateUserControlSelector.RegisterCalculationFieldGroupTemplateUserControl<ucCalculationFieldGroupTemplate>();
+            TemplateUserControlSelector.RegisterConditionalFieldGroupTemplateUserControl<ucConditionalFieldClassTemplate>();
         }
 
         private void Localize()
@@ -180,7 +192,7 @@ namespace DokuExtractorStandardGUI
             }
         }
 
-        private void UcResultAndEditor1_RegexExpressionHelper(Guid id, DataFieldTypes dataFieldType)
+        private void UcResultAndEditor1_RegexExpressionHelper(Guid id, DataFieldType dataFieldType)
         {
             EnableOrDisableControlsAndButtons(false);
 
