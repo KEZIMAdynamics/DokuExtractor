@@ -16,7 +16,7 @@ namespace DokuExtractorStandardGUI.UserControls
     {
         public delegate void TabSwitchedHandler(bool switchedToSingleTemplateEditor);
         /// <summary>
-        /// Fired, when user or program switched to another tab of the tab control
+        /// Fired, when user or program has switched to another tab of the tab control
         /// </summary>
         public event TabSwitchedHandler TabSwitched;
 
@@ -55,6 +55,7 @@ namespace DokuExtractorStandardGUI.UserControls
         /// <summary>
         /// Switches to single template editor tab or to extracted data tab
         /// </summary>
+        /// <param name="switchToSingleTemplateEditor">Switch to single template editor? (Or to extracted data tab?)</param>
         public void SwitchTab(bool switchToSingleTemplateEditor)
         {
             if (switchToSingleTemplateEditor == true)
@@ -78,6 +79,7 @@ namespace DokuExtractorStandardGUI.UserControls
         /// <summary>
         /// Shows a class template (general properties and data fields) within ucSingleTemplateEditor
         /// </summary>
+        /// <param name="classTemplate">Class template</param>
         public void ShowPropertiesAndDataFields(DocumentClassTemplate classTemplate)
         {
             ucSingleTemplateEditor1.ShowPropertiesAndDataFields(classTemplate);
@@ -147,6 +149,12 @@ namespace DokuExtractorStandardGUI.UserControls
             return ucExtractedData1.GetFieldExtractionResult();
         }
 
+        /// <summary>
+        /// Chagnes a regex expression or adds an addtional regex string to the regex expression list
+        /// </summary>
+        /// <param name="regexHelperID">ID of the regex expression, which shall be changed</param>
+        /// <param name="regex">Regex expression</param>
+        /// <param name="additionalRegex">Shall the regex expression be added to the regex expression list or shall it overwrite the list completely?</param>
         public void ChangeOrAddRegexExpression(Guid regexHelperID, string regex, bool additionalRegex)
         {
             ucSingleTemplateEditor1.ChangeOrAddRegexExpression(regexHelperID, regex, additionalRegex);

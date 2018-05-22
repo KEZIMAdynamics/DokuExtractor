@@ -91,16 +91,26 @@ namespace DokuExtractorCore
         /// <summary>
         /// Saves group templates to the TemplateGroupDirectory.
         /// </summary>
-        /// <returns></returns>
+        /// <param name="templates">List of group templates</param>
         public void SaveTemplates(List<DocumentGroupTemplate> templates)
         {
             SaveTemplates(templates, TemplateGroupDirectory);
         }
 
         /// <summary>
+        /// Saves group template to the TemplateGroupDirectory.
+        /// </summary>
+        /// <param name="template">Group template</param>
+        public bool SaveTemplate(DocumentGroupTemplate template)
+        {
+            return SaveTemplate(template, TemplateGroupDirectory);
+        }
+
+        /// <summary>
         /// Saves group templates to the specified directory.
         /// </summary>
-        /// <returns></returns>
+        /// <param name="templates">List of group templates</param>
+        /// <param name="templateDirectory">Template directory</param>
         public void SaveTemplates(List<DocumentGroupTemplate> templates, string templateDirectory)
         {
             if (Directory.Exists(templateDirectory) == false)
@@ -108,26 +118,54 @@ namespace DokuExtractorCore
 
             foreach (var template in templates)
             {
+                SaveTemplate(template, templateDirectory);
+            }
+        }
+
+        /// <summary>
+        /// Saves group template to the specified directory.
+        /// </summary>
+        /// <param name="template">Group template</param>
+        /// <param name="templateDirectory">Template directory</param>
+        public bool SaveTemplate(DocumentGroupTemplate template, string templateDirectory)
+        {
+            var retVal = false;
+
+            if (string.IsNullOrWhiteSpace(template.TemplateGroupName) == false)
+            {
                 var templateJson = JsonConvert.SerializeObject(template, Formatting.Indented);
                 var filePath = Path.Combine(templateDirectory, template.TemplateGroupName + ".json.txt");
 
                 File.WriteAllText(filePath, templateJson);
+                retVal = true;
             }
+
+            return retVal;
         }
 
         /// <summary>
         /// Saves class templates to the TemplateClassDirectory.
         /// </summary>
-        /// <returns></returns>
+        /// <param name="templates">List of class templates</param>
         public void SaveTemplates(List<DocumentClassTemplate> templates)
         {
             SaveTemplates(templates, TemplateClassDirectory);
         }
 
         /// <summary>
+        /// Saves class template to the TemplateClassDirectory.
+        /// </summary>
+        /// <param name="template">Class template</param>
+        public bool SaveTemplate(DocumentClassTemplate template)
+        {
+            return SaveTemplate(template, TemplateClassDirectory);
+        }
+
+        /// <summary>
         /// Saves class templates to the specified directory.
         /// </summary>
-        /// <returns></returns>
+        /// <param name="templates">List of class templates</param>
+        /// <param name="templateDirectory">Template directory</param>
         public void SaveTemplates(List<DocumentClassTemplate> templates, string templateDirectory)
         {
             if (Directory.Exists(templateDirectory) == false)
@@ -135,11 +173,29 @@ namespace DokuExtractorCore
 
             foreach (var template in templates)
             {
+                SaveTemplate(template, templateDirectory);
+            }
+        }
+
+        /// <summary>
+        /// Saves class template to the specified directory.
+        /// </summary>
+        /// <param name="template">Class template</param>
+        /// <param name="templateDirectory">Template directory</param>
+        public bool SaveTemplate(DocumentClassTemplate template, string templateDirectory)
+        {
+            var retVal = false;
+
+            if (string.IsNullOrWhiteSpace(template.TemplateClassName) == false)
+            {
                 var templateJson = JsonConvert.SerializeObject(template, Formatting.Indented);
                 var filePath = Path.Combine(templateDirectory, template.TemplateClassName + ".json.txt");
 
                 File.WriteAllText(filePath, templateJson);
+                retVal = true;
             }
+
+            return retVal;
         }
 
         /// <summary>

@@ -18,6 +18,10 @@ namespace DokuExtractorStandardGUI
         private List<DocumentClassTemplate> classTemplates = new List<DocumentClassTemplate>();
         private List<DocumentGroupTemplate> groupTemplates = new List<DocumentGroupTemplate>();
 
+
+        /// <summary>
+        /// Editor to edit group templates and class templates
+        /// </summary>
         public frmTemplateEditor(List<DocumentClassTemplate> classTemplates, List<DocumentGroupTemplate> groupTemplates)
         {
             InitializeComponent();

@@ -29,10 +29,19 @@ namespace DokuExtractorStandardGUI
         private string regexHelperValueText = string.Empty;
 
         private string selectedFilePath = string.Empty;
-        private TemplateProcessor templateProcessor = new TemplateProcessor(Application.StartupPath);
         private string languageFolderPath = string.Empty;
+        private TemplateProcessor templateProcessor = new TemplateProcessor(Application.StartupPath);
 
-        public frmExtractorStandard(string filePath, string languageFolderPath, CultureInfo culture, string additionalCultureInfo = "", bool allowEditTemplates = false)
+        /// <summary>
+        /// Main form of DokuExtractor
+        /// </summary>
+        /// <param name="fileFolderPath">Folder path, which includes the files that have to be processed within the DokuExtractor</param>
+        /// <param name="languageFolderPath">Folder path, where the language files are</param>
+        /// <param name="culture">Culture info, which defines, which language (of the language folder path) shall be used</param>
+        /// <param name="additionalCultureInfo">If there is more than one language file belonging to the given culture info, additional culture info can be used</param>
+        /// <param name="allowEditTemplates">Allows or pohibits the access to the template editors</param>
+        /// <param name = "accessToAdminTools">Allows or prohibits the access to the global template editor and to the language editor</param>
+        public frmExtractorStandard(string fileFolderPath, string languageFolderPath, CultureInfo culture, string additionalCultureInfo = "", bool allowEditTemplates = false, bool accessToAdminTools = false)
         {
             InitializeComponent();
             this.languageFolderPath = languageFolderPath;
@@ -40,7 +49,7 @@ namespace DokuExtractorStandardGUI
             SubscribeOnEvents();
 
             var fileInfos = new List<FileInfo>();
-            var files = Directory.GetFiles(filePath);
+            var files = Directory.GetFiles(fileFolderPath);
 
             foreach (var file in files)
             {
@@ -51,10 +60,22 @@ namespace DokuExtractorStandardGUI
             if (allowEditTemplates == false)
                 DisableBuiltInEditor();
 
+            if (accessToAdminTools == false)
+                DisableAdminTools();
+
             ucFileSelector1.LoadFiles(fileInfos);
         }
 
-        public frmExtractorStandard(List<FileInfo> fileInfos, string languageFolderPath, CultureInfo culture, string additionalCultureInfo = "", bool allowEditTemplates = false)
+        /// <summary>
+        /// Main form of DokuExtractor
+        /// </summary>
+        /// <param name="fileInfos">List of file infos, including files that have to be processed within the DokuExtractor</param>
+        /// <param name="languageFolderPath">Folder path, where the language files are</param>
+        /// <param name="culture">Culture info, which defines, which language (of the language folder path) shall be used</param>
+        /// <param name="additionalCultureInfo">If there is more than one language file belonging to the given culture info, additional culture info can be used</param>
+        /// <param name="allowEditTemplates">Allows or prohibits the access to the built in template editor</param>
+        /// <param name = "accessToAdminTools">Allows or prohibits the access to the global template editor and to the language editor</param>
+        public frmExtractorStandard(List<FileInfo> fileInfos, string languageFolderPath, CultureInfo culture, string additionalCultureInfo = "", bool allowEditTemplates = false, bool accessToAdminTools = false)
         {
             InitializeComponent();
             this.languageFolderPath = languageFolderPath;
@@ -63,6 +84,9 @@ namespace DokuExtractorStandardGUI
 
             if (allowEditTemplates == false)
                 DisableBuiltInEditor();
+
+            if (accessToAdminTools == false)
+                DisableAdminTools();
 
             ucFileSelector1.LoadFiles(fileInfos);
         }
@@ -91,7 +115,12 @@ namespace DokuExtractorStandardGUI
             ucResultAndEditor1.DisableBuiltInEditor();
             butAddDataField.Visible = false;
             butSaveTemplate.Visible = false;
+        }
+
+        public void DisableAdminTools()
+        {
             butTemplateEditor.Visible = false;
+            butLanguageEditor.Visible = false;
         }
 
         private void RegisterTemplateUserControls()
@@ -163,6 +192,12 @@ namespace DokuExtractorStandardGUI
             }
         }
 
+        /// <summary>
+        /// Chagnes a regex expression or adds an addtional regex string to the regex expression list
+        /// </summary>
+        /// <param name="regexHelperID">ID of the regex expression, which shall be changed</param>
+        /// <param name="regex">Regex expression</param>
+        /// <param name="additionalRegex">Shall the regex expression be added to the regex expression list or shall it overwrite the list completely?</param>
         private void ChangeOrAddRegexExpression(Guid regexHelperID, string regex, bool additionalRegex)
         {
             ucResultAndEditor1.ChangeOrAddRegexExpression(regexHelperID, regex, additionalRegex);
@@ -204,12 +239,7 @@ namespace DokuExtractorStandardGUI
 
         private void UcResultAndEditor1_ConditionalFieldCellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            //var gridView = sender as DataGridView;
 
-            //if(e.RowIndex >= 0 && e.ColumnIndex >= 0)
-            //{
-            //    var value = gridView.Rows[e.RowIndex].Cells[1].Value?.ToString();
-            //}
         }
 
         private void EnableOrDisableControlsAndButtons(bool enablingState)
@@ -266,7 +296,7 @@ namespace DokuExtractorStandardGUI
 
         private void butOk_Click(object sender, EventArgs e)
         {
-            if (ucResultAndEditor1.CheckIfAllDataFieldsAreFilled() == true 
+            if (ucResultAndEditor1.CheckIfAllDataFieldsAreFilled() == true
                 && ucResultAndEditor1.CheckIfAllCalculationResultsEqualValidation() == true
                 && ucResultAndEditor1.CheckIfAllConditionalFieldsAreFilled() == true)
             {
@@ -289,12 +319,9 @@ namespace DokuExtractorStandardGUI
             }
 
             var templateProcessor = new TemplateProcessor(Application.StartupPath);
-
-            var templateDummyList = new List<DocumentClassTemplate>();
-            templateDummyList.Add(newTemplate);
-            templateProcessor.SaveTemplates(templateDummyList);
-
-            MessageBox.Show(Translation.LanguageStrings.MsgClassTemplateSaved, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            var saved = templateProcessor.SaveTemplate(newTemplate);
+            if (saved == true)
+                MessageBox.Show(Translation.LanguageStrings.MsgClassTemplateSaved, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void frmExtractorStandard_FormClosing(object sender, FormClosingEventArgs e)

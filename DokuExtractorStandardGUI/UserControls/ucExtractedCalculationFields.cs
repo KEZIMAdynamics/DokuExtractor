@@ -28,6 +28,10 @@ namespace DokuExtractorStandardGUI.UserControls
             Localize();
         }
 
+        /// <summary>
+        /// Shows the content of the extracted calculation fields
+        /// </summary>
+        /// <param name="extractedCalculationFields">List of calculation field results</param>
         public void ShowExtractedCalculationFields(List<CalculationFieldResult> extractedCalculationFields)
         {
             CalculationFieldResultsDisplayBinding = new BindingList<CalculationFieldResultDisplay>();

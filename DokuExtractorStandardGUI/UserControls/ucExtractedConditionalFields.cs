@@ -34,6 +34,10 @@ namespace DokuExtractorStandardGUI.UserControls
             Localize();
         }
 
+        /// <summary>
+        /// Shows the content of the extracted conditional fields
+        /// </summary>
+        /// <param name="extractedConditionalFields">List of conditional field results</param>
         public void ShowExtractedConditionalFields(List<ConditionalFieldResult> extractedConditionalFields)
         {
             ConditionalFieldResultDisplayBinding = new BindingList<ConditionalFieldResultDisplay>();

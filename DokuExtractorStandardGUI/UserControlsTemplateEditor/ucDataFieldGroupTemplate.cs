@@ -16,21 +16,36 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
     {
         public delegate void DataFieldEraserHandler(Guid id);
         /// <summary>
-        /// Fired, when butDeleteDataField was clicked
+        /// Fired, when butDeleteDataField has been clicked
         /// </summary>
         public event DataFieldEraserHandler DataFieldEraser;
 
+        /// <summary>
+        /// Gets the name of the data field from the text box
+        /// </summary>
         public string NameText { get { return txtName.Text; } }
+        /// <summary>
+        /// Gets the field type of the data field from the combo box as integer
+        /// </summary>
         public int FieldTypeInt { get { return cbxFieldType.SelectedIndex; } }
+        /// <summary>
+        /// Gets the text anchors of the data field from the text box
+        /// </summary>
         public string TextAnchorsText { get { return txtTextAnchors.Text; } }
 
         private DataFieldGroupTemplate dataFieldGroupTemplate { get; set; } = new DataFieldGroupTemplate();
 
+        /// <summary>
+        /// Data field user control for group templates
+        /// </summary>
         public ucDataFieldGroupTemplate()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Data field user control for group templates with data
+        /// </summary>
         public ucDataFieldGroupTemplate(DataFieldGroupTemplate dataFieldGroupTemplate)
         {
             InitializeComponent();

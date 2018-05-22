@@ -16,24 +16,48 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
     {
         public delegate void CalculationFieldEraserHandler(Guid id);
         /// <summary>
-        /// Fired, when butDeleteCalculationField was clicked
+        /// Fired, when butDeleteCalculationField has been clicked
         /// </summary>
         public event CalculationFieldEraserHandler CalculationFieldEraser;
 
+        /// <summary>
+        /// Gets the name of the calculation field from the text box
+        /// </summary>
         public string NameText { get { return txtName.Text; } }
+        /// <summary>
+        /// Gets the field type of the calculation field from the combo box as integer
+        /// </summary>
         public int FieldTypeInt { get { return cbxFieldType.SelectedIndex; } }
+        /// <summary>
+        /// Gets the calculation expression of the calculation field from the text box
+        /// </summary>
         public string CalculationExpressionText { get { return txtCalculationExpression.Text; } }
+        /// <summary>
+        /// Gets the calculation precision of the calculation field from the combo box as integer
+        /// </summary>
         public int CalculationPrecisionInt { get { var retVal = -1; int.TryParse(cbxCalculationPrecision.SelectedText, out retVal); return retVal; } }
+        /// <summary>
+        /// Gets the validation expression of the calculation field from the text box
+        /// </summary>
         public string ValidationExpressionText { get { return txtValidationExpressions.Text; } }
+        /// <summary>
+        /// Gets the validation precision of the calculation field from the combo box as integer
+        /// </summary>
         public int ValidationPrecisionInt { get { var retVal = -1; int.TryParse(cbxValidationPrecision.SelectedText, out retVal); return retVal; } }
 
         private CalculationFieldTemplate calculationFieldTemplate { get; set; } = new CalculationFieldTemplate();
 
+        /// <summary>
+        /// Calculation field user control for group templates
+        /// </summary>
         public ucCalculationFieldGroupTemplate()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Calculation field user control for group templates with data
+        /// </summary>
         public ucCalculationFieldGroupTemplate(CalculationFieldTemplate calculationFieldTemplate)
         {
             InitializeComponent();

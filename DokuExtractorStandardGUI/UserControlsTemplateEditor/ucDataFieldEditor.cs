@@ -436,6 +436,12 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             }
         }
 
+        /// <summary>
+        /// Chagnes a regex expression or adds an addtional regex string to the regex expression list
+        /// </summary>
+        /// <param name="regexHelperID">ID of the regex expression, which shall be changed</param>
+        /// <param name="regex">Regex expression</param>
+        /// <param name="additionalRegex">Shall the regex expression be added to the regex expression list or shall it overwrite the list completely?</param>
         public void ChangeOrAddRegexExpression(Guid regexHelperID, string regex, bool additionalRegex)
         {
             foreach (Control control in flowLayoutPanel1.Controls)

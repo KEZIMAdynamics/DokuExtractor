@@ -36,6 +36,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         /// <summary>
         /// Shows general properties and data fields of a class template
         /// </summary>
+        /// <param name="classTemplate">Class template</param>
         public void ShowPropertiesAndDataFields(DocumentClassTemplate classTemplate)
         {
             ShowGeneralProperties(classTemplate);
@@ -45,6 +46,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         /// <summary>
         /// Shows general properties and data fields of a group template
         /// </summary>
+        /// <param name="groupTemplate">Group template</param>
         public void ShowPropertiesAndDataFields(DocumentGroupTemplate groupTemplate)
         {
             ShowGeneralProperties(groupTemplate);
@@ -68,13 +70,16 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         }
 
         /// <summary>
-        /// Adds a new data field (group template) to ucDataFieldEditor
+        /// Adds a new data field (group template) to the user control
         /// </summary>
         public void AddDataFieldGroupTemplate()
         {
             ucDataFieldEditor1.AddDataFieldGroupTemplate();
         }
 
+        /// <summary>
+        /// Adds a new calculation field to the user control
+        /// </summary>
         public void AddCalculationField()
         {
             ucDataFieldEditor1.AddCalculationField();
@@ -112,6 +117,12 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             return ucDataFieldEditor1.GetDocumentGroupTemplateWithChangedFields();
         }
 
+        /// <summary>
+        /// Chagnes a regex expression or adds an addtional regex string to the regex expression list
+        /// </summary>
+        /// <param name="regexHelperID">ID of the regex expression, which shall be changed</param>
+        /// <param name="regex">Regex expression</param>
+        /// <param name="additionalRegex">Shall the regex expression be added to the regex expression list or shall it overwrite the list completely?</param>
         public void ChangeOrAddRegexExpression(Guid regexHelperID, string regex, bool additionalRegex)
         {
             ucDataFieldEditor1.ChangeOrAddRegexExpression(regexHelperID, regex, additionalRegex);
@@ -144,7 +155,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         /// <summary>
         /// Shows the data fields of a group template
         /// </summary>
-        /// <param name="groupTemplate"></param>
+        /// <param name="groupTemplate">Group template</param>
         private void ShowDataFields(DocumentGroupTemplate groupTemplate)
         {
             ucDataFieldEditor1.ShowDataFields(groupTemplate);

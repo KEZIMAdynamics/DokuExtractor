@@ -28,6 +28,10 @@ namespace DokuExtractorStandardGUI.UserControls
             Localize();
         }
 
+        /// <summary>
+        /// Shows the content of the extracted data fields
+        /// </summary>
+        /// <param name="extractedDataFields">List of data field results</param>
         public void ShowExtractedDataFields(List<DataFieldResult> extractedDataFields)
         {
             DataFieldResultsDisplayBinding = new BindingList<DataFieldResultDisplay>();

@@ -22,22 +22,37 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
 
         public delegate void DataFieldEraserHandler(Guid id);
         /// <summary>
-        /// Fired, when butDeleteDataField was clicked
+        /// Fired, when butDeleteDataField has been clicked
         /// </summary>
         public event DataFieldEraserHandler DataFieldEraser;
 
+        /// <summary>
+        /// Gets the name of the data field from the text box
+        /// </summary>
         public string NameText { get { return txtName.Text; } }
+        /// <summary>
+        /// Gets the field type of the data field from the combo box as integer
+        /// </summary>
         public int FieldTypeInt { get { return cbxFieldType.SelectedIndex; } }
+        /// <summary>
+        /// Gets the regex expressions of the data field from the text box
+        /// </summary>
         public string RegexText { get { return txtRegexExpression.Text; } }
 
         private DataFieldClassTemplate dataFieldClassTemplate { get; set; } = new DataFieldClassTemplate();
         private bool isRegexExpressionHelperActivated = false;
 
+        /// <summary>
+        /// Data field user control for class templates
+        /// </summary>
         public ucDataFieldClassTemplate()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Data field user control for class templates with data
+        /// </summary>
         public ucDataFieldClassTemplate(DataFieldClassTemplate dataFieldClassTemplate)
         {
             InitializeComponent();
@@ -73,6 +88,11 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             }
         }
 
+        /// <summary>
+        /// Chagnes a regex expression or adds an addtional regex string to the regex expression list
+        /// </summary>
+        /// <param name="regex">Regex expression</param>
+        /// <param name="additionalRegex">Shall the regex expression be added to the regex expression list or shall it overwrite the list completely?</param>
         public void ChangeOrAddRegexExpression(string regex, bool additionalRegex)
         {
             if (additionalRegex)

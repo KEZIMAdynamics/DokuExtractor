@@ -18,6 +18,9 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         public BindingList<StringValue> TemplateNames { get; set; } = new BindingList<StringValue>();
 
         public delegate void SelectionChangedHandler(string templateName);
+        /// <summary>
+        /// Fired, when selected template has been changed
+        /// </summary>
         public event SelectionChangedHandler SelectionChanged;
 
         private TemplateProcessor templateProcessor = new TemplateProcessor(Application.StartupPath);

@@ -16,14 +16,25 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
     {
         public delegate void ConditionalFieldEraserHandler(Guid id);
         /// <summary>
-        /// Fired, when butDeleteConditionalField was clicked
+        /// Fired, when butDeleteConditionalField has been clicked
         /// </summary>
         public event ConditionalFieldEraserHandler ConditionalFieldEraser;
 
+        /// <summary>
+        /// Gets the name of the conditional field from the text box
+        /// </summary>
         public string NameText { get { return txtName.Text; } }
+        /// <summary>
+        /// Gets the field type of the conditional field from the combo box as integer
+        /// </summary>
         public int ConditionalFieldTypeInt { get { return cbxConditionalFieldType.SelectedIndex; } }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public BindingList<ConditionValue> ConditionsBindingList { get; set; } = new BindingList<ConditionValue>();
 
+        /// <summary>
+        /// Gets or sets the (binding) list of condition-value pairs
+        /// </summary>
         public List<ConditionValue> ConditionsList
         {
             get
@@ -39,11 +50,17 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
 
         private ConditionalFieldTemplate conditionalFieldTemplate { get; set; } = new ConditionalFieldTemplate();
 
+        /// <summary>
+        /// Conditional field user control for class and group templates
+        /// </summary>
         public ucConditionalFieldTemplate()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Conditional field user control for class and group templates with data
+        /// </summary>
         public ucConditionalFieldTemplate(ConditionalFieldTemplate dataFieldClassTemplate)
         {
             InitializeComponent();

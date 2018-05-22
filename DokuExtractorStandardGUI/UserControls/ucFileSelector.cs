@@ -19,7 +19,7 @@ namespace DokuExtractorStandardGUI.UserControls
 
         public delegate void SelectedFileChangedHandler(string newPath);
         /// <summary>
-        /// Fired, when selected file changed (contains path of the now selected file)
+        /// Fired, when selected file has been changed (contains path of the now selected file)
         /// </summary>
         public event SelectedFileChangedHandler SelectedFileChanged;
 

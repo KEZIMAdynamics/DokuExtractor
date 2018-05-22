@@ -15,13 +15,12 @@ namespace DokuExtractorStandardGUI.Localization
 {
     public partial class frmLanguageEditor : Form
     {
-        //[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        //public BindingList<LanguageStrings> LanguageFiles { get; set; } = new BindingList<LanguageStrings>();
-        //[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string[,] RotatedLanguageFiles { get; set; } = new string[0, 0];
-
         private string languageFolderPath = string.Empty;
 
+        /// <summary>
+        /// Editor to create, edit or delete translations of DokuExtractor content
+        /// </summary>
+        /// <param name="languageFolderPath">Folder path, where the language files are</param>
         public frmLanguageEditor(string languageFolderPath)
         {
             InitializeComponent();
@@ -36,14 +35,6 @@ namespace DokuExtractorStandardGUI.Localization
             Localize();
 
             var languageFilesList = Translation.LoadAllLanguageFiles(languageFolderPath);
-            //this.LanguageFiles = new BindingList<LanguageStrings>(languageFilesList);
-            //dataGridView1.DataSource = this.LanguageFiles;
-            //dataGridView1.AutoGenerateColumns = true;
-
-            //foreach (DataGridViewColumn column in dataGridView1.Columns)
-            //{
-            //    column.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            //}
 
             TransformLanguageFilesToRotatedArrayAndDisplayInDgv(languageFilesList);
             var headerColumn = true;
@@ -66,10 +57,14 @@ namespace DokuExtractorStandardGUI.Localization
             butSave.Text = Translation.LanguageStrings.ButSaveLanguage;
         }
 
+        /// <summary>
+        /// Transforms a list of language strings into a rotated array and displays that array within the data grid view (every language string now fills one column of the grid)
+        /// </summary>
+        /// <param name="languageFiles">List of languange strings</param>
         private void TransformLanguageFilesToRotatedArrayAndDisplayInDgv(List<LanguageStrings> languageFiles)
         {
             var propertyCount = typeof(LanguageStrings).GetProperties().Count();
-            RotatedLanguageFiles = new string[propertyCount, languageFiles.Count + 1];
+            var rotatedLanguageFiles = new string[propertyCount, languageFiles.Count + 1];
 
             var languageFileCounter = 0;
             foreach (LanguageStrings languageFile in languageFiles)
@@ -79,9 +74,9 @@ namespace DokuExtractorStandardGUI.Localization
                 foreach (var property in properties)
                 {
                     if (languageFileCounter == 0)
-                        RotatedLanguageFiles[propertyCounter, 0] = property.Name;
+                        rotatedLanguageFiles[propertyCounter, 0] = property.Name;
 
-                    RotatedLanguageFiles[propertyCounter, languageFileCounter + 1] = property.GetValue(languageFile)?.ToString();
+                    rotatedLanguageFiles[propertyCounter, languageFileCounter + 1] = property.GetValue(languageFile)?.ToString();
                     propertyCounter++;
                 }
                 languageFileCounter++;
@@ -91,7 +86,7 @@ namespace DokuExtractorStandardGUI.Localization
             {
                 var headerText = string.Empty;
                 if (lfNumber > 0)
-                    headerText = RotatedLanguageFiles[0, lfNumber] + " " + RotatedLanguageFiles[1, lfNumber];
+                    headerText = rotatedLanguageFiles[0, lfNumber] + " " + rotatedLanguageFiles[1, lfNumber];
 
                 dgvRotatedLanguages.Columns.Add(lfNumber.ToString(), headerText);
             }
@@ -101,13 +96,16 @@ namespace DokuExtractorStandardGUI.Localization
                 var row = new object[languageFiles.Count + 1];
                 for (int lfNumber = 0; lfNumber < languageFiles.Count + 1; lfNumber++)
                 {
-                    row[lfNumber] = RotatedLanguageFiles[propNumber, lfNumber];
+                    row[lfNumber] = rotatedLanguageFiles[propNumber, lfNumber];
                 }
 
                 dgvRotatedLanguages.Rows.Add(row);
             }
         }
 
+        /// <summary>
+        /// Transforms the data grid view values into a list of language strings and returns that list of language strings
+        /// </summary>
         private List<LanguageStrings> TransformDgvValuesToLanguageStrings()
         {
             var retVal = new List<LanguageStrings>();
@@ -134,8 +132,6 @@ namespace DokuExtractorStandardGUI.Localization
 
         private void butSave_Click(object sender, EventArgs e)
         {
-            //Translation.SaveAllLanguageFiles(this.LanguageFiles.ToList(), this.languageFolderPath);
-
             var languageStrings = TransformDgvValuesToLanguageStrings();
             Translation.SaveAllLanguageFiles(languageStrings, this.languageFolderPath);
             this.Close();
@@ -143,23 +139,12 @@ namespace DokuExtractorStandardGUI.Localization
 
         private void butAddLanguage_Click(object sender, EventArgs e)
         {
-            //this.LanguageFiles.AddNew();
-
             var random = new Guid();
             dgvRotatedLanguages.Columns.Add(random.ToString(), "new");
         }
 
         private void butDeleteLanguage_Click(object sender, EventArgs e)
         {
-            //var selectedRows = dataGridView1.SelectedRows;
-            //if (selectedRows != null)
-            //    foreach (DataGridViewRow row in selectedRows)
-            //    {
-            //        var language = row.DataBoundItem as LanguageStrings;
-            //        this.LanguageFiles.Remove(language);
-            //        break;
-            //    }
-
             var selectedCells = dgvRotatedLanguages.SelectedCells;
             if (selectedCells != null)
                 foreach (DataGridViewCell cell in selectedCells)

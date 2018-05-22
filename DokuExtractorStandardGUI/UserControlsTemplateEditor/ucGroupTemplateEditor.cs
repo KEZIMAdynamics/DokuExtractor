@@ -28,6 +28,10 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             Localize();
         }
 
+        /// <summary>
+        /// Initializes the group template editor
+        /// </summary>
+        /// <param name="groupTemplates"></param>
         public void InitializeGroupTemplateEditor(List<DocumentGroupTemplate> groupTemplates)
         {
             this.groupTemplates = groupTemplates;
@@ -75,12 +79,9 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             }
 
             var templateProcessor = new TemplateProcessor(Application.StartupPath);
-
-            var templateDummyList = new List<DocumentGroupTemplate>();
-            templateDummyList.Add(this.selectedGroupTemplate);
-            templateProcessor.SaveTemplates(templateDummyList);
-
-            MessageBox.Show(Translation.LanguageStrings.MsgGroupTemplateSaved, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            var saved = templateProcessor.SaveTemplate(this.selectedGroupTemplate);
+            if (saved == true)
+                MessageBox.Show(Translation.LanguageStrings.MsgGroupTemplateSaved, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void butAddDataField_Click(object sender, EventArgs e)

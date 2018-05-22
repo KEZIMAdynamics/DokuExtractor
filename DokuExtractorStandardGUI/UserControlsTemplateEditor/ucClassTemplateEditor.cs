@@ -28,6 +28,10 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             Localize();
         }
 
+        /// <summary>
+        /// Initializes the class template editor
+        /// </summary>
+        /// <param name="classTemplates">Class template</param>
         public void InitializeClassTemplateEditor(List<DocumentClassTemplate> classTemplates)
         {
             this.classTemplates = classTemplates;
@@ -73,12 +77,9 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             }
 
             var templateProcessor = new TemplateProcessor(Application.StartupPath);
-
-            var templateDummyList = new List<DocumentClassTemplate>();
-            templateDummyList.Add(this.selectedClassTemplate);
-            templateProcessor.SaveTemplates(templateDummyList);
-
-            MessageBox.Show(Translation.LanguageStrings.MsgClassTemplateSaved, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            var saved = templateProcessor.SaveTemplate(this.selectedClassTemplate);
+            if (saved == true)
+                MessageBox.Show(Translation.LanguageStrings.MsgClassTemplateSaved, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void butAddDataField_Click(object sender, EventArgs e)

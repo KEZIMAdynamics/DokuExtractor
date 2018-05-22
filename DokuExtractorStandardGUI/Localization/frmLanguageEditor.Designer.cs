@@ -29,29 +29,12 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLanguageEditor));
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.butSave = new System.Windows.Forms.Button();
             this.butAddLanguage = new System.Windows.Forms.Button();
             this.butDeleteLanguage = new System.Windows.Forms.Button();
             this.dgvRotatedLanguages = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRotatedLanguages)).BeginInit();
             this.SuspendLayout();
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 12);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(928, 530);
-            this.dataGridView1.TabIndex = 0;
             // 
             // butSave
             // 
@@ -99,7 +82,7 @@
             this.dgvRotatedLanguages.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvRotatedLanguages.Location = new System.Drawing.Point(12, 12);
             this.dgvRotatedLanguages.Name = "dgvRotatedLanguages";
-            this.dgvRotatedLanguages.Size = new System.Drawing.Size(928, 462);
+            this.dgvRotatedLanguages.Size = new System.Drawing.Size(928, 530);
             this.dgvRotatedLanguages.TabIndex = 6;
             // 
             // frmLanguageEditor
@@ -112,20 +95,16 @@
             this.Controls.Add(this.butDeleteLanguage);
             this.Controls.Add(this.butAddLanguage);
             this.Controls.Add(this.butSave);
-            this.Controls.Add(this.dataGridView1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmLanguageEditor";
             this.Text = "LanguageEditor";
             this.Load += new System.EventHandler(this.frmLanguageEditor_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRotatedLanguages)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button butSave;
         private System.Windows.Forms.Button butAddLanguage;
         private System.Windows.Forms.Button butDeleteLanguage;
