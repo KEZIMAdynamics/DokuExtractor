@@ -66,6 +66,11 @@ namespace DokuExtractorStandardGUI.Localization
 
         public static void SaveAllLanguageFiles(List<LanguageStrings> languageFiles, string languageFolderPath)
         {
+            foreach (var file in Directory.GetFiles(languageFolderPath))
+            {
+                File.Delete(file);
+            }
+
             foreach (var language in languageFiles)
             {
                 var languageJson = JsonConvert.SerializeObject(language, Formatting.Indented);
@@ -76,10 +81,6 @@ namespace DokuExtractorStandardGUI.Localization
                 else
                     filePath = Path.Combine(languageFolderPath, "DokuExtractorLanguage_" + language.Culture.Name + "_" + language.AdditionalCultureInfo + ".json");
 
-                if (File.Exists(filePath))
-                {
-                    File.Delete(filePath);
-                }
                 File.WriteAllText(filePath, languageJson);
             }
         }
