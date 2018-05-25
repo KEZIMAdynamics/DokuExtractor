@@ -30,7 +30,7 @@ namespace DokuExtractorStandardGUI
 
         private string selectedFilePath = string.Empty;
         private string languageFolderPath = string.Empty;
-        private TemplateProcessor templateProcessor = new TemplateProcessor(Application.StartupPath);
+        private TemplateProcessor templateProcessor;
 
         /// <summary>
         /// Main form of DokuExtractor
@@ -39,11 +39,22 @@ namespace DokuExtractorStandardGUI
         /// <param name="languageFolderPath">Folder path, where the language files are</param>
         /// <param name="culture">Culture info, which defines, which language (of the language folder path) shall be used</param>
         /// <param name="additionalCultureInfo">If there is more than one language file belonging to the given culture info, additional culture info can be used</param>
+        /// <param name="appRootPath">Folder path, where the Template folders (group and class template folders) are</param>
+        /// <param name="popplerPath">Folder path, where the poppler.zip is</param>
         /// <param name="allowEditTemplates">Allows or pohibits the access to the template editors</param>
         /// <param name = "accessToAdminTools">Allows or prohibits the access to the global template editor and to the language editor</param>
-        public frmExtractorStandard(string fileFolderPath, string languageFolderPath, CultureInfo culture, string additionalCultureInfo = "", bool allowEditTemplates = false, bool accessToAdminTools = false)
+        public frmExtractorStandard(string fileFolderPath, string languageFolderPath, CultureInfo culture, string additionalCultureInfo = "", string appRootPath = "", string popplerPath = "", bool allowEditTemplates = false, bool accessToAdminTools = false)
         {
             InitializeComponent();
+
+            if (string.IsNullOrWhiteSpace(appRootPath) == false)
+                Directories.AppRootPath = appRootPath;
+
+            if (string.IsNullOrWhiteSpace(popplerPath) == false)
+                Directories.PopplerZipPath = popplerPath;
+
+            this.templateProcessor = new TemplateProcessor(Directories.AppRootPath);
+
             this.languageFolderPath = languageFolderPath;
             Translation.LoadLanguageFile(culture, additionalCultureInfo, languageFolderPath);
             SubscribeOnEvents();
@@ -74,11 +85,22 @@ namespace DokuExtractorStandardGUI
         /// <param name="culture">Culture info, which defines, which language (of the language folder path) shall be used</param>
         /// <param name="additionalCultureInfo">If there is more than one language file belonging to the given culture info, additional culture info can be used</param>
         /// <param name="allowEditTemplates">Allows or prohibits the access to the built in template editor</param>
+        /// <param name="appRootPath">Folder path, where the Template folders (group and class template folders) are</param>
+        /// <param name="popplerPath">Folder path, where the poppler.zip is</param>
         /// <param name = "accessToAdminTools">Allows or prohibits the access to the global template editor and to the language editor</param>
-        public frmExtractorStandard(List<FileInfo> fileInfos, string languageFolderPath, CultureInfo culture, string additionalCultureInfo = "", bool allowEditTemplates = false, bool accessToAdminTools = false)
+        public frmExtractorStandard(List<FileInfo> fileInfos, string languageFolderPath, CultureInfo culture, string additionalCultureInfo = "", string appRootPath = "", string popplerPath = "", bool allowEditTemplates = false, bool accessToAdminTools = false)
         {
             InitializeComponent();
+
+            if (string.IsNullOrWhiteSpace(appRootPath) == false)
+                Directories.AppRootPath = appRootPath;
+
+            if (string.IsNullOrWhiteSpace(popplerPath) == false)
+                Directories.PopplerZipPath = popplerPath;
+
+            this.templateProcessor = new TemplateProcessor(Directories.AppRootPath);
             this.languageFolderPath = languageFolderPath;
+
             Translation.LoadLanguageFile(culture, additionalCultureInfo, languageFolderPath);
             SubscribeOnEvents();
 
@@ -110,14 +132,15 @@ namespace DokuExtractorStandardGUI
             ucResultAndEditor1.ConditionalFieldCellDoubleClick += UcResultAndEditor1_ConditionalFieldCellDoubleClick;
         }
 
-        public void DisableBuiltInEditor()
+        private void DisableBuiltInEditor()
         {
             ucResultAndEditor1.DisableBuiltInEditor();
             butAddDataField.Visible = false;
             butSaveTemplate.Visible = false;
+            butAddConditionalField.Visible = false;
         }
 
-        public void DisableAdminTools()
+        private void DisableAdminTools()
         {
             butTemplateEditor.Visible = false;
             butLanguageEditor.Visible = false;
@@ -256,7 +279,6 @@ namespace DokuExtractorStandardGUI
 
         private void butTemplateEditor_Click(object sender, EventArgs e)
         {
-            var templateProcessor = new TemplateProcessor(Application.StartupPath);
             var classTemplates = templateProcessor.LoadClassTemplatesFromDisk();
             var groupTemplates = templateProcessor.LoadGroupTemplatesFromDisk();
 
@@ -301,7 +323,10 @@ namespace DokuExtractorStandardGUI
                 && ucResultAndEditor1.CheckIfAllConditionalFieldsAreFilled() == true)
             {
                 var result = ucResultAndEditor1.GetFieldExtractionResult();
-                ucFileSelector1.RemoveFileFromQueue(selectedFilePath);
+                if (result.DataFields.Count > 0)
+                    ucFileSelector1.RemoveFileFromQueue(selectedFilePath);
+                else
+                    MessageBox.Show(Translation.LanguageStrings.MsgEmptyOrInvalidValues, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
                 MessageBox.Show(Translation.LanguageStrings.MsgEmptyOrInvalidValues, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -315,10 +340,10 @@ namespace DokuExtractorStandardGUI
             if (oldTemplate != null)
             {
                 this.classTemplates.Remove(oldTemplate);
-                this.classTemplates.Add(newTemplate);
             }
 
-            var templateProcessor = new TemplateProcessor(Application.StartupPath);
+            this.classTemplates.Add(newTemplate);
+
             var saved = templateProcessor.SaveTemplate(newTemplate);
             if (saved == true)
                 MessageBox.Show(Translation.LanguageStrings.MsgClassTemplateSaved, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);

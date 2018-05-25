@@ -78,7 +78,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
                 this.groupTemplates.Add(this.selectedGroupTemplate);
             }
 
-            var templateProcessor = new TemplateProcessor(Application.StartupPath);
+            var templateProcessor = new TemplateProcessor(Directories.AppRootPath);
             var saved = templateProcessor.SaveTemplate(this.selectedGroupTemplate);
             if (saved == true)
                 MessageBox.Show(Translation.LanguageStrings.MsgGroupTemplateSaved, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);

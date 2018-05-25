@@ -23,7 +23,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         /// </summary>
         public event SelectionChangedHandler SelectionChanged;
 
-        private TemplateProcessor templateProcessor = new TemplateProcessor(Application.StartupPath);
+        private TemplateProcessor templateProcessor = new TemplateProcessor(Directories.AppRootPath);
 
         public ucTemplateSelector()
         {

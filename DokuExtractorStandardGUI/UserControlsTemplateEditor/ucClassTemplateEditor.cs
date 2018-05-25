@@ -76,7 +76,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
                 this.classTemplates.Add(this.selectedClassTemplate);
             }
 
-            var templateProcessor = new TemplateProcessor(Application.StartupPath);
+            var templateProcessor = new TemplateProcessor(Directories.AppRootPath);
             var saved = templateProcessor.SaveTemplate(this.selectedClassTemplate);
             if (saved == true)
                 MessageBox.Show(Translation.LanguageStrings.MsgClassTemplateSaved, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);

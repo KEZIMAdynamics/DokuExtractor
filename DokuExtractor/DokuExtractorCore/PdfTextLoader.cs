@@ -80,7 +80,7 @@ namespace DokuExtractorCore
         {
             if (File.Exists(Path.Combine(Environment.CurrentDirectory, "bin", "pdftotext.exe")) == false)
             {
-                ZipFile.ExtractToDirectory(Path.Combine(Environment.CurrentDirectory, "poppler-0.51.zip"), Path.Combine(Environment.CurrentDirectory));
+                ZipFile.ExtractToDirectory(Path.Combine(Directories.PopplerZipPath, "poppler-0.51.zip"), Path.Combine(Environment.CurrentDirectory));
             }
             popplerChecked = true;
         }

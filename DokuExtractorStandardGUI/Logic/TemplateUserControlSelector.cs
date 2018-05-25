@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DokuExtractorStandardGUI.Logic
 {
-    static class TemplateUserControlSelector
+    public static class TemplateUserControlSelector
     {
         public static Type DataFieldClassTemplateUserControl { get { return dataFieldClassTemplateUserControl; } }
         public static Type DataFieldGroupTemplateUserControl { get { return dataFieldGroupTemplateUserControl; } }
