@@ -71,13 +71,6 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             this.selectedGroupTemplate.CalculationFields = groupTemplateWithChangedFields.CalculationFields;
             this.selectedGroupTemplate.ConditionalFields = groupTemplateWithChangedFields.ConditionalFields;
 
-            var oldTemplate = this.groupTemplates.Where(x => x.TemplateGroupName == this.selectedGroupTemplate.TemplateGroupName).FirstOrDefault();
-            if (oldTemplate != null)
-            {
-                this.groupTemplates.Remove(oldTemplate);
-                this.groupTemplates.Add(this.selectedGroupTemplate);
-            }
-
             var templateProcessor = new TemplateProcessor(Directories.AppRootPath);
             var saved = templateProcessor.SaveTemplate(this.selectedGroupTemplate);
             if (saved == true)

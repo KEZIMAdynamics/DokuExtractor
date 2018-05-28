@@ -35,7 +35,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         /// <summary>
         /// Gets the calculation precision of the calculation field from the combo box as integer
         /// </summary>
-        public int CalculationPrecisionInt { get { var retVal = -1; int.TryParse(cbxCalculationPrecision.SelectedText, out retVal); return retVal; } }
+        public int CalculationPrecisionInt { get { var retVal = -1; int.TryParse(cbxCalculationPrecision.Text, out retVal); return retVal; } }
         /// <summary>
         /// Gets the validation expression of the calculation field from the text box
         /// </summary>
@@ -43,7 +43,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         /// <summary>
         /// Gets the validation precision of the calculation field from the combo box as integer
         /// </summary>
-        public int ValidationPrecisionInt { get { var retVal = -1; int.TryParse(cbxValidationPrecision.SelectedText, out retVal); return retVal; } }
+        public int ValidationPrecisionInt { get { var retVal = -1; int.TryParse(cbxValidationPrecision.Text, out retVal); return retVal; } }
 
         private CalculationFieldTemplate calculationFieldTemplate { get; set; } = new CalculationFieldTemplate();
 

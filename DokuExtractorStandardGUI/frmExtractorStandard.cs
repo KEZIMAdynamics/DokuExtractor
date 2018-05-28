@@ -40,18 +40,18 @@ namespace DokuExtractorStandardGUI
         /// <param name="culture">Culture info, which defines, which language (of the language folder path) shall be used</param>
         /// <param name="additionalCultureInfo">If there is more than one language file belonging to the given culture info, additional culture info can be used</param>
         /// <param name="appRootPath">Folder path, where the Template folders (group and class template folders) are</param>
-        /// <param name="popplerPath">Folder path, where the poppler.zip is</param>
+        /// <param name="popplerZipPath">Folder path, where the poppler.zip is</param>
         /// <param name="allowEditTemplates">Allows or pohibits the access to the template editors</param>
         /// <param name = "accessToAdminTools">Allows or prohibits the access to the global template editor and to the language editor</param>
-        public frmExtractorStandard(string fileFolderPath, string languageFolderPath, CultureInfo culture, string additionalCultureInfo = "", string appRootPath = "", string popplerPath = "", bool allowEditTemplates = false, bool accessToAdminTools = false)
+        public frmExtractorStandard(string fileFolderPath, string languageFolderPath, CultureInfo culture, string additionalCultureInfo = "", string appRootPath = "", string popplerZipPath = "", bool allowEditTemplates = false, bool accessToAdminTools = false)
         {
             InitializeComponent();
 
             if (string.IsNullOrWhiteSpace(appRootPath) == false)
                 Directories.AppRootPath = appRootPath;
 
-            if (string.IsNullOrWhiteSpace(popplerPath) == false)
-                Directories.PopplerZipPath = popplerPath;
+            if (string.IsNullOrWhiteSpace(popplerZipPath) == false)
+                Directories.PopplerZipPath = popplerZipPath;
 
             this.templateProcessor = new TemplateProcessor(Directories.AppRootPath);
 
@@ -86,17 +86,17 @@ namespace DokuExtractorStandardGUI
         /// <param name="additionalCultureInfo">If there is more than one language file belonging to the given culture info, additional culture info can be used</param>
         /// <param name="allowEditTemplates">Allows or prohibits the access to the built in template editor</param>
         /// <param name="appRootPath">Folder path, where the Template folders (group and class template folders) are</param>
-        /// <param name="popplerPath">Folder path, where the poppler.zip is</param>
+        /// <param name="popplerZipPath">Folder path, where the poppler.zip is</param>
         /// <param name = "accessToAdminTools">Allows or prohibits the access to the global template editor and to the language editor</param>
-        public frmExtractorStandard(List<FileInfo> fileInfos, string languageFolderPath, CultureInfo culture, string additionalCultureInfo = "", string appRootPath = "", string popplerPath = "", bool allowEditTemplates = false, bool accessToAdminTools = false)
+        public frmExtractorStandard(List<FileInfo> fileInfos, string languageFolderPath, CultureInfo culture, string additionalCultureInfo = "", string appRootPath = "", string popplerZipPath = "", bool allowEditTemplates = false, bool accessToAdminTools = false)
         {
             InitializeComponent();
 
             if (string.IsNullOrWhiteSpace(appRootPath) == false)
                 Directories.AppRootPath = appRootPath;
 
-            if (string.IsNullOrWhiteSpace(popplerPath) == false)
-                Directories.PopplerZipPath = popplerPath;
+            if (string.IsNullOrWhiteSpace(popplerZipPath) == false)
+                Directories.PopplerZipPath = popplerZipPath;
 
             this.templateProcessor = new TemplateProcessor(Directories.AppRootPath);
             this.languageFolderPath = languageFolderPath;

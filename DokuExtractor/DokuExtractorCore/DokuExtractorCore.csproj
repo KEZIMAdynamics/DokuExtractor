@@ -99,7 +99,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ExtractorGroupTemplates\GenericTemplateRechnungen.json.txt">
+    <None Include="ExtractorGroupTemplates\Rechnung.json.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
