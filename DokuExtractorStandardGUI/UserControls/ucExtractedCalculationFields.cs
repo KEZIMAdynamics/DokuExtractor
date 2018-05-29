@@ -81,12 +81,27 @@ namespace DokuExtractorStandardGUI.UserControls
             return retVal;
         }
 
+        /// <summary>
+        /// Overridable function, which is called by a double click within a calculation field cell of dgvCalculationFields
+        /// </summary>
+        /// <param name="sender">DataGridView</param>
+        /// <param name="e">DataGridViewCellEventArgs</param>
+        protected virtual void OnDgvCalculationFieldsCellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
         private void Localize()
         {
             dgvCalculationFields.Columns["col" + nameof(CalculationFieldResultDisplay.Name)].HeaderText = Translation.LanguageStrings.CalculationFieldName;
             dgvCalculationFields.Columns["col" + nameof(CalculationFieldResultDisplay.CalculationValue)].HeaderText = Translation.LanguageStrings.CalculationValue;
             dgvCalculationFields.Columns["col" + nameof(CalculationFieldResultDisplay.FieldTypeDisplayValue)].HeaderText = Translation.LanguageStrings.CalculationFieldType;
             dgvCalculationFields.Columns["col" + nameof(CalculationFieldResultDisplay.CalculationEqualsValidation)].HeaderText = Translation.LanguageStrings.CalculationEqualsValidation;
+        }
+
+        private void dgvCalculationFields_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            OnDgvCalculationFieldsCellContentDoubleClick(sender, e);
         }
     }
 }

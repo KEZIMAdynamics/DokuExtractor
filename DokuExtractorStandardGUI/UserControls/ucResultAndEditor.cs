@@ -26,17 +26,10 @@ namespace DokuExtractorStandardGUI.UserControls
         /// </summary>
         public event RegexExpressionHelperHandler RegexExpressionHelper;
 
-        public delegate void ConditionalFieldCellDoubleClickHandler(object sender, DataGridViewCellEventArgs e);
-        /// <summary>
-        /// Fired, when a cell in dgvConditionalFields has been double clicked
-        /// </summary>
-        public event ConditionalFieldCellDoubleClickHandler ConditionalFieldCellDoubleClick;
-
         public ucResultAndEditor()
         {
             InitializeComponent();
             ucSingleTemplateEditor1.RegexExpressionHelper += FireRegexExpressionHelper;
-            ucExtractedData1.ConditionalFieldCellDoubleClick += FireConditionalFieldCellDoubleClick;
         }
 
         private void ucResultAndEditor_Load(object sender, EventArgs e)
@@ -182,11 +175,6 @@ namespace DokuExtractorStandardGUI.UserControls
         private void FireRegexExpressionHelper(Guid id, DataFieldType dataFieldType)
         {
             RegexExpressionHelper?.Invoke(id, dataFieldType);
-        }
-
-        private void FireConditionalFieldCellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            ConditionalFieldCellDoubleClick?.Invoke(sender, e);
         }
     }
 }

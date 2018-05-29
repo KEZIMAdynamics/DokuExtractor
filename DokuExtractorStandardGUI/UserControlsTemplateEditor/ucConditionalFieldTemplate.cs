@@ -32,6 +32,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public BindingList<ConditionValue> ConditionsBindingList { get; set; } = new BindingList<ConditionValue>();
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         /// <summary>
         /// Gets or sets the (binding) list of condition-value pairs
         /// </summary>
@@ -65,6 +66,11 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         {
             InitializeComponent();
             this.conditionalFieldTemplate = dataFieldClassTemplate;
+        }
+
+        protected virtual void OnDgvConditionsCellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
 
         private void ucConditionalFieldClassTemplate_Load(object sender, EventArgs e)
@@ -135,7 +141,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
 
         private void dgvConditions_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            OnDgvConditionsCellDoubleClick(sender, e);
         }
     }
 }

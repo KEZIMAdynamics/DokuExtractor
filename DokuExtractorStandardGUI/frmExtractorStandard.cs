@@ -2,6 +2,7 @@
 using DokuExtractorCore.Model;
 using DokuExtractorStandardGUI.Localization;
 using DokuExtractorStandardGUI.Logic;
+using DokuExtractorStandardGUI.UserControls;
 using DokuExtractorStandardGUI.UserControlsTemplateEditor;
 using System;
 using System.Collections.Generic;
@@ -45,6 +46,7 @@ namespace DokuExtractorStandardGUI
         /// <param name = "accessToAdminTools">Allows or prohibits the access to the global template editor and to the language editor</param>
         public frmExtractorStandard(string fileFolderPath, string languageFolderPath, CultureInfo culture, string additionalCultureInfo = "", string appRootPath = "", string popplerZipPath = "", bool allowEditTemplates = false, bool accessToAdminTools = false)
         {
+            RegisterUserControls();
             InitializeComponent();
 
             if (string.IsNullOrWhiteSpace(appRootPath) == false)
@@ -90,6 +92,7 @@ namespace DokuExtractorStandardGUI
         /// <param name = "accessToAdminTools">Allows or prohibits the access to the global template editor and to the language editor</param>
         public frmExtractorStandard(List<FileInfo> fileInfos, string languageFolderPath, CultureInfo culture, string additionalCultureInfo = "", string appRootPath = "", string popplerZipPath = "", bool allowEditTemplates = false, bool accessToAdminTools = false)
         {
+            RegisterUserControls();
             InitializeComponent();
 
             if (string.IsNullOrWhiteSpace(appRootPath) == false)
@@ -115,7 +118,6 @@ namespace DokuExtractorStandardGUI
 
         private void frmExtractorStandard_Load(object sender, EventArgs e)
         {
-            RegisterTemplateUserControls();
             Localize();
             this.CenterToScreen();
             this.WindowState = FormWindowState.Maximized;
@@ -129,7 +131,6 @@ namespace DokuExtractorStandardGUI
             ucViewer1.TextSelected += UcViewer1_TextSelected;
             ucResultAndEditor1.TabSwitched += UcResultAndEditor1_TabSwitched;
             ucResultAndEditor1.RegexExpressionHelper += UcResultAndEditor1_RegexExpressionHelper;
-            ucResultAndEditor1.ConditionalFieldCellDoubleClick += UcResultAndEditor1_ConditionalFieldCellDoubleClick;
         }
 
         private void DisableBuiltInEditor()
@@ -146,13 +147,18 @@ namespace DokuExtractorStandardGUI
             butLanguageEditor.Visible = false;
         }
 
-        private void RegisterTemplateUserControls()
+        private void RegisterUserControls()
         {
             //To change user controls of the data field templates, change type here (the choosen user control has to be a derivation of the origin user control):
-            TemplateUserControlSelector.RegisterDataFieldClassTemplateUserControl<ucDataFieldClassTemplate>();
-            TemplateUserControlSelector.RegisterDataFieldGroupTemplateUserControl<ucDataFieldGroupTemplate>();
-            TemplateUserControlSelector.RegisterCalculationFieldGroupTemplateUserControl<ucCalculationFieldGroupTemplate>();
-            TemplateUserControlSelector.RegisterConditionalFieldGroupTemplateUserControl<ucConditionalFieldTemplate>();
+            UserControlSelector.RegisterDataFieldClassTemplateUserControl<ucDataFieldClassTemplate>();
+            UserControlSelector.RegisterDataFieldGroupTemplateUserControl<ucDataFieldGroupTemplate>();
+            UserControlSelector.RegisterCalculationFieldGroupTemplateUserControl<ucCalculationFieldGroupTemplate>();
+            UserControlSelector.RegisterConditionalFieldGroupTemplateUserControl<ucConditionalFieldTemplate>();
+
+            //To change user controls of the extracted data fields, change type here (the choosen user control has to be a derivation of the origin user control):
+            UserControlSelector.RegisterExtractedDataFieldsUserControl<ucExtractedDataFields>();
+            UserControlSelector.RegisterExtractedCalculationFieldsUserControl<ucExtractedCalculationFields>();
+            UserControlSelector.RegisterExtractedConditionalFieldsUserControl<ucExtractedConditionalFields>();
         }
 
         private void Localize()
@@ -258,11 +264,6 @@ namespace DokuExtractorStandardGUI
             regexHelperFieldType = dataFieldType;
             isAnchorSelectionRunning = true;
             lblInstruction.Text = Translation.LanguageStrings.InstructionSelectAnchor;
-        }
-
-        private void UcResultAndEditor1_ConditionalFieldCellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
 
         private void EnableOrDisableControlsAndButtons(bool enablingState)

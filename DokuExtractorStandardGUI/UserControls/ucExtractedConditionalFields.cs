@@ -15,12 +15,6 @@ namespace DokuExtractorStandardGUI.UserControls
 {
     public partial class ucExtractedConditionalFields : UserControl
     {
-        public delegate void ConditionalFieldCellDoubleClickHandler(object sender, DataGridViewCellEventArgs e);
-        /// <summary>
-        /// Fired, when a cell in dgvConditionalFields has been double clicked
-        /// </summary>
-        public event ConditionalFieldCellDoubleClickHandler ConditionalFieldCellDoubleClick;
-
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public BindingList<ConditionalFieldResultDisplay> ConditionalFieldResultDisplayBinding { get; set; } = new BindingList<ConditionalFieldResultDisplay>();
 
@@ -85,6 +79,16 @@ namespace DokuExtractorStandardGUI.UserControls
             return retVal;
         }
 
+        /// <summary>
+        /// Overridable function, which is called by a double click within a conditional field cell of dgvConditionalFields
+        /// </summary>
+        /// <param name="sender">DataGridView</param>
+        /// <param name="e">DataGridViewCellEventArgs</param>
+        protected virtual void OnDgvConditionalFieldCellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
         private void Localize()
         {
             dgvConditionalFields.Columns["col" + nameof(ConditionalFieldResultDisplay.Name)].HeaderText = Translation.LanguageStrings.ConditionalFieldName;
@@ -94,12 +98,7 @@ namespace DokuExtractorStandardGUI.UserControls
 
         private void dgvConditionalFields_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            FireConditionalFieldCellDoubleClick(sender, e);
-        }
-
-        private void FireConditionalFieldCellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            ConditionalFieldCellDoubleClick?.Invoke(sender, e);
+            OnDgvConditionalFieldCellDoubleClick(sender, e);
         }
     }
 }

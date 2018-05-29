@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{3305CF5D-F4C7-48B0-9D4D-A60F7BB4B61F}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Library</OutputType>
     <RootNamespace>DokuExtractorStandardGUI</RootNamespace>
     <AssemblyName>DokuExtractorStandardGUI</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
@@ -71,7 +71,7 @@
     </Compile>
     <Compile Include="Localization\LanguageStrings.cs" />
     <Compile Include="Localization\Translation.cs" />
-    <Compile Include="Logic\TemplateUserControlSelector.cs" />
+    <Compile Include="Logic\UserControlSelector.cs" />
     <Compile Include="Model\CalculationFieldResultDisplay.cs" />
     <Compile Include="Model\ConditionalFieldResultDisplay.cs" />
     <Compile Include="Model\DataFieldResultDisplay.cs" />

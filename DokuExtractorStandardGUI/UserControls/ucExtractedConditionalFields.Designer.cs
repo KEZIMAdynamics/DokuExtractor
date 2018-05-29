@@ -30,15 +30,15 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dgvConditionalFields = new System.Windows.Forms.DataGridView();
-            this.ucExtractedConditionalFieldsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.conditionalFieldResultDisplayBindingBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.ucExtractedConditionalFieldsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colConditionalFieldTypeDisplayValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colConditionalFieldType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConditionalFields)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ucExtractedConditionalFieldsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.conditionalFieldResultDisplayBindingBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ucExtractedConditionalFieldsBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvConditionalFields
@@ -60,14 +60,14 @@
             this.dgvConditionalFields.TabIndex = 0;
             this.dgvConditionalFields.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvConditionalFields_CellDoubleClick);
             // 
-            // ucExtractedConditionalFieldsBindingSource
-            // 
-            this.ucExtractedConditionalFieldsBindingSource.DataSource = typeof(DokuExtractorStandardGUI.UserControls.ucExtractedConditionalFields);
-            // 
             // conditionalFieldResultDisplayBindingBindingSource
             // 
             this.conditionalFieldResultDisplayBindingBindingSource.DataMember = "ConditionalFieldResultDisplayBinding";
             this.conditionalFieldResultDisplayBindingBindingSource.DataSource = this.ucExtractedConditionalFieldsBindingSource;
+            // 
+            // ucExtractedConditionalFieldsBindingSource
+            // 
+            this.ucExtractedConditionalFieldsBindingSource.DataSource = typeof(DokuExtractorStandardGUI.UserControls.ucExtractedConditionalFields);
             // 
             // colName
             // 
@@ -84,6 +84,7 @@
             this.colValue.DataPropertyName = "Value";
             this.colValue.HeaderText = "Value";
             this.colValue.Name = "colValue";
+            this.colValue.ReadOnly = true;
             this.colValue.Width = 59;
             // 
             // colConditionalFieldTypeDisplayValue
@@ -115,8 +116,8 @@
             this.Size = new System.Drawing.Size(444, 503);
             this.Load += new System.EventHandler(this.ucExtractedConditionalFields_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvConditionalFields)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ucExtractedConditionalFieldsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.conditionalFieldResultDisplayBindingBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ucExtractedConditionalFieldsBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -124,11 +125,11 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dgvConditionalFields;
+        private System.Windows.Forms.BindingSource conditionalFieldResultDisplayBindingBindingSource;
+        private System.Windows.Forms.BindingSource ucExtractedConditionalFieldsBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colValue;
         private System.Windows.Forms.DataGridViewTextBoxColumn colConditionalFieldTypeDisplayValue;
         private System.Windows.Forms.DataGridViewTextBoxColumn colConditionalFieldType;
-        private System.Windows.Forms.BindingSource conditionalFieldResultDisplayBindingBindingSource;
-        private System.Windows.Forms.BindingSource ucExtractedConditionalFieldsBindingSource;
     }
 }

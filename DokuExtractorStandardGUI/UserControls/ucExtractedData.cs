@@ -15,16 +15,9 @@ namespace DokuExtractorStandardGUI.UserControls
 {
     public partial class ucExtractedData : UserControl
     {
-        public delegate void ConditionalFieldCellDoubleClickHandler(object sender, DataGridViewCellEventArgs e);
-        /// <summary>
-        /// Fired, when a cell in dgvConditionalFields has been double clicked
-        /// </summary>
-        public event ConditionalFieldCellDoubleClickHandler ConditionalFieldCellDoubleClick;
-
         public ucExtractedData()
         {
             InitializeComponent();
-            ucExtractedConditionalFields1.ConditionalFieldCellDoubleClick += FireConditionalFieldCellDoubleClick;
         }
 
         private void ucExtractedData_Load(object sender, EventArgs e)
@@ -85,11 +78,6 @@ namespace DokuExtractorStandardGUI.UserControls
             retVal.ConditionalFields = ucExtractedConditionalFields1.GetConditionalFieldExtractionResult();
 
             return retVal;
-        }
-
-        private void FireConditionalFieldCellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            ConditionalFieldCellDoubleClick?.Invoke(sender, e);
         }
 
         private void Localize()
