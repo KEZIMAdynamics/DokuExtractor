@@ -43,6 +43,7 @@
             this.butSaveTemplate = new System.Windows.Forms.Button();
             this.butGo = new System.Windows.Forms.Button();
             this.butTemplateEditor = new System.Windows.Forms.Button();
+            this.butDeleteFile = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -71,7 +72,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer3);
             this.splitContainer1.Size = new System.Drawing.Size(1566, 836);
-            this.splitContainer1.SplitterDistance = 1018;
+            this.splitContainer1.SplitterDistance = 1017;
             this.splitContainer1.TabIndex = 0;
             // 
             // splitContainer2
@@ -82,23 +83,26 @@
             // 
             // splitContainer2.Panel1
             // 
+            this.splitContainer2.Panel1.Controls.Add(this.butDeleteFile);
             this.splitContainer2.Panel1.Controls.Add(this.ucFileSelector1);
             // 
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.ucViewer1);
-            this.splitContainer2.Size = new System.Drawing.Size(1018, 836);
-            this.splitContainer2.SplitterDistance = 262;
+            this.splitContainer2.Size = new System.Drawing.Size(1017, 836);
+            this.splitContainer2.SplitterDistance = 261;
             this.splitContainer2.TabIndex = 0;
             // 
             // ucFileSelector1
             // 
+            this.ucFileSelector1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ucFileSelector1.BackColor = System.Drawing.Color.White;
-            this.ucFileSelector1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucFileSelector1.Location = new System.Drawing.Point(0, 0);
+            this.ucFileSelector1.Location = new System.Drawing.Point(3, 3);
             this.ucFileSelector1.Name = "ucFileSelector1";
             this.ucFileSelector1.Padding = new System.Windows.Forms.Padding(3);
-            this.ucFileSelector1.Size = new System.Drawing.Size(262, 836);
+            this.ucFileSelector1.Size = new System.Drawing.Size(255, 789);
             this.ucFileSelector1.TabIndex = 0;
             // 
             // ucViewer1
@@ -133,7 +137,7 @@
             this.splitContainer3.Panel2.Controls.Add(this.butSaveTemplate);
             this.splitContainer3.Panel2.Controls.Add(this.butGo);
             this.splitContainer3.Panel2.Controls.Add(this.butTemplateEditor);
-            this.splitContainer3.Size = new System.Drawing.Size(544, 836);
+            this.splitContainer3.Size = new System.Drawing.Size(545, 836);
             this.splitContainer3.SplitterDistance = 700;
             this.splitContainer3.TabIndex = 0;
             // 
@@ -143,14 +147,15 @@
             this.ucResultAndEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucResultAndEditor1.Location = new System.Drawing.Point(0, 0);
             this.ucResultAndEditor1.Name = "ucResultAndEditor1";
-            this.ucResultAndEditor1.Size = new System.Drawing.Size(544, 700);
+            this.ucResultAndEditor1.Padding = new System.Windows.Forms.Padding(5, 5, 5, 0);
+            this.ucResultAndEditor1.Size = new System.Drawing.Size(545, 700);
             this.ucResultAndEditor1.TabIndex = 0;
             // 
             // butAddConditionalField
             // 
             this.butAddConditionalField.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butAddConditionalField.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.butAddConditionalField.Location = new System.Drawing.Point(379, 41);
+            this.butAddConditionalField.Location = new System.Drawing.Point(380, 41);
             this.butAddConditionalField.Name = "butAddConditionalField";
             this.butAddConditionalField.Size = new System.Drawing.Size(153, 35);
             this.butAddConditionalField.TabIndex = 8;
@@ -162,7 +167,7 @@
             // 
             this.butLanguageEditor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butLanguageEditor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.butLanguageEditor.Location = new System.Drawing.Point(220, 82);
+            this.butLanguageEditor.Location = new System.Drawing.Point(221, 82);
             this.butLanguageEditor.Name = "butLanguageEditor";
             this.butLanguageEditor.Size = new System.Drawing.Size(100, 47);
             this.butLanguageEditor.TabIndex = 7;
@@ -177,7 +182,7 @@
             this.lblInstruction.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblInstruction.Location = new System.Drawing.Point(19, 10);
             this.lblInstruction.Name = "lblInstruction";
-            this.lblInstruction.Size = new System.Drawing.Size(522, 23);
+            this.lblInstruction.Size = new System.Drawing.Size(523, 23);
             this.lblInstruction.TabIndex = 6;
             this.lblInstruction.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -185,7 +190,7 @@
             // 
             this.butOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.butOk.Location = new System.Drawing.Point(144, 41);
+            this.butOk.Location = new System.Drawing.Point(145, 41);
             this.butOk.Name = "butOk";
             this.butOk.Size = new System.Drawing.Size(70, 88);
             this.butOk.TabIndex = 5;
@@ -197,7 +202,7 @@
             // 
             this.butAddDataField.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butAddDataField.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.butAddDataField.Location = new System.Drawing.Point(220, 41);
+            this.butAddDataField.Location = new System.Drawing.Point(221, 41);
             this.butAddDataField.Name = "butAddDataField";
             this.butAddDataField.Size = new System.Drawing.Size(153, 35);
             this.butAddDataField.TabIndex = 3;
@@ -209,7 +214,7 @@
             // 
             this.butSaveTemplate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butSaveTemplate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.butSaveTemplate.Location = new System.Drawing.Point(326, 82);
+            this.butSaveTemplate.Location = new System.Drawing.Point(327, 82);
             this.butSaveTemplate.Name = "butSaveTemplate";
             this.butSaveTemplate.Size = new System.Drawing.Size(100, 47);
             this.butSaveTemplate.TabIndex = 2;
@@ -221,7 +226,7 @@
             // 
             this.butGo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butGo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.butGo.Location = new System.Drawing.Point(68, 41);
+            this.butGo.Location = new System.Drawing.Point(69, 41);
             this.butGo.Name = "butGo";
             this.butGo.Size = new System.Drawing.Size(70, 88);
             this.butGo.TabIndex = 1;
@@ -233,13 +238,26 @@
             // 
             this.butTemplateEditor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butTemplateEditor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.butTemplateEditor.Location = new System.Drawing.Point(432, 82);
+            this.butTemplateEditor.Location = new System.Drawing.Point(433, 82);
             this.butTemplateEditor.Name = "butTemplateEditor";
             this.butTemplateEditor.Size = new System.Drawing.Size(100, 47);
             this.butTemplateEditor.TabIndex = 0;
             this.butTemplateEditor.Text = "Template Editor";
             this.butTemplateEditor.UseVisualStyleBackColor = true;
             this.butTemplateEditor.Click += new System.EventHandler(this.butTemplateEditor_Click);
+            // 
+            // butDeleteFile
+            // 
+            this.butDeleteFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.butDeleteFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.butDeleteFile.Location = new System.Drawing.Point(3, 798);
+            this.butDeleteFile.Name = "butDeleteFile";
+            this.butDeleteFile.Size = new System.Drawing.Size(255, 35);
+            this.butDeleteFile.TabIndex = 9;
+            this.butDeleteFile.Text = "Delete File";
+            this.butDeleteFile.UseVisualStyleBackColor = true;
+            this.butDeleteFile.Click += new System.EventHandler(this.butDeleteFile_Click);
             // 
             // frmExtractorStandard
             // 
@@ -285,6 +303,7 @@
         private System.Windows.Forms.Label lblInstruction;
         private System.Windows.Forms.Button butLanguageEditor;
         private System.Windows.Forms.Button butAddConditionalField;
+        private System.Windows.Forms.Button butDeleteFile;
     }
 }
 

@@ -325,7 +325,11 @@ namespace DokuExtractorStandardGUI
             {
                 var result = ucResultAndEditor1.GetFieldExtractionResult();
                 if (result.DataFields.Count > 0)
+                {
                     ucFileSelector1.RemoveFileFromQueue(selectedFilePath);
+                    //ucViewer1.CloseDisplayedPdf();
+                    //ucFileSelector1.DeleteFile(selectedFilePath);
+                }
                 else
                     MessageBox.Show(Translation.LanguageStrings.MsgEmptyOrInvalidValues, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -337,17 +341,25 @@ namespace DokuExtractorStandardGUI
         {
             var newTemplate = ucResultAndEditor1.GetChangedDocumentClassTemplate();
 
-            var oldTemplate = this.classTemplates.Where(x => x.TemplateClassName == newTemplate.TemplateClassName).FirstOrDefault();
-            if (oldTemplate != null)
+            if (string.IsNullOrWhiteSpace(newTemplate.TemplateClassName) || newTemplate.TemplateClassName == "NewTemplate"
+                || string.IsNullOrWhiteSpace(newTemplate.TemplateGroupName) || newTemplate.KeyWords == null || newTemplate.KeyWords.Count == 0)
             {
-                this.classTemplates.Remove(oldTemplate);
+                MessageBox.Show(Translation.LanguageStrings.MsgEmptyOrInvalidGeneralProperties, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            else
+            {
+                var oldTemplate = this.classTemplates.Where(x => x.TemplateClassName == newTemplate.TemplateClassName).FirstOrDefault();
+                if (oldTemplate != null)
+                {
+                    this.classTemplates.Remove(oldTemplate);
+                }
 
-            this.classTemplates.Add(newTemplate);
+                this.classTemplates.Add(newTemplate);
 
-            var saved = templateProcessor.SaveTemplate(newTemplate);
-            if (saved == true)
-                MessageBox.Show(Translation.LanguageStrings.MsgClassTemplateSaved, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                var saved = templateProcessor.SaveTemplate(newTemplate);
+                if (saved == true)
+                    MessageBox.Show(Translation.LanguageStrings.MsgClassTemplateSaved, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void frmExtractorStandard_FormClosing(object sender, FormClosingEventArgs e)
@@ -378,6 +390,17 @@ namespace DokuExtractorStandardGUI
         {
             var languageEditor = new frmLanguageEditor(this.languageFolderPath);
             languageEditor.ShowDialog();
+        }
+
+        private void butDeleteFile_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show(Translation.LanguageStrings.MsgAskDeleteFile, string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                var selectedFilePath = this.selectedFilePath;
+                ucFileSelector1.RemoveFileFromQueue(selectedFilePath);
+                ucViewer1.CloseDisplayedPdf();
+                ucFileSelector1.DeleteFile(selectedFilePath);
+            }
         }
     }
 }

@@ -71,6 +71,11 @@ namespace DokuExtractorStandardGUI.UserControls
             viewerControlBase?.LoadPdf(pdfPath);
         }
 
+        public void CloseDisplayedPdf()
+        {
+            viewerControlBase?.CloseDisplayedPdf();
+        }
+
         private void ViewerControlBase_TextSelected(string selectedText)
         {
             TextSelected?.Invoke(selectedText);

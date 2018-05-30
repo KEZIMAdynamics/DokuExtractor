@@ -116,6 +116,7 @@ namespace DokuExtractorStandardGUI.Localization
         public string MsgDllNotFound { get; set; } = "DLL not found!";
         public string MsgClassTemplateSaved { get; set; } = "Class template saved.";
         public string MsgGroupTemplateSaved { get; set; } = "Group template saved.";
+        public string MsgAskDeleteFile { get; set; } = "Do you really want to delete this file?";
         public string MsgAskStartRegexExpressionHelper { get; set; } = "Start regex expression helper?";
         public string MsgAskAcceptRegexExpressionHelperResult { get; set; } = "Do you accept the following result?";
         public string MsgAskAdditionalRegexExpression { get; set; } = "Do you want to add this expression as an ADDITIONAL expression?";
@@ -123,6 +124,7 @@ namespace DokuExtractorStandardGUI.Localization
         public string MsgTemplateFound { get; set; } = "Template found: ";
         public string MsgNoTemplateFound { get; set; } = "No template found! New Template was generated.";
         public string MsgEmptyOrInvalidValues { get; set; } = "Empty/Invalid values detected! Please fill values of all data fields.";
+        public string MsgEmptyOrInvalidGeneralProperties { get; set; } = "Empty/Invalid properties detected! Pleas fill class and group name and define keywords.";
         #endregion MessageBoxes
     }
 }

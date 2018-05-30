@@ -32,6 +32,11 @@ namespace GdPicturePdfViewer
             }
         }
 
+        public override void CloseDisplayedPdf()
+        {
+            gdViewer1.CloseDocument(true);
+        }
+
         private void gdViewer1_MouseUp(object sender, MouseEventArgs e)
         {
             if (gdViewer1.IsRect() && e.Button == MouseButtons.Left)
@@ -44,6 +49,7 @@ namespace GdPicturePdfViewer
                 gdViewer1.GetRectCoordinatesOnDocumentInches(ref left, ref top, ref width, ref height);
                 var text = gdViewer1.GetPageTextArea(gdViewer1.CurrentPage, left, top, width, height);
                 FireTextSelected(text);
+                Clipboard.SetText(text);
             }
         }
     }
