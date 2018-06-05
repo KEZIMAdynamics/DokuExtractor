@@ -280,8 +280,10 @@ namespace DokuExtractorCore
         public TemplateMachResult MatchTemplatesViaKeyWords(List<DocumentClassTemplate> templates, string inputText)
         {
             var checkedWords = new Dictionary<string, int>();
-
+            
             var retVal = new TemplateMachResult();
+
+            inputText = Regex.Replace(inputText, " +", " ");
 
             foreach (var template in templates)
             {

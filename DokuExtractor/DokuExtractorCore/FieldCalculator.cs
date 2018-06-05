@@ -113,7 +113,7 @@ namespace DokuExtractorCore
             var retVal = inputText.Replace("‚", ","); // Replce Comma with ASCII Code Dec130 with comma with ASCII Code Dec44 to unfuck OCR results
             // TODO: Stabilize function against further funny characters
 
-            var temp = double.Parse(retVal, System.Globalization.NumberStyles.Currency);
+            var temp = double.Parse(retVal, System.Globalization.NumberStyles.Currency, NumberFormatInfo.InvariantInfo);
 
             return temp.ToString(CultureInfo.InvariantCulture);
 
