@@ -165,6 +165,7 @@ namespace DokuExtractorStandardGUI
         {
             butGo.Text = Translation.LanguageStrings.ButGo;
             butOk.Text = Translation.LanguageStrings.ButOk;
+            butDeleteFile.Text = Translation.LanguageStrings.ButDeleteFile;
             butAddDataField.Text = Translation.LanguageStrings.ButAddDataField;
             butAddConditionalField.Text = Translation.LanguageStrings.ButAddConditionalField;
             butSaveTemplate.Text = Translation.LanguageStrings.ButSaveTemplate;
@@ -397,8 +398,8 @@ namespace DokuExtractorStandardGUI
             if (MessageBox.Show(Translation.LanguageStrings.MsgAskDeleteFile, string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 var selectedFilePath = this.selectedFilePath;
-                ucFileSelector1.RemoveFileFromQueue(selectedFilePath);
                 ucViewer1.CloseDisplayedPdf();
+                ucFileSelector1.RemoveFileFromQueue(selectedFilePath);
                 ucFileSelector1.DeleteFile(selectedFilePath);
             }
         }

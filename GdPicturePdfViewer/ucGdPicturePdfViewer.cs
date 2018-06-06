@@ -14,6 +14,8 @@ namespace GdPicturePdfViewer
 {
     public partial class ucGdPicturePdfViewer : ucViewerBase
     {
+        private GdPicturePDF gdPdf = new GdPicturePDF();
+
         public ucGdPicturePdfViewer()
         {
             InitializeComponent();
@@ -23,7 +25,7 @@ namespace GdPicturePdfViewer
 
         public override void LoadPdf(string pdfPath)
         {
-            var gdPdf = new GdPicturePDF();
+            gdPdf = new GdPicturePDF();
             var gdStatus = gdPdf.LoadFromFile(pdfPath, false);
             if (gdStatus == GdPictureStatus.OK)
             {
@@ -34,7 +36,8 @@ namespace GdPicturePdfViewer
 
         public override void CloseDisplayedPdf()
         {
-            gdViewer1.CloseDocument(true);
+            gdPdf.CloseDocument();
+            MessageBox.Show("Cäsar!");
         }
 
         private void gdViewer1_MouseUp(object sender, MouseEventArgs e)
