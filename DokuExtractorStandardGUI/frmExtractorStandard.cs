@@ -327,8 +327,9 @@ namespace DokuExtractorStandardGUI
                 var result = ucResultAndEditor1.GetFieldExtractionResult();
                 if (result.DataFields.Count > 0)
                 {
-                    ucFileSelector1.RemoveFileFromQueue(selectedFilePath);
+                    //IMPORTANT: First close disyplayed PDF, then delete file physically
                     //ucViewer1.CloseDisplayedPdf();
+                    //Do stuff here
                     //ucFileSelector1.DeleteFile(selectedFilePath);
                 }
                 else
@@ -398,8 +399,8 @@ namespace DokuExtractorStandardGUI
             if (MessageBox.Show(Translation.LanguageStrings.MsgAskDeleteFile, string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 var selectedFilePath = this.selectedFilePath;
+                //IMPORTANT: First close disyplayed PDF, then delete file physically
                 ucViewer1.CloseDisplayedPdf();
-                ucFileSelector1.RemoveFileFromQueue(selectedFilePath);
                 ucFileSelector1.DeleteFile(selectedFilePath);
             }
         }

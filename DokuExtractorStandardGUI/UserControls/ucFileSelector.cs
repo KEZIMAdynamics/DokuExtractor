@@ -70,10 +70,11 @@ namespace DokuExtractorStandardGUI.UserControls
         /// <param name="filePath"></param>
         public void DeleteFile(string filePath)
         {
+            //IMPORTANT: First Remove file from queue, then delete it physically
+            RemoveFileFromQueue(filePath);
+
             if (File.Exists(filePath))
                 File.Delete(filePath);
-
-            RemoveFileFromQueue(filePath);
         }
 
         private void Localize()
