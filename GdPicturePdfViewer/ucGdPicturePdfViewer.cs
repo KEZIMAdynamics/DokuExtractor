@@ -37,7 +37,6 @@ namespace GdPicturePdfViewer
         public override void CloseDisplayedPdf()
         {
             gdPdf.CloseDocument();
-            MessageBox.Show("Cäsar!");
         }
 
         private void gdViewer1_MouseUp(object sender, MouseEventArgs e)
