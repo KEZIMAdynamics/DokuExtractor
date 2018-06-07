@@ -50,8 +50,11 @@ namespace GdPicturePdfViewer
 
                 gdViewer1.GetRectCoordinatesOnDocumentInches(ref left, ref top, ref width, ref height);
                 var text = gdViewer1.GetPageTextArea(gdViewer1.CurrentPage, left, top, width, height);
-                FireTextSelected(text);
-                Clipboard.SetText(text);
+                if (string.IsNullOrEmpty(text) == false)
+                {
+                    FireTextSelected(text);
+                    Clipboard.SetText(text);
+                }
             }
         }
     }
