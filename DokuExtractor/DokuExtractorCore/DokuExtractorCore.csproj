@@ -62,6 +62,7 @@
     <Compile Include="Model\CalculationFieldResult.cs" />
     <Compile Include="Model\ConditionalFieldResult.cs" />
     <Compile Include="Model\ConditionalFieldType.cs" />
+    <Compile Include="Model\ConditionType.cs" />
     <Compile Include="Model\ConditionValue.cs" />
     <Compile Include="Model\ConditionalFieldTemplate.cs" />
     <Compile Include="Model\DataFieldGroupTemplate.cs" />

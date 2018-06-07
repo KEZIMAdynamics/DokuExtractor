@@ -16,6 +16,12 @@ namespace DokuExtractorCore.Model
         /// </summary>
         public List<ConditionValue> ConditionValues { get; set; } = new List<ConditionValue>();
 
+        public bool OnlyStoreInGroupTemplate { get; set; } = false;
+
+        public ConditionType ConditionType { get; set; } = ConditionType.SimpleDocumentTextRegex;
+
+        public bool IgnoreCaseForSimpleDocumentTextRegex { get; set; } = false;
+
         /// <summary>
         /// Type of the conditional field.
         /// </summary>

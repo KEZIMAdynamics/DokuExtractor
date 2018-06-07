@@ -186,6 +186,8 @@ namespace DokuExtractorCore
         {
             var retVal = false;
 
+            template = CleanClassTemplateBeforeSave(template);
+
             if (string.IsNullOrWhiteSpace(template.TemplateClassName) == false)
             {
                 var templateJson = JsonConvert.SerializeObject(template, Formatting.Indented);
@@ -196,6 +198,20 @@ namespace DokuExtractorCore
             }
 
             return retVal;
+        }
+
+        /// <summary>
+        /// Can be called to prepare modified class templates for being saved externally. Takes care removing double blank spaces in <see cref="DocumentClassTemplate.KeyWords"/>.
+        /// Will be called automatically if the template is saved by the internally provided methods. (<see cref="SaveTemplate(DocumentClassTemplate, string)"/>) and its derivates.
+        /// </summary>
+        /// <param name="template"></param>
+        /// <returns></returns>
+        public DocumentClassTemplate CleanClassTemplateBeforeSave(DocumentClassTemplate template)
+        {
+            // Clean KeyWords of excessive blank spaces to match a cleaned document text when 
+            template.KeyWords = template.KeyWords.Select(x => Regex.Replace(x, " +", " ")).ToList();
+
+            return template;
         }
 
         /// <summary>
@@ -280,7 +296,7 @@ namespace DokuExtractorCore
         public TemplateMachResult MatchTemplatesViaKeyWords(List<DocumentClassTemplate> templates, string inputText)
         {
             var checkedWords = new Dictionary<string, int>();
-            
+
             var retVal = new TemplateMachResult();
 
             inputText = Regex.Replace(inputText, " +", " ");
@@ -370,7 +386,10 @@ namespace DokuExtractorCore
             }
 
             var conditionProcessor = new ConditionalFieldProcessor();
-            foreach (var item in template.ConditionalFields)
+            var allConditionalFields = template.ConditionalFields;
+            allConditionalFields.AddRange(groupTemplate.ConditionalFields.Where(x => x.OnlyStoreInGroupTemplate));
+
+            foreach (var item in allConditionalFields)
             {
                 retVal.ConditionalFields.Add(conditionProcessor.ProcessConditions(inputText, item));
             }
@@ -493,7 +512,7 @@ namespace DokuExtractorCore
         {
             var retVal = new List<FieldTemplateBase>();
 
-            var fieldSet = groupTemplate.DataFields.Select(x => x.Name).ToHashSet();
+            var fieldSet = classTemplate.DataFields.Select(x => x.Name).ToHashSet();
 
             foreach (var item in groupTemplate.DataFields.ToList())
             {
@@ -506,16 +525,15 @@ namespace DokuExtractorCore
 
             }
 
-            fieldSet = groupTemplate.ConditionalFields.Select(x => x.Name).ToHashSet();
+            fieldSet = classTemplate.ConditionalFields.Select(x => x.Name).ToHashSet();
 
-            foreach (var item in classTemplate.ConditionalFields.ToList())
+            foreach (var item in groupTemplate.ConditionalFields.ToList())
             {
-                if (fieldSet.Contains(item.Name) == false)
+                if (item.OnlyStoreInGroupTemplate == false && fieldSet.Contains(item.Name) == false)
                 {
                     classTemplate.ConditionalFields.Add(item);
                     retVal.Add(item);
                 }
-
             }
 
             return retVal;
