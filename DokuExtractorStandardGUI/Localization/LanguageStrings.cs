@@ -65,6 +65,9 @@ namespace DokuExtractorStandardGUI.Localization
         public string ButAddCondition { get; set; } = "+";
         public string ButDeleteCondition { get; set; } = "-";
         public string ButDeleteConditionalField { get; set; } = "Delete conditional field";
+
+        public string CheckOnlyStoreInGroupTemplate { get; set; } = "Only in Group Template";
+        public string CheckIgnoreCaseForSimpleDocumentTextRegex { get; set; } = "Ignore Case";
         #endregion ConditionalField
 
         #region CalculationField

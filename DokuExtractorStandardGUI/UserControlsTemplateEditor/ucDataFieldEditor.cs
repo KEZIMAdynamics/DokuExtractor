@@ -496,6 +496,8 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
                 retVal.Name = ucConditionalField.NameText;
                 retVal.ConditionalFieldType = (ConditionalFieldType)(ucConditionalField.ConditionalFieldTypeInt);
                 retVal.ConditionValues = ucConditionalField.ConditionsList;
+                retVal.OnlyStoreInGroupTemplate = ucConditionalField.OnlyStoreInGroupTemplateBool;
+                retVal.IgnoreCaseForSimpleDocumentTextRegex = ucConditionalField.IgnoreCaseForSimpleDocumentTextRegexBool;
             }
             return retVal;
         }

@@ -28,6 +28,14 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         /// Gets the field type of the conditional field from the combo box as integer
         /// </summary>
         public int ConditionalFieldTypeInt { get { return cbxConditionalFieldType.SelectedIndex; } }
+        /// <summary>
+        /// Gets the OnlyStoreInGroupTemplateBool
+        /// </summary>
+        public bool OnlyStoreInGroupTemplateBool { get { return chbOnlyInGroupTemplate.Checked; } }
+        /// <summary>
+        /// Gets the IgnoreCaseForSimpleDocumentTextRegexBool
+        /// </summary>
+        public bool IgnoreCaseForSimpleDocumentTextRegexBool { get { return chbIgnoreCaseForSimpleDocumentText.Checked; } }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public BindingList<ConditionValue> ConditionsBindingList { get; set; } = new BindingList<ConditionValue>();
@@ -81,6 +89,10 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
 
             cbxConditionalFieldType.SelectedIndex = (int)(this.conditionalFieldTemplate.ConditionalFieldType);
 
+            chbOnlyInGroupTemplate.Checked = this.conditionalFieldTemplate.OnlyStoreInGroupTemplate;
+
+            chbIgnoreCaseForSimpleDocumentText.Checked = this.conditionalFieldTemplate.IgnoreCaseForSimpleDocumentTextRegex;
+
             this.ConditionsList = this.conditionalFieldTemplate.ConditionValues;
             dgvConditions.DataSource = this.ConditionsBindingList;
         }
@@ -104,6 +116,9 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
 
             dgvConditions.Columns["col" + nameof(ConditionValue.Condition)].HeaderText = Translation.LanguageStrings.Condition;
             dgvConditions.Columns["col" + nameof(ConditionValue.DisplayValue)].HeaderText = Translation.LanguageStrings.ConditionValue;
+
+            chbOnlyInGroupTemplate.Text = Translation.LanguageStrings.CheckOnlyStoreInGroupTemplate;
+            chbIgnoreCaseForSimpleDocumentText.Text = Translation.LanguageStrings.CheckIgnoreCaseForSimpleDocumentTextRegex;
         }
 
         private void butAddCondition_Click(object sender, EventArgs e)
