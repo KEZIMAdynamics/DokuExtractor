@@ -23,6 +23,9 @@ namespace DokuExtractorStandardGUI.Localization
         public string ButLanguageEditor { get; set; } = "Language editor";
         public string InstructionSelectAnchor { get; set; } = "Select an anchor!";
         public string InstructionSelectValue { get; set; } = "Select a value!";
+
+        public string ButTextEditOk { get; set; } = "OK";
+        public string ButTextEditCancel { get; set; } = "Cancel";
         #endregion FormButtons
 
         #region FileSelector

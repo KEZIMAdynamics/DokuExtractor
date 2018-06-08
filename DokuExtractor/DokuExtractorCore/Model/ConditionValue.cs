@@ -21,5 +21,10 @@ namespace DokuExtractorCore.Model
         /// The text that will be written to the ConditionalFieldResult when condition is accepted.
         /// </summary>
         public string Value { get; set; } = string.Empty;
+
+        /// <summary>
+        /// The text that will be written to the ConditionalFieldResult DisplayValue when condition is accepted.
+        /// </summary>
+        public string DisplayValue { get; set; } = string.Empty;
     }
 }

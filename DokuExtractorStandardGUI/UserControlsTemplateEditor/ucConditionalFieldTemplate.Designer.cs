@@ -34,14 +34,15 @@
             this.lblConditionValues = new System.Windows.Forms.Label();
             this.dgvConditions = new System.Windows.Forms.DataGridView();
             this.conditionsBindingListBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.ucConditionalFieldClassTemplateBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.butDeleteConditionalField = new System.Windows.Forms.Button();
             this.butAddCondition = new System.Windows.Forms.Button();
             this.butDeleteCondition = new System.Windows.Forms.Button();
             this.lblConditionalFieldType = new System.Windows.Forms.Label();
             this.cbxConditionalFieldType = new System.Windows.Forms.ComboBox();
             this.colCondition = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDisplayValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ucConditionalFieldClassTemplateBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvConditions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.conditionsBindingListBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ucConditionalFieldClassTemplateBindingSource)).BeginInit();
@@ -87,6 +88,7 @@
             this.dgvConditions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvConditions.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colCondition,
+            this.colDisplayValue,
             this.colValue});
             this.dgvConditions.DataSource = this.conditionsBindingListBindingSource;
             this.dgvConditions.Location = new System.Drawing.Point(10, 114);
@@ -99,6 +101,10 @@
             // 
             this.conditionsBindingListBindingSource.DataMember = "ConditionsBindingList";
             this.conditionsBindingListBindingSource.DataSource = this.ucConditionalFieldClassTemplateBindingSource;
+            // 
+            // ucConditionalFieldClassTemplateBindingSource
+            // 
+            this.ucConditionalFieldClassTemplateBindingSource.DataSource = typeof(DokuExtractorStandardGUI.UserControlsTemplateEditor.ucConditionalFieldTemplate);
             // 
             // butDeleteConditionalField
             // 
@@ -178,7 +184,15 @@
             this.colCondition.DataPropertyName = "Condition";
             this.colCondition.HeaderText = "Condition";
             this.colCondition.Name = "colCondition";
+            this.colCondition.ReadOnly = true;
             this.colCondition.Width = 76;
+            // 
+            // colDisplayValue
+            // 
+            this.colDisplayValue.DataPropertyName = "DisplayValue";
+            this.colDisplayValue.HeaderText = "DisplayValue";
+            this.colDisplayValue.Name = "colDisplayValue";
+            this.colDisplayValue.ReadOnly = true;
             // 
             // colValue
             // 
@@ -186,11 +200,9 @@
             this.colValue.DataPropertyName = "Value";
             this.colValue.HeaderText = "Value";
             this.colValue.Name = "colValue";
+            this.colValue.ReadOnly = true;
+            this.colValue.Visible = false;
             this.colValue.Width = 59;
-            // 
-            // ucConditionalFieldClassTemplateBindingSource
-            // 
-            this.ucConditionalFieldClassTemplateBindingSource.DataSource = typeof(DokuExtractorStandardGUI.UserControlsTemplateEditor.ucConditionalFieldTemplate);
             // 
             // ucConditionalFieldTemplate
             // 
@@ -226,11 +238,12 @@
         private System.Windows.Forms.Button butDeleteConditionalField;
         private System.Windows.Forms.Button butAddCondition;
         private System.Windows.Forms.Button butDeleteCondition;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCondition;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colValue;
         private System.Windows.Forms.BindingSource conditionsBindingListBindingSource;
         private System.Windows.Forms.BindingSource ucConditionalFieldClassTemplateBindingSource;
         private System.Windows.Forms.Label lblConditionalFieldType;
         private System.Windows.Forms.ComboBox cbxConditionalFieldType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCondition;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDisplayValue;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colValue;
     }
 }

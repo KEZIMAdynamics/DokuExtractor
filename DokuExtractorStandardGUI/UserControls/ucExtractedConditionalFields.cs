@@ -86,13 +86,13 @@ namespace DokuExtractorStandardGUI.UserControls
         /// <param name="e">DataGridViewCellEventArgs</param>
         protected virtual void OnDgvConditionalFieldCellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            //TODO: Open form with possibility to insert string for conditional field value
         }
 
         private void Localize()
         {
             dgvConditionalFields.Columns["col" + nameof(ConditionalFieldResultDisplay.Name)].HeaderText = Translation.LanguageStrings.ConditionalFieldName;
-            dgvConditionalFields.Columns["col" + nameof(ConditionalFieldResultDisplay.Value)].HeaderText = Translation.LanguageStrings.ConditionValue;
+            dgvConditionalFields.Columns["col" + nameof(ConditionalFieldResultDisplay.DisplayValue)].HeaderText = Translation.LanguageStrings.ConditionValue;
             dgvConditionalFields.Columns["col" + nameof(ConditionalFieldResultDisplay.ConditionalFieldTypeDisplayValue)].HeaderText = Translation.LanguageStrings.ConditionalFieldType;
         }
 

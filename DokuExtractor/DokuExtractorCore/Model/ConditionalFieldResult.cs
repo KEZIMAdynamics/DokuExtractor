@@ -17,6 +17,11 @@ namespace DokuExtractorCore.Model
         public string Value { get; set; } = string.Empty;
 
         /// <summary>
+        /// Display value of the processed conditional field
+        /// </summary>
+        public string DisplayValue { get; set; } = string.Empty;
+
+        /// <summary>
         /// Type of the processed conditional field.
         /// </summary>
         public ConditionalFieldType ConditionalFieldType { get; set; } = ConditionalFieldType.Text;

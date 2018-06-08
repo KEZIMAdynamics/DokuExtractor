@@ -70,7 +70,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
 
         protected virtual void OnDgvConditionsCellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            //TODO: Open form with possibility to insert string for conditional field value
         }
 
         private void ucConditionalFieldClassTemplate_Load(object sender, EventArgs e)
@@ -103,7 +103,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             cbxConditionalFieldType.Items[(int)(ConditionalFieldType.UserOrUserGroupId)] = Translation.LanguageStrings.ConditionalFieldTypeUserOrUserGroupId;
 
             dgvConditions.Columns["col" + nameof(ConditionValue.Condition)].HeaderText = Translation.LanguageStrings.Condition;
-            dgvConditions.Columns["col" + nameof(ConditionValue.Value)].HeaderText = Translation.LanguageStrings.ConditionValue;
+            dgvConditions.Columns["col" + nameof(ConditionValue.DisplayValue)].HeaderText = Translation.LanguageStrings.ConditionValue;
         }
 
         private void butAddCondition_Click(object sender, EventArgs e)

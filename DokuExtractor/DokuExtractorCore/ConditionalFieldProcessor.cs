@@ -16,7 +16,7 @@ namespace DokuExtractorCore
             {
                 case ConditionType.SimpleDocumentTextRegex:
                     return ProcessSimpleDocumentTextRegexConditions(inputText, fieldTemplate);
-                    //break;
+                //break;
                 default:
                     throw new NotImplementedException();
                     //break;
@@ -36,6 +36,11 @@ namespace DokuExtractorCore
                 if (string.IsNullOrEmpty(item.Condition))
                 {
                     retVal.Value = item.Value;
+
+                    if (string.IsNullOrWhiteSpace(item.DisplayValue) == true)
+                        retVal.DisplayValue = item.Value;
+                    else
+                        retVal.DisplayValue = item.DisplayValue;
                 }
                 else
                 {
@@ -53,7 +58,14 @@ namespace DokuExtractorCore
                     }
 
                     if (isMatching)
+                    {
                         retVal.Value = item.Value;
+
+                        if (string.IsNullOrWhiteSpace(item.DisplayValue) == true)
+                            retVal.DisplayValue = item.Value;
+                        else
+                            retVal.DisplayValue = item.DisplayValue;
+                    }
                 }
             }
 

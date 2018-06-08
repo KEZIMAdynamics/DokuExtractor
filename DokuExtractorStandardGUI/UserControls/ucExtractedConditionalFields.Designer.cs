@@ -33,6 +33,7 @@
             this.conditionalFieldResultDisplayBindingBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.ucExtractedConditionalFieldsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DisplayValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colConditionalFieldTypeDisplayValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colConditionalFieldType = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,6 +50,7 @@
             this.dgvConditionalFields.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvConditionalFields.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colName,
+            this.DisplayValue,
             this.colValue,
             this.colConditionalFieldTypeDisplayValue,
             this.colConditionalFieldType});
@@ -78,6 +80,12 @@
             this.colName.ReadOnly = true;
             this.colName.Width = 60;
             // 
+            // DisplayValue
+            // 
+            this.DisplayValue.DataPropertyName = "colDisplayValue";
+            this.DisplayValue.HeaderText = "DisplayValue";
+            this.DisplayValue.Name = "DisplayValue";
+            // 
             // colValue
             // 
             this.colValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
@@ -85,6 +93,7 @@
             this.colValue.HeaderText = "Value";
             this.colValue.Name = "colValue";
             this.colValue.ReadOnly = true;
+            this.colValue.Visible = false;
             this.colValue.Width = 59;
             // 
             // colConditionalFieldTypeDisplayValue
@@ -128,6 +137,7 @@
         private System.Windows.Forms.BindingSource conditionalFieldResultDisplayBindingBindingSource;
         private System.Windows.Forms.BindingSource ucExtractedConditionalFieldsBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DisplayValue;
         private System.Windows.Forms.DataGridViewTextBoxColumn colValue;
         private System.Windows.Forms.DataGridViewTextBoxColumn colConditionalFieldTypeDisplayValue;
         private System.Windows.Forms.DataGridViewTextBoxColumn colConditionalFieldType;
