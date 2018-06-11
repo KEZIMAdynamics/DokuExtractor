@@ -48,7 +48,7 @@
             // 
             this.butOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.butOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.butOk.Location = new System.Drawing.Point(308, 50);
+            this.butOk.Location = new System.Drawing.Point(212, 50);
             this.butOk.Name = "butOk";
             this.butOk.Size = new System.Drawing.Size(90, 35);
             this.butOk.TabIndex = 4;
@@ -60,7 +60,7 @@
             // 
             this.butCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.butCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.butCancel.Location = new System.Drawing.Point(212, 50);
+            this.butCancel.Location = new System.Drawing.Point(308, 50);
             this.butCancel.Name = "butCancel";
             this.butCancel.Size = new System.Drawing.Size(90, 35);
             this.butCancel.TabIndex = 5;
@@ -79,7 +79,7 @@
             this.Controls.Add(this.txtRetVal);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(900, 136);
-            this.MinimumSize = new System.Drawing.Size(0, 136);
+            this.MinimumSize = new System.Drawing.Size(16, 136);
             this.Name = "frmTextEdit";
             this.Text = "TextEdit";
             this.Load += new System.EventHandler(this.frmTextEdit_Load);

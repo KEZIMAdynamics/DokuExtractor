@@ -85,6 +85,7 @@
             this.colDisplayValue.DataPropertyName = "DisplayValue";
             this.colDisplayValue.HeaderText = "DisplayValue";
             this.colDisplayValue.Name = "colDisplayValue";
+            this.colDisplayValue.ReadOnly = true;
             // 
             // colValue
             // 

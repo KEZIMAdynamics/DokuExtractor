@@ -20,8 +20,19 @@ namespace DokuExtractorStandardGUI
             InitializeComponent();
         }
 
+        public frmTextEdit(string value)
+        {
+            InitializeComponent();
+            if (string.IsNullOrEmpty(value) == false)
+            {
+                txtRetVal.Text = value;
+                txtRetVal.SelectAll();
+            }
+        }
+
         private void frmTextEdit_Load(object sender, EventArgs e)
         {
+            this.CenterToScreen();
             Localize();
         }
 
@@ -31,6 +42,8 @@ namespace DokuExtractorStandardGUI
                 RetVal = null;
             else
                 RetVal = txtRetVal.Text;
+
+            this.Close();
         }
 
         private void butCancel_Click(object sender, EventArgs e)
