@@ -59,37 +59,10 @@
     <Compile Include="Directories.cs" />
     <Compile Include="FieldCalculator.cs" />
     <Compile Include="HelperExtensions.cs" />
-    <Compile Include="Model\CalculationFieldResult.cs" />
-    <Compile Include="Model\ConditionalFieldResult.cs" />
-    <Compile Include="Model\ConditionalFieldType.cs" />
-    <Compile Include="Model\ConditionType.cs" />
-    <Compile Include="Model\ConditionValue.cs" />
-    <Compile Include="Model\ConditionalFieldTemplate.cs" />
-    <Compile Include="Model\DataFieldGroupTemplate.cs" />
-    <Compile Include="Model\DataFieldResult.cs" />
-    <Compile Include="Model\DataFieldType.cs" />
-    <Compile Include="Model\DataTableCoordinates.cs" />
-    <Compile Include="Model\DataTableDefinition.cs" />
-    <Compile Include="Model\DocumentGroupTemplate.cs" />
-    <Compile Include="Model\FieldExtractionResult.cs" />
-    <Compile Include="Model\FieldResultBase.cs" />
-    <Compile Include="Model\FieldTemplateBase.cs" />
-    <Compile Include="Model\PreKeyWordSelectionArgs.cs" />
-    <Compile Include="Model\RegexExpressionFinderResult.cs" />
-    <Compile Include="Model\RegexExpressions.cs" />
-    <Compile Include="Model\StringValue.cs" />
-    <Compile Include="Model\Tables\TableColumn.cs" />
-    <Compile Include="Model\Tables\TableLine.cs" />
-    <Compile Include="Model\Tables\TableResult.cs" />
-    <Compile Include="Model\TemplateMachResult.cs" />
-    <Compile Include="Model\CalculationFieldTemplate.cs" />
-    <Compile Include="Model\TwoLineTable.cs" />
     <Compile Include="PdfTextLoader.cs" />
     <Compile Include="RegexExpressionFinder.cs" />
     <Compile Include="TableProcessor.cs" />
     <Compile Include="TemplateProcessor.cs" />
-    <Compile Include="Model\DataFieldClassTemplate.cs" />
-    <Compile Include="Model\DocumentClassTemplate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TwoLineTableProcessor.cs" />
   </ItemGroup>
@@ -119,6 +92,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DokuExtractorCore.Model\DokuExtractorCore.Model\DokuExtractorCore.Model.csproj">
+      <Project>{f2f88503-5633-4dd3-b4b6-328d1949601c}</Project>
+      <Name>DokuExtractorCore.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

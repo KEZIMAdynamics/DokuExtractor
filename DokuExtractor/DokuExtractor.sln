@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2036
+VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DokuExtractorGUI", "DokuExtractorGUI.csproj", "{DB0C52AF-76F0-4367-87E7-1829370D9CA3}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GdPicturePdfViewer", "..\GdPicturePdfViewer\GdPicturePdfViewer.csproj", "{B2A2182B-50B8-469A-9F7D-E00C43CC63FB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwoLineTableConsoleApp1", "..\TwoLineTableConsolseApp1\TwoLineTableConsoleApp1.csproj", "{A4686D5D-47C8-48BE-B0DE-7F69B5C1E163}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DokuExtractorCore.Model", "..\DokuExtractorCore.Model\DokuExtractorCore.Model\DokuExtractorCore.Model.csproj", "{F2F88503-5633-4DD3-B4B6-328D1949601C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{A4686D5D-47C8-48BE-B0DE-7F69B5C1E163}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4686D5D-47C8-48BE-B0DE-7F69B5C1E163}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4686D5D-47C8-48BE-B0DE-7F69B5C1E163}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2F88503-5633-4DD3-B4B6-328D1949601C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2F88503-5633-4DD3-B4B6-328D1949601C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2F88503-5633-4DD3-B4B6-328D1949601C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2F88503-5633-4DD3-B4B6-328D1949601C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
