@@ -39,7 +39,7 @@ namespace DokuExtractorStandardGUI
         private void butOk_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtRetVal.Text))
-                RetVal = null;
+                RetVal = string.Empty;
             else
                 RetVal = txtRetVal.Text;
 

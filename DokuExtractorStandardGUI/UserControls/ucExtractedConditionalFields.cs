@@ -41,6 +41,7 @@ namespace DokuExtractorStandardGUI.UserControls
                 {
                     Name = condField.Name,
                     Value = condField.Value,
+                    DisplayValue = condField.DisplayValue,
                     ConditionalFieldType = condField.ConditionalFieldType,
                     ConditionalFieldTypeDisplayValue = Translation.TranslateConditionalFieldTypeEnum(condField.ConditionalFieldType)
                 });
