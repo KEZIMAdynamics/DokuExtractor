@@ -413,7 +413,7 @@ namespace DokuExtractorStandardGUI
 
         private void butAddConditionalField_Click(object sender, EventArgs e)
         {
-            ucResultAndEditor1.AddConditionalField();
+            ucResultAndEditor1.AddConditionalField(false);
         }
 
         private void butLanguageEditor_Click(object sender, EventArgs e)

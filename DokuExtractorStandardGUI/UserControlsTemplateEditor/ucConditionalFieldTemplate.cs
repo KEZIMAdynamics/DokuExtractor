@@ -108,6 +108,11 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             }
         }
 
+        public void HideGroupTemplateSpecificComponents()
+        {
+            chbOnlyInGroupTemplate.Visible = false;
+        }
+
         private void ucConditionalFieldClassTemplate_Load(object sender, EventArgs e)
         {
             Localize();

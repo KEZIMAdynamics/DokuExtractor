@@ -67,11 +67,15 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         }
 
         /// <summary>
-        /// Adds a new conditional field (class template) to the user control
+        /// Adds a new conditional field to the user control
         /// </summary>
-        public void AddConditionalField()
+        public void AddConditionalField(bool isGroupTemplate)
         {
             var newConditionalField = (ucConditionalFieldTemplate)Activator.CreateInstance(UserControlSelector.ConditionalFieldTemplateUserControl);
+
+            if (isGroupTemplate == false)
+                newConditionalField.HideGroupTemplateSpecificComponents();
+
             newConditionalField.Tag = Guid.NewGuid();
             newConditionalField.ConditionalFieldEraser += DeleteConditionalField;
             flowLayoutPanel1.Controls.Add(newConditionalField);
@@ -302,6 +306,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
                 foreach (var item in this.classTemplate.ConditionalFields)
                 {
                     var newConditionalField = (ucConditionalFieldTemplate)Activator.CreateInstance(UserControlSelector.ConditionalFieldTemplateUserControl, item);
+                    newConditionalField.HideGroupTemplateSpecificComponents();
                     newConditionalField.Tag = Guid.NewGuid();
                     newConditionalField.ConditionalFieldEraser += DeleteConditionalField;
                     flowLayoutPanel1.Controls.Add(newConditionalField);

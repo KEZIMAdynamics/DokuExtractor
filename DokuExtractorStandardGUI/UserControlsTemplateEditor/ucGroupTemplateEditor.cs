@@ -100,7 +100,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
 
         private void butAddConditionalField_Click(object sender, EventArgs e)
         {
-            ucSingleTemplateEditor1.AddConditionalField();
+            ucSingleTemplateEditor1.AddConditionalField(true);
         }
     }
 }

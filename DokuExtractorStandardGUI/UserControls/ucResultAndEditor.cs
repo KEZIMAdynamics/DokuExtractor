@@ -105,9 +105,9 @@ namespace DokuExtractorStandardGUI.UserControls
         /// <summary>
         /// Adds a new conditional field to ucDataField
         /// </summary>
-        public void AddConditionalField()
+        public void AddConditionalField(bool isGroupTemplate)
         {
-            ucSingleTemplateEditor1.AddConditionalField();
+            ucSingleTemplateEditor1.AddConditionalField(isGroupTemplate);
         }
 
         /// <summary>
