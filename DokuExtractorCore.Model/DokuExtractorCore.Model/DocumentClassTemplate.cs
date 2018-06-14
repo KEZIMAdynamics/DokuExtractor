@@ -17,6 +17,11 @@ namespace DokuExtractorCore.Model
         public string TemplateClassName { get; set; } = string.Empty;
 
         /// <summary>
+        /// Can be used by external programs to identify a certain template
+        /// </summary>
+        public string ExternalId { get; set; } = string.Empty;
+
+        /// <summary>
         /// Which group or category does the template belong to? (Rechnung, Angebot, Lieferschein etc)
         /// </summary>
         public string TemplateGroupName { get; set; } = string.Empty;

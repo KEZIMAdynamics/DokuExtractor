@@ -14,6 +14,11 @@ namespace DokuExtractorCore.Model
         public string TemplateGroupName { get; set; } = string.Empty;
 
         /// <summary>
+        /// Can be used by external programs to identify a certain template
+        /// </summary>
+        public string ExternalId { get; set; } = string.Empty;
+
+        /// <summary>
         /// Before the normal KeyWord matching, templates of interests can be pre selected based on certain conditions.
         /// </summary>
         public PreKeyWordSelectionArgs PreSelectionCondition { get; set; } = new PreKeyWordSelectionArgs();
