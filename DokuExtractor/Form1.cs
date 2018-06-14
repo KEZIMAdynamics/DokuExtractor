@@ -47,7 +47,7 @@ namespace DokuExtractorGUI
             }
             else
             {
-                template = processor.AutoCreateClassTemplate("NeuesTemplate", inputString);
+                template = processor.AutoCreateClassTemplate("NeuesTemplate", inputString, groupTemplates);
                 var json = processor.ExtractDataAsJson(template, groupTemplates, inputString);
                 tbExtractedData.Text = json;
 
@@ -129,7 +129,7 @@ namespace DokuExtractorGUI
 
             });
 
-            proc.SaveTemplates(templates);// Path.Combine(Application.StartupPath, "ExtractorTemplates"));
+            proc.SaveTemplatesToFiles(templates);// Path.Combine(Application.StartupPath, "ExtractorTemplates"));
         }
 
         private void btOpenTemplateDir_Click(object sender, EventArgs e)

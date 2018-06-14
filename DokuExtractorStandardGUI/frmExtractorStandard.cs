@@ -21,6 +21,7 @@ namespace DokuExtractorStandardGUI
     public partial class frmExtractorStandard : Form
     {
         private List<DocumentClassTemplate> classTemplates { get; set; } = new List<DocumentClassTemplate>();
+        private List<DocumentGroupTemplate> groupTemplates { get; set; } = new List<DocumentGroupTemplate>();
 
         private Guid regexHelperID = Guid.Empty;
         private DataFieldType regexHelperFieldType = DataFieldType.Text;
@@ -44,10 +45,13 @@ namespace DokuExtractorStandardGUI
         /// <param name="popplerZipPath">Folder path, where the poppler.zip is</param>
         /// <param name="allowEditTemplates">Allows or pohibits the access to the template editors</param>
         /// <param name = "accessToAdminTools">Allows or prohibits the access to the global template editor and to the language editor</param>
-        public frmExtractorStandard(string fileFolderPath, string languageFolderPath, CultureInfo culture, string additionalCultureInfo = "", string appRootPath = "", string popplerZipPath = "", bool allowEditTemplates = false, bool accessToAdminTools = false)
+        /// <param name = "allowSaveTemplatesToFiles">When set to true, new and changed templates are saved as json files to the Template(Class/Group)Directory when user pressed save button</param>
+        public frmExtractorStandard(string fileFolderPath, string languageFolderPath, CultureInfo culture, string additionalCultureInfo = "", string appRootPath = "", string popplerZipPath = "", bool allowEditTemplates = false, bool accessToAdminTools = false, bool allowSaveTemplatesToFiles = false)
         {
             RegisterUserControls();
             InitializeComponent();
+
+            Directories.AllowSaveTemplatesToFiles = allowSaveTemplatesToFiles;
 
             if (string.IsNullOrWhiteSpace(appRootPath) == false)
                 Directories.AppRootPath = appRootPath;
@@ -90,10 +94,13 @@ namespace DokuExtractorStandardGUI
         /// <param name="appRootPath">Folder path, where the Template folders (group and class template folders) are</param>
         /// <param name="popplerZipPath">Folder path, where the poppler.zip is</param>
         /// <param name = "accessToAdminTools">Allows or prohibits the access to the global template editor and to the language editor</param>
-        public frmExtractorStandard(List<FileInfo> fileInfos, string languageFolderPath, CultureInfo culture, string additionalCultureInfo = "", string appRootPath = "", string popplerZipPath = "", bool allowEditTemplates = false, bool accessToAdminTools = false)
+        /// <param name = "allowSaveTemplatesToFiles">When set to true, new and changed templates are saved as json files to the Template(Class/Group)Directory when user pressed save button</param>
+        public frmExtractorStandard(List<FileInfo> fileInfos, string languageFolderPath, CultureInfo culture, string additionalCultureInfo = "", string appRootPath = "", string popplerZipPath = "", bool allowEditTemplates = false, bool accessToAdminTools = false, bool allowSaveTemplatesToFiles = false)
         {
             RegisterUserControls();
             InitializeComponent();
+
+            Directories.AllowSaveTemplatesToFiles = allowSaveTemplatesToFiles;
 
             if (string.IsNullOrWhiteSpace(appRootPath) == false)
                 Directories.AppRootPath = appRootPath;
@@ -119,10 +126,24 @@ namespace DokuExtractorStandardGUI
         private void frmExtractorStandard_Load(object sender, EventArgs e)
         {
             Localize();
+
+            this.classTemplates = templateProcessor.LoadClassTemplatesFromDisk();
+            this.groupTemplates = templateProcessor.LoadGroupTemplatesFromDisk();
+
             this.CenterToScreen();
             this.WindowState = FormWindowState.Maximized;
 
             UcResultAndEditor1_TabSwitched(false);
+        }
+
+        private void TemplateEditor_GroupTemplateSavedInGroupTemplateEditor(DocumentGroupTemplate savedGroupTemplate)
+        {
+            MessageBox.Show(Translation.LanguageStrings.MsgGroupTemplateSaved + ": " + savedGroupTemplate.TemplateGroupName, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void TemplateEditor_ClassTemplateSavedInClassTemplateEditor(DocumentClassTemplate savedClassTemplate)
+        {
+            MessageBox.Show(Translation.LanguageStrings.MsgClassTemplateSaved + ": " + savedClassTemplate.TemplateClassName, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void SubscribeOnEvents()
@@ -281,22 +302,21 @@ namespace DokuExtractorStandardGUI
 
         private void butTemplateEditor_Click(object sender, EventArgs e)
         {
-            var classTemplates = templateProcessor.LoadClassTemplatesFromDisk();
-            var groupTemplates = templateProcessor.LoadGroupTemplatesFromDisk();
+            if (Application.OpenForms.OfType<frmTemplateEditor>().Count() > 0)
+                return;
 
-            var templateEditor = new frmTemplateEditor(classTemplates, groupTemplates);
+            var templateEditor = new frmTemplateEditor(this.classTemplates, this.groupTemplates);
+            templateEditor.ClassTemplateSavedInClassTemplateEditor += TemplateEditor_ClassTemplateSavedInClassTemplateEditor;
+            templateEditor.GroupTemplateSavedInGroupTemplateEditor += TemplateEditor_GroupTemplateSavedInGroupTemplateEditor;
             templateEditor.Show();
         }
 
         private async void butGo_Click(object sender, EventArgs e)
         {
-            classTemplates = templateProcessor.LoadClassTemplatesFromDisk();
-            var groupTemplates = templateProcessor.LoadGroupTemplatesFromDisk();
-
             var loader = new PdfTextLoader();
             var inputString = await loader.GetTextFromPdf(selectedFilePath, false);
 
-            var matchingTemplateResult = templateProcessor.MatchTemplates(classTemplates, inputString);
+            var matchingTemplateResult = templateProcessor.MatchTemplates(this.classTemplates, inputString);
             var template = matchingTemplateResult.Template;
 
             if (matchingTemplateResult.IsMatchSuccessfull)
@@ -310,7 +330,7 @@ namespace DokuExtractorStandardGUI
             {
                 ucResultAndEditor1.SwitchTab(true);
 
-                template = templateProcessor.AutoCreateClassTemplate("NewTemplate", inputString);
+                template = templateProcessor.AutoCreateClassTemplate("NewTemplate", inputString, this.groupTemplates);
                 var json = templateProcessor.ExtractDataAsJson(template, groupTemplates, inputString);
                 ucResultAndEditor1.ShowPropertiesAndDataFields(template);
 
@@ -350,17 +370,25 @@ namespace DokuExtractorStandardGUI
             }
             else
             {
-                var oldTemplate = this.classTemplates.Where(x => x.TemplateClassName == newTemplate.TemplateClassName).FirstOrDefault();
-                if (oldTemplate != null)
+                //var oldTemplate = this.classTemplates.Where(x => x.TemplateClassName == newTemplate.TemplateClassName).FirstOrDefault();
+                //if (oldTemplate != null)
+                //{
+                //    this.classTemplates.Remove(oldTemplate);
+                //}
+
+                //this.classTemplates.Add(newTemplate);
+
+                if (Directories.AllowSaveTemplatesToFiles)
                 {
-                    this.classTemplates.Remove(oldTemplate);
+                    var saved = templateProcessor.SaveTemplateToFile(newTemplate);
+                    if (saved == true)
+                        MessageBox.Show(Translation.LanguageStrings.MsgClassTemplateSaved + ": " + newTemplate.TemplateClassName, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-
-                this.classTemplates.Add(newTemplate);
-
-                var saved = templateProcessor.SaveTemplate(newTemplate);
-                if (saved == true)
-                    MessageBox.Show(Translation.LanguageStrings.MsgClassTemplateSaved, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                else
+                {
+                    templateProcessor.CleanClassTemplateBeforeSave(newTemplate);
+                    MessageBox.Show(Translation.LanguageStrings.MsgClassTemplateSaved + ": " + newTemplate.TemplateClassName, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
         }
 

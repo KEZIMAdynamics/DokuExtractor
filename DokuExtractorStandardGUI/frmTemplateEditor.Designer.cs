@@ -31,8 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTemplateEditor));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabClassTemplateEditor = new System.Windows.Forms.TabPage();
-            this.tabGroupTemplateEditor = new System.Windows.Forms.TabPage();
             this.ucClassTemplateEditor1 = new DokuExtractorStandardGUI.UserControlsTemplateEditor.ucClassTemplateEditor();
+            this.tabGroupTemplateEditor = new System.Windows.Forms.TabPage();
             this.ucGroupTemplateEditor1 = new DokuExtractorStandardGUI.UserControlsTemplateEditor.ucGroupTemplateEditor();
             this.tabControl1.SuspendLayout();
             this.tabClassTemplateEditor.SuspendLayout();
@@ -61,6 +61,15 @@
             this.tabClassTemplateEditor.Text = "Class Template Editor";
             this.tabClassTemplateEditor.UseVisualStyleBackColor = true;
             // 
+            // ucClassTemplateEditor1
+            // 
+            this.ucClassTemplateEditor1.BackColor = System.Drawing.Color.White;
+            this.ucClassTemplateEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucClassTemplateEditor1.Location = new System.Drawing.Point(3, 3);
+            this.ucClassTemplateEditor1.Name = "ucClassTemplateEditor1";
+            this.ucClassTemplateEditor1.Size = new System.Drawing.Size(1090, 547);
+            this.ucClassTemplateEditor1.TabIndex = 0;
+            // 
             // tabGroupTemplateEditor
             // 
             this.tabGroupTemplateEditor.Controls.Add(this.ucGroupTemplateEditor1);
@@ -71,15 +80,6 @@
             this.tabGroupTemplateEditor.TabIndex = 1;
             this.tabGroupTemplateEditor.Text = "Group Template Editor";
             this.tabGroupTemplateEditor.UseVisualStyleBackColor = true;
-            // 
-            // ucClassTemplateEditor1
-            // 
-            this.ucClassTemplateEditor1.BackColor = System.Drawing.Color.White;
-            this.ucClassTemplateEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucClassTemplateEditor1.Location = new System.Drawing.Point(3, 3);
-            this.ucClassTemplateEditor1.Name = "ucClassTemplateEditor1";
-            this.ucClassTemplateEditor1.Size = new System.Drawing.Size(1090, 547);
-            this.ucClassTemplateEditor1.TabIndex = 0;
             // 
             // ucGroupTemplateEditor1
             // 
@@ -100,6 +100,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmTemplateEditor";
             this.Text = "TemplateEditor";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmTemplateEditor_FormClosing);
             this.Load += new System.EventHandler(this.frmTemplateEditor_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabClassTemplateEditor.ResumeLayout(false);

@@ -15,6 +15,12 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
 {
     public partial class ucGroupTemplateEditor : UserControl
     {
+        public delegate void GroupTemplateSavedInGroupTemplateEditorHandler(DocumentGroupTemplate savedGroupTemplate);
+        /// <summary>
+        /// Fired, when user has pressed save button in group template editor
+        /// </summary>
+        public event GroupTemplateSavedInGroupTemplateEditorHandler GroupTemplateSavedInGroupTemplateEditor;
+
         private DocumentGroupTemplate selectedGroupTemplate = new DocumentGroupTemplate();
         private List<DocumentGroupTemplate> groupTemplates = new List<DocumentGroupTemplate>();
 
@@ -72,9 +78,14 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             this.selectedGroupTemplate.ConditionalFields = groupTemplateWithChangedFields.ConditionalFields;
 
             var templateProcessor = new TemplateProcessor(Directories.AppRootPath);
-            var saved = templateProcessor.SaveTemplate(this.selectedGroupTemplate);
-            if (saved == true)
-                MessageBox.Show(Translation.LanguageStrings.MsgGroupTemplateSaved, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (Directories.AllowSaveTemplatesToFiles)
+            {
+                var saved = templateProcessor.SaveTemplateToFile(this.selectedGroupTemplate);
+                if (saved == true)
+                    GroupTemplateSavedInGroupTemplateEditor?.Invoke(this.selectedGroupTemplate);
+            }
+            else
+                GroupTemplateSavedInGroupTemplateEditor?.Invoke(this.selectedGroupTemplate);
         }
 
         private void butAddDataField_Click(object sender, EventArgs e)

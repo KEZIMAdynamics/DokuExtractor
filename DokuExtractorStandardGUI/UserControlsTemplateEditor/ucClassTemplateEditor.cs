@@ -15,6 +15,12 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
 {
     public partial class ucClassTemplateEditor : UserControl
     {
+        public delegate void ClassTemplateSavedInClassTemplateEditorHandler(DocumentClassTemplate savedClassTemplate);
+        /// <summary>
+        /// Fired, when user has pressed save button in class template editor
+        /// </summary>
+        public event ClassTemplateSavedInClassTemplateEditorHandler ClassTemplateSavedInClassTemplateEditor;
+
         private DocumentClassTemplate selectedClassTemplate = new DocumentClassTemplate();
         private List<DocumentClassTemplate> classTemplates = new List<DocumentClassTemplate>();
 
@@ -69,17 +75,25 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             this.selectedClassTemplate.DataFields = classTemplateWithChangedDataFields.DataFields;
 
 
-            var oldTemplate = this.classTemplates.Where(x => x.TemplateClassName == this.selectedClassTemplate.TemplateClassName).FirstOrDefault();
-            if (oldTemplate != null)
-            {
-                this.classTemplates.Remove(oldTemplate);
-                this.classTemplates.Add(this.selectedClassTemplate);
-            }
+            //var oldTemplate = this.classTemplates.Where(x => x.TemplateClassName == this.selectedClassTemplate.TemplateClassName).FirstOrDefault();
+            //if (oldTemplate != null)
+            //{
+            //    this.classTemplates.Remove(oldTemplate);
+            //    this.classTemplates.Add(this.selectedClassTemplate);
+            //}
 
             var templateProcessor = new TemplateProcessor(Directories.AppRootPath);
-            var saved = templateProcessor.SaveTemplate(this.selectedClassTemplate);
-            if (saved == true)
-                MessageBox.Show(Translation.LanguageStrings.MsgClassTemplateSaved, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (Directories.AllowSaveTemplatesToFiles)
+            {
+                var saved = templateProcessor.SaveTemplateToFile(this.selectedClassTemplate);
+                if (saved == true)
+                    ClassTemplateSavedInClassTemplateEditor?.Invoke(this.selectedClassTemplate);
+            }
+            else
+            {
+                templateProcessor.CleanClassTemplateBeforeSave(this.selectedClassTemplate);
+                ClassTemplateSavedInClassTemplateEditor?.Invoke(this.selectedClassTemplate);
+            }
         }
 
         private void butAddDataField_Click(object sender, EventArgs e)

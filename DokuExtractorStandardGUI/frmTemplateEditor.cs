@@ -15,9 +15,20 @@ namespace DokuExtractorStandardGUI
 {
     public partial class frmTemplateEditor : Form
     {
+        public delegate void GroupTemplateSavedInGroupTemplateEditorHandler(DocumentGroupTemplate savedGroupTemplate);
+        /// <summary>
+        /// Fired, when user has pressed save button in group template editor
+        /// </summary>
+        public event GroupTemplateSavedInGroupTemplateEditorHandler GroupTemplateSavedInGroupTemplateEditor;
+
+        public delegate void ClassTemplateSavedInClassTemplateEditorHandler(DocumentClassTemplate savedClassTemplate);
+        /// <summary>
+        /// Fired, when user has pressed save button in class template editor
+        /// </summary>
+        public event ClassTemplateSavedInClassTemplateEditorHandler ClassTemplateSavedInClassTemplateEditor;
+
         private List<DocumentClassTemplate> classTemplates = new List<DocumentClassTemplate>();
         private List<DocumentGroupTemplate> groupTemplates = new List<DocumentGroupTemplate>();
-
 
         /// <summary>
         /// Editor to edit group templates and class templates
@@ -28,6 +39,9 @@ namespace DokuExtractorStandardGUI
 
             this.classTemplates = classTemplates;
             this.groupTemplates = groupTemplates;
+
+            ucGroupTemplateEditor1.GroupTemplateSavedInGroupTemplateEditor += UcGroupTemplateEditor1_GroupTemplateSavedInGroupTemplateEditor;
+            ucClassTemplateEditor1.ClassTemplateSavedInClassTemplateEditor += UcClassTemplateEditor1_ClassTemplateSavedInClassTemplateEditor;
 
             this.CenterToScreen();
             this.WindowState = FormWindowState.Maximized;
@@ -44,6 +58,27 @@ namespace DokuExtractorStandardGUI
         {
             tabClassTemplateEditor.Text = Translation.LanguageStrings.ClassTemplateEditor;
             tabGroupTemplateEditor.Text = Translation.LanguageStrings.GroupTemplateEditor;
+        }
+
+        private void UcClassTemplateEditor1_ClassTemplateSavedInClassTemplateEditor(DocumentClassTemplate savedClassTemplate)
+        {
+            ClassTemplateSavedInClassTemplateEditor?.Invoke(savedClassTemplate);
+        }
+
+        private void UcGroupTemplateEditor1_GroupTemplateSavedInGroupTemplateEditor(DocumentGroupTemplate savedGroupTemplate)
+        {
+            GroupTemplateSavedInGroupTemplateEditor?.Invoke(savedGroupTemplate);
+        }
+
+        private void frmTemplateEditor_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                ucGroupTemplateEditor1.GroupTemplateSavedInGroupTemplateEditor -= UcGroupTemplateEditor1_GroupTemplateSavedInGroupTemplateEditor;
+                ucClassTemplateEditor1.ClassTemplateSavedInClassTemplateEditor -= UcClassTemplateEditor1_ClassTemplateSavedInClassTemplateEditor;
+            }
+            catch (Exception ex)
+            { }
         }
     }
 }

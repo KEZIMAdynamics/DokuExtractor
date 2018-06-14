@@ -32,7 +32,6 @@ namespace DokuExtractorCore
         /// For ease of use, Class and Group jsons can be copied to the appRootPath directory into the folders "ExtractorClassTemplates" and "ExtractorGroupTemplates".
         /// </summary>
         /// <param name="appRootPath"></param>
-
         public TemplateProcessor(string appRootPath)
         {
             this.appRootPath = appRootPath;
@@ -92,18 +91,18 @@ namespace DokuExtractorCore
         /// Saves group templates to the TemplateGroupDirectory.
         /// </summary>
         /// <param name="templates">List of group templates</param>
-        public void SaveTemplates(List<DocumentGroupTemplate> templates)
+        public void SaveTemplatesToFiles(List<DocumentGroupTemplate> templates)
         {
-            SaveTemplates(templates, TemplateGroupDirectory);
+            SaveTemplatesToFiles(templates, TemplateGroupDirectory);
         }
 
         /// <summary>
         /// Saves group template to the TemplateGroupDirectory.
         /// </summary>
         /// <param name="template">Group template</param>
-        public bool SaveTemplate(DocumentGroupTemplate template)
+        public bool SaveTemplateToFile(DocumentGroupTemplate template)
         {
-            return SaveTemplate(template, TemplateGroupDirectory);
+            return SaveTemplateToFile(template, TemplateGroupDirectory);
         }
 
         /// <summary>
@@ -111,14 +110,14 @@ namespace DokuExtractorCore
         /// </summary>
         /// <param name="templates">List of group templates</param>
         /// <param name="templateDirectory">Template directory</param>
-        public void SaveTemplates(List<DocumentGroupTemplate> templates, string templateDirectory)
+        public void SaveTemplatesToFiles(List<DocumentGroupTemplate> templates, string templateDirectory)
         {
             if (Directory.Exists(templateDirectory) == false)
                 Directory.CreateDirectory(templateDirectory);
 
             foreach (var template in templates)
             {
-                SaveTemplate(template, templateDirectory);
+                SaveTemplateToFile(template, templateDirectory);
             }
         }
 
@@ -127,7 +126,7 @@ namespace DokuExtractorCore
         /// </summary>
         /// <param name="template">Group template</param>
         /// <param name="templateDirectory">Template directory</param>
-        public bool SaveTemplate(DocumentGroupTemplate template, string templateDirectory)
+        public bool SaveTemplateToFile(DocumentGroupTemplate template, string templateDirectory)
         {
             var retVal = false;
 
@@ -147,18 +146,18 @@ namespace DokuExtractorCore
         /// Saves class templates to the TemplateClassDirectory.
         /// </summary>
         /// <param name="templates">List of class templates</param>
-        public void SaveTemplates(List<DocumentClassTemplate> templates)
+        public void SaveTemplatesToFiles(List<DocumentClassTemplate> templates)
         {
-            SaveTemplates(templates, TemplateClassDirectory);
+            SaveTemplatesToFiles(templates, TemplateClassDirectory);
         }
 
         /// <summary>
         /// Saves class template to the TemplateClassDirectory.
         /// </summary>
         /// <param name="template">Class template</param>
-        public bool SaveTemplate(DocumentClassTemplate template)
+        public bool SaveTemplateToFile(DocumentClassTemplate template)
         {
-            return SaveTemplate(template, TemplateClassDirectory);
+            return SaveTemplateToFile(template, TemplateClassDirectory);
         }
 
         /// <summary>
@@ -166,14 +165,14 @@ namespace DokuExtractorCore
         /// </summary>
         /// <param name="templates">List of class templates</param>
         /// <param name="templateDirectory">Template directory</param>
-        public void SaveTemplates(List<DocumentClassTemplate> templates, string templateDirectory)
+        public void SaveTemplatesToFiles(List<DocumentClassTemplate> templates, string templateDirectory)
         {
             if (Directory.Exists(templateDirectory) == false)
                 Directory.CreateDirectory(templateDirectory);
 
             foreach (var template in templates)
             {
-                SaveTemplate(template, templateDirectory);
+                SaveTemplateToFile(template, templateDirectory);
             }
         }
 
@@ -182,7 +181,7 @@ namespace DokuExtractorCore
         /// </summary>
         /// <param name="template">Class template</param>
         /// <param name="templateDirectory">Template directory</param>
-        public bool SaveTemplate(DocumentClassTemplate template, string templateDirectory)
+        public bool SaveTemplateToFile(DocumentClassTemplate template, string templateDirectory)
         {
             var retVal = false;
 
@@ -202,7 +201,7 @@ namespace DokuExtractorCore
 
         /// <summary>
         /// Can be called to prepare modified class templates for being saved externally. Takes care removing double blank spaces in <see cref="DocumentClassTemplate.KeyWords"/>.
-        /// Will be called automatically if the template is saved by the internally provided methods. (<see cref="SaveTemplate(DocumentClassTemplate, string)"/>) and its derivates.
+        /// Will be called automatically if the template is saved by the internally provided methods. (<see cref="SaveTemplateToFile(DocumentClassTemplate, string)"/>) and its derivates.
         /// </summary>
         /// <param name="template"></param>
         /// <returns></returns>
@@ -241,11 +240,12 @@ namespace DokuExtractorCore
         /// Selects the group template with the matching group name from TemplateGroupDirectory
         /// </summary>
         /// <param name="groupName"></param>
+        /// <param name="groupTemplates"></param>
         /// <returns></returns>
-        public DocumentGroupTemplate GetDocumentGroupTemplateByName(string groupName)
+        public DocumentGroupTemplate GetDocumentGroupTemplateByName(string groupName, List<DocumentGroupTemplate> groupTemplates)
         {
-            var templates = LoadGroupTemplatesFromDisk();
-            return templates.Where(x => x.TemplateGroupName == groupName).FirstOrDefault();
+            //var templates = LoadGroupTemplatesFromDisk();
+            return groupTemplates.Where(x => x.TemplateGroupName == groupName).FirstOrDefault();
         }
 
         /// <summary>
@@ -415,11 +415,12 @@ namespace DokuExtractorCore
         /// </summary>
         /// <param name="templateName"></param>
         /// <param name="inputText"></param>
+        /// <param name="groupTemplates"></param>
         /// <returns></returns>
-        public DocumentClassTemplate AutoCreateClassTemplate(string templateName, string inputText)
+        public DocumentClassTemplate AutoCreateClassTemplate(string templateName, string inputText, List<DocumentGroupTemplate> groupTemplates)
         {
             // var genericRechnung = JsonConvert.DeserializeObject<DocumentGroupTemplate>(File.ReadAllText(Path.Combine(appRootPath, "GenericTemplates", "GenericTemplateRechnungen.json.txt")));
-            var genericRechnung = GetDocumentGroupTemplateByName("Rechnung");
+            var genericRechnung = GetDocumentGroupTemplateByName("Rechnung", groupTemplates);
 
             var retVal = new DocumentClassTemplate();
             retVal.TemplateClassName = templateName;

@@ -36,7 +36,7 @@ namespace DokuExtractorGUI
             try
             {
                 var template = JsonConvert.DeserializeObject<DocumentClassTemplate>(tbTemplateBox.Text);
-                new TemplateProcessor(Application.StartupPath).SaveTemplates(new List<DocumentClassTemplate>() { template });
+                new TemplateProcessor(Application.StartupPath).SaveTemplatesToFiles(new List<DocumentClassTemplate>() { template });
                 MessageBox.Show("Template " + template.TemplateClassName + " gespeichert.");
             }
             catch (Exception ex)
