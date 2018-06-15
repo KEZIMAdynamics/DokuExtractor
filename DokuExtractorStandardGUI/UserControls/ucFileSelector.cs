@@ -101,5 +101,30 @@ namespace DokuExtractorStandardGUI.UserControls
         {
             SelectedFileChanged?.Invoke(newPath);
         }
+
+        private void dataGridView1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                var selectedRows = dataGridView1.SelectedRows;
+                if (selectedRows != null)
+                    foreach (DataGridViewRow row in selectedRows)
+                    {
+                        try
+                        {
+                            var fileInfo = row.DataBoundItem as FileInfo;
+                            var dragDropDaten = new DataObject();
+                            string[] pfad = new string[1];
+                            pfad[0] = fileInfo.FullName;
+                            dragDropDaten.SetData(DataFormats.FileDrop, pfad);
+                            DoDragDrop(dragDropDaten, DragDropEffects.Copy);
+                        }
+                        catch (Exception ex)
+                        { }
+
+                        break;
+                    }
+            }
+        }
     }
 }

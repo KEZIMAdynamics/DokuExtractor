@@ -30,8 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.fileInfosBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.ucFileSelectorBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDirectoryName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -47,6 +45,8 @@
             this.colLastWriteTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLastWriteTimeUtc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAttributes = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fileInfosBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.ucFileSelectorBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileInfosBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ucFileSelectorBindingSource)).BeginInit();
@@ -82,15 +82,7 @@
             this.dataGridView1.Size = new System.Drawing.Size(451, 490);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
-            // 
-            // fileInfosBindingSource
-            // 
-            this.fileInfosBindingSource.DataMember = "FileInfos";
-            this.fileInfosBindingSource.DataSource = this.ucFileSelectorBindingSource;
-            // 
-            // ucFileSelectorBindingSource
-            // 
-            this.ucFileSelectorBindingSource.DataSource = typeof(DokuExtractorStandardGUI.UserControls.ucFileSelector);
+            this.dataGridView1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.dataGridView1_MouseMove);
             // 
             // colName
             // 
@@ -157,7 +149,6 @@
             this.colExtension.Name = "colExtension";
             this.colExtension.ReadOnly = true;
             this.colExtension.Visible = false;
-            this.colExtension.Width = 78;
             // 
             // colCreationTime
             // 
@@ -166,7 +157,6 @@
             this.colCreationTime.HeaderText = "CreationTime";
             this.colCreationTime.Name = "colCreationTime";
             this.colCreationTime.Visible = false;
-            this.colCreationTime.Width = 94;
             // 
             // colCreationTimeUtc
             // 
@@ -209,6 +199,15 @@
             this.colAttributes.HeaderText = "Attributes";
             this.colAttributes.Name = "colAttributes";
             this.colAttributes.Visible = false;
+            // 
+            // fileInfosBindingSource
+            // 
+            this.fileInfosBindingSource.DataMember = "FileInfos";
+            this.fileInfosBindingSource.DataSource = this.ucFileSelectorBindingSource;
+            // 
+            // ucFileSelectorBindingSource
+            // 
+            this.ucFileSelectorBindingSource.DataSource = typeof(DokuExtractorStandardGUI.UserControls.ucFileSelector);
             // 
             // ucFileSelector
             // 
