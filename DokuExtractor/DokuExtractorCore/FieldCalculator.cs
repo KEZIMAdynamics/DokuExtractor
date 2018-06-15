@@ -110,18 +110,31 @@ namespace DokuExtractorCore
             if (string.IsNullOrEmpty(inputText))
                 return "0";
 
-            var retVal = inputText.Replace("‚", ","); // Replce Comma with ASCII Code Dec130 with comma with ASCII Code Dec44 to unfuck OCR results
-            // TODO: Stabilize function against further funny characters
+            var retVal = inputText.Replace("‚", ","); // Replace Comma with ASCII Code Dec130 with comma with ASCII Code Dec44 to unfuck OCR results
 
-            var temp = double.Parse(retVal, System.Globalization.NumberStyles.Currency, NumberFormatInfo.InvariantInfo);
+            retVal = retVal.Replace(".", ",").TrimEnd(','); // Prepare decimal seperator magic by setting als seperators to ','...
 
-            return temp.ToString(CultureInfo.InvariantCulture);
+            var tempArray = retVal.ToCharArray();
 
-            //if (inputText.Contains(',') && inputText.Contains('.'))
-            //{
-            //    if (inputText.IndexOf(',')<inputText.IndexOf('.')
-            //        retva
-            //}
+            if (tempArray.Length >= 2)                      // ...and then replacing the ',' (which is supposed to be a decimal seperator and not a seperator for thousands) based on its position. If it is the second or third last character of a number, it's assumed to be the decimal seperator.
+            {                                               
+                if (tempArray[tempArray.Length - 2] == ',')
+                    tempArray[tempArray.Length - 2] = '.';
+            }
+            if (tempArray.Length >= 3)
+            {
+                if (tempArray[tempArray.Length - 3] == ',')
+                    tempArray[tempArray.Length - 3] = '.';
+            }
+
+            retVal = string.Concat(tempArray);
+
+            // The input text is sanitized and ready to be parsed to double by the actual parser.
+            // TODO: Stabilize function against further funny characters from OCR
+
+            var temp = double.Parse(retVal, System.Globalization.NumberStyles.Currency, CultureInfo.InvariantCulture.NumberFormat.);
+
+            return temp.ToString(CultureInfo.InvariantCulture);           
         }
     }
 }
