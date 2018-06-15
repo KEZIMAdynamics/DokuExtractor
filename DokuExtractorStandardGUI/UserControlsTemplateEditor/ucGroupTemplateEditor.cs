@@ -21,6 +21,12 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         /// </summary>
         public event GroupTemplateSavedInGroupTemplateEditorHandler GroupTemplateSavedInGroupTemplateEditor;
 
+        public delegate void GroupTemplateDeletedInGroupTemplateEditorHandler(DocumentGroupTemplate deletedGroupTemplate);
+        /// <summary>
+        /// Fired, when user has pressed delete button in group template editor
+        /// </summary>
+        public event GroupTemplateDeletedInGroupTemplateEditorHandler GroupTemplateDeletedInGroupTemplateEditor;
+
         private DocumentGroupTemplate selectedGroupTemplate = new DocumentGroupTemplate();
         private List<DocumentGroupTemplate> groupTemplates = new List<DocumentGroupTemplate>();
 
@@ -58,6 +64,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             butAddCalculationField.Text = Translation.LanguageStrings.ButAddCalculationField;
             butAddConditionalField.Text = Translation.LanguageStrings.ButAddConditionalField;
             butSaveTemplate.Text = Translation.LanguageStrings.ButSaveTemplate;
+            butDeleteTemplate.Text = Translation.LanguageStrings.ButDeleteTemplate;
         }
 
         private void UcTemplateSelector1_SelectionChanged(string templateName)
@@ -101,6 +108,29 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         private void butAddConditionalField_Click(object sender, EventArgs e)
         {
             ucSingleTemplateEditor1.AddConditionalField(true);
+        }
+
+        private void butDeleteTemplate_Click(object sender, EventArgs e)
+        {
+            var delete = MessageBox.Show(Translation.LanguageStrings.MsgAskDeleteTemplate, "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (delete == DialogResult.Yes)
+            {
+                var templateProcessor = new TemplateProcessor(Directories.AppRootPath);
+                if (Directories.AllowSaveTemplatesToFiles)
+                {
+                    var deleted = templateProcessor.DeleteTemplateFile(this.selectedGroupTemplate);
+                    if (deleted == true)
+                    {
+                        GroupTemplateDeletedInGroupTemplateEditor?.Invoke(this.selectedGroupTemplate);
+                        ucTemplateSelector1.RemoveSelectedTemplate();
+                    }
+                }
+                else
+                {
+                    GroupTemplateDeletedInGroupTemplateEditor?.Invoke(this.selectedGroupTemplate);
+                    ucTemplateSelector1.RemoveSelectedTemplate();
+                }
+            }
         }
     }
 }

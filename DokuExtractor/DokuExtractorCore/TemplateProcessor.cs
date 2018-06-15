@@ -214,6 +214,49 @@ namespace DokuExtractorCore
         }
 
         /// <summary>
+        /// Deletes class template from directory
+        /// </summary>
+        /// <param name="template"></param>
+        /// <returns></returns>
+        public bool DeleteTemplateFile(DocumentClassTemplate template)
+        {
+            var filePath = Path.Combine(TemplateClassDirectory, template.TemplateClassName + ".json.txt");
+            try
+            {
+                File.Delete(filePath);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Deletes group template from directory
+        /// </summary>
+        /// <param name="template"></param>
+        /// <returns></returns>
+        public bool DeleteTemplateFile(DocumentGroupTemplate template)
+        {
+            var filePath = Path.Combine(TemplateGroupDirectory, template.TemplateGroupName + ".json.txt");
+            try
+            {
+                if (File.Exists(filePath))
+                {
+                    File.Delete(filePath);
+                    return true;
+                }
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
         /// Matches a template to the input text. Templates will automatically be preselected and than matched via key words.
         /// </summary>
         /// <param name="templates">All class templates that shall be compared</param>

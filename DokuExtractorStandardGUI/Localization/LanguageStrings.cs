@@ -57,7 +57,6 @@ namespace DokuExtractorStandardGUI.Localization
 
         #region ConditionalField
         public string ConditionalFieldName { get; set; } = "Name";
-        public string ConditionalFieldConditions { get; set; } = "Conditions";
         public string ConditionalFieldType { get; set; } = "Type";
         public string Condition { get; set; } = "Condition";
         public string ConditionValue { get; set; } = "Value";
@@ -111,6 +110,7 @@ namespace DokuExtractorStandardGUI.Localization
         public string GroupTemplateEditor { get; set; } = "Group template editor";
 
         public string ButAddCalculationField { get; set; } = "Add calculation field";
+        public string ButDeleteTemplate { get; set; } = "Delete template";
         #endregion TemplateEditor
 
         #region LanguageEditor
@@ -121,9 +121,13 @@ namespace DokuExtractorStandardGUI.Localization
 
         #region MessageBoxes
         public string MsgDllNotFound { get; set; } = "DLL not found!";
-        public string MsgClassTemplateSaved { get; set; } = "Class template saved.";
-        public string MsgGroupTemplateSaved { get; set; } = "Group template saved.";
+        public string MsgClassTemplateSaved { get; set; } = "Class template saved";
+        public string MsgGroupTemplateSaved { get; set; } = "Group template saved";
+        public string MsgClassTemplateDeleted { get; set; } = "Class template deleted";
+        public string MsgGroupTemplateDeleted { get; set; } = "Group template deleted";
+        public string MsgAskDeleteTemplate { get; set; } = "Do you really want to delete this template?";
         public string MsgAskDeleteFile { get; set; } = "Do you really want to delete this file?";
+        public string MsgAskDeleteLanguage { get; set; } = "Do you really want to delete this language?";
         public string MsgAskStartRegexExpressionHelper { get; set; } = "Start regex expression helper?";
         public string MsgAskAcceptRegexExpressionHelperResult { get; set; } = "Do you accept the following result?";
         public string MsgAskAdditionalRegexExpression { get; set; } = "Do you want to add this expression as an ADDITIONAL expression?";

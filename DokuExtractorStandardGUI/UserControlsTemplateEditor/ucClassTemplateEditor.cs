@@ -21,6 +21,12 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         /// </summary>
         public event ClassTemplateSavedInClassTemplateEditorHandler ClassTemplateSavedInClassTemplateEditor;
 
+        public delegate void ClassTemplateDeletedInClassTemplateEditorHandler(DocumentClassTemplate deletedClassTemplate);
+        /// <summary>
+        /// Fired, when user has pressed delete button in class template editor
+        /// </summary>
+        public event ClassTemplateDeletedInClassTemplateEditorHandler ClassTemplateDeletedInClassTemplateEditor;
+
         private DocumentClassTemplate selectedClassTemplate = new DocumentClassTemplate();
         private List<DocumentClassTemplate> classTemplates = new List<DocumentClassTemplate>();
 
@@ -57,6 +63,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             butAddDataField.Text = Translation.LanguageStrings.ButAddDataField;
             butAddConditionalField.Text = Translation.LanguageStrings.ButAddConditionalField;
             butSaveTemplate.Text = Translation.LanguageStrings.ButSaveTemplate;
+            butDeleteTemplate.Text = Translation.LanguageStrings.ButDeleteTemplate;
         }
 
         private void UcTemplateSelector1_SelectionChanged(string templateName)
@@ -104,6 +111,29 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         private void butAddConditionalField_Click(object sender, EventArgs e)
         {
             ucSingleTemplateEditor1.AddConditionalField(false);
+        }
+
+        private void butDeleteTemplate_Click(object sender, EventArgs e)
+        {
+            var delete = MessageBox.Show(Translation.LanguageStrings.MsgAskDeleteTemplate, "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (delete == DialogResult.Yes)
+            {
+                var templateProcessor = new TemplateProcessor(Directories.AppRootPath);
+                if (Directories.AllowSaveTemplatesToFiles)
+                {
+                    var deleted = templateProcessor.DeleteTemplateFile(this.selectedClassTemplate);
+                    if (deleted == true)
+                    {
+                        ClassTemplateDeletedInClassTemplateEditor?.Invoke(this.selectedClassTemplate);
+                        ucTemplateSelector1.RemoveSelectedTemplate();
+                    }
+                }
+                else
+                {
+                    ClassTemplateDeletedInClassTemplateEditor?.Invoke(this.selectedClassTemplate);
+                    ucTemplateSelector1.RemoveSelectedTemplate();
+                }
+            }
         }
     }
 }

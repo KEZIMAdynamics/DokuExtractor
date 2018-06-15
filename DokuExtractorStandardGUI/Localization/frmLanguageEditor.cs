@@ -145,17 +145,21 @@ namespace DokuExtractorStandardGUI.Localization
 
         private void butDeleteLanguage_Click(object sender, EventArgs e)
         {
-            var selectedCells = dgvRotatedLanguages.SelectedCells;
-            if (selectedCells != null)
-                foreach (DataGridViewCell cell in selectedCells)
-                {
-                    if (cell.ColumnIndex > 0)
+            var delete = MessageBox.Show(Translation.LanguageStrings.MsgAskDeleteLanguage, "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (delete == DialogResult.Yes)
+            {
+                var selectedCells = dgvRotatedLanguages.SelectedCells;
+                if (selectedCells != null)
+                    foreach (DataGridViewCell cell in selectedCells)
                     {
-                        var column = dgvRotatedLanguages.Columns[cell.ColumnIndex];
-                        dgvRotatedLanguages.Columns.Remove(column);
+                        if (cell.ColumnIndex > 0)
+                        {
+                            var column = dgvRotatedLanguages.Columns[cell.ColumnIndex];
+                            dgvRotatedLanguages.Columns.Remove(column);
+                        }
+                        break;
                     }
-                    break;
-                }
+            }
         }
     }
 }

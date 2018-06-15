@@ -27,6 +27,18 @@ namespace DokuExtractorStandardGUI
         /// </summary>
         public event ClassTemplateSavedInClassTemplateEditorHandler ClassTemplateSavedInClassTemplateEditor;
 
+        public delegate void GroupTemplateDeletedInGroupTemplateEditorHandler(DocumentGroupTemplate deletedGroupTemplate);
+        /// <summary>
+        /// Fired, when user has pressed delete button in group template editor
+        /// </summary>
+        public event GroupTemplateDeletedInGroupTemplateEditorHandler GroupTemplateDeletedInGroupTemplateEditor;
+
+        public delegate void ClassTemplateDeletedInClassTemplateEditorHandler(DocumentClassTemplate deletedClassTemplate);
+        /// <summary>
+        /// Fired, when user has pressed delete button in class template editor
+        /// </summary>
+        public event ClassTemplateDeletedInClassTemplateEditorHandler ClassTemplateDeletedInClassTemplateEditor;
+
         private List<DocumentClassTemplate> classTemplates = new List<DocumentClassTemplate>();
         private List<DocumentGroupTemplate> groupTemplates = new List<DocumentGroupTemplate>();
 
@@ -42,6 +54,8 @@ namespace DokuExtractorStandardGUI
 
             ucGroupTemplateEditor1.GroupTemplateSavedInGroupTemplateEditor += UcGroupTemplateEditor1_GroupTemplateSavedInGroupTemplateEditor;
             ucClassTemplateEditor1.ClassTemplateSavedInClassTemplateEditor += UcClassTemplateEditor1_ClassTemplateSavedInClassTemplateEditor;
+            ucGroupTemplateEditor1.GroupTemplateDeletedInGroupTemplateEditor += UcGroupTemplateEditor1_GroupTemplateDeletedInGroupTemplateEditor;
+            ucClassTemplateEditor1.ClassTemplateDeletedInClassTemplateEditor += UcClassTemplateEditor1_ClassTemplateDeletedInClassTemplateEditor;
 
             this.CenterToScreen();
             this.WindowState = FormWindowState.Maximized;
@@ -70,12 +84,24 @@ namespace DokuExtractorStandardGUI
             GroupTemplateSavedInGroupTemplateEditor?.Invoke(savedGroupTemplate);
         }
 
+        private void UcClassTemplateEditor1_ClassTemplateDeletedInClassTemplateEditor(DocumentClassTemplate deletedClassTemplate)
+        {
+            ClassTemplateDeletedInClassTemplateEditor?.Invoke(deletedClassTemplate);
+        }
+
+        private void UcGroupTemplateEditor1_GroupTemplateDeletedInGroupTemplateEditor(DocumentGroupTemplate deletedGroupTemplate)
+        {
+            GroupTemplateDeletedInGroupTemplateEditor?.Invoke(deletedGroupTemplate);
+        }
+
         private void frmTemplateEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
             try
             {
                 ucGroupTemplateEditor1.GroupTemplateSavedInGroupTemplateEditor -= UcGroupTemplateEditor1_GroupTemplateSavedInGroupTemplateEditor;
                 ucClassTemplateEditor1.ClassTemplateSavedInClassTemplateEditor -= UcClassTemplateEditor1_ClassTemplateSavedInClassTemplateEditor;
+                ucGroupTemplateEditor1.GroupTemplateDeletedInGroupTemplateEditor -= UcGroupTemplateEditor1_GroupTemplateDeletedInGroupTemplateEditor;
+                ucClassTemplateEditor1.ClassTemplateDeletedInClassTemplateEditor -= UcClassTemplateEditor1_ClassTemplateDeletedInClassTemplateEditor;
             }
             catch (Exception ex)
             { }

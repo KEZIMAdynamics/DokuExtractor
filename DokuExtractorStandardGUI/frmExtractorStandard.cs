@@ -146,6 +146,16 @@ namespace DokuExtractorStandardGUI
             MessageBox.Show(Translation.LanguageStrings.MsgClassTemplateSaved + ": " + savedClassTemplate.TemplateClassName, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        private void TemplateEditor_GroupTemplateDeletedInGroupTemplateEditor(DocumentGroupTemplate deletedGroupTemplate)
+        {
+            MessageBox.Show(Translation.LanguageStrings.MsgGroupTemplateDeleted + ": " + deletedGroupTemplate.TemplateGroupName, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void TemplateEditor_ClassTemplateDeletedInClassTemplateEditor(DocumentClassTemplate deletedClassTemplate)
+        {
+            MessageBox.Show(Translation.LanguageStrings.MsgClassTemplateDeleted + ": " + deletedClassTemplate.TemplateClassName, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
         private void SubscribeOnEvents()
         {
             ucFileSelector1.SelectedFileChanged += UcFileSelector1_SelectedFileChanged;
@@ -308,6 +318,8 @@ namespace DokuExtractorStandardGUI
             var templateEditor = new frmTemplateEditor(this.classTemplates, this.groupTemplates);
             templateEditor.ClassTemplateSavedInClassTemplateEditor += TemplateEditor_ClassTemplateSavedInClassTemplateEditor;
             templateEditor.GroupTemplateSavedInGroupTemplateEditor += TemplateEditor_GroupTemplateSavedInGroupTemplateEditor;
+            templateEditor.ClassTemplateDeletedInClassTemplateEditor += TemplateEditor_ClassTemplateDeletedInClassTemplateEditor;
+            templateEditor.GroupTemplateDeletedInGroupTemplateEditor += TemplateEditor_GroupTemplateDeletedInGroupTemplateEditor;
             templateEditor.Show();
         }
 
@@ -400,7 +412,6 @@ namespace DokuExtractorStandardGUI
                 ucViewer1.TextSelected -= UcViewer1_TextSelected;
                 ucResultAndEditor1.TabSwitched -= UcResultAndEditor1_TabSwitched;
                 ucResultAndEditor1.RegexExpressionHelper -= UcResultAndEditor1_RegexExpressionHelper;
-
             }
             catch (Exception ex)
             { }

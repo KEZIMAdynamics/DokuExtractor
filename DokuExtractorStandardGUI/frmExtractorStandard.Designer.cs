@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmExtractorStandard));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.butDeleteFile = new System.Windows.Forms.Button();
             this.ucFileSelector1 = new DokuExtractorStandardGUI.UserControls.ucFileSelector();
             this.ucViewer1 = new DokuExtractorStandardGUI.UserControls.ucViewer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
@@ -43,7 +44,6 @@
             this.butSaveTemplate = new System.Windows.Forms.Button();
             this.butGo = new System.Windows.Forms.Button();
             this.butTemplateEditor = new System.Windows.Forms.Button();
-            this.butDeleteFile = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -92,6 +92,19 @@
             this.splitContainer2.Size = new System.Drawing.Size(1017, 836);
             this.splitContainer2.SplitterDistance = 261;
             this.splitContainer2.TabIndex = 0;
+            // 
+            // butDeleteFile
+            // 
+            this.butDeleteFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.butDeleteFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.butDeleteFile.Location = new System.Drawing.Point(3, 798);
+            this.butDeleteFile.Name = "butDeleteFile";
+            this.butDeleteFile.Size = new System.Drawing.Size(255, 35);
+            this.butDeleteFile.TabIndex = 9;
+            this.butDeleteFile.Text = "Delete File";
+            this.butDeleteFile.UseVisualStyleBackColor = true;
+            this.butDeleteFile.Click += new System.EventHandler(this.butDeleteFile_Click);
             // 
             // ucFileSelector1
             // 
@@ -154,13 +167,14 @@
             // butAddConditionalField
             // 
             this.butAddConditionalField.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.butAddConditionalField.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.butAddConditionalField.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.butAddConditionalField.Location = new System.Drawing.Point(380, 41);
             this.butAddConditionalField.Name = "butAddConditionalField";
             this.butAddConditionalField.Size = new System.Drawing.Size(153, 35);
             this.butAddConditionalField.TabIndex = 8;
             this.butAddConditionalField.Text = "Add Conditional Field";
-            this.butAddConditionalField.UseVisualStyleBackColor = true;
+            this.butAddConditionalField.UseVisualStyleBackColor = false;
             this.butAddConditionalField.Click += new System.EventHandler(this.butAddConditionalField_Click);
             // 
             // butLanguageEditor
@@ -190,6 +204,7 @@
             // 
             this.butOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.butOk.ForeColor = System.Drawing.Color.Green;
             this.butOk.Location = new System.Drawing.Point(145, 41);
             this.butOk.Name = "butOk";
             this.butOk.Size = new System.Drawing.Size(70, 88);
@@ -201,19 +216,21 @@
             // butAddDataField
             // 
             this.butAddDataField.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.butAddDataField.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.butAddDataField.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.butAddDataField.Location = new System.Drawing.Point(221, 41);
             this.butAddDataField.Name = "butAddDataField";
             this.butAddDataField.Size = new System.Drawing.Size(153, 35);
             this.butAddDataField.TabIndex = 3;
             this.butAddDataField.Text = "Add Data Field";
-            this.butAddDataField.UseVisualStyleBackColor = true;
+            this.butAddDataField.UseVisualStyleBackColor = false;
             this.butAddDataField.Click += new System.EventHandler(this.butAddDataField_Click);
             // 
             // butSaveTemplate
             // 
             this.butSaveTemplate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butSaveTemplate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.butSaveTemplate.ForeColor = System.Drawing.Color.Green;
             this.butSaveTemplate.Location = new System.Drawing.Point(327, 82);
             this.butSaveTemplate.Name = "butSaveTemplate";
             this.butSaveTemplate.Size = new System.Drawing.Size(100, 47);
@@ -226,6 +243,7 @@
             // 
             this.butGo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butGo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.butGo.ForeColor = System.Drawing.Color.Blue;
             this.butGo.Location = new System.Drawing.Point(69, 41);
             this.butGo.Name = "butGo";
             this.butGo.Size = new System.Drawing.Size(70, 88);
@@ -245,19 +263,6 @@
             this.butTemplateEditor.Text = "Template Editor";
             this.butTemplateEditor.UseVisualStyleBackColor = true;
             this.butTemplateEditor.Click += new System.EventHandler(this.butTemplateEditor_Click);
-            // 
-            // butDeleteFile
-            // 
-            this.butDeleteFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.butDeleteFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.butDeleteFile.Location = new System.Drawing.Point(3, 798);
-            this.butDeleteFile.Name = "butDeleteFile";
-            this.butDeleteFile.Size = new System.Drawing.Size(255, 35);
-            this.butDeleteFile.TabIndex = 9;
-            this.butDeleteFile.Text = "Delete File";
-            this.butDeleteFile.UseVisualStyleBackColor = true;
-            this.butDeleteFile.Click += new System.EventHandler(this.butDeleteFile_Click);
             // 
             // frmExtractorStandard
             // 

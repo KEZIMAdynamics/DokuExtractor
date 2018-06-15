@@ -40,7 +40,8 @@
             // 
             this.butSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.butSave.Location = new System.Drawing.Point(835, 548);
+            this.butSave.ForeColor = System.Drawing.Color.Green;
+            this.butSave.Location = new System.Drawing.Point(724, 548);
             this.butSave.Name = "butSave";
             this.butSave.Size = new System.Drawing.Size(105, 35);
             this.butSave.TabIndex = 3;
@@ -52,6 +53,7 @@
             // 
             this.butAddLanguage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butAddLanguage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.butAddLanguage.ForeColor = System.Drawing.Color.Blue;
             this.butAddLanguage.Location = new System.Drawing.Point(613, 548);
             this.butAddLanguage.Name = "butAddLanguage";
             this.butAddLanguage.Size = new System.Drawing.Size(105, 35);
@@ -64,7 +66,8 @@
             // 
             this.butDeleteLanguage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.butDeleteLanguage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.butDeleteLanguage.Location = new System.Drawing.Point(724, 548);
+            this.butDeleteLanguage.ForeColor = System.Drawing.Color.Red;
+            this.butDeleteLanguage.Location = new System.Drawing.Point(835, 548);
             this.butDeleteLanguage.Name = "butDeleteLanguage";
             this.butDeleteLanguage.Size = new System.Drawing.Size(105, 35);
             this.butDeleteLanguage.TabIndex = 5;
