@@ -391,7 +391,9 @@ namespace DokuExtractorCore
 
             foreach (var item in allConditionalFields)
             {
-                retVal.ConditionalFields.Add(conditionProcessor.ProcessConditions(inputText, item));
+                var conditionalFieldResult = conditionProcessor.ProcessConditions(inputText, item);
+                if (retVal.ConditionalFields.Where(x => x.Name == conditionalFieldResult.Name).Count() == 0)
+                    retVal.ConditionalFields.Add(conditionalFieldResult);
             }
 
             return retVal;
@@ -423,30 +425,33 @@ namespace DokuExtractorCore
             var genericRechnung = GetDocumentGroupTemplateByName("Rechnung", groupTemplates);
 
             var retVal = new DocumentClassTemplate();
-            retVal.TemplateClassName = templateName;
-            retVal.TemplateGroupName = genericRechnung.TemplateGroupName;
-
-            RegexExpressionFinderResult regexResult;
-            if (TryFindRegexMatchExpress(inputText, string.Empty, string.Empty, DataFieldType.AnchorLessIBAN, false, out regexResult))
+            if (genericRechnung != null)
             {
-                // retVal.PreSelectionCondition.IBANs = regexResult.MatchingValue.Replace(" ", string.Empty).ToUpper();
-                foreach (var item in regexResult.AllMatchingValues)
+                retVal.TemplateClassName = templateName;
+                retVal.TemplateGroupName = genericRechnung.TemplateGroupName;
+
+                RegexExpressionFinderResult regexResult;
+                if (TryFindRegexMatchExpress(inputText, string.Empty, string.Empty, DataFieldType.AnchorLessIBAN, false, out regexResult))
                 {
-                    var cleaned = item.Replace(" ", string.Empty).ToUpper();
-                    retVal.PreSelectionCondition.IBANs.Add(cleaned);
+                    // retVal.PreSelectionCondition.IBANs = regexResult.MatchingValue.Replace(" ", string.Empty).ToUpper();
+                    foreach (var item in regexResult.AllMatchingValues)
+                    {
+                        var cleaned = item.Replace(" ", string.Empty).ToUpper();
+                        retVal.PreSelectionCondition.IBANs.Add(cleaned);
+                    }
+
                 }
 
+
+                foreach (var item in genericRechnung.DataFields.ToList())
+                {
+                    var newDataField = AutoCreateDataFieldClassTemplateFromDataFieldGroupTemplate(item, inputText);
+
+                    retVal.DataFields.Add(newDataField);
+                }
+
+                retVal.ConditionalFields = genericRechnung.ConditionalFields;
             }
-
-
-            foreach (var item in genericRechnung.DataFields.ToList())
-            {
-                var newDataField = AutoCreateDataFieldClassTemplateFromDataFieldGroupTemplate(item, inputText);
-
-                retVal.DataFields.Add(newDataField);
-            }
-
-            retVal.ConditionalFields = genericRechnung.ConditionalFields;
 
             return retVal;
         }

@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.lblName = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
-            this.lblConditionValues = new System.Windows.Forms.Label();
             this.dgvConditions = new System.Windows.Forms.DataGridView();
             this.colCondition = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDisplayValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -68,16 +67,6 @@
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(129, 20);
             this.txtName.TabIndex = 9;
-            // 
-            // lblConditionValues
-            // 
-            this.lblConditionValues.AutoSize = true;
-            this.lblConditionValues.Location = new System.Drawing.Point(9, 75);
-            this.lblConditionValues.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
-            this.lblConditionValues.Name = "lblConditionValues";
-            this.lblConditionValues.Size = new System.Drawing.Size(56, 13);
-            this.lblConditionValues.TabIndex = 11;
-            this.lblConditionValues.Text = "Conditions";
             // 
             // dgvConditions
             // 
@@ -218,7 +207,7 @@
             // chbIgnoreCaseForSimpleDocumentText
             // 
             this.chbIgnoreCaseForSimpleDocumentText.AutoSize = true;
-            this.chbIgnoreCaseForSimpleDocumentText.Location = new System.Drawing.Point(148, 49);
+            this.chbIgnoreCaseForSimpleDocumentText.Location = new System.Drawing.Point(10, 68);
             this.chbIgnoreCaseForSimpleDocumentText.Name = "chbIgnoreCaseForSimpleDocumentText";
             this.chbIgnoreCaseForSimpleDocumentText.Size = new System.Drawing.Size(83, 17);
             this.chbIgnoreCaseForSimpleDocumentText.TabIndex = 20;
@@ -238,7 +227,6 @@
             this.Controls.Add(this.butAddCondition);
             this.Controls.Add(this.butDeleteConditionalField);
             this.Controls.Add(this.dgvConditions);
-            this.Controls.Add(this.lblConditionValues);
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.txtName);
             this.Name = "ucConditionalFieldTemplate";
@@ -256,7 +244,6 @@
 
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.TextBox txtName;
-        private System.Windows.Forms.Label lblConditionValues;
         private System.Windows.Forms.DataGridView dgvConditions;
         private System.Windows.Forms.Button butDeleteConditionalField;
         private System.Windows.Forms.Button butAddCondition;

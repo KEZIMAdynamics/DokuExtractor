@@ -424,13 +424,14 @@ namespace DokuExtractorStandardGUI
 
         private void butDeleteFile_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show(Translation.LanguageStrings.MsgAskDeleteFile, string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-            {
-                var selectedFilePath = this.selectedFilePath;
-                //IMPORTANT: First close disyplayed PDF, then delete file physically
-                ucViewer1.CloseDisplayedPdf();
-                ucFileSelector1.DeleteFile(selectedFilePath);
-            }
+            var selectedFilePath = this.selectedFilePath;
+            if (string.IsNullOrWhiteSpace(selectedFilePath) == false)
+                if (MessageBox.Show(Translation.LanguageStrings.MsgAskDeleteFile, string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    //IMPORTANT: First close disyplayed PDF, then delete file physically
+                    ucViewer1.CloseDisplayedPdf();
+                    ucFileSelector1.DeleteFile(selectedFilePath);
+                }
         }
     }
 }

@@ -74,18 +74,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ExtractorGroupTemplates\Rechnung.json.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="ExtractorClassTemplates\CpTemplateJson.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="ExtractorClassTemplates\ColumbusMcKinnonenTemplate.Json.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <Content Include="ExtractorClassTemplates\CompotecTemplate.json.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="SampleFiles\AllTableColumns.txt" />
     <Content Include="SampleFiles\AllTableLines.txt" />

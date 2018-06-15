@@ -110,7 +110,18 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
 
         public void HideGroupTemplateSpecificComponents()
         {
-            chbOnlyInGroupTemplate.Visible = false;
+            chbOnlyInGroupTemplate.Enabled = false;
+            if (this.conditionalFieldTemplate.OnlyStoreInGroupTemplate == true)
+            {
+                this.BackColor = Color.LightGray;
+                txtName.Enabled = false;
+                cbxConditionalFieldType.Enabled = false;
+                chbIgnoreCaseForSimpleDocumentText.Enabled = false;
+                dgvConditions.Enabled = false;
+                butAddCondition.Enabled = false;
+                butDeleteCondition.Enabled = false;
+                butDeleteConditionalField.Enabled = false;
+            }
         }
 
         private void ucConditionalFieldClassTemplate_Load(object sender, EventArgs e)
@@ -133,7 +144,6 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         {
             lblName.Text = Translation.LanguageStrings.ConditionalFieldName;
             lblConditionalFieldType.Text = Translation.LanguageStrings.ConditionalFieldType;
-            lblConditionValues.Text = Translation.LanguageStrings.ConditionalFieldConditions;
             butAddCondition.Text = Translation.LanguageStrings.ButAddCondition;
             butDeleteCondition.Text = Translation.LanguageStrings.ButDeleteCondition;
             butDeleteConditionalField.Text = Translation.LanguageStrings.ButDeleteConditionalField;
