@@ -132,7 +132,7 @@ namespace DokuExtractorCore
             // The input text is sanitized and ready to be parsed to double by the actual parser.
             // TODO: Stabilize function against further funny characters from OCR
 
-            var temp = double.Parse(retVal, System.Globalization.NumberStyles.Currency, CultureInfo.InvariantCulture.NumberFormat.);
+            var temp = double.Parse(retVal, System.Globalization.NumberStyles.Currency, CultureInfo.InvariantCulture.NumberFormat);
 
             return temp.ToString(CultureInfo.InvariantCulture);           
         }
