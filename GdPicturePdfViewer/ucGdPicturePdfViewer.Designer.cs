@@ -77,7 +77,7 @@
             this.gdViewer1.MagnifierZoomY = 2F;
             this.gdViewer1.MouseButtonForMouseMode = GdPicture14.MouseButton.MouseButtonLeft;
             this.gdViewer1.MouseMode = GdPicture14.ViewerMouseMode.MouseModeAreaSelection;
-            this.gdViewer1.MouseWheelMode = GdPicture14.ViewerMouseWheelMode.MouseWheelModeVerticalScroll;
+            this.gdViewer1.MouseWheelMode = GdPicture14.ViewerMouseWheelMode.MouseWheelModeZoom;
             this.gdViewer1.Name = "gdViewer1";
             this.gdViewer1.PageDisplayMode = GdPicture14.PageDisplayMode.SinglePageView;
             this.gdViewer1.PdfDisplayFormField = true;

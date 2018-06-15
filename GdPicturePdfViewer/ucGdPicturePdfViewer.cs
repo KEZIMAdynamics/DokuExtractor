@@ -15,6 +15,7 @@ namespace GdPicturePdfViewer
     public partial class ucGdPicturePdfViewer : ucViewerBase
     {
         private GdPicturePDF gdPdf = new GdPicturePDF();
+        private ToolTip tooltip = new ToolTip();
 
         public ucGdPicturePdfViewer()
         {
@@ -52,8 +53,10 @@ namespace GdPicturePdfViewer
                 var text = gdViewer1.GetPageTextArea(gdViewer1.CurrentPage, left, top, width, height);
                 if (string.IsNullOrEmpty(text) == false)
                 {
+                    tooltip.Hide(this);
                     FireTextSelected(text);
                     Clipboard.SetText(text);
+                    tooltip.Show(text, this, this.PointToClient(Control.MousePosition), 5000);
                 }
             }
         }
