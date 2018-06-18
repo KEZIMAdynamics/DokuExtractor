@@ -392,12 +392,14 @@ namespace DokuExtractorStandardGUI
 
                 if (Directories.AllowSaveTemplatesToFiles)
                 {
+                    newTemplate.TemplateClassName = System.Text.RegularExpressions.Regex.Replace(newTemplate.TemplateClassName, @"[^0-9a-zA-Z]", string.Empty);
                     var saved = templateProcessor.SaveTemplateToFile(newTemplate);
                     if (saved == true)
                         MessageBox.Show(Translation.LanguageStrings.MsgClassTemplateSaved + ": " + newTemplate.TemplateClassName, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
+                    newTemplate.TemplateClassName = System.Text.RegularExpressions.Regex.Replace(newTemplate.TemplateClassName, @"[^0-9a-zA-Z]", string.Empty);
                     templateProcessor.CleanClassTemplateBeforeSave(newTemplate);
                     MessageBox.Show(Translation.LanguageStrings.MsgClassTemplateSaved + ": " + newTemplate.TemplateClassName, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }

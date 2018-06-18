@@ -87,12 +87,16 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             var templateProcessor = new TemplateProcessor(Directories.AppRootPath);
             if (Directories.AllowSaveTemplatesToFiles)
             {
+                this.selectedGroupTemplate.TemplateGroupName = System.Text.RegularExpressions.Regex.Replace(this.selectedGroupTemplate.TemplateGroupName, @"[^0-9a-zA-Z]", string.Empty);
                 var saved = templateProcessor.SaveTemplateToFile(this.selectedGroupTemplate);
                 if (saved == true)
                     GroupTemplateSavedInGroupTemplateEditor?.Invoke(this.selectedGroupTemplate);
             }
             else
+            {
+                this.selectedGroupTemplate.TemplateGroupName = System.Text.RegularExpressions.Regex.Replace(this.selectedGroupTemplate.TemplateGroupName, @"[^0-9a-zA-Z]", string.Empty);
                 GroupTemplateSavedInGroupTemplateEditor?.Invoke(this.selectedGroupTemplate);
+            }
         }
 
         private void butAddDataField_Click(object sender, EventArgs e)
