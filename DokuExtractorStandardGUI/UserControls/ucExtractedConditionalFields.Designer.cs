@@ -82,10 +82,12 @@
             // 
             // colDisplayValue
             // 
+            this.colDisplayValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colDisplayValue.DataPropertyName = "DisplayValue";
             this.colDisplayValue.HeaderText = "DisplayValue";
             this.colDisplayValue.Name = "colDisplayValue";
             this.colDisplayValue.ReadOnly = true;
+            this.colDisplayValue.Width = 93;
             // 
             // colValue
             // 

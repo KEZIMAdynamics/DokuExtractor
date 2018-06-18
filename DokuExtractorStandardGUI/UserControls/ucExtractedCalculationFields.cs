@@ -48,6 +48,21 @@ namespace DokuExtractorStandardGUI.UserControls
                 });
             }
             dgvCalculationFields.DataSource = CalculationFieldResultsDisplayBinding;
+
+            foreach (DataGridViewRow row in dgvCalculationFields.Rows)
+            {
+                try
+                {
+                    DataGridViewCell calcOkCell = row.Cells["col" + nameof(CalculationFieldResultDisplay.CalculationEqualsValidation)];
+                    if (calcOkCell != null)
+                    {
+                        if ((bool)(calcOkCell.Value) == false)
+                            row.DefaultCellStyle.BackColor = Color.OrangeRed;
+                    }
+                }
+                catch (Exception ex)
+                { }
+            }
         }
 
         /// <summary>
