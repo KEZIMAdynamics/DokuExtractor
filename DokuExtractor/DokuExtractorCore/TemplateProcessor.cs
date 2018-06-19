@@ -511,7 +511,7 @@ namespace DokuExtractorCore
                     retVal.DataFields.Add(newDataField);
                 }
 
-                retVal.ConditionalFields = genericRechnung.ConditionalFields;
+                retVal.ConditionalFields = genericRechnung.ConditionalFields.Where(x=>x.OnlyStoreInGroupTemplate==false).ToList();
             }
 
             return retVal;
