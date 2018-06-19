@@ -212,6 +212,7 @@
             this.colValue.HeaderText = "Value";
             this.colValue.Name = "colValue";
             this.colValue.ReadOnly = true;
+            this.colValue.Visible = false;
             this.colValue.Width = 59;
             // 
             // ucConditionalFieldTemplate

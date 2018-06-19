@@ -60,7 +60,6 @@ namespace DokuExtractorStandardGUI.Localization
         public string ConditionalFieldType { get; set; } = "Type";
         public string Condition { get; set; } = "Condition";
         public string ConditionValue { get; set; } = "Value";
-        public string ConditionDisplayValue { get; set; } = "Display value";
 
         public string ButAddCondition { get; set; } = "+";
         public string ButDeleteCondition { get; set; } = "-";

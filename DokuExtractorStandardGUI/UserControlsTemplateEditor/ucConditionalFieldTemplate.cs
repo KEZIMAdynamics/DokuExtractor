@@ -93,12 +93,16 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
                         if (frmString.RetVal != null)
                             cell.Value = frmString.RetVal;
                     }
-                    else if (column.Name == "col" + nameof(ConditionValue.DisplayValue)
-                        || column.Name == "col" + nameof(ConditionValue.Value))
+                    else if (column.Name == "col" + nameof(ConditionValue.DisplayValue))
                     {
                         frmString.ShowDialog();
                         if (string.IsNullOrWhiteSpace(frmString.RetVal) == false)
+                        {
                             cell.Value = frmString.RetVal;
+                            var valueCell = row.Cells["col" + nameof(ConditionValue.Value)];
+                            if (valueCell != null)
+                                valueCell.Value = frmString.RetVal;
+                        }
                     }
                 }
             }
@@ -153,8 +157,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             cbxConditionalFieldType.Items[(int)(ConditionalFieldType.UserOrUserGroupId)] = Translation.LanguageStrings.ConditionalFieldTypeUserOrUserGroupId;
 
             dgvConditions.Columns["col" + nameof(ConditionValue.Condition)].HeaderText = Translation.LanguageStrings.Condition;
-            dgvConditions.Columns["col" + nameof(ConditionValue.Value)].HeaderText = Translation.LanguageStrings.ConditionValue;
-            dgvConditions.Columns["col" + nameof(ConditionValue.DisplayValue)].HeaderText = Translation.LanguageStrings.ConditionDisplayValue;
+            dgvConditions.Columns["col" + nameof(ConditionValue.DisplayValue)].HeaderText = Translation.LanguageStrings.ConditionValue;
 
             chbOnlyInGroupTemplate.Text = Translation.LanguageStrings.CheckOnlyStoreInGroupTemplate;
             chbIgnoreCaseForSimpleDocumentText.Text = Translation.LanguageStrings.CheckIgnoreCaseForSimpleDocumentTextRegex;
