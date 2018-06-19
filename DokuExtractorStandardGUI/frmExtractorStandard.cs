@@ -343,8 +343,8 @@ namespace DokuExtractorStandardGUI
                 ucResultAndEditor1.SwitchTab(true);
 
                 template = templateProcessor.AutoCreateClassTemplate("NewTemplate", inputString, this.groupTemplates);
-                var json = templateProcessor.ExtractDataAsJson(template, groupTemplates, inputString);
-                ucResultAndEditor1.ShowPropertiesAndDataFields(template);
+                var result = templateProcessor.ExtractData(template, groupTemplates, inputString);
+                ucResultAndEditor1.ShowExtractedData(result, template);
 
                 MessageBox.Show(Translation.LanguageStrings.MsgNoTemplateFound, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }

@@ -99,7 +99,7 @@
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmTemplateEditor";
-            this.Text = "TemplateEditor";
+            this.Text = "Template Editor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmTemplateEditor_FormClosing);
             this.Load += new System.EventHandler(this.frmTemplateEditor_Load);
             this.tabControl1.ResumeLayout(false);
