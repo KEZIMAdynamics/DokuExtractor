@@ -32,9 +32,6 @@
             this.lblName = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
             this.dgvConditions = new System.Windows.Forms.DataGridView();
-            this.colCondition = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDisplayValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.conditionsBindingListBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.ucConditionalFieldClassTemplateBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.butDeleteConditionalField = new System.Windows.Forms.Button();
@@ -44,6 +41,9 @@
             this.cbxConditionalFieldType = new System.Windows.Forms.ComboBox();
             this.chbOnlyInGroupTemplate = new System.Windows.Forms.CheckBox();
             this.chbIgnoreCaseForSimpleDocumentText = new System.Windows.Forms.CheckBox();
+            this.colCondition = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDisplayValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConditions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.conditionsBindingListBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ucConditionalFieldClassTemplateBindingSource)).BeginInit();
@@ -87,31 +87,6 @@
             this.dgvConditions.Size = new System.Drawing.Size(236, 120);
             this.dgvConditions.TabIndex = 12;
             this.dgvConditions.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvConditions_CellDoubleClick);
-            // 
-            // colCondition
-            // 
-            this.colCondition.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colCondition.DataPropertyName = "Condition";
-            this.colCondition.HeaderText = "Condition";
-            this.colCondition.Name = "colCondition";
-            this.colCondition.ReadOnly = true;
-            this.colCondition.Width = 76;
-            // 
-            // colDisplayValue
-            // 
-            this.colDisplayValue.DataPropertyName = "DisplayValue";
-            this.colDisplayValue.HeaderText = "DisplayValue";
-            this.colDisplayValue.Name = "colDisplayValue";
-            this.colDisplayValue.ReadOnly = true;
-            // 
-            // colValue
-            // 
-            this.colValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colValue.DataPropertyName = "Value";
-            this.colValue.HeaderText = "Value";
-            this.colValue.Name = "colValue";
-            this.colValue.ReadOnly = true;
-            this.colValue.Visible = false;
             // 
             // conditionsBindingListBindingSource
             // 
@@ -214,6 +189,31 @@
             this.chbIgnoreCaseForSimpleDocumentText.Text = "Ignore Case";
             this.chbIgnoreCaseForSimpleDocumentText.UseVisualStyleBackColor = true;
             // 
+            // colCondition
+            // 
+            this.colCondition.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colCondition.DataPropertyName = "Condition";
+            this.colCondition.HeaderText = "Condition";
+            this.colCondition.Name = "colCondition";
+            this.colCondition.ReadOnly = true;
+            this.colCondition.Width = 76;
+            // 
+            // colDisplayValue
+            // 
+            this.colDisplayValue.DataPropertyName = "DisplayValue";
+            this.colDisplayValue.HeaderText = "DisplayValue";
+            this.colDisplayValue.Name = "colDisplayValue";
+            this.colDisplayValue.ReadOnly = true;
+            // 
+            // colValue
+            // 
+            this.colValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colValue.DataPropertyName = "Value";
+            this.colValue.HeaderText = "Value";
+            this.colValue.Name = "colValue";
+            this.colValue.ReadOnly = true;
+            this.colValue.Width = 59;
+            // 
             // ucConditionalFieldTemplate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -252,10 +252,10 @@
         private System.Windows.Forms.BindingSource ucConditionalFieldClassTemplateBindingSource;
         private System.Windows.Forms.Label lblConditionalFieldType;
         private System.Windows.Forms.ComboBox cbxConditionalFieldType;
+        private System.Windows.Forms.CheckBox chbOnlyInGroupTemplate;
+        private System.Windows.Forms.CheckBox chbIgnoreCaseForSimpleDocumentText;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCondition;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDisplayValue;
         private System.Windows.Forms.DataGridViewTextBoxColumn colValue;
-        private System.Windows.Forms.CheckBox chbOnlyInGroupTemplate;
-        private System.Windows.Forms.CheckBox chbIgnoreCaseForSimpleDocumentText;
     }
 }

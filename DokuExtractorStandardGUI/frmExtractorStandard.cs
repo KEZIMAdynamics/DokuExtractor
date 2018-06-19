@@ -325,6 +325,7 @@ namespace DokuExtractorStandardGUI
 
         private async void butGo_Click(object sender, EventArgs e)
         {
+            ucResultAndEditor1.SwitchTab(false);
             var loader = new PdfTextLoader();
             var inputString = await loader.GetTextFromPdf(selectedFilePath, false);
 
@@ -333,19 +334,17 @@ namespace DokuExtractorStandardGUI
 
             if (matchingTemplateResult.IsMatchSuccessfull)
             {
-                ucResultAndEditor1.SwitchTab(false);
                 MessageBox.Show(Translation.LanguageStrings.MsgTemplateFound + template.TemplateClassName, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 var result = templateProcessor.ExtractData(template, groupTemplates, inputString);
                 ucResultAndEditor1.ShowExtractedData(result, template);
             }
             else
             {
-                ucResultAndEditor1.SwitchTab(true);
-
                 template = templateProcessor.AutoCreateClassTemplate("NewTemplate", inputString, this.groupTemplates);
                 var result = templateProcessor.ExtractData(template, groupTemplates, inputString);
                 ucResultAndEditor1.ShowExtractedData(result, template);
 
+                ucResultAndEditor1.SwitchTab(true);
                 MessageBox.Show(Translation.LanguageStrings.MsgNoTemplateFound, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
