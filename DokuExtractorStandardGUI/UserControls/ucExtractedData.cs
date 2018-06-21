@@ -29,14 +29,14 @@ namespace DokuExtractorStandardGUI.UserControls
         /// Shows the content of the extraction result
         /// </summary>
         /// <param name="extractionResult">Extraction result of type FieldExtractionResult</param>
-        public void ShowExtractedData(FieldExtractionResult extractionResult)
+        public void ShowExtractedData(FieldExtractionResult extractionResult, DocumentClassTemplate classTemplate)
         {
             txtClassName.Text = extractionResult.TemplateClassName;
             txtGroupName.Text = extractionResult.TemplateGroupName;
 
             ucExtractedDataFields1.ShowExtractedDataFields(extractionResult.DataFields);
             ucExtractedCalculationFields1.ShowExtractedCalculationFields(extractionResult.CalculationFields);
-            ucExtractedConditionalFields1.ShowExtractedConditionalFields(extractionResult.ConditionalFields);
+            ucExtractedConditionalFields1.ShowExtractedConditionalFields(extractionResult.ConditionalFields, classTemplate.ConditionalFields);
         }
 
         /// <summary>

@@ -11,18 +11,32 @@ using System.Windows.Forms;
 
 namespace DokuExtractorStandardGUI
 {
-    public partial class frmTextEdit : Form
+    public partial class frmValueEditor : Form
     {
         public string RetVal { get; set; } = string.Empty;
+        private bool isComboBoxForm = false;
 
-        public frmTextEdit()
+        public frmValueEditor()
         {
             InitializeComponent();
         }
 
-        public frmTextEdit(string value)
+        public frmValueEditor(string value, List<string> comboBoxOptions)
         {
             InitializeComponent();
+            this.isComboBoxForm = true;
+            this.txtRetVal.Visible = false;
+            if (string.IsNullOrEmpty(value) == false)
+            {
+                cbxRetVal.Items.AddRange(comboBoxOptions.ToArray());
+                cbxRetVal.SelectedItem = value;
+            }
+        }
+
+        public frmValueEditor (string value)
+        {
+            InitializeComponent();
+            this.cbxRetVal.Visible = false;
             if (string.IsNullOrEmpty(value) == false)
             {
                 txtRetVal.Text = value;
@@ -38,10 +52,20 @@ namespace DokuExtractorStandardGUI
 
         private void butOk_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtRetVal.Text))
-                RetVal = string.Empty;
+            if (isComboBoxForm)
+            {
+                if (string.IsNullOrWhiteSpace(cbxRetVal.SelectedItem?.ToString()))
+                    RetVal = string.Empty;
+                else
+                    RetVal = cbxRetVal.SelectedItem.ToString();
+            }
             else
-                RetVal = txtRetVal.Text;
+            {
+                if (string.IsNullOrWhiteSpace(txtRetVal.Text))
+                    RetVal = string.Empty;
+                else
+                    RetVal = txtRetVal.Text;
+            }
 
             this.Close();
         }

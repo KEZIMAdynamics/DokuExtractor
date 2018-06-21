@@ -273,7 +273,7 @@
             this.Controls.Add(this.splitContainer1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmExtractorStandard";
-            this.Text = "DokuExtractor";
+            this.Text = "Doku Extractor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmExtractorStandard_FormClosing);
             this.Load += new System.EventHandler(this.frmExtractorStandard_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);

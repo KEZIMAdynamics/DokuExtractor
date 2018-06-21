@@ -64,7 +64,7 @@ namespace DokuExtractorStandardGUI.UserControls
         /// <param name="classTemplate">Used class template</param>
         public void ShowExtractedData(FieldExtractionResult result, DocumentClassTemplate classTemplate)
         {
-            ucExtractedData1.ShowExtractedData(result);
+            ucExtractedData1.ShowExtractedData(result, classTemplate);
             ucSingleTemplateEditor1.ShowPropertiesAndDataFields(classTemplate);
             ucSingleTemplateEditor1.ActivateRegexExpressionHelper();
         }
@@ -76,7 +76,7 @@ namespace DokuExtractorStandardGUI.UserControls
         public void ShowPropertiesAndDataFields(DocumentClassTemplate classTemplate)
         {
             ucSingleTemplateEditor1.ShowPropertiesAndDataFields(classTemplate);
-            ucExtractedData1.ShowExtractedData(new FieldExtractionResult());
+            ucExtractedData1.ShowExtractedData(new FieldExtractionResult(), classTemplate);
             ucSingleTemplateEditor1.ActivateRegexExpressionHelper();
         }
 

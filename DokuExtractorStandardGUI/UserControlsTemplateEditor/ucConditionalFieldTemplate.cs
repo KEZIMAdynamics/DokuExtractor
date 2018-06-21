@@ -85,7 +85,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             if (cell != null && cell.Value != null)
             {
                 var cellValueString = cell.Value.ToString();
-                using (var frmString = new frmTextEdit(cellValueString))
+                using (var frmString = new frmValueEditor(cellValueString))
                 {
                     if (column.Name == "col" + nameof(ConditionValue.Condition))
                     {

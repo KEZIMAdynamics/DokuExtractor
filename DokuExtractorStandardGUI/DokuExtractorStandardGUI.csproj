@@ -63,11 +63,11 @@
     <Compile Include="frmTemplateEditor.Designer.cs">
       <DependentUpon>frmTemplateEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmTextEdit.cs">
+    <Compile Include="frmValueEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmTextEdit.Designer.cs">
-      <DependentUpon>frmTextEdit.cs</DependentUpon>
+    <Compile Include="frmValueEditor.Designer.cs">
+      <DependentUpon>frmValueEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Localization\frmLanguageEditor.cs">
       <SubType>Form</SubType>
@@ -197,8 +197,8 @@
     <EmbeddedResource Include="frmTemplateEditor.resx">
       <DependentUpon>frmTemplateEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmTextEdit.resx">
-      <DependentUpon>frmTextEdit.cs</DependentUpon>
+    <EmbeddedResource Include="frmValueEditor.resx">
+      <DependentUpon>frmValueEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Localization\frmLanguageEditor.resx">
       <DependentUpon>frmLanguageEditor.cs</DependentUpon>

@@ -18,6 +18,9 @@ namespace DokuExtractorStandardGUI.UserControls
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public BindingList<ConditionalFieldResultDisplay> ConditionalFieldResultDisplayBinding { get; set; } = new BindingList<ConditionalFieldResultDisplay>();
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        private List<ConditionalFieldTemplate> conditionalFieldsTemplate = new List<ConditionalFieldTemplate>();
+
         public ucExtractedConditionalFields()
         {
             InitializeComponent();
@@ -32,8 +35,10 @@ namespace DokuExtractorStandardGUI.UserControls
         /// Shows the content of the extracted conditional fields
         /// </summary>
         /// <param name="extractedConditionalFields">List of conditional field results</param>
-        public void ShowExtractedConditionalFields(List<ConditionalFieldResult> extractedConditionalFields)
+        public void ShowExtractedConditionalFields(List<ConditionalFieldResult> extractedConditionalFields, List<ConditionalFieldTemplate> conditionalFieldsTemplate)
         {
+            this.conditionalFieldsTemplate = conditionalFieldsTemplate;
+
             ConditionalFieldResultDisplayBinding = new BindingList<ConditionalFieldResultDisplay>();
             foreach (var condField in extractedConditionalFields)
             {
@@ -94,17 +99,29 @@ namespace DokuExtractorStandardGUI.UserControls
             if (cell != null && cell.Value != null)
             {
                 var cellValueString = cell.Value.ToString();
-                using (var frmString = new frmTextEdit(cellValueString))
+                var nameCell = row.Cells["col" + nameof(ConditionalFieldResultDisplay.Name)];
+
+                var condFieldTemplate = this.conditionalFieldsTemplate.Where(x => x.Name == nameCell.Value.ToString()).FirstOrDefault();
+                if (condFieldTemplate != null)
                 {
-                    if (column.Name == "col" + nameof(ConditionalFieldResultDisplay.DisplayValue))
+                    var conditionOptions = new List<string>();
+                    foreach (var conditionValue in condFieldTemplate.ConditionValues)
                     {
-                        frmString.ShowDialog();
-                        if (string.IsNullOrWhiteSpace(frmString.RetVal) == false)
+                        conditionOptions.Add(conditionValue.DisplayValue);
+                    }
+
+                    using (var frmCbx = new frmValueEditor(cellValueString, conditionOptions))
+                    {
+                        if (column.Name == "col" + nameof(ConditionalFieldResultDisplay.DisplayValue))
                         {
-                            cell.Value = frmString.RetVal;
-                            var valueCell = row.Cells["col" + nameof(ConditionalFieldResultDisplay.Value)];
-                            if (valueCell != null)
-                                valueCell.Value = frmString.RetVal;
+                            frmCbx.ShowDialog();
+                            if (string.IsNullOrWhiteSpace(frmCbx.RetVal) == false)
+                            {
+                                cell.Value = frmCbx.RetVal;
+                                var valueCell = row.Cells["col" + nameof(ConditionalFieldResultDisplay.Value)];
+                                if (valueCell != null)
+                                    valueCell.Value = frmCbx.RetVal;
+                            }
                         }
                     }
                 }

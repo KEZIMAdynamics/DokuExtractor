@@ -1,6 +1,6 @@
 ﻿namespace DokuExtractorStandardGUI
 {
-    partial class frmTextEdit
+    partial class frmValueEditor
     {
         /// <summary>
         /// Required designer variable.
@@ -28,10 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTextEdit));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmValueEditor));
             this.txtRetVal = new System.Windows.Forms.TextBox();
             this.butOk = new System.Windows.Forms.Button();
             this.butCancel = new System.Windows.Forms.Button();
+            this.cbxRetVal = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // txtRetVal
@@ -68,20 +69,33 @@
             this.butCancel.UseVisualStyleBackColor = true;
             this.butCancel.Click += new System.EventHandler(this.butCancel_Click);
             // 
-            // frmTextEdit
+            // cbxRetVal
+            // 
+            this.cbxRetVal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbxRetVal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxRetVal.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbxRetVal.FormattingEnabled = true;
+            this.cbxRetVal.Location = new System.Drawing.Point(12, 12);
+            this.cbxRetVal.Name = "cbxRetVal";
+            this.cbxRetVal.Size = new System.Drawing.Size(386, 24);
+            this.cbxRetVal.TabIndex = 6;
+            // 
+            // frmValueEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(410, 97);
+            this.Controls.Add(this.cbxRetVal);
             this.Controls.Add(this.butCancel);
             this.Controls.Add(this.butOk);
             this.Controls.Add(this.txtRetVal);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(900, 136);
             this.MinimumSize = new System.Drawing.Size(16, 136);
-            this.Name = "frmTextEdit";
-            this.Text = "TextEdit";
+            this.Name = "frmValueEditor";
+            this.Text = "Doku Extractor";
             this.Load += new System.EventHandler(this.frmTextEdit_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -93,5 +107,6 @@
         private System.Windows.Forms.TextBox txtRetVal;
         private System.Windows.Forms.Button butOk;
         private System.Windows.Forms.Button butCancel;
+        private System.Windows.Forms.ComboBox cbxRetVal;
     }
 }
