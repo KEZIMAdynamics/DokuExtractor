@@ -15,6 +15,7 @@ namespace DokuExtractorStandardGUI.Localization
         #region FormButtons
         public string ButGo { get; set; } = "Go!";
         public string ButOk { get; set; } = "OK!";
+        public string ButReCalculate { get; set; } = "Calculate again";
         public string ButDeleteFile { get; set; } = "Delete file";
         public string ButAddDataField { get; set; } = "Add data field";
         public string ButAddConditionalField { get; set; } = "Add conditional field";

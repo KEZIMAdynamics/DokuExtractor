@@ -153,6 +153,11 @@ namespace DokuExtractorStandardGUI.UserControls
             ucSingleTemplateEditor1.ChangeOrAddRegexExpression(regexHelperID, regex, additionalRegex);
         }
 
+        public void ReCalculate(List<DocumentGroupTemplate> groupTemplates)
+        {
+            ucExtractedData1.ReCalculate(groupTemplates);
+        }
+
         private void Localize()
         {
             tabExtractedData.Text = Translation.LanguageStrings.ExtractedData;

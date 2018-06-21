@@ -196,6 +196,7 @@ namespace DokuExtractorStandardGUI
         {
             butGo.Text = Translation.LanguageStrings.ButGo;
             butOk.Text = Translation.LanguageStrings.ButOk;
+            butReCalculate.Text = Translation.LanguageStrings.ButReCalculate;
             butDeleteFile.Text = Translation.LanguageStrings.ButDeleteFile;
             butAddDataField.Text = Translation.LanguageStrings.ButAddDataField;
             butAddConditionalField.Text = Translation.LanguageStrings.ButAddConditionalField;
@@ -444,6 +445,11 @@ namespace DokuExtractorStandardGUI
                     ucViewer1.CloseDisplayedPdf();
                     ucFileSelector1.DeleteFile(selectedFilePath);
                 }
+        }
+
+        private void butReCalculate_Click(object sender, EventArgs e)
+        {
+            ucResultAndEditor1.ReCalculate(groupTemplates);
         }
     }
 }

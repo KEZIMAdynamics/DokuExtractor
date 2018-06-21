@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using DokuExtractorStandardGUI.Model;
 using DokuExtractorCore.Model;
 using DokuExtractorStandardGUI.Localization;
+using DokuExtractorCore;
 
 namespace DokuExtractorStandardGUI.UserControls
 {
@@ -17,6 +18,9 @@ namespace DokuExtractorStandardGUI.UserControls
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public BindingList<CalculationFieldResultDisplay> CalculationFieldResultsDisplayBinding { get; set; } = new BindingList<CalculationFieldResultDisplay>();
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        private List<CalculationFieldTemplate> calculationFieldsTemplate = new List<CalculationFieldTemplate>();
 
         public ucExtractedCalculationFields()
         {
@@ -58,6 +62,8 @@ namespace DokuExtractorStandardGUI.UserControls
                     {
                         if ((bool)(calcOkCell.Value) == false)
                             row.DefaultCellStyle.BackColor = Color.OrangeRed;
+                        else if((bool)(calcOkCell.Value) == true)
+                            row.DefaultCellStyle.BackColor = Color.LightGreen;
                     }
                 }
                 catch (Exception ex)
@@ -94,6 +100,19 @@ namespace DokuExtractorStandardGUI.UserControls
             }
 
             return retVal;
+        }
+
+        public void ReCalculate(List<CalculationFieldTemplate> calculationFieldsTemplate, List<DataFieldResult> dataFieldResultList)
+        {
+            var fieldCalculator = new FieldCalculator();
+            var calculationFieldResults = new List<CalculationFieldResult>();
+
+            foreach (var item in calculationFieldsTemplate)
+            {
+                calculationFieldResults.Add(fieldCalculator.CompareExpressionResults(item, dataFieldResultList));
+            }
+
+            ShowExtractedCalculationFields(calculationFieldResults);
         }
 
         /// <summary>

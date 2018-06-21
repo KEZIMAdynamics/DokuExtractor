@@ -24,6 +24,7 @@ namespace DokuExtractorStandardGUI
         public frmValueEditor(string value, List<string> comboBoxOptions)
         {
             InitializeComponent();
+            this.Text = Translation.LanguageStrings.ConditionValue;
             this.isComboBoxForm = true;
             this.txtRetVal.Visible = false;
             if (string.IsNullOrEmpty(value) == false)
@@ -33,9 +34,10 @@ namespace DokuExtractorStandardGUI
             }
         }
 
-        public frmValueEditor (string value)
+        public frmValueEditor(string value)
         {
             InitializeComponent();
+            this.Text = Translation.LanguageStrings.ConditionValue;
             this.cbxRetVal.Visible = false;
             if (string.IsNullOrEmpty(value) == false)
             {

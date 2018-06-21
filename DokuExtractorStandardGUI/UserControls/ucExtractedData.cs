@@ -80,6 +80,13 @@ namespace DokuExtractorStandardGUI.UserControls
             return retVal;
         }
 
+        public void ReCalculate(List<DocumentGroupTemplate> groupTemplates)
+        {
+            var groupTemplate = groupTemplates.Where(x => x.TemplateGroupName == txtGroupName.Text).FirstOrDefault();
+            if(groupTemplate != null)
+            ucExtractedCalculationFields1.ReCalculate(groupTemplate.CalculationFields, ucExtractedDataFields1.GetDataFieldExtractionResult());
+        }
+
         private void Localize()
         {
             lblTemplateClassName.Text = Translation.LanguageStrings.TemplateClassName;
