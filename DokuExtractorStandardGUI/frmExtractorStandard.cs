@@ -138,21 +138,33 @@ namespace DokuExtractorStandardGUI
 
         private void TemplateEditor_GroupTemplateSavedInGroupTemplateEditor(DocumentGroupTemplate savedGroupTemplate)
         {
+            var template = this.groupTemplates.Where(x => x.TemplateGroupName == savedGroupTemplate.TemplateGroupName).FirstOrDefault();
+            if (template != null)
+                template = savedGroupTemplate;
+
             MessageBox.Show(Translation.LanguageStrings.MsgGroupTemplateSaved + ": " + savedGroupTemplate.TemplateGroupName, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void TemplateEditor_ClassTemplateSavedInClassTemplateEditor(DocumentClassTemplate savedClassTemplate)
         {
+            var template = this.classTemplates.Where(x => x.TemplateClassName == savedClassTemplate.TemplateClassName).FirstOrDefault();
+            if (template != null)
+                template = savedClassTemplate;
+
             MessageBox.Show(Translation.LanguageStrings.MsgClassTemplateSaved + ": " + savedClassTemplate.TemplateClassName, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void TemplateEditor_GroupTemplateDeletedInGroupTemplateEditor(DocumentGroupTemplate deletedGroupTemplate)
         {
+            this.groupTemplates.Remove(deletedGroupTemplate);
+
             MessageBox.Show(Translation.LanguageStrings.MsgGroupTemplateDeleted + ": " + deletedGroupTemplate.TemplateGroupName, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void TemplateEditor_ClassTemplateDeletedInClassTemplateEditor(DocumentClassTemplate deletedClassTemplate)
         {
+            this.classTemplates.Remove(deletedClassTemplate);
+
             MessageBox.Show(Translation.LanguageStrings.MsgClassTemplateDeleted + ": " + deletedClassTemplate.TemplateClassName, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -407,6 +419,12 @@ namespace DokuExtractorStandardGUI
                     templateProcessor.CleanClassTemplateBeforeSave(newTemplate);
                     MessageBox.Show(Translation.LanguageStrings.MsgClassTemplateSaved + ": " + newTemplate.TemplateClassName, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+
+                var template = this.classTemplates.Where(x => x.TemplateClassName == newTemplate.TemplateClassName).FirstOrDefault();
+                if (template != null)
+                    template = newTemplate;
+                else
+                    this.classTemplates.Add(newTemplate);
             }
         }
 

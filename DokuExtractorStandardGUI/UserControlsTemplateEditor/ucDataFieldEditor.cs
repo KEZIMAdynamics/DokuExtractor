@@ -305,11 +305,14 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             if (this.classTemplate != null && this.classTemplate.ConditionalFields != null)
                 foreach (var item in this.classTemplate.ConditionalFields)
                 {
-                    var newConditionalField = (ucConditionalFieldTemplate)Activator.CreateInstance(UserControlSelector.ConditionalFieldTemplateUserControl, item);
-                    newConditionalField.HideGroupTemplateSpecificComponents();
-                    newConditionalField.Tag = Guid.NewGuid();
-                    newConditionalField.ConditionalFieldEraser += DeleteConditionalField;
-                    flowLayoutPanel1.Controls.Add(newConditionalField);
+                    if (item.OnlyStoreInGroupTemplate == false)
+                    {
+                        var newConditionalField = (ucConditionalFieldTemplate)Activator.CreateInstance(UserControlSelector.ConditionalFieldTemplateUserControl, item);
+                        newConditionalField.HideGroupTemplateSpecificComponents();
+                        newConditionalField.Tag = Guid.NewGuid();
+                        newConditionalField.ConditionalFieldEraser += DeleteConditionalField;
+                        flowLayoutPanel1.Controls.Add(newConditionalField);
+                    }
                 }
         }
 

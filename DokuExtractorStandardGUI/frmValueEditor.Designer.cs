@@ -33,6 +33,7 @@
             this.butOk = new System.Windows.Forms.Button();
             this.butCancel = new System.Windows.Forms.Button();
             this.cbxRetVal = new System.Windows.Forms.ComboBox();
+            this.butIndividualConditionalValue = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtRetVal
@@ -78,8 +79,20 @@
             this.cbxRetVal.FormattingEnabled = true;
             this.cbxRetVal.Location = new System.Drawing.Point(12, 12);
             this.cbxRetVal.Name = "cbxRetVal";
-            this.cbxRetVal.Size = new System.Drawing.Size(386, 24);
+            this.cbxRetVal.Size = new System.Drawing.Size(347, 24);
             this.cbxRetVal.TabIndex = 6;
+            // 
+            // butIndividualConditionalValue
+            // 
+            this.butIndividualConditionalValue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.butIndividualConditionalValue.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.butIndividualConditionalValue.Location = new System.Drawing.Point(365, 12);
+            this.butIndividualConditionalValue.Name = "butIndividualConditionalValue";
+            this.butIndividualConditionalValue.Size = new System.Drawing.Size(33, 24);
+            this.butIndividualConditionalValue.TabIndex = 7;
+            this.butIndividualConditionalValue.Text = "...";
+            this.butIndividualConditionalValue.UseVisualStyleBackColor = true;
+            this.butIndividualConditionalValue.Click += new System.EventHandler(this.butIndividualConditionalValue_Click);
             // 
             // frmValueEditor
             // 
@@ -87,6 +100,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(410, 97);
+            this.Controls.Add(this.butIndividualConditionalValue);
             this.Controls.Add(this.cbxRetVal);
             this.Controls.Add(this.butCancel);
             this.Controls.Add(this.butOk);
@@ -108,5 +122,6 @@
         private System.Windows.Forms.Button butOk;
         private System.Windows.Forms.Button butCancel;
         private System.Windows.Forms.ComboBox cbxRetVal;
+        private System.Windows.Forms.Button butIndividualConditionalValue;
     }
 }

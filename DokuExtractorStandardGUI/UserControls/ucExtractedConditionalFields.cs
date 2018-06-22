@@ -123,8 +123,10 @@ namespace DokuExtractorStandardGUI.UserControls
                                 frmCbx.Font = dexForm.Font;
                             }
 
+                            frmCbx.IndividualConditionalValueButtonClicked += FrmCbx_IndividualConditionalValueButtonClicked;
+
                             frmCbx.ShowDialog();
-                            if (string.IsNullOrWhiteSpace(frmCbx.RetValDisplay) == false)
+                            if (string.IsNullOrWhiteSpace(frmCbx.RetVal) == false)
                             {
                                 cell.Value = frmCbx.RetValDisplay;
                                 var valueCell = row.Cells["col" + nameof(ConditionalFieldResultDisplay.Value)];
@@ -132,6 +134,30 @@ namespace DokuExtractorStandardGUI.UserControls
                                     valueCell.Value = frmCbx.RetVal;
                             }
                         }
+                    }
+                }
+            }
+        }
+
+        protected virtual void OnFrmComboBoxIndividualConditionalValueButtonClick(object sender, EventArgs e)
+        {
+            var frmValEdit = sender as frmValueEditor;
+            if (frmValEdit != null)
+            {
+                using (var individualFrmValEdit = new frmValueEditor("..."))
+                {
+                    var dexForm = FindForm();
+                    if (dexForm != null)
+                    {
+                        individualFrmValEdit.Icon = dexForm.Icon;
+                        individualFrmValEdit.Font = dexForm.Font;
+                    }
+                    individualFrmValEdit.ShowDialog();
+                    if (string.IsNullOrWhiteSpace(individualFrmValEdit.RetValDisplay) == false)
+                    {
+                        frmValEdit.RetVal = individualFrmValEdit.RetValDisplay;
+                        frmValEdit.RetValDisplay = individualFrmValEdit.RetValDisplay;
+                        frmValEdit.Close();
                     }
                 }
             }
@@ -147,6 +173,11 @@ namespace DokuExtractorStandardGUI.UserControls
         private void dgvConditionalFields_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             OnDgvConditionalFieldCellDoubleClick(sender, e);
+        }
+
+        private void FrmCbx_IndividualConditionalValueButtonClicked(object sender, EventArgs e)
+        {
+            OnFrmComboBoxIndividualConditionalValueButtonClick(sender, e);
         }
     }
 }

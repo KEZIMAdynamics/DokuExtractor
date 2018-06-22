@@ -13,6 +13,11 @@ namespace DokuExtractorStandardGUI
 {
     public partial class frmValueEditor : Form
     {
+        /// <summary>
+        /// Fired, when butIndividualConditionalValue has been clicked
+        /// </summary>
+        public event EventHandler IndividualConditionalValueButtonClicked;
+
         public string RetVal { get; set; } = string.Empty;
         public string RetValDisplay { get; set; } = string.Empty;
 
@@ -32,7 +37,7 @@ namespace DokuExtractorStandardGUI
             this.Text = Translation.LanguageStrings.ConditionValue;
             this.isComboBoxForm = true;
             this.txtRetVal.Visible = false;
-            if (string.IsNullOrEmpty(value) == false)
+            if (value != null)
             {
                 this.comboBoxOptions = comboBoxOptions;
                 cbxRetVal.Items.AddRange(comboBoxOptionsDisplay.ToArray());
@@ -43,9 +48,10 @@ namespace DokuExtractorStandardGUI
         public frmValueEditor(string value)
         {
             InitializeComponent();
+            this.butIndividualConditionalValue.Visible = false;
             this.Text = Translation.LanguageStrings.ConditionValue;
             this.cbxRetVal.Visible = false;
-            if (string.IsNullOrEmpty(value) == false)
+            if (value != null)
             {
                 txtRetVal.Text = value;
                 txtRetVal.SelectAll();
@@ -95,6 +101,11 @@ namespace DokuExtractorStandardGUI
         {
             butOk.Text = Translation.LanguageStrings.ButTextEditOk;
             butCancel.Text = Translation.LanguageStrings.ButTextEditCancel;
+        }
+
+        private void butIndividualConditionalValue_Click(object sender, EventArgs e)
+        {
+            IndividualConditionalValueButtonClicked?.Invoke(this, e);
         }
     }
 }

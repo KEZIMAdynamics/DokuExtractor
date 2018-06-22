@@ -96,7 +96,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
                     else if (column.Name == "col" + nameof(ConditionValue.DisplayValue))
                     {
                         frmString.ShowDialog();
-                        if (string.IsNullOrWhiteSpace(frmString.RetValDisplay) == false)
+                        if (frmString.RetValDisplay != null)
                         {
                             cell.Value = frmString.RetValDisplay;
                             var valueCell = row.Cells["col" + nameof(ConditionValue.Value)];
