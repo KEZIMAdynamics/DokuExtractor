@@ -123,6 +123,8 @@ namespace DokuExtractorStandardGUI.UserControls
                                 frmCbx.Font = dexForm.Font;
                             }
 
+                            var typeCell = row.Cells["col" + nameof(ConditionalFieldResultDisplay.ConditionalFieldType)];
+                            frmCbx.ConditionalFieldType = (ConditionalFieldType)(typeCell.Value);
                             frmCbx.IndividualConditionalValueButtonClicked += FrmCbx_IndividualConditionalValueButtonClicked;
 
                             frmCbx.ShowDialog();

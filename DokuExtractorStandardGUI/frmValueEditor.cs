@@ -1,4 +1,5 @@
-﻿using DokuExtractorStandardGUI.Localization;
+﻿using DokuExtractorCore.Model;
+using DokuExtractorStandardGUI.Localization;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,6 +21,10 @@ namespace DokuExtractorStandardGUI
 
         public string RetVal { get; set; } = string.Empty;
         public string RetValDisplay { get; set; } = string.Empty;
+
+
+        public ConditionalFieldType ConditionalFieldType = ConditionalFieldType.Text;
+        //public DataFieldType DataFieldType = DataFieldType.Text;
 
         private bool isComboBoxForm = false;
 
