@@ -105,19 +105,28 @@ namespace DokuExtractorStandardGUI.UserControls
                 if (condFieldTemplate != null)
                 {
                     var conditionOptions = new List<string>();
+                    var conditionOptionsDisplay = new List<string>();
                     foreach (var conditionValue in condFieldTemplate.ConditionValues)
                     {
-                        conditionOptions.Add(conditionValue.DisplayValue);
+                        conditionOptions.Add(conditionValue.Value);
+                        conditionOptionsDisplay.Add(conditionValue.DisplayValue);
                     }
 
-                    using (var frmCbx = new frmValueEditor(cellValueString, conditionOptions))
+                    using (var frmCbx = new frmValueEditor(cellValueString, conditionOptions, conditionOptionsDisplay))
                     {
                         if (column.Name == "col" + nameof(ConditionalFieldResultDisplay.DisplayValue))
                         {
-                            frmCbx.ShowDialog();
-                            if (string.IsNullOrWhiteSpace(frmCbx.RetVal) == false)
+                            var dexForm = FindForm();
+                            if (dexForm != null)
                             {
-                                cell.Value = frmCbx.RetVal;
+                                frmCbx.Icon = dexForm.Icon;
+                                frmCbx.Font = dexForm.Font;
+                            }
+
+                            frmCbx.ShowDialog();
+                            if (string.IsNullOrWhiteSpace(frmCbx.RetValDisplay) == false)
+                            {
+                                cell.Value = frmCbx.RetValDisplay;
                                 var valueCell = row.Cells["col" + nameof(ConditionalFieldResultDisplay.Value)];
                                 if (valueCell != null)
                                     valueCell.Value = frmCbx.RetVal;

@@ -90,18 +90,18 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
                     if (column.Name == "col" + nameof(ConditionValue.Condition))
                     {
                         frmString.ShowDialog();
-                        if (frmString.RetVal != null)
-                            cell.Value = frmString.RetVal;
+                        if (frmString.RetValDisplay != null)
+                            cell.Value = frmString.RetValDisplay;
                     }
                     else if (column.Name == "col" + nameof(ConditionValue.DisplayValue))
                     {
                         frmString.ShowDialog();
-                        if (string.IsNullOrWhiteSpace(frmString.RetVal) == false)
+                        if (string.IsNullOrWhiteSpace(frmString.RetValDisplay) == false)
                         {
-                            cell.Value = frmString.RetVal;
+                            cell.Value = frmString.RetValDisplay;
                             var valueCell = row.Cells["col" + nameof(ConditionValue.Value)];
                             if (valueCell != null)
-                                valueCell.Value = frmString.RetVal;
+                                valueCell.Value = frmString.RetValDisplay;
                         }
                     }
                 }

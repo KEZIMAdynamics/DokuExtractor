@@ -14,14 +14,19 @@ namespace DokuExtractorStandardGUI
     public partial class frmValueEditor : Form
     {
         public string RetVal { get; set; } = string.Empty;
+        public string RetValDisplay { get; set; } = string.Empty;
+
         private bool isComboBoxForm = false;
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        private List<string> comboBoxOptions = new List<string>();
 
         public frmValueEditor()
         {
             InitializeComponent();
         }
 
-        public frmValueEditor(string value, List<string> comboBoxOptions)
+        public frmValueEditor(string value, List<string> comboBoxOptions, List<string> comboBoxOptionsDisplay)
         {
             InitializeComponent();
             this.Text = Translation.LanguageStrings.ConditionValue;
@@ -29,7 +34,8 @@ namespace DokuExtractorStandardGUI
             this.txtRetVal.Visible = false;
             if (string.IsNullOrEmpty(value) == false)
             {
-                cbxRetVal.Items.AddRange(comboBoxOptions.ToArray());
+                this.comboBoxOptions = comboBoxOptions;
+                cbxRetVal.Items.AddRange(comboBoxOptionsDisplay.ToArray());
                 cbxRetVal.SelectedItem = value;
             }
         }
@@ -57,16 +63,22 @@ namespace DokuExtractorStandardGUI
             if (isComboBoxForm)
             {
                 if (string.IsNullOrWhiteSpace(cbxRetVal.SelectedItem?.ToString()))
+                {
                     RetVal = string.Empty;
+                    RetValDisplay = string.Empty;
+                }
                 else
-                    RetVal = cbxRetVal.SelectedItem.ToString();
+                {
+                    RetVal = comboBoxOptions[cbxRetVal.SelectedIndex];
+                    RetValDisplay = cbxRetVal.SelectedItem.ToString();
+                }
             }
             else
             {
                 if (string.IsNullOrWhiteSpace(txtRetVal.Text))
-                    RetVal = string.Empty;
+                    RetValDisplay = string.Empty;
                 else
-                    RetVal = txtRetVal.Text;
+                    RetValDisplay = txtRetVal.Text;
             }
 
             this.Close();
@@ -75,6 +87,7 @@ namespace DokuExtractorStandardGUI
         private void butCancel_Click(object sender, EventArgs e)
         {
             RetVal = null;
+            RetValDisplay = null;
             this.Close();
         }
 
