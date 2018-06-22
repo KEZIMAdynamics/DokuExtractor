@@ -62,9 +62,9 @@ namespace DokuExtractorStandardGUI.UserControls
         /// </summary>
         /// <param name="result">Extracted data</param>
         /// <param name="classTemplate">Used class template</param>
-        public void ShowExtractedData(FieldExtractionResult result, DocumentClassTemplate classTemplate)
+        public void ShowExtractedData(FieldExtractionResult result, DocumentClassTemplate classTemplate, DocumentGroupTemplate groupTemplate)
         {
-            ucExtractedData1.ShowExtractedData(result, classTemplate);
+            ucExtractedData1.ShowExtractedData(result, classTemplate, groupTemplate);
             ucSingleTemplateEditor1.ShowPropertiesAndDataFields(classTemplate);
             ucSingleTemplateEditor1.ActivateRegexExpressionHelper();
         }
@@ -73,10 +73,10 @@ namespace DokuExtractorStandardGUI.UserControls
         /// Shows a class template (general properties and data fields) within ucSingleTemplateEditor
         /// </summary>
         /// <param name="classTemplate">Class template</param>
-        public void ShowPropertiesAndDataFields(DocumentClassTemplate classTemplate)
+        public void ShowPropertiesAndDataFields(DocumentClassTemplate classTemplate, DocumentGroupTemplate groupTemplate)
         {
             ucSingleTemplateEditor1.ShowPropertiesAndDataFields(classTemplate);
-            ucExtractedData1.ShowExtractedData(new FieldExtractionResult(), classTemplate);
+            ucExtractedData1.ShowExtractedData(new FieldExtractionResult(), classTemplate, groupTemplate);
             ucSingleTemplateEditor1.ActivateRegexExpressionHelper();
         }
 

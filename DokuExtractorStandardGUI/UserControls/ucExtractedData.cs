@@ -29,14 +29,22 @@ namespace DokuExtractorStandardGUI.UserControls
         /// Shows the content of the extraction result
         /// </summary>
         /// <param name="extractionResult">Extraction result of type FieldExtractionResult</param>
-        public void ShowExtractedData(FieldExtractionResult extractionResult, DocumentClassTemplate classTemplate)
+        public void ShowExtractedData(FieldExtractionResult extractionResult, DocumentClassTemplate classTemplate, DocumentGroupTemplate groupTemplate)
         {
             txtClassName.Text = extractionResult.TemplateClassName;
             txtGroupName.Text = extractionResult.TemplateGroupName;
 
             ucExtractedDataFields1.ShowExtractedDataFields(extractionResult.DataFields);
             ucExtractedCalculationFields1.ShowExtractedCalculationFields(extractionResult.CalculationFields);
-            ucExtractedConditionalFields1.ShowExtractedConditionalFields(extractionResult.ConditionalFields, classTemplate.ConditionalFields);
+
+            var conditionalFields = classTemplate.ConditionalFields;
+            foreach (var item in groupTemplate.ConditionalFields)
+            {
+                if (item.OnlyStoreInGroupTemplate)
+                    conditionalFields.Add(item);
+            }
+
+            ucExtractedConditionalFields1.ShowExtractedConditionalFields(extractionResult.ConditionalFields, conditionalFields);
         }
 
         /// <summary>
@@ -83,8 +91,8 @@ namespace DokuExtractorStandardGUI.UserControls
         public void ReCalculate(List<DocumentGroupTemplate> groupTemplates)
         {
             var groupTemplate = groupTemplates.Where(x => x.TemplateGroupName == txtGroupName.Text).FirstOrDefault();
-            if(groupTemplate != null)
-            ucExtractedCalculationFields1.ReCalculate(groupTemplate.CalculationFields, ucExtractedDataFields1.GetDataFieldExtractionResult());
+            if (groupTemplate != null)
+                ucExtractedCalculationFields1.ReCalculate(groupTemplate.CalculationFields, ucExtractedDataFields1.GetDataFieldExtractionResult());
         }
 
         private void Localize()

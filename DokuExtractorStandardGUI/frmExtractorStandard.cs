@@ -269,7 +269,7 @@ namespace DokuExtractorStandardGUI
         {
             this.selectedFilePath = newPath;
             ucViewer1.LoadPdf(newPath);
-            ucResultAndEditor1.ShowPropertiesAndDataFields(new DocumentClassTemplate());
+            ucResultAndEditor1.ShowPropertiesAndDataFields(new DocumentClassTemplate(), new DocumentGroupTemplate());
         }
 
 
@@ -337,13 +337,17 @@ namespace DokuExtractorStandardGUI
             {
                 MessageBox.Show(Translation.LanguageStrings.MsgTemplateFound + template.TemplateClassName, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 var result = templateProcessor.ExtractData(template, groupTemplates, inputString);
-                ucResultAndEditor1.ShowExtractedData(result, template);
+
+                var groupTemplate = groupTemplates.Where(x => x.TemplateGroupName == template.TemplateGroupName).FirstOrDefault();
+                ucResultAndEditor1.ShowExtractedData(result, template, groupTemplate);
             }
             else
             {
                 template = templateProcessor.AutoCreateClassTemplate("NewTemplate", inputString, this.groupTemplates);
                 var result = templateProcessor.ExtractData(template, groupTemplates, inputString);
-                ucResultAndEditor1.ShowExtractedData(result, template);
+
+                var groupTemplate = groupTemplates.Where(x => x.TemplateGroupName == template.TemplateGroupName).FirstOrDefault();
+                ucResultAndEditor1.ShowExtractedData(result, template, groupTemplate);
 
                 ucResultAndEditor1.SwitchTab(true);
                 MessageBox.Show(Translation.LanguageStrings.MsgNoTemplateFound, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Warning);

@@ -96,6 +96,7 @@
             this.colCalculationValue.DataPropertyName = "CalculationValue";
             this.colCalculationValue.HeaderText = "CalculationValue";
             this.colCalculationValue.Name = "colCalculationValue";
+            this.colCalculationValue.ReadOnly = true;
             this.colCalculationValue.Width = 111;
             // 
             // colFieldTypeDisplayValue
