@@ -280,8 +280,13 @@ namespace DokuExtractorStandardGUI
         private void UcFileSelector1_SelectedFileChanged(string newPath)
         {
             this.selectedFilePath = newPath;
-            ucViewer1.LoadPdf(newPath);
-            ucResultAndEditor1.ShowPropertiesAndDataFields(new DocumentClassTemplate(), new DocumentGroupTemplate());
+            if (this.selectedFilePath != null)
+            {
+                ucViewer1.LoadPdf(newPath);
+                ucResultAndEditor1.ShowPropertiesAndDataFields(new DocumentClassTemplate(), new DocumentGroupTemplate());
+            }
+            else
+                ucViewer1.CloseDisplayedPdf();
         }
 
 

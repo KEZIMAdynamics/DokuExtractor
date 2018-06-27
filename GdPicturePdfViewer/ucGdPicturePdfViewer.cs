@@ -38,6 +38,7 @@ namespace GdPicturePdfViewer
         public override void CloseDisplayedPdf()
         {
             gdPdf.CloseDocument();
+            gdViewer1.CloseDocument();
         }
 
         private void gdViewer1_MouseUp(object sender, MouseEventArgs e)

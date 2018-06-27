@@ -88,13 +88,20 @@ namespace DokuExtractorStandardGUI.UserControls
         {
             var selectedRows = dataGridView1.SelectedRows;
             if (selectedRows != null)
-                foreach (DataGridViewRow row in selectedRows)
+            {
+                if (selectedRows.Count > 0)
                 {
-                    var fileInfo = row.DataBoundItem as FileInfo;
-                    if (fileInfo != null)
-                        FireSelectedFileChanged(fileInfo.FullName);
-                    break;
+                    foreach (DataGridViewRow row in selectedRows)
+                    {
+                        var fileInfo = row.DataBoundItem as FileInfo;
+                        if (fileInfo != null)
+                            FireSelectedFileChanged(fileInfo.FullName);
+                        break;
+                    }
                 }
+                else
+                    FireSelectedFileChanged(null);
+            }
         }
 
         private void FireSelectedFileChanged(string newPath)
