@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvConditionalFields = new System.Windows.Forms.DataGridView();
             this.conditionalFieldResultDisplayBindingBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.ucExtractedConditionalFieldsBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -84,6 +85,8 @@
             // 
             this.colDisplayValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colDisplayValue.DataPropertyName = "DisplayValue";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.colDisplayValue.DefaultCellStyle = dataGridViewCellStyle1;
             this.colDisplayValue.HeaderText = "DisplayValue";
             this.colDisplayValue.Name = "colDisplayValue";
             this.colDisplayValue.ReadOnly = true;
@@ -91,32 +94,29 @@
             // 
             // colValue
             // 
-            this.colValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colValue.DataPropertyName = "Value";
             this.colValue.HeaderText = "Value";
             this.colValue.Name = "colValue";
             this.colValue.ReadOnly = true;
             this.colValue.Visible = false;
-            this.colValue.Width = 59;
             // 
             // colConditionalFieldTypeDisplayValue
             // 
-            this.colConditionalFieldTypeDisplayValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colConditionalFieldTypeDisplayValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colConditionalFieldTypeDisplayValue.DataPropertyName = "ConditionalFieldTypeDisplayValue";
             this.colConditionalFieldTypeDisplayValue.HeaderText = "ConditionalFieldTypeDisplayValue";
             this.colConditionalFieldTypeDisplayValue.Name = "colConditionalFieldTypeDisplayValue";
             this.colConditionalFieldTypeDisplayValue.ReadOnly = true;
-            this.colConditionalFieldTypeDisplayValue.Width = 191;
             // 
             // colConditionalFieldType
             // 
-            this.colConditionalFieldType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colConditionalFieldType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colConditionalFieldType.DataPropertyName = "ConditionalFieldType";
             this.colConditionalFieldType.HeaderText = "ConditionalFieldType";
             this.colConditionalFieldType.Name = "colConditionalFieldType";
             this.colConditionalFieldType.ReadOnly = true;
             this.colConditionalFieldType.Visible = false;
-            this.colConditionalFieldType.Width = 130;
             // 
             // ucExtractedConditionalFields
             // 

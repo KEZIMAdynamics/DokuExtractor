@@ -30,12 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.ucTemplateSelectorBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.templateNamesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.ucTemplateSelectorBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.valueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ucTemplateSelectorBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.templateNamesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ucTemplateSelectorBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -57,23 +57,22 @@
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
-            // ucTemplateSelectorBindingSource
-            // 
-            this.ucTemplateSelectorBindingSource.DataSource = typeof(DokuExtractorStandardGUI.UserControlsTemplateEditor.ucTemplateSelector);
-            // 
             // templateNamesBindingSource
             // 
             this.templateNamesBindingSource.DataMember = "TemplateNames";
             this.templateNamesBindingSource.DataSource = this.ucTemplateSelectorBindingSource;
             // 
+            // ucTemplateSelectorBindingSource
+            // 
+            this.ucTemplateSelectorBindingSource.DataSource = typeof(DokuExtractorStandardGUI.UserControlsTemplateEditor.ucTemplateSelector);
+            // 
             // valueDataGridViewTextBoxColumn
             // 
-            this.valueDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.valueDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.valueDataGridViewTextBoxColumn.DataPropertyName = "Value";
             this.valueDataGridViewTextBoxColumn.HeaderText = "Template";
             this.valueDataGridViewTextBoxColumn.Name = "valueDataGridViewTextBoxColumn";
             this.valueDataGridViewTextBoxColumn.ReadOnly = true;
-            this.valueDataGridViewTextBoxColumn.Width = 76;
             // 
             // ucTemplateSelector
             // 
@@ -84,8 +83,8 @@
             this.Name = "ucTemplateSelector";
             this.Size = new System.Drawing.Size(288, 463);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ucTemplateSelectorBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.templateNamesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ucTemplateSelectorBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -93,8 +92,8 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn valueDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource templateNamesBindingSource;
         private System.Windows.Forms.BindingSource ucTemplateSelectorBindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn valueDataGridViewTextBoxColumn;
     }
 }

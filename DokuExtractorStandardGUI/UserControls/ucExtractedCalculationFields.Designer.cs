@@ -29,10 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvCalculationFields = new System.Windows.Forms.DataGridView();
             this.calculationFieldResultsDisplayBindingBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.ucExtractedCalculationFieldsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ucExtractedCalculationFieldsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCalculationValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFieldTypeDisplayValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -68,10 +69,6 @@
             this.calculationFieldResultsDisplayBindingBindingSource.DataMember = "CalculationFieldResultsDisplayBinding";
             this.calculationFieldResultsDisplayBindingBindingSource.DataSource = this.ucExtractedCalculationFieldsBindingSource;
             // 
-            // ucExtractedCalculationFieldsBindingSource
-            // 
-            this.ucExtractedCalculationFieldsBindingSource.DataSource = typeof(DokuExtractorStandardGUI.UserControls.ucExtractedCalculationFields);
-            // 
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
@@ -80,6 +77,10 @@
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             this.dataGridViewTextBoxColumn1.ReadOnly = true;
             this.dataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // ucExtractedCalculationFieldsBindingSource
+            // 
+            this.ucExtractedCalculationFieldsBindingSource.DataSource = typeof(DokuExtractorStandardGUI.UserControls.ucExtractedCalculationFields);
             // 
             // colName
             // 
@@ -94,6 +95,8 @@
             // 
             this.colCalculationValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colCalculationValue.DataPropertyName = "CalculationValue";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.colCalculationValue.DefaultCellStyle = dataGridViewCellStyle1;
             this.colCalculationValue.HeaderText = "CalculationValue";
             this.colCalculationValue.Name = "colCalculationValue";
             this.colCalculationValue.ReadOnly = true;
@@ -110,22 +113,20 @@
             // 
             // colCalculationEqualsValidation
             // 
-            this.colCalculationEqualsValidation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colCalculationEqualsValidation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colCalculationEqualsValidation.DataPropertyName = "CalculationEqualsValidation";
             this.colCalculationEqualsValidation.HeaderText = "CalculationEqualsValidation";
             this.colCalculationEqualsValidation.Name = "colCalculationEqualsValidation";
             this.colCalculationEqualsValidation.ReadOnly = true;
-            this.colCalculationEqualsValidation.Width = 143;
             // 
             // colFieldType
             // 
-            this.colFieldType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colFieldType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colFieldType.DataPropertyName = "FieldType";
             this.colFieldType.HeaderText = "FieldType";
             this.colFieldType.Name = "colFieldType";
             this.colFieldType.ReadOnly = true;
             this.colFieldType.Visible = false;
-            this.colFieldType.Width = 78;
             // 
             // ucExtractedCalculationFields
             // 

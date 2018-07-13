@@ -29,7 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.fileInfosBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.ucFileSelectorBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDirectoryName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -45,8 +49,6 @@
             this.colLastWriteTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLastWriteTimeUtc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAttributes = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fileInfosBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.ucFileSelectorBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileInfosBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ucFileSelectorBindingSource)).BeginInit();
@@ -84,6 +86,15 @@
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             this.dataGridView1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.dataGridView1_MouseMove);
             // 
+            // fileInfosBindingSource
+            // 
+            this.fileInfosBindingSource.DataMember = "FileInfos";
+            this.fileInfosBindingSource.DataSource = this.ucFileSelectorBindingSource;
+            // 
+            // ucFileSelectorBindingSource
+            // 
+            this.ucFileSelectorBindingSource.DataSource = typeof(DokuExtractorStandardGUI.UserControls.ucFileSelector);
+            // 
             // colName
             // 
             this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
@@ -95,12 +106,13 @@
             // 
             // colLength
             // 
-            this.colLength.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colLength.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colLength.DataPropertyName = "Length";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.colLength.DefaultCellStyle = dataGridViewCellStyle1;
             this.colLength.HeaderText = "Length";
             this.colLength.Name = "colLength";
             this.colLength.ReadOnly = true;
-            this.colLength.Width = 65;
             // 
             // colDirectoryName
             // 
@@ -123,6 +135,7 @@
             this.colIsReadOnly.DataPropertyName = "IsReadOnly";
             this.colIsReadOnly.HeaderText = "IsReadOnly";
             this.colIsReadOnly.Name = "colIsReadOnly";
+            this.colIsReadOnly.ReadOnly = true;
             this.colIsReadOnly.Visible = false;
             // 
             // colExists
@@ -149,6 +162,7 @@
             this.colExtension.Name = "colExtension";
             this.colExtension.ReadOnly = true;
             this.colExtension.Visible = false;
+            this.colExtension.Width = 78;
             // 
             // colCreationTime
             // 
@@ -156,13 +170,16 @@
             this.colCreationTime.DataPropertyName = "CreationTime";
             this.colCreationTime.HeaderText = "CreationTime";
             this.colCreationTime.Name = "colCreationTime";
+            this.colCreationTime.ReadOnly = true;
             this.colCreationTime.Visible = false;
+            this.colCreationTime.Width = 94;
             // 
             // colCreationTimeUtc
             // 
             this.colCreationTimeUtc.DataPropertyName = "CreationTimeUtc";
             this.colCreationTimeUtc.HeaderText = "CreationTimeUtc";
             this.colCreationTimeUtc.Name = "colCreationTimeUtc";
+            this.colCreationTimeUtc.ReadOnly = true;
             this.colCreationTimeUtc.Visible = false;
             // 
             // colLastAccessTime
@@ -170,6 +187,7 @@
             this.colLastAccessTime.DataPropertyName = "LastAccessTime";
             this.colLastAccessTime.HeaderText = "LastAccessTime";
             this.colLastAccessTime.Name = "colLastAccessTime";
+            this.colLastAccessTime.ReadOnly = true;
             this.colLastAccessTime.Visible = false;
             // 
             // colLastAccessTimeUtc
@@ -177,20 +195,25 @@
             this.colLastAccessTimeUtc.DataPropertyName = "LastAccessTimeUtc";
             this.colLastAccessTimeUtc.HeaderText = "LastAccessTimeUtc";
             this.colLastAccessTimeUtc.Name = "colLastAccessTimeUtc";
+            this.colLastAccessTimeUtc.ReadOnly = true;
             this.colLastAccessTimeUtc.Visible = false;
             // 
             // colLastWriteTime
             // 
-            this.colLastWriteTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colLastWriteTime.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colLastWriteTime.DataPropertyName = "LastWriteTime";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.colLastWriteTime.DefaultCellStyle = dataGridViewCellStyle2;
             this.colLastWriteTime.HeaderText = "LastWriteTime";
             this.colLastWriteTime.Name = "colLastWriteTime";
+            this.colLastWriteTime.ReadOnly = true;
             // 
             // colLastWriteTimeUtc
             // 
             this.colLastWriteTimeUtc.DataPropertyName = "LastWriteTimeUtc";
             this.colLastWriteTimeUtc.HeaderText = "LastWriteTimeUtc";
             this.colLastWriteTimeUtc.Name = "colLastWriteTimeUtc";
+            this.colLastWriteTimeUtc.ReadOnly = true;
             this.colLastWriteTimeUtc.Visible = false;
             // 
             // colAttributes
@@ -198,16 +221,8 @@
             this.colAttributes.DataPropertyName = "Attributes";
             this.colAttributes.HeaderText = "Attributes";
             this.colAttributes.Name = "colAttributes";
+            this.colAttributes.ReadOnly = true;
             this.colAttributes.Visible = false;
-            // 
-            // fileInfosBindingSource
-            // 
-            this.fileInfosBindingSource.DataMember = "FileInfos";
-            this.fileInfosBindingSource.DataSource = this.ucFileSelectorBindingSource;
-            // 
-            // ucFileSelectorBindingSource
-            // 
-            this.ucFileSelectorBindingSource.DataSource = typeof(DokuExtractorStandardGUI.UserControls.ucFileSelector);
             // 
             // ucFileSelector
             // 
