@@ -52,6 +52,21 @@ namespace DokuExtractorStandardGUI.UserControls
                 });
             }
             dgvConditionalFields.DataSource = ConditionalFieldResultDisplayBinding;
+
+            foreach (DataGridViewRow row in dgvConditionalFields.Rows)
+            {
+                try
+                {
+                    DataGridViewCell valueCell = row.Cells["col" + nameof(DataFieldResultDisplay.Value)];
+                    if (valueCell != null)
+                    {
+                        if (string.IsNullOrWhiteSpace(valueCell.Value as string))
+                            row.DefaultCellStyle.BackColor = Color.OrangeRed;
+                    }
+                }
+                catch (Exception ex)
+                { }
+            }
         }
 
         /// <summary>
@@ -180,6 +195,24 @@ namespace DokuExtractorStandardGUI.UserControls
         private void FrmCbx_IndividualConditionalValueButtonClicked(object sender, EventArgs e)
         {
             OnFrmComboBoxIndividualConditionalValueButtonClick(sender, e);
+        }
+
+        private void dgvConditionalFields_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                var row = dgvConditionalFields.Rows[e.RowIndex];
+                DataGridViewCell valueCell = row.Cells["col" + nameof(DataFieldResultDisplay.Value)];
+                if (valueCell != null)
+                {
+                    if (string.IsNullOrWhiteSpace(valueCell.Value as string))
+                        row.DefaultCellStyle.BackColor = Color.OrangeRed;
+                    else
+                        row.DefaultCellStyle.BackColor = Color.Empty;
+                }
+            }
+            catch (Exception ex)
+            { }
         }
     }
 }
