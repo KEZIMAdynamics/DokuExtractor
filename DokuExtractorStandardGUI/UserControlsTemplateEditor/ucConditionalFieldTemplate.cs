@@ -65,6 +65,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         public ucConditionalFieldTemplate()
         {
             InitializeComponent();
+            cbxConditionalFieldType.MouseWheel += (o, e) => ((HandledMouseEventArgs)e).Handled = true;
         }
 
         /// <summary>
@@ -73,6 +74,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         public ucConditionalFieldTemplate(ConditionalFieldTemplate dataFieldClassTemplate)
         {
             InitializeComponent();
+            cbxConditionalFieldType.MouseWheel += (o, e) => ((HandledMouseEventArgs)e).Handled = true;
             this.conditionalFieldTemplate = dataFieldClassTemplate;
         }
 

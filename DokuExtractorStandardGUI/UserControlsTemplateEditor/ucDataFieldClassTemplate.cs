@@ -48,6 +48,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         public ucDataFieldClassTemplate()
         {
             InitializeComponent();
+            cbxFieldType.MouseWheel += (o, e) => ((HandledMouseEventArgs)e).Handled = true;
         }
 
         /// <summary>
@@ -56,6 +57,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         public ucDataFieldClassTemplate(DataFieldClassTemplate dataFieldClassTemplate)
         {
             InitializeComponent();
+            cbxFieldType.MouseWheel += (o, e) => ((HandledMouseEventArgs)e).Handled = true;
             this.dataFieldClassTemplate = dataFieldClassTemplate;
         }
 
