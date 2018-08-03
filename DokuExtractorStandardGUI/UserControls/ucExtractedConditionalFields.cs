@@ -61,7 +61,7 @@ namespace DokuExtractorStandardGUI.UserControls
                     if (valueCell != null)
                     {
                         if (string.IsNullOrWhiteSpace(valueCell.Value as string))
-                            row.DefaultCellStyle.BackColor = Color.OrangeRed;
+                            row.DefaultCellStyle.BackColor = Color.Yellow;
                     }
                 }
                 catch (Exception ex)
@@ -206,7 +206,7 @@ namespace DokuExtractorStandardGUI.UserControls
                 if (valueCell != null)
                 {
                     if (string.IsNullOrWhiteSpace(valueCell.Value as string))
-                        row.DefaultCellStyle.BackColor = Color.OrangeRed;
+                        row.DefaultCellStyle.BackColor = Color.Yellow;
                     else
                         row.DefaultCellStyle.BackColor = Color.Empty;
                 }
