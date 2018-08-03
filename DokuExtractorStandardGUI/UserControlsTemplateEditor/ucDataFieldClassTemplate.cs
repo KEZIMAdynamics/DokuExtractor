@@ -165,5 +165,13 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         {
             StartRegexExpressionHelper();
         }
+
+        private void txtRegexExpression_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtRegexExpression.Text))
+                txtRegexExpression.BackColor = Color.Yellow;
+            else
+                txtRegexExpression.BackColor = Color.White;
+        }
     }
 }

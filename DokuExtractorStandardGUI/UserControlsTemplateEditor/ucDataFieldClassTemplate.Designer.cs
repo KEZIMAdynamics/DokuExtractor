@@ -72,12 +72,14 @@
             this.txtRegexExpression.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtRegexExpression.BackColor = System.Drawing.Color.Yellow;
             this.txtRegexExpression.Location = new System.Drawing.Point(10, 143);
             this.txtRegexExpression.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.txtRegexExpression.Multiline = true;
             this.txtRegexExpression.Name = "txtRegexExpression";
             this.txtRegexExpression.Size = new System.Drawing.Size(280, 68);
             this.txtRegexExpression.TabIndex = 4;
+            this.txtRegexExpression.TextChanged += new System.EventHandler(this.txtRegexExpression_TextChanged);
             // 
             // lblRegexExpression
             // 
