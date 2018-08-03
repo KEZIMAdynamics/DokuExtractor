@@ -51,6 +51,7 @@ namespace DokuExtractorStandardGUI.Localization
         public string DataFieldType { get; set; } = "Type";
 
         public string DataFieldRegexExpressions { get; set; } = "Regex expressions";
+        public string ButStartRegexExpressionHelper { get; set; } = "Start regex expression helper";
         public string ButDeleteDataField { get; set; } = "Delete data field";
 
         public string DataFieldGroupTemplateTextAnchors { get; set; } = "Text anchors";
