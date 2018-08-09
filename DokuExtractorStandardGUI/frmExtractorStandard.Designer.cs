@@ -267,7 +267,7 @@
             this.ucViewer1.Name = "ucViewer1";
             this.ucViewer1.Size = new System.Drawing.Size(752, 836);
             this.ucViewer1.TabIndex = 0;
-            this.ucViewer1.ViewerPluginPath = "G:\\DokuExtractor\\GdPicturePdfViewer\\bin\\Debug\\GdPicturePdfViewer.dll";
+            this.ucViewer1.ViewerPluginPath = "G:\\Entwicklung\\dokuextractor\\GdPicturePdfViewer\\bin\\Debug\\GdPicturePdfViewer.dll";
             // 
             // ucResultAndEditor1
             // 
