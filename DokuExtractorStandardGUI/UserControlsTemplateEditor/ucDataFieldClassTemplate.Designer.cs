@@ -35,6 +35,7 @@
             this.lblRegexExpression = new System.Windows.Forms.Label();
             this.butDeleteDataField = new System.Windows.Forms.Button();
             this.cbxFieldType = new System.Windows.Forms.ComboBox();
+            this.butStartRegexExpressionHelper = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtName
@@ -71,12 +72,14 @@
             this.txtRegexExpression.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtRegexExpression.Location = new System.Drawing.Point(10, 114);
+            this.txtRegexExpression.BackColor = System.Drawing.Color.Yellow;
+            this.txtRegexExpression.Location = new System.Drawing.Point(10, 143);
             this.txtRegexExpression.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.txtRegexExpression.Multiline = true;
             this.txtRegexExpression.Name = "txtRegexExpression";
-            this.txtRegexExpression.Size = new System.Drawing.Size(280, 97);
+            this.txtRegexExpression.Size = new System.Drawing.Size(280, 68);
             this.txtRegexExpression.TabIndex = 4;
+            this.txtRegexExpression.TextChanged += new System.EventHandler(this.txtRegexExpression_TextChanged);
             // 
             // lblRegexExpression
             // 
@@ -122,11 +125,27 @@
             this.cbxFieldType.Size = new System.Drawing.Size(280, 21);
             this.cbxFieldType.TabIndex = 7;
             // 
+            // butStartRegexExpressionHelper
+            // 
+            this.butStartRegexExpressionHelper.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.butStartRegexExpressionHelper.BackColor = System.Drawing.Color.White;
+            this.butStartRegexExpressionHelper.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.butStartRegexExpressionHelper.Location = new System.Drawing.Point(10, 114);
+            this.butStartRegexExpressionHelper.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
+            this.butStartRegexExpressionHelper.Name = "butStartRegexExpressionHelper";
+            this.butStartRegexExpressionHelper.Size = new System.Drawing.Size(280, 23);
+            this.butStartRegexExpressionHelper.TabIndex = 8;
+            this.butStartRegexExpressionHelper.Text = "Start Regex Expression Helper";
+            this.butStartRegexExpressionHelper.UseVisualStyleBackColor = false;
+            this.butStartRegexExpressionHelper.Click += new System.EventHandler(this.butStartRegexExpressionHelper_Click);
+            // 
             // ucDataFieldClassTemplate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.Controls.Add(this.butStartRegexExpressionHelper);
             this.Controls.Add(this.cbxFieldType);
             this.Controls.Add(this.butDeleteDataField);
             this.Controls.Add(this.lblRegexExpression);
@@ -151,5 +170,6 @@
         private System.Windows.Forms.Label lblRegexExpression;
         private System.Windows.Forms.Button butDeleteDataField;
         private System.Windows.Forms.ComboBox cbxFieldType;
+        private System.Windows.Forms.Button butStartRegexExpressionHelper;
     }
 }

@@ -31,13 +31,13 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvDataFields = new System.Windows.Forms.DataGridView();
-            this.dataFieldResultsDisplayBindingBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ucExtractedDataFieldsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.colDatName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDatValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDatFieldTypeDisplayValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDatFieldType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataFieldResultsDisplayBindingBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.ucExtractedDataFieldsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDataFields)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataFieldResultsDisplayBindingBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ucExtractedDataFieldsBindingSource)).BeginInit();
@@ -61,24 +61,7 @@
             this.dgvDataFields.Size = new System.Drawing.Size(535, 477);
             this.dgvDataFields.TabIndex = 0;
             this.dgvDataFields.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDataFields_CellDoubleClick);
-            // 
-            // dataFieldResultsDisplayBindingBindingSource
-            // 
-            this.dataFieldResultsDisplayBindingBindingSource.DataMember = "DataFieldResultsDisplayBinding";
-            this.dataFieldResultsDisplayBindingBindingSource.DataSource = this.ucExtractedDataFieldsBindingSource;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "FieldType";
-            this.dataGridViewTextBoxColumn1.HeaderText = "FieldType";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Visible = false;
-            // 
-            // ucExtractedDataFieldsBindingSource
-            // 
-            this.ucExtractedDataFieldsBindingSource.DataSource = typeof(DokuExtractorStandardGUI.UserControls.ucExtractedDataFields);
+            this.dgvDataFields.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDataFields_CellValueChanged);
             // 
             // colDatName
             // 
@@ -115,6 +98,24 @@
             this.colDatFieldType.Name = "colDatFieldType";
             this.colDatFieldType.ReadOnly = true;
             this.colDatFieldType.Visible = false;
+            // 
+            // dataFieldResultsDisplayBindingBindingSource
+            // 
+            this.dataFieldResultsDisplayBindingBindingSource.DataMember = "DataFieldResultsDisplayBinding";
+            this.dataFieldResultsDisplayBindingBindingSource.DataSource = this.ucExtractedDataFieldsBindingSource;
+            // 
+            // ucExtractedDataFieldsBindingSource
+            // 
+            this.ucExtractedDataFieldsBindingSource.DataSource = typeof(DokuExtractorStandardGUI.UserControls.ucExtractedDataFields);
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "FieldType";
+            this.dataGridViewTextBoxColumn1.HeaderText = "FieldType";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Visible = false;
             // 
             // ucExtractedDataFields
             // 

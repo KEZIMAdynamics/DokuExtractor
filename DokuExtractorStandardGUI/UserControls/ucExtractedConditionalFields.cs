@@ -29,6 +29,14 @@ namespace DokuExtractorStandardGUI.UserControls
         private void ucExtractedConditionalFields_Load(object sender, EventArgs e)
         {
             Localize();
+
+            var buttonCol = new DataGridViewButtonColumn();
+            buttonCol.Name = "colButton";
+            buttonCol.HeaderText = string.Empty;
+            buttonCol.Text = Translation.LanguageStrings.ButChangeConditionValue;
+            buttonCol.UseColumnTextForButtonValue = true;
+            dgvConditionalFields.Columns.Add(buttonCol);
+            dgvConditionalFields.CellClick += DgvConditionalFields_CellClick;
         }
 
         /// <summary>
@@ -52,6 +60,74 @@ namespace DokuExtractorStandardGUI.UserControls
                 });
             }
             dgvConditionalFields.DataSource = ConditionalFieldResultDisplayBinding;
+
+            foreach (DataGridViewRow row in dgvConditionalFields.Rows)
+            {
+                try
+                {
+                    DataGridViewCell valueCell = row.Cells["col" + nameof(DataFieldResultDisplay.Value)];
+                    if (valueCell != null)
+                    {
+                        if (string.IsNullOrWhiteSpace(valueCell.Value as string))
+                            row.DefaultCellStyle.BackColor = Color.Yellow;
+                    }
+                }
+                catch (Exception ex)
+                { }
+            }
+        }
+
+        /// <summary>
+        /// Overridable function, which is called by a click within on conditional field button of dgvConditionalFields
+        /// </summary>
+        /// <param name="sender">DataGridView</param>
+        /// <param name="e">DataGridViewCellEventArgs</param>
+        protected virtual void DgvConditionalFields_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var col = dgvConditionalFields.Columns[e.ColumnIndex];
+            if (col.Name == "colButton")
+            {
+                var row = dgvConditionalFields.Rows[e.RowIndex];
+
+                var rowValue = row.DataBoundItem as ConditionalFieldResultDisplay;
+                if (rowValue != null)
+                {
+                    var colIndex = dgvConditionalFields.Columns["col" + nameof(ConditionalFieldResultDisplay.DisplayValue)].Index;
+
+                    if (rowValue.ConditionalFieldType == ConditionalFieldType.Bool)
+                    {
+                        try
+                        {
+                            var nameCell = row.Cells["col" + nameof(ConditionalFieldResultDisplay.Name)];
+                            var condFieldTemplate = this.conditionalFieldsTemplate.Where(x => x.Name == nameCell.Value.ToString()).FirstOrDefault();
+
+                            var cell = row.Cells[colIndex];
+                            var valueCell = row.Cells["col" + nameof(ConditionalFieldResultDisplay.Value)];
+                            if (cell.Value.ToString() != condFieldTemplate.ConditionValues.FirstOrDefault()?.Value)
+                            {
+                                cell.Value = condFieldTemplate.ConditionValues.FirstOrDefault()?.Value;
+                                valueCell.Value = cell.Value;
+                            }
+                            else
+                            {
+                                cell.Value = condFieldTemplate.ConditionValues[1]?.Value;
+                                valueCell.Value = cell.Value;
+                            }
+                        }
+                        catch (Exception ex)
+                        { }
+                    }
+                    else
+                    {
+                        try
+                        {
+                            OnDgvConditionalFieldCellDoubleClick(sender, new DataGridViewCellEventArgs(colIndex, e.RowIndex));
+                        }
+                        catch (Exception ex)
+                        { }
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -180,6 +256,24 @@ namespace DokuExtractorStandardGUI.UserControls
         private void FrmCbx_IndividualConditionalValueButtonClicked(object sender, EventArgs e)
         {
             OnFrmComboBoxIndividualConditionalValueButtonClick(sender, e);
+        }
+
+        private void dgvConditionalFields_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                var row = dgvConditionalFields.Rows[e.RowIndex];
+                DataGridViewCell valueCell = row.Cells["col" + nameof(DataFieldResultDisplay.Value)];
+                if (valueCell != null)
+                {
+                    if (string.IsNullOrWhiteSpace(valueCell.Value as string))
+                        row.DefaultCellStyle.BackColor = Color.Yellow;
+                    else
+                        row.DefaultCellStyle.BackColor = Color.Empty;
+                }
+            }
+            catch (Exception ex)
+            { }
         }
     }
 }

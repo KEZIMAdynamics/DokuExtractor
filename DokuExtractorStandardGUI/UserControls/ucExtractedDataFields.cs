@@ -47,6 +47,21 @@ namespace DokuExtractorStandardGUI.UserControls
             }
 
             dgvDataFields.DataSource = DataFieldResultsDisplayBinding;
+
+            foreach (DataGridViewRow row in dgvDataFields.Rows)
+            {
+                try
+                {
+                    DataGridViewCell valueCell = row.Cells["colDat" + nameof(DataFieldResultDisplay.Value)];
+                    if (valueCell != null)
+                    {
+                        if (string.IsNullOrWhiteSpace(valueCell.Value as string))
+                            row.DefaultCellStyle.BackColor = Color.Yellow;
+                    }
+                }
+                catch (Exception ex)
+                { }
+            }
         }
 
         /// <summary>
@@ -100,6 +115,24 @@ namespace DokuExtractorStandardGUI.UserControls
         private void dgvDataFields_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             OnDgvDataFieldsCellDoubleClick(sender, e);
+        }
+
+        private void dgvDataFields_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                var row = dgvDataFields.Rows[e.RowIndex];
+                DataGridViewCell valueCell = row.Cells["colDat" + nameof(DataFieldResultDisplay.Value)];
+                if (valueCell != null)
+                {
+                    if (string.IsNullOrWhiteSpace(valueCell.Value as string))
+                        row.DefaultCellStyle.BackColor = Color.Yellow;
+                    else
+                        row.DefaultCellStyle.BackColor = Color.Empty;
+                }
+            }
+            catch (Exception ex)
+            { }
         }
     }
 }

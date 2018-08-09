@@ -53,6 +53,9 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         public ucCalculationFieldGroupTemplate()
         {
             InitializeComponent();
+            cbxCalculationPrecision.MouseWheel += (o, e) => ((HandledMouseEventArgs)e).Handled = true;
+            cbxFieldType.MouseWheel += (o, e) => ((HandledMouseEventArgs)e).Handled = true;
+            cbxValidationPrecision.MouseWheel += (o, e) => ((HandledMouseEventArgs)e).Handled = true;
         }
 
         /// <summary>
@@ -61,6 +64,9 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         public ucCalculationFieldGroupTemplate(CalculationFieldTemplate calculationFieldTemplate)
         {
             InitializeComponent();
+            cbxCalculationPrecision.MouseWheel += (o, e) => ((HandledMouseEventArgs)e).Handled = true;
+            cbxFieldType.MouseWheel += (o, e) => ((HandledMouseEventArgs)e).Handled = true;
+            cbxValidationPrecision.MouseWheel += (o, e) => ((HandledMouseEventArgs)e).Handled = true;
             this.calculationFieldTemplate = calculationFieldTemplate;
         }
 

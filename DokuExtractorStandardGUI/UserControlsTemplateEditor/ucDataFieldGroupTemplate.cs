@@ -41,6 +41,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         public ucDataFieldGroupTemplate()
         {
             InitializeComponent();
+            cbxFieldType.MouseWheel += (o, e) => ((HandledMouseEventArgs)e).Handled = true;
         }
 
         /// <summary>
@@ -49,6 +50,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         public ucDataFieldGroupTemplate(DataFieldGroupTemplate dataFieldGroupTemplate)
         {
             InitializeComponent();
+            cbxFieldType.MouseWheel += (o, e) => ((HandledMouseEventArgs)e).Handled = true;
             this.dataFieldGroupTemplate = dataFieldGroupTemplate;
         }
 

@@ -48,6 +48,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         public ucDataFieldClassTemplate()
         {
             InitializeComponent();
+            cbxFieldType.MouseWheel += (o, e) => ((HandledMouseEventArgs)e).Handled = true;
         }
 
         /// <summary>
@@ -56,6 +57,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         public ucDataFieldClassTemplate(DataFieldClassTemplate dataFieldClassTemplate)
         {
             InitializeComponent();
+            cbxFieldType.MouseWheel += (o, e) => ((HandledMouseEventArgs)e).Handled = true;
             this.dataFieldClassTemplate = dataFieldClassTemplate;
         }
 
@@ -106,6 +108,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             lblName.Text = Translation.LanguageStrings.DataFieldName;
             lblFieldType.Text = Translation.LanguageStrings.DataFieldType;
             lblRegexExpression.Text = Translation.LanguageStrings.DataFieldRegexExpressions;
+            butStartRegexExpressionHelper.Text = Translation.LanguageStrings.ButStartRegexExpressionHelper;
             butDeleteDataField.Text = Translation.LanguageStrings.ButDeleteDataField;
 
             cbxFieldType.Items[(int)(DataFieldType.Text)] = Translation.LanguageStrings.FieldTypeText;
@@ -118,6 +121,11 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         }
 
         private void LblRegexExpression_DoubleClick(object sender, EventArgs e)
+        {
+            StartRegexExpressionHelper();
+        }
+
+        private void StartRegexExpressionHelper()
         {
             var result = MessageBox.Show(Translation.LanguageStrings.MsgAskStartRegexExpressionHelper, string.Empty, MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes)
@@ -151,6 +159,19 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         private void FireDataFieldEraser(Guid id)
         {
             DataFieldEraser?.Invoke(id);
+        }
+
+        private void butStartRegexExpressionHelper_Click(object sender, EventArgs e)
+        {
+            StartRegexExpressionHelper();
+        }
+
+        private void txtRegexExpression_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtRegexExpression.Text))
+                txtRegexExpression.BackColor = Color.Yellow;
+            else
+                txtRegexExpression.BackColor = Color.White;
         }
     }
 }
