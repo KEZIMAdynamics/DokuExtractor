@@ -371,7 +371,7 @@ namespace DokuExtractorStandardGUI
             }
         }
 
-        private void butOk_Click(object sender, EventArgs e)
+        private async void butOk_Click(object sender, EventArgs e)
         {
             if (ucResultAndEditor1.CheckIfAllDataFieldsAreFilled() == true
                 && ucResultAndEditor1.CheckIfAllCalculationResultsEqualValidation() == true
@@ -381,9 +381,9 @@ namespace DokuExtractorStandardGUI
                 if (result.DataFields.Count > 0)
                 {
                     //IMPORTANT: First close disyplayed PDF, then delete file physically
-                    //ucViewer1.CloseDisplayedPdf();
+                    ucViewer1.CloseDisplayedPdf();
                     //Do stuff here
-                    //ucFileSelector1.DeleteFile(selectedFilePath);
+                    await ucFileSelector1.DeleteFile(selectedFilePath);
                 }
                 else
                     MessageBox.Show(Translation.LanguageStrings.MsgEmptyOrInvalidValues, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -462,7 +462,7 @@ namespace DokuExtractorStandardGUI
             languageEditor.ShowDialog();
         }
 
-        private void butDeleteFile_Click(object sender, EventArgs e)
+        private async void butDeleteFile_Click(object sender, EventArgs e)
         {
             var selectedFilePath = this.selectedFilePath;
             if (string.IsNullOrWhiteSpace(selectedFilePath) == false)
@@ -470,7 +470,7 @@ namespace DokuExtractorStandardGUI
                 {
                     //IMPORTANT: First close disyplayed PDF, then delete file physically
                     ucViewer1.CloseDisplayedPdf();
-                    ucFileSelector1.DeleteFile(selectedFilePath);
+                    await ucFileSelector1.DeleteFile(selectedFilePath);
                 }
         }
 

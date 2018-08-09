@@ -68,15 +68,38 @@ namespace DokuExtractorStandardGUI.UserControls
         /// Deletes a file physically and removes the file from the list of FileInfos of the FileSelector
         /// </summary>
         /// <param name="filePath"></param>
-        public void DeleteFile(string filePath)
+        public async Task DeleteFile(string filePath)
         {
             //IMPORTANT: First Remove file from queue, then delete it physically
             RemoveFileFromQueue(filePath);
 
             if (File.Exists(filePath))
-                File.Delete(filePath);
+            {
+                try
+                {
+                    File.Delete(filePath);
+                }
+                catch (Exception ex)
+                {
+                    var retryCounter = 0;
+                    while (retryCounter < 10)
+                    {
+                        await Task.Delay(10000);
+                        try
+                        {
+                            File.Delete(filePath);
+                            break;
+                        }
+                        catch (Exception e)
+                        {
+                            retryCounter++;
+                        }
+                    }
+                    if (retryCounter >= 10)
+                        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
-
         private void Localize()
         {
             dataGridView1.Columns["col" + nameof(FileInfo.Name)].HeaderText = Translation.LanguageStrings.FileName;
