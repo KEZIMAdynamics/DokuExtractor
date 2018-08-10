@@ -27,6 +27,7 @@ namespace DokuExtractorCore
         public string TemplateGroupDirectory { get; set; }
         string appRootPath;
         RegexExpressionFinder finder = new RegexExpressionFinder();
+        TemplateMatcher templateMatcher = new TemplateMatcher();
 
         /// <summary>
         /// For ease of use, Class and Group jsons can be copied to the appRootPath directory into the folders "ExtractorClassTemplates" and "ExtractorGroupTemplates".
@@ -266,14 +267,14 @@ namespace DokuExtractorCore
         {
             var retVal = new TemplateMachResult();
 
-            var preselectedTemplates = PreSelectTemplates(templates, inputText);
+            var preselectedTemplates = templateMatcher.PreSelectTemplates(templates, inputText);
             if (preselectedTemplates.Count > 0)
             {
-                retVal = MatchTemplatesViaKeyWords(preselectedTemplates, inputText);
+                retVal = templateMatcher.MatchTemplatesViaKeyWords(preselectedTemplates, inputText);
             }
             if (retVal.IsMatchSuccessfull == false)
             {
-                retVal = MatchTemplatesViaKeyWords(templates, inputText);
+                retVal = templateMatcher.MatchTemplatesViaKeyWords(templates, inputText);
             }
 
             return retVal;
@@ -291,112 +292,9 @@ namespace DokuExtractorCore
             return groupTemplates.Where(x => x.TemplateGroupName == groupName).FirstOrDefault();
         }
 
-        /// <summary>
-        /// Preselection of templates the possibly match. Based on IBAN. Maybe more conditions in the future.
-        /// </summary>
-        /// <param name="templates"></param>
-        /// <param name="inputText"></param>
-        /// <returns></returns>
-        public List<DocumentClassTemplate> PreSelectTemplates(List<DocumentClassTemplate> templates, string inputText)
-        {
-            var retVal = new List<DocumentClassTemplate>();
 
-            RegexExpressionFinderResult regexResult;
-            if (TryFindRegexMatchExpress(inputText, string.Empty, string.Empty, DataFieldType.AnchorLessIBAN, false, out regexResult))
-            {
-                var templateDict = new Dictionary<string, DocumentClassTemplate>();
-                foreach (var item in templates)
-                {
-                    foreach (var itemIban in item.PreSelectionCondition.IBANs)
-                    {
-                        if (templateDict.ContainsKey(itemIban) == false)
-                        {
-                            templateDict.Add(itemIban, item);
-                        }
-                    }
-                }
 
-                foreach (var item in regexResult.AllMatchingValues)
-                {
-                    var iban = item.Replace(" ", string.Empty).ToUpper();
-                    DocumentClassTemplate outTemplate;
-                    if (templateDict.TryGetValue(iban, out outTemplate))
-                        retVal.Add(outTemplate);
-                }
 
-                //   retVal.AddRange(templates.Where(x => x.PreSelectionCondition.IBANs.Contains(iban)));
-            }
-
-            return retVal;
-        }
-
-        /// <summary>
-        /// Matches a template to the input text based on the template's key words.
-        /// </summary>
-        /// <param name="templates"></param>
-        /// <param name="inputText"></param>
-        /// <returns></returns>
-        public TemplateMachResult MatchTemplatesViaKeyWords(List<DocumentClassTemplate> templates, string inputText)
-        {
-            var checkedWords = new Dictionary<string, int>();
-
-            var retVal = new TemplateMachResult();
-
-            inputText = Regex.Replace(inputText, " +", " ");
-
-            foreach (var template in templates)
-            {
-                bool isMatchingTemplate = false;
-                foreach (var keywordGroup in template.KeyWords)
-                {
-                    var singleWords = keywordGroup.Split("|".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-
-                    int wordCount = 0;
-                    foreach (var singleWord in singleWords)
-                    {
-                        int singleWordCount;
-
-                        if (checkedWords.TryGetValue(singleWord, out singleWordCount) == false)
-                        {
-                            var regexMatches = Regex.Matches(inputText, Regex.Escape(singleWord));
-                            singleWordCount = regexMatches.Count;
-                            checkedWords.Add(singleWord, singleWordCount);
-
-                            if (singleWordCount > 0)
-                            {
-                                wordCount = 1;
-                                break;
-                            }
-                        }
-
-                        if (singleWordCount >= 1)
-                        {
-                            wordCount = singleWordCount;
-                            break;
-                        }
-                    }
-
-                    if (wordCount >= 1)
-                    {
-                        isMatchingTemplate = true;
-                    }
-                    else
-                    {
-                        isMatchingTemplate = false;
-                        break;
-                    }
-                }
-
-                if (isMatchingTemplate)
-                {
-                    retVal.Template = template;
-                    retVal.IsMatchSuccessfull = true;
-                    break;
-                }
-            }
-
-            return retVal;
-        }
 
         /// <summary>
         /// Extracts data from input text based on the given class template and matching group template.
@@ -457,7 +355,7 @@ namespace DokuExtractorCore
                 if (retVal.ConditionalFields.Where(x => x.Name == conditionalFieldResult.Name).Count() == 0)
                     retVal.ConditionalFields.Add(conditionalFieldResult);
             }
-                return retVal;
+            return retVal;
         }
 
         /// <summary>
@@ -511,7 +409,7 @@ namespace DokuExtractorCore
                     retVal.DataFields.Add(newDataField);
                 }
 
-                retVal.ConditionalFields = genericRechnung.ConditionalFields.Where(x=>x.OnlyStoreInGroupTemplate==false).ToList();
+                retVal.ConditionalFields = genericRechnung.ConditionalFields.Where(x => x.OnlyStoreInGroupTemplate == false).ToList();
             }
 
             return retVal;
