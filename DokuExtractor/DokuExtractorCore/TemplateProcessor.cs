@@ -263,9 +263,9 @@ namespace DokuExtractorCore
         /// <param name="templates">All class templates that shall be compared</param>
         /// <param name="inputText"></param>
         /// <returns></returns>
-        public TemplateMachResult MatchTemplates(List<DocumentClassTemplate> templates, string inputText)
+        public TemplateMatchResult<DocumentClassTemplate> MatchTemplates(List<DocumentClassTemplate> templates, string inputText)
         {
-            var retVal = new TemplateMachResult();
+            var retVal = new TemplateMatchResult<DocumentClassTemplate>();
 
             var preselectedTemplates = templateMatcher.PreSelectTemplates(templates, inputText);
             if (preselectedTemplates.Count > 0)
@@ -276,6 +276,21 @@ namespace DokuExtractorCore
             {
                 retVal = templateMatcher.MatchTemplatesViaKeyWords(templates, inputText);
             }
+
+            return retVal;
+        }
+
+        /// <summary>
+        /// Matches a template to the input text. Templates will matched via key words.
+        /// </summary>
+        /// <param name="templates">All group templates that shall be compared</param>
+        /// <param name="inputText"></param>
+        /// <returns></returns>
+        public TemplateMatchResult<DocumentGroupTemplate> MatchTemplates(List<DocumentGroupTemplate> templates, string inputText)
+        {
+            //  var retVal = new TemplateMatchResult<DocumentGroupTemplate>();
+
+            var retVal = templateMatcher.MatchTemplatesViaKeyWords(templates, inputText);
 
             return retVal;
         }
@@ -376,18 +391,18 @@ namespace DokuExtractorCore
         /// </summary>
         /// <param name="templateName"></param>
         /// <param name="inputText"></param>
-        /// <param name="groupTemplates"></param>
+        /// <param name="baseGroupTemplate"></param>
         /// <returns></returns>
-        public DocumentClassTemplate AutoCreateClassTemplate(string templateName, string inputText, List<DocumentGroupTemplate> groupTemplates)
+        public DocumentClassTemplate AutoCreateClassTemplate(string templateName, string inputText, DocumentGroupTemplate baseGroupTemplate)
         {
             // var genericRechnung = JsonConvert.DeserializeObject<DocumentGroupTemplate>(File.ReadAllText(Path.Combine(appRootPath, "GenericTemplates", "GenericTemplateRechnungen.json.txt")));
-            var genericRechnung = GetDocumentGroupTemplateByName("Rechnung", groupTemplates);
+            //var genericRechnung = GetDocumentGroupTemplateByName("Rechnung", baseGroupTemplate);
 
             var retVal = new DocumentClassTemplate();
-            if (genericRechnung != null)
+            if (baseGroupTemplate != null)
             {
                 retVal.TemplateClassName = templateName;
-                retVal.TemplateGroupName = genericRechnung.TemplateGroupName;
+                retVal.TemplateGroupName = baseGroupTemplate.TemplateGroupName;
 
                 RegexExpressionFinderResult regexResult;
                 if (TryFindRegexMatchExpress(inputText, string.Empty, string.Empty, DataFieldType.AnchorLessIBAN, false, out regexResult))
@@ -402,14 +417,14 @@ namespace DokuExtractorCore
                 }
 
 
-                foreach (var item in genericRechnung.DataFields.ToList())
+                foreach (var item in baseGroupTemplate.DataFields.ToList())
                 {
                     var newDataField = AutoCreateDataFieldClassTemplateFromDataFieldGroupTemplate(item, inputText);
 
                     retVal.DataFields.Add(newDataField);
                 }
 
-                retVal.ConditionalFields = genericRechnung.ConditionalFields.Where(x => x.OnlyStoreInGroupTemplate == false).ToList();
+                retVal.ConditionalFields = baseGroupTemplate.ConditionalFields.Where(x => x.OnlyStoreInGroupTemplate == false).ToList();
             }
 
             return retVal;

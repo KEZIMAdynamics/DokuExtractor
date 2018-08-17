@@ -35,7 +35,7 @@ namespace DokuExtractorGUI
             var inputString = tbInhalt.Text;
 
             var matchingTemplateResult = processor.MatchTemplates(classTemplates, inputString);
-            var template = matchingTemplateResult.Template;
+            var template = matchingTemplateResult.GetTemplate();
             //if (matchingTemplateResult.IsMatchSuccessfull == false)
             //    template = processor.AutoCreateTemplate("NeuesTemplate", inputString);
 
@@ -47,7 +47,12 @@ namespace DokuExtractorGUI
             }
             else
             {
-                template = processor.AutoCreateClassTemplate("NeuesTemplate", inputString, groupTemplates);
+                var baseGroupTemplateMatchResult = processor.MatchTemplates(groupTemplates, inputString);
+                if (baseGroupTemplateMatchResult.IsMatchSuccessfull)
+                    template = processor.AutoCreateClassTemplate("NeuesTemplate", inputString, baseGroupTemplateMatchResult.GetTemplate());
+                else
+                    // TODO: Show group template selection dialog instead of defaulting to "Rechnung"
+                    template = processor.AutoCreateClassTemplate("NeuesTemplate", inputString, groupTemplates.Where(x => x.TemplateGroupName == "Rechnung").FirstOrDefault());
                 var json = processor.ExtractDataAsJson(template, groupTemplates, inputString);
                 tbExtractedData.Text = json;
 

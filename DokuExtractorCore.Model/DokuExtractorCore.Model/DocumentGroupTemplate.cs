@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DokuExtractorCore.Model
 {
-    public class DocumentGroupTemplate
+    public class DocumentGroupTemplate : DocumentBaseTemplate
     {
         /// <summary>
         /// Which group or category does the template belong to? (Rechnung, Angebot, Lieferschein etc)

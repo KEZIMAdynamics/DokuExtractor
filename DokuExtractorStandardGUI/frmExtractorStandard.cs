@@ -348,7 +348,7 @@ namespace DokuExtractorStandardGUI
             var inputString = await loader.GetTextFromPdf(selectedFilePath, false);
 
             var matchingTemplateResult = templateProcessor.MatchTemplates(this.classTemplates, inputString);
-            var template = matchingTemplateResult.Template;
+            var template = matchingTemplateResult.GetTemplate();
 
             if (matchingTemplateResult.IsMatchSuccessfull)
             {
@@ -360,7 +360,14 @@ namespace DokuExtractorStandardGUI
             }
             else
             {
-                template = templateProcessor.AutoCreateClassTemplate("NewTemplate", inputString, this.groupTemplates);
+                //   template = templateProcessor.AutoCreateClassTemplate("NewTemplate", inputString, this.groupTemplates);
+                var baseGroupTemplateMatchResult = templateProcessor.MatchTemplates(groupTemplates, inputString);
+                if (baseGroupTemplateMatchResult.IsMatchSuccessfull)
+                    template = templateProcessor.AutoCreateClassTemplate("NeuesTemplate", inputString, baseGroupTemplateMatchResult.GetTemplate());
+                else
+                    // TODO: Show group template selection dialog instead of defaulting to "Rechnung"
+                    template = templateProcessor.AutoCreateClassTemplate("NeuesTemplate", inputString, groupTemplates.Where(x => x.TemplateGroupName == "Rechnung").FirstOrDefault());
+
                 var result = templateProcessor.ExtractData(template, groupTemplates, inputString);
 
                 var groupTemplate = groupTemplates.Where(x => x.TemplateGroupName == template.TemplateGroupName).FirstOrDefault();

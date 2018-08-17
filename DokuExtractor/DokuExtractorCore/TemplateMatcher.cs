@@ -57,11 +57,11 @@ namespace DokuExtractorCore
         /// <param name="templates"></param>
         /// <param name="inputText"></param>
         /// <returns></returns>
-        public TemplateMachResult MatchTemplatesViaKeyWords(List<DocumentClassTemplate> templates, string inputText)
+        public TemplateMatchResult<T> MatchTemplatesViaKeyWords<T>(List<T> templates, string inputText) where T : DocumentBaseTemplate
         {
             var checkedWords = new Dictionary<string, int>();
 
-            var retVal = new TemplateMachResult();
+            var retVal = new TemplateMatchResult<T>();
 
             inputText = Regex.Replace(inputText, " +", " ");
 
