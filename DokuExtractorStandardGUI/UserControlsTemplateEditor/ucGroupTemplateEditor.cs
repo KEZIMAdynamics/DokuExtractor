@@ -65,6 +65,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             butAddConditionalField.Text = Translation.LanguageStrings.ButAddConditionalField;
             butSaveTemplate.Text = Translation.LanguageStrings.ButSaveTemplate;
             butDeleteTemplate.Text = Translation.LanguageStrings.ButDeleteTemplate;
+            butNewTemplate.Text = Translation.LanguageStrings.ButNewTemplate;
         }
 
         private void UcTemplateSelector1_SelectionChanged(string templateName)
@@ -97,6 +98,8 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
                 this.selectedGroupTemplate.TemplateGroupName = System.Text.RegularExpressions.Regex.Replace(this.selectedGroupTemplate.TemplateGroupName, @"[^0-9a-zA-Z]", string.Empty);
                 GroupTemplateSavedInGroupTemplateEditor?.Invoke(this.selectedGroupTemplate);
             }
+
+            ucTemplateSelector1.UpdateSelectedTemplateName(selectedGroupTemplate.TemplateGroupName);
         }
 
         private void butAddDataField_Click(object sender, EventArgs e)
@@ -135,6 +138,15 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
                     ucTemplateSelector1.RemoveSelectedTemplate();
                 }
             }
+        }
+
+        private void butNewTemplate_Click(object sender, EventArgs e)
+        {
+            var newTemplate = new DocumentGroupTemplate();
+            newTemplate.TemplateGroupName = Translation.LanguageStrings.NewGroupTemplateDefaultGroupName;
+
+            groupTemplates.Add(newTemplate);
+            ucTemplateSelector1.TemplateNames.Add(new StringValue(newTemplate.TemplateGroupName));
         }
     }
 }

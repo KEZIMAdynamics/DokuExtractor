@@ -62,21 +62,26 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         public void ShowGeneralProperties(DocumentGroupTemplate groupTemplate)
         {
             lblClassName.Visible = false;
-            txtClassName.Visible = false;
-            lblKeywords.Visible = false;
-            txtKeyWords.Visible = false;
+            txtClassName.Visible = false;           
 
             this.groupTemplate = groupTemplate;
 
             if (this.groupTemplate != null)
             {
                 txtGroupName.Text = this.groupTemplate.TemplateGroupName;
-
+             
                 txtIban.Text = string.Empty;
                 if (this.groupTemplate.PreSelectionCondition.IBANs != null)
                     foreach (var item in this.groupTemplate.PreSelectionCondition.IBANs)
                     {
                         txtIban.Text = txtIban.Text + item + Environment.NewLine;
+                    }
+
+                txtKeyWords.Text = string.Empty;
+                if (this.groupTemplate.KeyWords != null)
+                    foreach (var item in this.groupTemplate.KeyWords)
+                    {
+                        txtKeyWords.Text = txtKeyWords.Text + item + Environment.NewLine;
                     }
             }
         }
@@ -128,6 +133,13 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             foreach (var item in regexArrayIbans)
             {
                 retVal.PreSelectionCondition.IBANs.Add(item);
+            }
+
+            var regexArrayKeyWords = txtKeyWords.Text.Split(splitArray, StringSplitOptions.RemoveEmptyEntries);
+            retVal.KeyWords = new List<string>();
+            foreach (var item in regexArrayKeyWords)
+            {
+                retVal.KeyWords.Add(item);
             }
 
             return retVal;

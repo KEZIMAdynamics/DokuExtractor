@@ -51,6 +51,21 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
                 }
         }
 
+        public void UpdateSelectedTemplateName(string newName)
+        {
+            var selectedRows = dataGridView1.SelectedRows;
+            foreach (DataGridViewRow row in selectedRows)
+            {
+                var templateName = row.DataBoundItem as StringValue;
+                foreach (var item in TemplateNames)
+                {
+                    item.Value = item.Value.Replace(templateName.Value, newName);
+                }
+            }
+
+            dataGridView1.Refresh();
+        }
+
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
             var selectedRows = dataGridView1.SelectedRows;

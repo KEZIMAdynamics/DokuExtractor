@@ -32,11 +32,12 @@
             this.ucTemplateSelector1 = new DokuExtractorStandardGUI.UserControlsTemplateEditor.ucTemplateSelector();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.ucSingleTemplateEditor1 = new DokuExtractorStandardGUI.UserControlsTemplateEditor.ucSingleTemplateEditor();
+            this.butDeleteTemplate = new System.Windows.Forms.Button();
             this.butAddConditionalField = new System.Windows.Forms.Button();
             this.butAddCalculationField = new System.Windows.Forms.Button();
             this.butAddDataField = new System.Windows.Forms.Button();
             this.butSaveTemplate = new System.Windows.Forms.Button();
-            this.butDeleteTemplate = new System.Windows.Forms.Button();
+            this.butNewTemplate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -87,6 +88,7 @@
             // 
             // splitContainer2.Panel2
             // 
+            this.splitContainer2.Panel2.Controls.Add(this.butNewTemplate);
             this.splitContainer2.Panel2.Controls.Add(this.butDeleteTemplate);
             this.splitContainer2.Panel2.Controls.Add(this.butAddConditionalField);
             this.splitContainer2.Panel2.Controls.Add(this.butAddCalculationField);
@@ -104,6 +106,19 @@
             this.ucSingleTemplateEditor1.Name = "ucSingleTemplateEditor1";
             this.ucSingleTemplateEditor1.Size = new System.Drawing.Size(896, 440);
             this.ucSingleTemplateEditor1.TabIndex = 0;
+            // 
+            // butDeleteTemplate
+            // 
+            this.butDeleteTemplate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.butDeleteTemplate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.butDeleteTemplate.ForeColor = System.Drawing.Color.Red;
+            this.butDeleteTemplate.Location = new System.Drawing.Point(793, 6);
+            this.butDeleteTemplate.Name = "butDeleteTemplate";
+            this.butDeleteTemplate.Size = new System.Drawing.Size(100, 47);
+            this.butDeleteTemplate.TabIndex = 6;
+            this.butDeleteTemplate.Text = "Delete selected Template";
+            this.butDeleteTemplate.UseVisualStyleBackColor = true;
+            this.butDeleteTemplate.Click += new System.EventHandler(this.butDeleteTemplate_Click);
             // 
             // butAddConditionalField
             // 
@@ -158,18 +173,17 @@
             this.butSaveTemplate.UseVisualStyleBackColor = true;
             this.butSaveTemplate.Click += new System.EventHandler(this.butSaveTemplate_Click);
             // 
-            // butDeleteTemplate
+            // btNewTemplate
             // 
-            this.butDeleteTemplate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.butDeleteTemplate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.butDeleteTemplate.ForeColor = System.Drawing.Color.Red;
-            this.butDeleteTemplate.Location = new System.Drawing.Point(793, 6);
-            this.butDeleteTemplate.Name = "butDeleteTemplate";
-            this.butDeleteTemplate.Size = new System.Drawing.Size(100, 47);
-            this.butDeleteTemplate.TabIndex = 6;
-            this.butDeleteTemplate.Text = "Delete selected Template";
-            this.butDeleteTemplate.UseVisualStyleBackColor = true;
-            this.butDeleteTemplate.Click += new System.EventHandler(this.butDeleteTemplate_Click);
+            this.butNewTemplate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.butNewTemplate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.butNewTemplate.Location = new System.Drawing.Point(263, 6);
+            this.butNewTemplate.Name = "btNewTemplate";
+            this.butNewTemplate.Size = new System.Drawing.Size(100, 47);
+            this.butNewTemplate.TabIndex = 7;
+            this.butNewTemplate.Text = "New Template";
+            this.butNewTemplate.UseVisualStyleBackColor = false;
+            this.butNewTemplate.Click += new System.EventHandler(this.butNewTemplate_Click);
             // 
             // ucGroupTemplateEditor
             // 
@@ -203,5 +217,6 @@
         private System.Windows.Forms.Button butAddCalculationField;
         private System.Windows.Forms.Button butAddConditionalField;
         private System.Windows.Forms.Button butDeleteTemplate;
+        private System.Windows.Forms.Button butNewTemplate;
     }
 }

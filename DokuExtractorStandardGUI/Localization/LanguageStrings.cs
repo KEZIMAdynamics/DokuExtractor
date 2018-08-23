@@ -114,6 +114,9 @@ namespace DokuExtractorStandardGUI.Localization
 
         public string ButAddCalculationField { get; set; } = "Add calculation field";
         public string ButDeleteTemplate { get; set; } = "Delete template";
+        public string ButNewTemplate { get; set; } = "New template";
+
+        public string NewGroupTemplateDefaultGroupName { get; set; } = "New group";
         #endregion TemplateEditor
 
         #region LanguageEditor
