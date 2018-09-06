@@ -14,7 +14,7 @@ namespace DokuExtractorCore
     /// <summary>
     /// Can open a PDF file and return its content text
     /// </summary>
-    public class PdfTextLoader
+    public class PdfTextLoader : IPdfTextLoader
     {
         private bool popplerChecked;
 

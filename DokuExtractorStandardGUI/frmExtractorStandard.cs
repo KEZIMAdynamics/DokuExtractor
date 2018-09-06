@@ -20,6 +20,8 @@ namespace DokuExtractorStandardGUI
 {
     public partial class frmExtractorStandard : Form
     {
+        public IPdfTextLoader PdfTextLoader { get; set; } = new PdfTextLoader();
+
         private List<DocumentClassTemplate> classTemplates { get; set; } = new List<DocumentClassTemplate>();
         private List<DocumentGroupTemplate> groupTemplates { get; set; } = new List<DocumentGroupTemplate>();
 
@@ -232,8 +234,8 @@ namespace DokuExtractorStandardGUI
                 isValueSelectionRunning = false;
                 lblInstruction.Text = string.Empty;
 
-                var loader = new PdfTextLoader();
-                var inputString = await loader.GetTextFromPdf(selectedFilePath, false);
+                // var loader = new PdfTextLoader();
+                var inputString = await PdfTextLoader.GetTextFromPdf(selectedFilePath, false);
 
                 var regexResult = new RegexExpressionFinderResult();
                 if (templateProcessor.TryFindRegexMatchExpress(inputString, regexHelperAnchorText, regexHelperValueText, regexHelperFieldType, false, out regexResult))
@@ -344,8 +346,8 @@ namespace DokuExtractorStandardGUI
         private async void butGo_Click(object sender, EventArgs e)
         {
             ucResultAndEditor1.SwitchTab(false);
-            var loader = new PdfTextLoader();
-            var inputString = await loader.GetTextFromPdf(selectedFilePath, false);
+          //  var loader = new PdfTextLoader();
+            var inputString = await PdfTextLoader.GetTextFromPdf(selectedFilePath, false);
 
             var matchingTemplateResult = templateProcessor.MatchTemplates(this.classTemplates, inputString);
             var template = matchingTemplateResult.GetTemplate();
