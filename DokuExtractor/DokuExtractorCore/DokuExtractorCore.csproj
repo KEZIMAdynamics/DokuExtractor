@@ -59,6 +59,7 @@
     <Compile Include="Directories.cs" />
     <Compile Include="FieldCalculator.cs" />
     <Compile Include="HelperExtensions.cs" />
+    <Compile Include="IPdfTextLoader.cs" />
     <Compile Include="PdfTextLoader.cs" />
     <Compile Include="RegexExpressionFinder.cs" />
     <Compile Include="TableProcessor.cs" />
