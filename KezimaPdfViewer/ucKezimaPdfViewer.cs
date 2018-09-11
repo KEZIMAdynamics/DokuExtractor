@@ -20,6 +20,7 @@ namespace KezimaPdfViewer
 {
     public partial class ucKezimaPdfViewer : ucViewerBase
     {
+        public IPdfTextLoader PdfTextLoader { get; set; } = new PdfTextLoader();
         private int activePageIndex = 0;
 
         public ucKezimaPdfViewer()
@@ -68,8 +69,8 @@ namespace KezimaPdfViewer
 
         public override async Task LoadPdf(string pdfPath)
         {
-            var pdfTextLoader = new PdfTextLoader();
-            var hashwert = pdfTextLoader.CheckMD5(pdfPath);
+            //var pdfTextLoader = new PdfTextLoader();
+            var hashwert = PdfTextLoader.CheckMD5(pdfPath);
 
             var dexTempPath = Path.Combine(Application.StartupPath, "DexPdfTemp");
             if (Directory.Exists(dexTempPath) == false)
@@ -86,7 +87,7 @@ namespace KezimaPdfViewer
             }
 
             if (Directory.GetFiles(pdfImagesPath)?.Count() == 0)
-                await pdfTextLoader.RenderPdfToPngs(pdfPath, pdfImagesPath);
+                await PdfTextLoader.RenderPdfToPngs(pdfPath, pdfImagesPath);
 
             CloseDisplayedPdf();
 
