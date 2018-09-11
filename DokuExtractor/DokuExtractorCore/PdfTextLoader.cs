@@ -107,9 +107,9 @@ namespace DokuExtractorCore
 
             var splitSize = sizeString.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-            retVal.SizeX = float.Parse(splitSize[0]);
             retVal.SizeX = float.Parse(splitSize[2]);
-            retVal.Unit = splitSize[3];
+            retVal.SizeY = float.Parse(splitSize[4]);
+            retVal.Unit = splitSize[5];
 
             return retVal;
         }
@@ -119,7 +119,7 @@ namespace DokuExtractorCore
             if (popplerChecked == false)
                 SupplyPoppler();
 
-            var pdfInfoExePath = Path.Combine(Environment.CurrentDirectory, "bin", "pdftotext.exe");
+            var pdfInfoExePath = Path.Combine(Environment.CurrentDirectory, "bin", "pdfinfo.exe");
 
             var pdfProcess = new Process();
             pdfProcess.StartInfo.FileName = pdfInfoExePath;

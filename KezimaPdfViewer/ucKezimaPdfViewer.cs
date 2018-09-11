@@ -15,13 +15,22 @@ using System.Threading;
 using DokuExtractorStandardGUI.UserControls;
 using DokuExtractorCore;
 using System.Drawing.Drawing2D;
+using DokuExtractorCore.Model.PdfHelper;
 
 namespace KezimaPdfViewer
 {
     public partial class ucKezimaPdfViewer : ucViewerBase
     {
         public IPdfTextLoader PdfTextLoader { get; set; } = new PdfTextLoader();
+
         private int activePageIndex = 0;
+        private Point lastPoint = Point.Empty;
+        private bool isMouseDown = false;
+
+        private Image imageWithoutDrawing;
+        private DateTime lastMouseMove = DateTime.Now;
+
+        private string pdfPath = string.Empty;
 
         public ucKezimaPdfViewer()
         {
@@ -69,6 +78,8 @@ namespace KezimaPdfViewer
 
         public override async Task LoadPdf(string pdfPath)
         {
+            this.pdfPath = pdfPath;
+
             //var pdfTextLoader = new PdfTextLoader();
             var hashwert = PdfTextLoader.CheckMD5(pdfPath);
 
@@ -124,7 +135,7 @@ namespace KezimaPdfViewer
             {
                 try
                 {
-                    var previousActiveBox = flowLayoutPanel1.Controls[activePageIndex] as PictureBox;
+                    var previousActiveBox = flowLayoutPanel1.Controls[activePageIndex] as ucImageViewerForThumbnail;
                     previousActiveBox.BackColor = Color.Black;
                 }
                 catch (Exception ex)
@@ -135,7 +146,134 @@ namespace KezimaPdfViewer
 
                 var pagePath = imageViewer.ImagePath;
                 pictureBox1.Image = Image.FromFile(pagePath);
+                imageWithoutDrawing = Image.FromFile(pagePath);
             }
+        }
+
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            lastPoint = GetPointOnImage(e.Location);
+            isMouseDown = true;
+        }
+
+        private async void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        {
+            isMouseDown = false;
+
+            if (string.IsNullOrWhiteSpace(this.pdfPath) == false)
+            {
+                var rect = GetRectangleOnImageFromLastPoint(e.Location);
+
+                var crop = new PercentalCropAreaInfo()
+                {
+                    PageNumber = activePageIndex,
+                    TopLeftX = (float)(rect.X) / (float)(pictureBox1.Image.Width),
+                    TopLeftY = (float)(rect.Y) / (float)(pictureBox1.Image.Height),
+                    Height = (float)(rect.Height) / (float)(pictureBox1.Image.Height),
+                    Width = (float)(rect.Width) / (float)(pictureBox1.Image.Width)
+                };
+
+                var rectText = await PdfTextLoader.GetTextFromPdf(pdfPath, crop);
+                MessageBox.Show(rectText);
+            }
+
+            lastPoint = Point.Empty;
+        }
+
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (isMouseDown == true && lastPoint != null)
+            {
+                if ((DateTime.Now - lastMouseMove).TotalMilliseconds > 30)
+                {
+                    if (pictureBox1.Image != null)
+                    {
+                        pictureBox1.Image.Dispose();
+                        pictureBox1.Image = imageWithoutDrawing.Clone() as Image;
+
+                        using (var g = Graphics.FromImage(pictureBox1.Image))
+                        {
+                            var thisPoint = GetPointOnImage(e.Location);
+                            var pen = new Pen(Color.Black, 2);
+
+                            try
+                            {
+                                g.DrawRectangle(pen, GetRectangleOnImageFromLastPoint(e.Location));
+                            }
+                            catch (Exception ex)
+                            { }
+                        }
+
+                        pictureBox1.Invalidate();
+                        //lastPoint = GetPointOnImage(e.Location);
+                    }
+                    lastMouseMove = DateTime.Now;
+                }
+            }
+        }
+
+        private Point GetPointOnImage(Point location)
+        {
+            var retVal = location;
+
+            float relation = 1;
+
+            if (AreStripesLeftAndRight() == true)
+            {
+                if (pictureBox1.Image != null)
+                    relation = (float)(pictureBox1.Image.Size.Height) / (float)(pictureBox1.Height);
+
+                var blackStripe = ((pictureBox1.Width * relation) - pictureBox1.Image.Width) / 2;
+
+                retVal.X = (int)((Math.Round((float)(location.X) * relation) - blackStripe));
+                retVal.Y = (int)(Math.Round((float)(location.Y) * relation));
+            }
+            else
+            {
+                if (pictureBox1.Image != null)
+                    relation = (float)(pictureBox1.Image.Size.Width) / (float)(pictureBox1.Width);
+
+                var blackStripe = ((pictureBox1.Height * relation) - pictureBox1.Image.Height) / 2;
+
+                retVal.X = (int)((Math.Round((float)(location.X) * relation)));
+                retVal.Y = (int)(Math.Round((float)(location.Y) * relation) - blackStripe);
+            }
+
+            return retVal;
+        }
+
+        private bool AreStripesLeftAndRight()
+        {
+            var retVal = true;
+
+            var pbWidthHeightRatio = (float)(pictureBox1.Width) / (float)(pictureBox1.Height);
+            var imgWidthHeightRatio = (float)(pictureBox1.Image.Width) / (float)(pictureBox1.Image.Height);
+
+            if (imgWidthHeightRatio >= pbWidthHeightRatio)
+                retVal = false;
+
+            return retVal;
+        }
+
+        private Rectangle GetRectangleOnImageFromLastPoint(Point mousePoint)
+        {
+            var retVal = new Rectangle();
+
+            var mousePointOnImage = GetPointOnImage(mousePoint);
+
+            var width = mousePointOnImage.X - lastPoint.X;
+            var height = mousePointOnImage.Y - lastPoint.Y;
+
+            if (width >= 0 && height >= 0)
+                retVal = new Rectangle(lastPoint.X, lastPoint.Y, width, height);
+            else if (width >= 0 && height < 0)
+                retVal = new Rectangle(lastPoint.X, lastPoint.Y + height, width, -height);
+            else if (width < 0 && height >= 0)
+                retVal = new Rectangle(lastPoint.X + width, lastPoint.Y, -width, height);
+            else if (width < 0 && height < 0)
+                retVal = new Rectangle(lastPoint.X + width, lastPoint.Y + height, -width, -height);
+
+            return retVal;
         }
     }
 }
