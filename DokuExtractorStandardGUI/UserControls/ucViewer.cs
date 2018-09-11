@@ -16,7 +16,7 @@ namespace DokuExtractorStandardGUI.UserControls
         /// <summary>
         /// Path of the used viewer plugin for viewing PDF files
         /// </summary>
-        public string ViewerPluginPath { get; set; } = @"G:\DokuExtractor\GdPicturePdfViewer\bin\Debug\GdPicturePdfViewer.dll";
+        public string ViewerPluginPath { get; set; } = @"G:\Entwicklung\dokuextractor\KezimaPdfViewer\bin\Debug\KezimaPdfViewer.dll";
 
         public delegate void TextSelectedHandler(string selectedText);
         /// <summary>
@@ -29,12 +29,13 @@ namespace DokuExtractorStandardGUI.UserControls
         public ucViewer()
         {
             InitializeComponent();
+            if (DesignMode == false)
+                LoadViewerPlugin(ViewerPluginPath);
         }
 
         private void ucViewer_Load(object sender, EventArgs e)
         {
-            if (DesignMode == false)
-                LoadViewerPlugin(ViewerPluginPath);
+
         }
 
         /// <summary>
@@ -66,9 +67,10 @@ namespace DokuExtractorStandardGUI.UserControls
         /// Loads a PDF file into the file viewer
         /// </summary>
         /// <param name="pdfPath">Path of the PDF file</param>
-        public void LoadPdf(string pdfPath)
+        public async Task LoadPdf(string pdfPath)
         {
-            viewerControlBase?.LoadPdf(pdfPath);
+            if (viewerControlBase != null)
+                await viewerControlBase?.LoadPdf(pdfPath);
         }
 
         public void CloseDisplayedPdf()

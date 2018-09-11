@@ -9,21 +9,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace GdPicturePdfViewer
+namespace KezimaPdfViewer
 {
-    public partial class frmGdPictureViewer : Form
+    public partial class frmKezimaViewer : Form
     {
-        public frmGdPictureViewer()
+        public frmKezimaViewer()
         {
             InitializeComponent();
         }
 
-        private async void frmGdPictureViewer_Load(object sender, EventArgs e)
+        private async void frmKezimaViewer_Load(object sender, EventArgs e)
         {
             if (DesignMode == false)
             {
                 var pdfPath = Path.Combine(Application.StartupPath, "Files", "File1.pdf");
-                await ucGdPicturePdfViewer1.LoadPdf(pdfPath);
+                await ucKezimaPdfViewer1.LoadPdf(pdfPath);
             }
         }
     }

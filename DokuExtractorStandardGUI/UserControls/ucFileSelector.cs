@@ -17,11 +17,13 @@ namespace DokuExtractorStandardGUI.UserControls
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public BindingList<FileInfo> FileInfos { get; set; } = new BindingList<FileInfo>();
 
-        public delegate void SelectedFileChangedHandler(string newPath);
+        public delegate void SelectedFileChangedHandler(string oldPath, string newPath);
         /// <summary>
         /// Fired, when selected file has been changed (contains path of the now selected file)
         /// </summary>
         public event SelectedFileChangedHandler SelectedFileChanged;
+
+        private FileInfo prevSelectedFile;
 
         public ucFileSelector()
         {
@@ -118,18 +120,22 @@ namespace DokuExtractorStandardGUI.UserControls
                     {
                         var fileInfo = row.DataBoundItem as FileInfo;
                         if (fileInfo != null)
-                            FireSelectedFileChanged(fileInfo.FullName);
+                        {
+                            if (this.prevSelectedFile != null)
+                                FireSelectedFileChanged(prevSelectedFile.FullName, fileInfo.FullName);
+                            else
+                                FireSelectedFileChanged(null, fileInfo.FullName);
+                        }
+                        this.prevSelectedFile = fileInfo;
                         break;
                     }
                 }
-                else
-                    FireSelectedFileChanged(null);
             }
         }
 
-        private void FireSelectedFileChanged(string newPath)
+        private void FireSelectedFileChanged(string oldPath, string newPath)
         {
-            SelectedFileChanged?.Invoke(newPath);
+            SelectedFileChanged?.Invoke(oldPath, newPath);
         }
 
         private void dataGridView1_MouseMove(object sender, MouseEventArgs e)

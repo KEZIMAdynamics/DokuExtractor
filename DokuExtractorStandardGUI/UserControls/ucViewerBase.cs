@@ -21,7 +21,7 @@ namespace DokuExtractorStandardGUI.UserControls
             InitializeComponent();
         }
 
-        public virtual void LoadPdf(string pdfPath)
+        public virtual async Task LoadPdf(string pdfPath)
         {
             MessageBox.Show(Translation.LanguageStrings.MsgDllNotFound, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }

@@ -15,7 +15,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GdPicturePdfViewer", "..\Gd
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwoLineTableConsoleApp1", "..\TwoLineTableConsolseApp1\TwoLineTableConsoleApp1.csproj", "{A4686D5D-47C8-48BE-B0DE-7F69B5C1E163}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DokuExtractorCore.Model", "..\DokuExtractorCore.Model\DokuExtractorCore.Model\DokuExtractorCore.Model.csproj", "{F2F88503-5633-4DD3-B4B6-328D1949601C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DokuExtractorCore.Model", "..\DokuExtractorCore.Model\DokuExtractorCore.Model\DokuExtractorCore.Model.csproj", "{F2F88503-5633-4DD3-B4B6-328D1949601C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KezimaPdfViewer", "..\KezimaPdfViewer\KezimaPdfViewer.csproj", "{382A2FD4-811E-458B-93DD-93685BFBF026}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{F2F88503-5633-4DD3-B4B6-328D1949601C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2F88503-5633-4DD3-B4B6-328D1949601C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F2F88503-5633-4DD3-B4B6-328D1949601C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{382A2FD4-811E-458B-93DD-93685BFBF026}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{382A2FD4-811E-458B-93DD-93685BFBF026}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{382A2FD4-811E-458B-93DD-93685BFBF026}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{382A2FD4-811E-458B-93DD-93685BFBF026}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

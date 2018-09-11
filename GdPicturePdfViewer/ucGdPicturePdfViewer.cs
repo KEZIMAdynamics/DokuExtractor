@@ -20,11 +20,14 @@ namespace GdPicturePdfViewer
         public ucGdPicturePdfViewer()
         {
             InitializeComponent();
+
             var license = new GdPicture14.LicenseManager();
+
+            //TODO: Enter License Key here:
             license.RegisterKEY("***REMOVED***");
         }
 
-        public override void LoadPdf(string pdfPath)
+        public override async Task LoadPdf(string pdfPath)
         {
             gdPdf = new GdPicturePDF();
             var gdStatus = gdPdf.LoadFromFile(pdfPath, false);

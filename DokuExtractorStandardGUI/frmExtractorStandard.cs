@@ -277,12 +277,15 @@ namespace DokuExtractorStandardGUI
             ucResultAndEditor1.ChangeOrAddRegexExpression(regexHelperID, regex, additionalRegex);
         }
 
-        private void UcFileSelector1_SelectedFileChanged(string newPath)
+        private async void UcFileSelector1_SelectedFileChanged(string oldPath, string newPath)
         {
+            if (newPath == oldPath)
+                return;
+
             this.selectedFilePath = newPath;
             if (this.selectedFilePath != null)
             {
-                ucViewer1.LoadPdf(newPath);
+                await ucViewer1.LoadPdf(newPath);
                 ucResultAndEditor1.ShowPropertiesAndDataFields(new DocumentClassTemplate(), new DocumentGroupTemplate());
             }
             else

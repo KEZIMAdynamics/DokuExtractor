@@ -100,7 +100,7 @@
             this.gdViewer1.TabIndex = 0;
             this.gdViewer1.ViewRotation = System.Drawing.RotateFlipType.RotateNoneFlipNone;
             this.gdViewer1.Zoom = 1D;
-            this.gdViewer1.ZoomCenterAtMousePosition = false;
+            this.gdViewer1.ZoomCenterAtMousePosition = true;
             this.gdViewer1.ZoomMode = GdPicture14.ViewerZoomMode.ZoomModeHeightViewer;
             this.gdViewer1.ZoomStep = 25;
             this.gdViewer1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.gdViewer1_MouseUp);

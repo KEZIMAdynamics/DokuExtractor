@@ -135,7 +135,7 @@ namespace DokuExtractorCore
             return retVal;
         }
 
-        private string CheckMD5(string filename)
+        public string CheckMD5(string filename)
         {
             using (var md5 = MD5.Create())
             {
@@ -144,6 +144,28 @@ namespace DokuExtractorCore
                     return BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", "").ToLower();
                 }
             }
+        }
+
+        public async Task RenderPdfToPngs(string pdfFilePath, string pdfImagesPath)
+        {
+            var pdfFileInfo = new FileInfo(pdfFilePath);
+
+            var pdfToPpmPath = Path.Combine(Environment.CurrentDirectory, "bin", "pdftoppm.exe");
+
+            var ppmProcess = new Process();
+            ppmProcess.StartInfo.FileName = pdfToPpmPath;
+            ppmProcess.StartInfo.Arguments = "-png " + "\"" + pdfFilePath + "\"" + " " + "\"" + Path.Combine(pdfImagesPath, pdfFileInfo.Name) + "\"";
+            ppmProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+
+            var watch = new Stopwatch();
+            watch.Start();
+            ppmProcess.Start();
+
+            await ppmProcess.WaitForExitAsync();
+
+            watch.Stop();
+
+            Debug.Print("Render time: " + watch.Elapsed);
         }
 
         private void SupplyPoppler()
