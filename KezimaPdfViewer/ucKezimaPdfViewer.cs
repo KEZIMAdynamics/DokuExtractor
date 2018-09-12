@@ -26,7 +26,7 @@ namespace KezimaPdfViewer
         private int activePageIndex = 0;
         private Point lastPoint = Point.Empty;
         private bool isMouseDown = false;
-
+        private ToolTip tooltip = new ToolTip();
         private Image imageWithoutDrawing;
         private DateTime lastMouseMove = DateTime.Now;
 
@@ -166,7 +166,7 @@ namespace KezimaPdfViewer
 
                 var crop = new PercentalCropAreaInfo()
                 {
-                    PageNumber = activePageIndex,
+                    PageNumber = activePageIndex + 1,
                     TopLeftX = (float)(rect.X) / (float)(pictureBox1.Image.Width),
                     TopLeftY = (float)(rect.Y) / (float)(pictureBox1.Image.Height),
                     Height = (float)(rect.Height) / (float)(pictureBox1.Image.Height),
@@ -174,7 +174,11 @@ namespace KezimaPdfViewer
                 };
 
                 var rectText = await PdfTextLoader.GetTextFromPdf(pdfPath, crop);
-                MessageBox.Show(rectText);
+
+                tooltip.Hide(this);
+                FireTextSelected(rectText);
+                Clipboard.SetText(rectText);
+                tooltip.Show(rectText, this, this.PointToClient(Control.MousePosition), 5000);
             }
 
             lastPoint = Point.Empty;

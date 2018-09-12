@@ -73,7 +73,8 @@ namespace DokuExtractorStandardGUI
             foreach (var file in files)
             {
                 var fileInfo = new FileInfo(file);
-                fileInfos.Add(fileInfo);
+                if (fileInfo.Extension == ".pdf")
+                    fileInfos.Add(fileInfo);
             }
 
             if (allowEditTemplates == false)
@@ -122,7 +123,14 @@ namespace DokuExtractorStandardGUI
             if (accessToAdminTools == false)
                 DisableAdminTools();
 
-            ucFileSelector1.LoadFiles(fileInfos);
+            var fileInfosBereinigt = new List<FileInfo>();
+            foreach (var fileInfo in fileInfos)
+            {
+                if (fileInfo.Extension == ".pdf")
+                    fileInfosBereinigt.Add(fileInfo);
+            }
+
+            ucFileSelector1.LoadFiles(fileInfosBereinigt);
         }
 
         private void frmExtractorStandard_Load(object sender, EventArgs e)
@@ -349,7 +357,7 @@ namespace DokuExtractorStandardGUI
         private async void butGo_Click(object sender, EventArgs e)
         {
             ucResultAndEditor1.SwitchTab(false);
-          //  var loader = new PdfTextLoader();
+            //  var loader = new PdfTextLoader();
             var inputString = await PdfTextLoader.GetTextFromPdf(selectedFilePath, false);
 
             var matchingTemplateResult = templateProcessor.MatchTemplates(this.classTemplates, inputString);
