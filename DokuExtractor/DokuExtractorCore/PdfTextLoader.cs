@@ -47,9 +47,17 @@ namespace DokuExtractorCore
             var W = (int)Math.Round(cropAreaInfo.Width / 100 * pdfInfo.SizeX, 0);
             var H = (int)Math.Round(cropAreaInfo.Height / 100 * pdfInfo.SizeY, 0);
 
-            var pdfToTextOptions = " -f " + cropAreaInfo.PageNumber + " -l " + cropAreaInfo.PageNumber + " -x " + x + " -y " + y + " -W " + W + " -H " + H + " -layout ";
+            var pdfToTextOptions = " -f " + cropAreaInfo.PageNumber + " -l " + cropAreaInfo.PageNumber + " -x " + x + " -y " + y + " -W " + W + " -H " + H + " -layout -nopgbrk ";
 
             var retVal = await GetTextFromPdf(pdfFilePath, false, pdfToTextOptions);
+
+            // Remove last line break, as it is added by poppler and does not represent the selected area
+            if (retVal.Length > 1)
+                retVal = retVal.Remove(retVal.Length - 2);
+
+            if (retVal is null)
+                retVal = string.Empty;
+
             return retVal;
         }
 
@@ -148,6 +156,9 @@ namespace DokuExtractorCore
 
         public async Task RenderPdfToPngs(string pdfFilePath, string pdfImagesPath)
         {
+            if (popplerChecked == false)
+                SupplyPoppler();
+
             var pdfFileInfo = new FileInfo(pdfFilePath);
 
             var pdfToPpmPath = Path.Combine(Environment.CurrentDirectory, "bin", "pdftoppm.exe");

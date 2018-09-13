@@ -177,7 +177,8 @@ namespace KezimaPdfViewer
 
                 tooltip.Hide(this);
                 FireTextSelected(rectText);
-                Clipboard.SetText(rectText);
+                if (string.IsNullOrEmpty(rectText) == false)
+                    Clipboard.SetText(rectText);
                 tooltip.Show(rectText, this, this.PointToClient(Control.MousePosition), 5000);
             }
 
