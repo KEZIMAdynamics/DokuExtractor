@@ -73,7 +73,7 @@ namespace DokuExtractorStandardGUI
             foreach (var file in files)
             {
                 var fileInfo = new FileInfo(file);
-                if (fileInfo.Extension == ".pdf")
+                if (fileInfo.Extension.ToLower() == ".pdf")
                     fileInfos.Add(fileInfo);
             }
 
@@ -126,7 +126,7 @@ namespace DokuExtractorStandardGUI
             var fileInfosBereinigt = new List<FileInfo>();
             foreach (var fileInfo in fileInfos)
             {
-                if (fileInfo.Extension == ".pdf")
+                if (fileInfo.Extension.ToLower() == ".pdf")
                     fileInfosBereinigt.Add(fileInfo);
             }
 
