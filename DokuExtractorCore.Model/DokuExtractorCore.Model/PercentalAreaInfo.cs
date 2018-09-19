@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DokuExtractorCore.Model.PdfHelper
+namespace DokuExtractorCore.Model
 {
-   public class PercentalCropAreaInfo
+   public class PercentalAreaInfo
     {
         public int PageNumber { get; set; }
         public float TopLeftX { get; set; }

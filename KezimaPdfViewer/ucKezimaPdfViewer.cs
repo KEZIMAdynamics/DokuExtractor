@@ -164,7 +164,7 @@ namespace KezimaPdfViewer
             {
                 var rect = GetRectangleOnImageFromLastPoint(e.Location);
 
-                var crop = new PercentalCropAreaInfo()
+                var crop = new PercentalAreaInfo()
                 {
                     PageNumber = activePageIndex + 1,
                     TopLeftX = (float)(rect.X) / (float)(pictureBox1.Image.Width),

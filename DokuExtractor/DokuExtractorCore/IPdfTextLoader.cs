@@ -29,7 +29,7 @@ namespace DokuExtractorCore
         /// <param name="cropAreaWdith">Percentual width of the area which is to be extracted.</param>
         /// <param name="cropAreaHeight">Percentual height of the area which is to be extracted.</param>
         /// <returns></returns>
-        Task<string> GetTextFromPdf(string pdfFilePath, PercentalCropAreaInfo cropAreaInfo);
+        Task<string> GetTextFromPdf(string pdfFilePath, PercentalAreaInfo cropAreaInfo);
 
         string CheckMD5(string filename);
 

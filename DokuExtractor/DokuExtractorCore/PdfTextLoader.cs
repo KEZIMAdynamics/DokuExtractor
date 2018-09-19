@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO.Compression;
 using DokuExtractorCore.Model.PdfHelper;
+using DokuExtractorCore.Model;
 
 namespace DokuExtractorCore
 {
@@ -30,18 +31,26 @@ namespace DokuExtractorCore
         }
 
         /// <summary>
-        /// 
+        /// Gets text from a PDF based that is within a given area.
         /// </summary>
-        /// <param name="pdfFilePath"></param>
-        /// <param name="useMd5Cache"></param>
-        /// <param name="cropAreaX">Percentual X-Coordinate of the area which is to be extracted.</param>
-        /// <param name="cropAreaY">Percentual Y-Coordinate of the area which is to be extracted.</param>
-        /// <param name="cropAreaWdith">Percentual width of the area which is to be extracted.</param>
-        /// <param name="cropAreaHeight">Percentual height of the area which is to be extracted.</param>
+        /// <param name="pdfFilePath">PDF location on disk.</param>
+        /// <param name="cropAreaInfo">Percentual area which is to be extracted.</param>
         /// <returns></returns>
-        public async Task<string> GetTextFromPdf(string pdfFilePath, PercentalCropAreaInfo cropAreaInfo)
+        public async Task<string> GetTextFromPdf(string pdfFilePath, PercentalAreaInfo cropAreaInfo)
         {
             var pdfInfo = await GetPdfPageSize(pdfFilePath);
+            return await GetTextFromPdf(pdfFilePath, cropAreaInfo, pdfInfo);
+        }
+
+        /// <summary>
+        /// Gets text from a PDF based that is within a given area.
+        /// </summary>
+        /// <param name="pdfFilePath">PDF location on disk.</param>
+        /// <param name="cropAreaInfo">Percentual area which is to be extracted.</param>
+        /// <returns></returns>
+        public async Task<string> GetTextFromPdf(string pdfFilePath, PercentalAreaInfo cropAreaInfo, PdfPageSizeInfo pdfPageSizeInfo)
+        {
+            var pdfInfo = pdfPageSizeInfo;
             var x = (int)Math.Round(cropAreaInfo.TopLeftX / 100 * pdfInfo.SizeX, 0);
             var y = (int)Math.Round(cropAreaInfo.TopLeftY / 100 * pdfInfo.SizeY, 0);
             var W = (int)Math.Round(cropAreaInfo.Width / 100 * pdfInfo.SizeX, 0);
