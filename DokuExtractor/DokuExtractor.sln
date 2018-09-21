@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DokuExtractorGUI", "DokuExtractorGUI.csproj", "{DB0C52AF-76F0-4367-87E7-1829370D9CA3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DokuExtractorCore", "DokuExtractorCore\DokuExtractorCore.csproj", "{7A7F0155-A57F-4F47-9441-A0FD725719CB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DokuExtractorCore", "..\DokuExtractorCore\DokuExtractorCore.csproj", "{7A7F0155-A57F-4F47-9441-A0FD725719CB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DokuExtractorTableGUI", "..\DokuExtractorTableGUI\DokuExtractorTableGUI.csproj", "{647A5BD4-1C77-49DB-98A0-07534629A5BD}"
 EndProject
