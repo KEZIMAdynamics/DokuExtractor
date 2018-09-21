@@ -16,9 +16,10 @@ namespace DokuExtractorStandardGUI.UserControls
         /// <summary>
         /// Path of the used viewer plugin for viewing PDF files
         /// </summary>
-       
+
+        //TODO: Set path of used viewer plugin
         public string ViewerPluginPath { get; set; } = @"..\..\..\KezimaPdfViewer\bin\Debug\KezimaPdfViewer.dll";
-        //   public string ViewerPluginPath { get; set; } = @"G:\Entwicklung\dokuextractor\KezimaPdfViewer\bin\Debug\KezimaPdfViewer.dll";
+        //public string ViewerPluginPath { get; set; } = @"G:\Entwicklung\dokuextractor\KezimaPdfViewer\bin\Debug\KezimaPdfViewer.dll";
         //public string ViewerPluginPath { get; set; } = @"G:\Entwicklung\dokuextractor\GdPicturePdfViewer\bin\Debug\GdPicturePdfViewer.dll";
 
         public delegate void TextSelectedHandler(string selectedText);

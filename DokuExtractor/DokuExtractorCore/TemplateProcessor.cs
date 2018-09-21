@@ -201,7 +201,7 @@ namespace DokuExtractorCore
         }
 
         /// <summary>
-        /// Can be called to prepare modified class templates for being saved externally. Takes care removing double blank spaces in <see cref="DocumentClassTemplate.KeyWords"/>.
+        /// Can be called to prepare modified class templates for being saved externally. Takes care removing double blank spaces in <see cref="DocumentBaseTemplate.KeyWords"/>.
         /// Will be called automatically if the template is saved by the internally provided methods. (<see cref="SaveTemplateToFile(DocumentClassTemplate, string)"/>) and its derivates.
         /// </summary>
         /// <param name="template"></param>

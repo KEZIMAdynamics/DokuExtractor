@@ -202,13 +202,13 @@ namespace DokuExtractorStandardGUI
 
         private void RegisterUserControls()
         {
-            //To change user controls of the data field templates, change type here (the choosen user control has to be a derivation of the origin user control):
+            //TODO: To change user controls of the data field templates, change type here (the choosen user control has to be a derivation of the origin user control):
             UserControlSelector.RegisterDataFieldClassTemplateUserControl<ucDataFieldClassTemplate>();
             UserControlSelector.RegisterDataFieldGroupTemplateUserControl<ucDataFieldGroupTemplate>();
             UserControlSelector.RegisterCalculationFieldGroupTemplateUserControl<ucCalculationFieldGroupTemplate>();
             UserControlSelector.RegisterConditionalFieldGroupTemplateUserControl<ucConditionalFieldTemplate>();
 
-            //To change user controls of the extracted data fields, change type here (the choosen user control has to be a derivation of the origin user control):
+            //TODO: To change user controls of the extracted data fields, change type here (the choosen user control has to be a derivation of the origin user control):
             UserControlSelector.RegisterExtractedDataFieldsUserControl<ucExtractedDataFields>();
             UserControlSelector.RegisterExtractedCalculationFieldsUserControl<ucExtractedCalculationFields>();
             UserControlSelector.RegisterExtractedConditionalFieldsUserControl<ucExtractedConditionalFields>();

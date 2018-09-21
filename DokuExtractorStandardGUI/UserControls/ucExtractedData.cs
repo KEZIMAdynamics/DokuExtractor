@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using DokuExtractorCore.Model;
 using DokuExtractorStandardGUI.Localization;
 using DokuExtractorStandardGUI.Model;
+using DokuExtractorStandardGUI.Logic;
 
 namespace DokuExtractorStandardGUI.UserControls
 {
@@ -18,6 +19,9 @@ namespace DokuExtractorStandardGUI.UserControls
         public ucExtractedData()
         {
             InitializeComponent();
+            this.ucExtractedCalculationFields1 = (ucExtractedCalculationFields)Activator.CreateInstance(UserControlSelector.ExtractedCalculationFieldsUserControl);
+            this.ucExtractedConditionalFields1 = (ucExtractedConditionalFields)Activator.CreateInstance(UserControlSelector.ExtractedConditionalFieldsUserControl);
+            this.ucExtractedDataFields1 = (ucExtractedDataFields)Activator.CreateInstance(UserControlSelector.ExtractedDataFieldsUserControl);
         }
 
         private void ucExtractedData_Load(object sender, EventArgs e)
