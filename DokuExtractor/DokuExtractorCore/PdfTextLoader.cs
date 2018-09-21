@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.IO.Compression;
 using DokuExtractorCore.Model.PdfHelper;
 using DokuExtractorCore.Model;
+using System.Collections;
 
 namespace DokuExtractorCore
 {
@@ -30,6 +31,25 @@ namespace DokuExtractorCore
             return await GetTextFromPdf(pdfFilePath, useMd5Cache, "-layout ");
         }
 
+        public async Task<List<DataFieldResult>> GetTextFromPdf(string pdfFilePath, List<DataFieldClassTemplate> datafields)
+        {
+            var retVal = new List<DataFieldResult>();
+
+            var pdfInfo = await GetPdfPageSize(pdfFilePath);
+
+            foreach (var item in datafields)
+            {
+                if (item.FieldMode == DataFieldMode.Position)
+                {
+                    var resultItem = new DataFieldResult() { FieldType = item.FieldType, Name = item.Name };
+                    resultItem.Value = await GetTextFromPdf(pdfFilePath, item.ValueArea);
+                    retVal.Add(resultItem);
+                }
+            }
+
+            return retVal;
+        }
+
         /// <summary>
         /// Gets text from a PDF based that is within a given area.
         /// </summary>
@@ -47,6 +67,7 @@ namespace DokuExtractorCore
         /// </summary>
         /// <param name="pdfFilePath">PDF location on disk.</param>
         /// <param name="cropAreaInfo">Percentual area which is to be extracted.</param>
+        /// <param name="pdfPageSizeInfo">Size information of the PDF file. Used to calculate absolute area from percental area.</param>
         /// <returns></returns>
         public async Task<string> GetTextFromPdf(string pdfFilePath, PercentalAreaInfo cropAreaInfo, PdfPageSizeInfo pdfPageSizeInfo)
         {

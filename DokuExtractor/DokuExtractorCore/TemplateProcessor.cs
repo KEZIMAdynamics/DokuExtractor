@@ -29,6 +29,8 @@ namespace DokuExtractorCore
         RegexExpressionFinder finder = new RegexExpressionFinder();
         TemplateMatcher templateMatcher = new TemplateMatcher();
 
+        IPdfTextLoader textLoader = new PdfTextLoader();
+
         /// <summary>
         /// For ease of use, Class and Group jsons can be copied to the appRootPath directory into the folders "ExtractorClassTemplates" and "ExtractorGroupTemplates".
         /// </summary>
@@ -201,7 +203,7 @@ namespace DokuExtractorCore
         }
 
         /// <summary>
-        /// Can be called to prepare modified class templates for being saved externally. Takes care removing double blank spaces in <see cref="DocumentBaseTemplate.KeyWords"/>.
+        /// Can be called to prepare modified class templates for being saved externally. Takes care removing double blank spaces in <see cref="DocumentClassTemplate.KeyWords"/>.
         /// Will be called automatically if the template is saved by the internally provided methods. (<see cref="SaveTemplateToFile(DocumentClassTemplate, string)"/>) and its derivates.
         /// </summary>
         /// <param name="template"></param>
@@ -318,16 +320,18 @@ namespace DokuExtractorCore
         /// <param name="groupTemplates">Available group templates. The correct group template for the given class template will be selected automatically. If it is the correct one, it's okay if only one group template is in the list.</param>
         /// <param name="inputText"></param>
         /// <returns></returns>
-        public FieldExtractionResult ExtractData(DocumentClassTemplate template, List<DocumentGroupTemplate> groupTemplates, string inputText)
+        public async Task<FieldExtractionResult> ExtractData(DocumentClassTemplate template, List<DocumentGroupTemplate> groupTemplates, string inputText, string pdfFilePath)
         {
             var retVal = new FieldExtractionResult() { TemplateClassName = template.TemplateClassName, TemplateGroupName = template.TemplateGroupName };
 
-            foreach (var item in template.DataFields)
+            foreach (var item in template.DataFields.Where(x => x.FieldMode == DataFieldMode.Regex))
             {
                 var resultItem = new DataFieldResult() { FieldType = item.FieldType, Name = item.Name };
                 resultItem.Value = ExecuteRegexExpression(inputText, item.RegexExpressions);
                 retVal.DataFields.Add(resultItem);
             }
+
+            retVal.DataFields.AddRange(await textLoader.GetTextFromPdf(pdfFilePath, template.DataFields.Where(x => x.FieldMode == DataFieldMode.Position).ToList()));
 
             //var groupTemplate = GetDocumentGroupTemplateByName(template.TemplateGroupName);
             var groupTemplate = groupTemplates.Where(x => x.TemplateGroupName == template.TemplateGroupName).FirstOrDefault();
@@ -380,9 +384,9 @@ namespace DokuExtractorCore
         /// <param name="groupTemplates"></param>
         /// <param name="inputText"></param>
         /// <returns></returns>
-        public string ExtractDataAsJson(DocumentClassTemplate template, List<DocumentGroupTemplate> groupTemplates, string inputText)
+        public async Task<string> ExtractDataAsJson(DocumentClassTemplate template, List<DocumentGroupTemplate> groupTemplates, string inputText, string pdfFilePath)
         {
-            var json = JsonConvert.SerializeObject(ExtractData(template, groupTemplates, inputText), Formatting.Indented);
+            var json = JsonConvert.SerializeObject(await ExtractData(template, groupTemplates, inputText, pdfFilePath), Formatting.Indented);
             return json;
         }
 
