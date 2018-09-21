@@ -22,7 +22,6 @@ namespace GdPicturePdfViewer
             InitializeComponent();
 
             var license = new GdPicture14.LicenseManager();
-
             //TODO: Enter License Key here:
             license.RegisterKEY("");
         }

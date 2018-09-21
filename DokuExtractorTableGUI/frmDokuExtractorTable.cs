@@ -22,7 +22,8 @@ namespace DokuExtractorTableGUI
             InitializeComponent();
 
             var license = new GdPicture14.LicenseManager();
-            license.RegisterKEY("***REMOVED***");
+            //TODO: Enter License Key here:
+            license.RegisterKEY("");
 
             this.CenterToScreen();
             splitContainer1.SplitterDistance = splitContainer1.Width / 2;
