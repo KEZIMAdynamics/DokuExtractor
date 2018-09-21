@@ -378,8 +378,17 @@ namespace DokuExtractorStandardGUI
                 if (baseGroupTemplateMatchResult.IsMatchSuccessfull)
                     template = templateProcessor.AutoCreateClassTemplate("NeuesTemplate", inputString, baseGroupTemplateMatchResult.GetTemplate());
                 else
+                {
                     // TODO: Show group template selection dialog instead of defaulting to "Rechnung"
-                    template = templateProcessor.AutoCreateClassTemplate("NeuesTemplate", inputString, groupTemplates.Where(x => x.TemplateGroupName == "Rechnung").FirstOrDefault());
+                    using (var frmGroupTemplate = new frmGroupTemplateSelection(groupTemplates))
+                    {
+                        frmGroupTemplate.ShowDialog();
+                        if (frmGroupTemplate.SelectedGrouptTemplate != null)
+                            template = templateProcessor.AutoCreateClassTemplate("NeuesTemplate", inputString, frmGroupTemplate.SelectedGrouptTemplate);
+                        else
+                            template = templateProcessor.AutoCreateClassTemplate("NeuesTemplate", inputString, groupTemplates.Where(x => x.TemplateGroupName == "Rechnung").FirstOrDefault());
+                    }
+                }
 
                 var result = templateProcessor.ExtractData(template, groupTemplates, inputString);
 
