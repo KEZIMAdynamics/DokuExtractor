@@ -107,7 +107,7 @@
       <Project>{F2F88503-5633-4DD3-B4B6-328D1949601C}</Project>
       <Name>DokuExtractorCore.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="DokuExtractorCore\DokuExtractorCore.csproj">
+    <ProjectReference Include="..\DokuExtractorCore\DokuExtractorCore.csproj">
       <Project>{7a7f0155-a57f-4f47-9441-a0fd725719cb}</Project>
       <Name>DokuExtractorCore</Name>
     </ProjectReference>
