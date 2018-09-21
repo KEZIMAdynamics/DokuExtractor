@@ -68,6 +68,10 @@ namespace DokuExtractorStandardGUI
             SubscribeOnEvents();
 
             var fileInfos = new List<FileInfo>();
+
+            if (Directory.Exists(fileFolderPath) == false)
+                Directory.CreateDirectory(fileFolderPath);
+
             var files = Directory.GetFiles(fileFolderPath);
 
             foreach (var file in files)
