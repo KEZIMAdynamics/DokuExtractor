@@ -3,21 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DokuExtractorGUI", "DokuExtractorGUI.csproj", "{DB0C52AF-76F0-4367-87E7-1829370D9CA3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DokuExtractorGUI", "DokuExtractorDevGUI\DokuExtractorGUI.csproj", "{DB0C52AF-76F0-4367-87E7-1829370D9CA3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DokuExtractorCore", "..\DokuExtractorCore\DokuExtractorCore.csproj", "{7A7F0155-A57F-4F47-9441-A0FD725719CB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DokuExtractorCore", "DokuExtractorCore\DokuExtractorCore.csproj", "{7A7F0155-A57F-4F47-9441-A0FD725719CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DokuExtractorTableGUI", "..\DokuExtractorTableGUI\DokuExtractorTableGUI.csproj", "{647A5BD4-1C77-49DB-98A0-07534629A5BD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DokuExtractorTableGUI", "DokuExtractorTableGUI\DokuExtractorTableGUI.csproj", "{647A5BD4-1C77-49DB-98A0-07534629A5BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DokuExtractorStandardGUI", "..\DokuExtractorStandardGUI\DokuExtractorStandardGUI.csproj", "{3305CF5D-F4C7-48B0-9D4D-A60F7BB4B61F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DokuExtractorStandardGUI", "DokuExtractorStandardGUI\DokuExtractorStandardGUI.csproj", "{3305CF5D-F4C7-48B0-9D4D-A60F7BB4B61F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GdPicturePdfViewer", "..\GdPicturePdfViewer\GdPicturePdfViewer.csproj", "{B2A2182B-50B8-469A-9F7D-E00C43CC63FB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GdPicturePdfViewer", "GdPicturePdfViewer\GdPicturePdfViewer.csproj", "{B2A2182B-50B8-469A-9F7D-E00C43CC63FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwoLineTableConsoleApp1", "..\TwoLineTableConsolseApp1\TwoLineTableConsoleApp1.csproj", "{A4686D5D-47C8-48BE-B0DE-7F69B5C1E163}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwoLineTableConsoleApp1", "TwoLineTableConsolseApp1\TwoLineTableConsoleApp1.csproj", "{A4686D5D-47C8-48BE-B0DE-7F69B5C1E163}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DokuExtractorCore.Model", "..\DokuExtractorCore.Model\DokuExtractorCore.Model\DokuExtractorCore.Model.csproj", "{F2F88503-5633-4DD3-B4B6-328D1949601C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DokuExtractorCore.Model", "DokuExtractorCore.Model\DokuExtractorCore.Model\DokuExtractorCore.Model.csproj", "{F2F88503-5633-4DD3-B4B6-328D1949601C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KezimaPdfViewer", "..\KezimaPdfViewer\KezimaPdfViewer.csproj", "{382A2FD4-811E-458B-93DD-93685BFBF026}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KezimaPdfViewer", "KezimaPdfViewer\KezimaPdfViewer.csproj", "{382A2FD4-811E-458B-93DD-93685BFBF026}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
