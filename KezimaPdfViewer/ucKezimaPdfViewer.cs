@@ -16,6 +16,7 @@ using DokuExtractorStandardGUI.UserControls;
 using DokuExtractorCore;
 using System.Drawing.Drawing2D;
 using DokuExtractorCore.Model.PdfHelper;
+using DokuExtractorCore.Model;
 
 namespace KezimaPdfViewer
 {

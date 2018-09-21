@@ -1,4 +1,5 @@
-﻿using DokuExtractorCore.Model.PdfHelper;
+﻿using DokuExtractorCore.Model;
+using DokuExtractorCore.Model.PdfHelper;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
