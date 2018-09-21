@@ -20,14 +20,10 @@ namespace DokuExtractorCore
         Task<string> GetTextFromPdf(string pdfFilePath, bool useMd5Cache);
 
         /// <summary>
-        /// 
+        /// Reads the text from a defined crop area of a PDF file and returns it.
         /// </summary>
-        /// <param name="pdfFilePath"></param>
-        /// <param name="useMd5Cache"></param>
-        /// <param name="cropAreaX">Percentual X-Coordinate of the area which is to be extracted.</param>
-        /// <param name="cropAreaY">Percentual Y-Coordinate of the area which is to be extracted.</param>
-        /// <param name="cropAreaWdith">Percentual width of the area which is to be extracted.</param>
-        /// <param name="cropAreaHeight">Percentual height of the area which is to be extracted.</param>
+        /// <param name="pdfFilePath">Full name of PDF file.</param>
+        /// <param name="cropAreaInfo">Definition of the crop area.</param>
         /// <returns></returns>
         Task<string> GetTextFromPdf(string pdfFilePath, PercentalAreaInfo cropAreaInfo);
 

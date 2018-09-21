@@ -202,13 +202,13 @@ namespace DokuExtractorStandardGUI
 
         private void RegisterUserControls()
         {
-            //To change user controls of the data field templates, change type here (the choosen user control has to be a derivation of the origin user control):
+            //TODO: To change user controls of the data field templates, change type here (the choosen user control has to be a derivation of the origin user control):
             UserControlSelector.RegisterDataFieldClassTemplateUserControl<ucDataFieldClassTemplate>();
             UserControlSelector.RegisterDataFieldGroupTemplateUserControl<ucDataFieldGroupTemplate>();
             UserControlSelector.RegisterCalculationFieldGroupTemplateUserControl<ucCalculationFieldGroupTemplate>();
             UserControlSelector.RegisterConditionalFieldGroupTemplateUserControl<ucConditionalFieldTemplate>();
 
-            //To change user controls of the extracted data fields, change type here (the choosen user control has to be a derivation of the origin user control):
+            //TODO: To change user controls of the extracted data fields, change type here (the choosen user control has to be a derivation of the origin user control):
             UserControlSelector.RegisterExtractedDataFieldsUserControl<ucExtractedDataFields>();
             UserControlSelector.RegisterExtractedCalculationFieldsUserControl<ucExtractedCalculationFields>();
             UserControlSelector.RegisterExtractedConditionalFieldsUserControl<ucExtractedConditionalFields>();
@@ -376,10 +376,19 @@ namespace DokuExtractorStandardGUI
                 //   template = templateProcessor.AutoCreateClassTemplate("NewTemplate", inputString, this.groupTemplates);
                 var baseGroupTemplateMatchResult = templateProcessor.MatchTemplates(groupTemplates, inputString);
                 if (baseGroupTemplateMatchResult.IsMatchSuccessfull)
-                    template = templateProcessor.AutoCreateClassTemplate("NeuesTemplate", inputString, baseGroupTemplateMatchResult.GetTemplate());
+                    template = templateProcessor.AutoCreateClassTemplate("NewTemplate", inputString, baseGroupTemplateMatchResult.GetTemplate());
                 else
+                {
                     // TODO: Show group template selection dialog instead of defaulting to "Rechnung"
-                    template = templateProcessor.AutoCreateClassTemplate("NeuesTemplate", inputString, groupTemplates.Where(x => x.TemplateGroupName == "Rechnung").FirstOrDefault());
+                    using (var frmGroupTemplate = new frmGroupTemplateSelection(groupTemplates))
+                    {
+                        frmGroupTemplate.ShowDialog();
+                        if (frmGroupTemplate.SelectedGrouptTemplate != null)
+                            template = templateProcessor.AutoCreateClassTemplate("NewTemplate", inputString, frmGroupTemplate.SelectedGrouptTemplate);
+                        else
+                            template = templateProcessor.AutoCreateClassTemplate("NewTemplate", inputString, groupTemplates.Where(x => x.TemplateGroupName == "Rechnung").FirstOrDefault());
+                    }
+                }
 
                 var result = templateProcessor.ExtractData(template, groupTemplates, inputString);
 

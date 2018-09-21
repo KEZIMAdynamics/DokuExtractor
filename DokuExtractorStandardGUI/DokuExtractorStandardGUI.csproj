@@ -57,6 +57,12 @@
     <Compile Include="frmExtractorStandard.Designer.cs">
       <DependentUpon>frmExtractorStandard.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmGroupTemplateSelection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmGroupTemplateSelection.Designer.cs">
+      <DependentUpon>frmGroupTemplateSelection.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmTemplateEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -194,6 +200,9 @@
     <EmbeddedResource Include="frmExtractorStandard.resx">
       <DependentUpon>frmExtractorStandard.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmGroupTemplateSelection.resx">
+      <DependentUpon>frmGroupTemplateSelection.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmTemplateEditor.resx">
       <DependentUpon>frmTemplateEditor.cs</DependentUpon>
     </EmbeddedResource>
@@ -275,6 +284,7 @@
     <None Include="Properties\DataSources\DokuExtractorStandardGUI.UserControls.ucFileSelector.datasource" />
     <None Include="Properties\DataSources\DokuExtractorStandardGUI.UserControlsTemplateEditor.ucConditionalFieldClassTemplate.datasource" />
     <None Include="Properties\DataSources\DokuExtractorStandardGUI.UserControlsTemplateEditor.ucTemplateSelector.datasource" />
+    <None Include="Properties\DataSources\frmGroupTemplateSelection.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

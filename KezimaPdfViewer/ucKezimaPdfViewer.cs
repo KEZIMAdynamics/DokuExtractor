@@ -114,8 +114,6 @@ namespace KezimaPdfViewer
         private void AddPageToThumbnailViewer(string pagePath)
         {
             var imageViewer = new ucImageViewerForThumbnail();
-            //imageViewer.Image = Image.FromFile(pagePath);
-            //imageViewer.Image.Tag = pagePath;
             imageViewer.LoadImage(pagePath, 128, 128);
             imageViewer.ImagePath = pagePath;
             imageViewer.SizeMode = PictureBoxSizeMode.Zoom;
@@ -210,7 +208,6 @@ namespace KezimaPdfViewer
                         }
 
                         pictureBox1.Invalidate();
-                        //lastPoint = GetPointOnImage(e.Location);
                     }
                     lastMouseMove = DateTime.Now;
                 }

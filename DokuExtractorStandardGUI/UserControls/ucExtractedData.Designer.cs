@@ -1,5 +1,4 @@
-﻿using DokuExtractorStandardGUI.Logic;
-using System;
+﻿using System;
 
 namespace DokuExtractorStandardGUI.UserControls
 {
@@ -37,10 +36,8 @@ namespace DokuExtractorStandardGUI.UserControls
             this.lblTemplateClassName = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            //this.ucExtractedCalculationFields1 = new DokuExtractorStandardGUI.UserControls.ucExtractedCalculationFields();
-            this.ucExtractedCalculationFields1 = (ucExtractedCalculationFields)Activator.CreateInstance(UserControlSelector.ExtractedCalculationFieldsUserControl);
-            //this.ucExtractedConditionalFields1 = new DokuExtractorStandardGUI.UserControls.ucExtractedConditionalFields();
-            this.ucExtractedConditionalFields1 = (ucExtractedConditionalFields)Activator.CreateInstance(UserControlSelector.ExtractedConditionalFieldsUserControl);
+            this.ucExtractedCalculationFields1 = new DokuExtractorStandardGUI.UserControls.ucExtractedCalculationFields();
+            this.ucExtractedConditionalFields1 = new DokuExtractorStandardGUI.UserControls.ucExtractedConditionalFields();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -48,8 +45,7 @@ namespace DokuExtractorStandardGUI.UserControls
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            //this.ucExtractedDataFields1 = new DokuExtractorStandardGUI.UserControls.ucExtractedDataFields();
-            this.ucExtractedDataFields1 = (ucExtractedDataFields)Activator.CreateInstance(UserControlSelector.ExtractedDataFieldsUserControl);
+            this.ucExtractedDataFields1 = new DokuExtractorStandardGUI.UserControls.ucExtractedDataFields();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -259,18 +255,7 @@ namespace DokuExtractorStandardGUI.UserControls
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDatName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDatValue;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDatFieldType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDatFieldTypeDisplayValue;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCalcName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCalcFieldType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCalcFieldTypeDisplayValue;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCalcCalculationValue;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colCalcCalculationEqualsValidation;
         private System.Windows.Forms.SplitContainer splitContainer2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCondName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCondValue;
         private ucExtractedConditionalFields ucExtractedConditionalFields1;
         private ucExtractedCalculationFields ucExtractedCalculationFields1;
         private ucExtractedDataFields ucExtractedDataFields1;
