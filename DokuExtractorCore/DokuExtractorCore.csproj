@@ -35,13 +35,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\DokuExtractor\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Sprache, Version=1.10.0.37, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\DokuExtractor\packages\Sprache.1.10.0.37\lib\net40\Sprache.dll</HintPath>
+      <HintPath>..\packages\Sprache.1.10.0.37\lib\net40\Sprache.dll</HintPath>
     </Reference>
     <Reference Include="Sprache.Calc, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\DokuExtractor\packages\Sprache.Calc.1.0.0\lib\net40\Sprache.Calc.dll</HintPath>
+      <HintPath>..\packages\Sprache.Calc.1.0.0\lib\net40\Sprache.Calc.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -96,7 +96,7 @@
     <Folder Include="Interfaces\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DokuExtractorCore.Model\DokuExtractorCore.Model\DokuExtractorCore.Model.csproj">
+    <ProjectReference Include="..\DokuExtractorCore.Model\DokuExtractorCore.Model.csproj">
       <Project>{f2f88503-5633-4dd3-b4b6-328d1949601c}</Project>
       <Name>DokuExtractorCore.Model</Name>
     </ProjectReference>
