@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DokuExtractorCore
 {
-    public interface IPdfTextLoader
+    public interface IPdfTextLoaderFull
     {
         // Currently disabled until it's actually needed.
         //Task<string> GetPdfInfo(string pdfFilePath);
@@ -29,10 +29,8 @@ namespace DokuExtractorCore
         /// <returns></returns>
         Task<string> GetTextFromPdf(string pdfFilePath, PercentalAreaInfo cropAreaInfo);
 
-        Task<List<DataFieldResult>> GetTextFromPdf(string pdfFilePath, List<DataFieldClassTemplate> datafields);
+        Task<List<DataFieldResult>> GetTextFromPdfForPositionalDataFields(string pdfFilePath, List<DataFieldClassTemplate> datafields);
 
         string CheckMD5(string filename);
-
-        Task RenderPdfToPngs(string pdfFilePath, string pdfImagesPath);
     }
 }

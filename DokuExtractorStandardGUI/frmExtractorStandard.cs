@@ -20,7 +20,7 @@ namespace DokuExtractorStandardGUI
 {
     public partial class frmExtractorStandard : Form
     {
-        public IPdfTextLoader PdfTextLoader { get; set; } = new PdfTextLoader();
+        public IPdfTextLoaderFull PdfTextLoader { get; set; } = new PdfTextLoader();
 
         private List<DocumentClassTemplate> classTemplates { get; set; } = new List<DocumentClassTemplate>();
         private List<DocumentGroupTemplate> groupTemplates { get; set; } = new List<DocumentGroupTemplate>();
@@ -370,7 +370,7 @@ namespace DokuExtractorStandardGUI
             if (matchingTemplateResult.IsMatchSuccessfull)
             {
                 MessageBox.Show(Translation.LanguageStrings.MsgTemplateFound + template.TemplateClassName, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                var result = templateProcessor.ExtractData(template, groupTemplates, inputString);
+                var result = await templateProcessor.ExtractData(template, groupTemplates, inputString, string.Empty);
 
                 var groupTemplate = groupTemplates.Where(x => x.TemplateGroupName == template.TemplateGroupName).FirstOrDefault();
                 ucResultAndEditor1.ShowExtractedData(result, template, groupTemplate);
@@ -394,7 +394,7 @@ namespace DokuExtractorStandardGUI
                     }
                 }
 
-                var result = templateProcessor.ExtractData(template, groupTemplates, inputString);
+                var result = await templateProcessor.ExtractData(template, groupTemplates, inputString, string.Empty);
 
                 var groupTemplate = groupTemplates.Where(x => x.TemplateGroupName == template.TemplateGroupName).FirstOrDefault();
                 ucResultAndEditor1.ShowExtractedData(result, template, groupTemplate);

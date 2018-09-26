@@ -22,7 +22,8 @@ namespace KezimaPdfViewer
 {
     public partial class ucKezimaPdfViewer : ucViewerBase
     {
-        public IPdfTextLoader PdfTextLoader { get; set; } = new PdfTextLoader();
+        public IPdfTextLoaderFull PdfTextLoader { get; set; } = new PdfTextLoader();
+        public IPdfRenderer PdfRenderer { get; set; } = new PdfRenderer();
 
         private int activePageIndex = 0;
         private Point lastPoint = Point.Empty;
@@ -99,7 +100,7 @@ namespace KezimaPdfViewer
             }
 
             if (Directory.GetFiles(pdfImagesPath)?.Count() == 0)
-                await PdfTextLoader.RenderPdfToPngs(pdfPath, pdfImagesPath);
+                await PdfRenderer.RenderPdfToPngs(pdfPath, pdfImagesPath);
 
             CloseDisplayedPdf();
 

@@ -29,7 +29,7 @@ namespace DokuExtractorCore
         RegexExpressionFinder finder = new RegexExpressionFinder();
         TemplateMatcher templateMatcher = new TemplateMatcher();
 
-        IPdfTextLoader textLoader = new PdfTextLoader();
+        IPdfTextLoaderFull textLoader = new PdfTextLoader();
 
         /// <summary>
         /// For ease of use, Class and Group jsons can be copied to the appRootPath directory into the folders "ExtractorClassTemplates" and "ExtractorGroupTemplates".
@@ -331,7 +331,7 @@ namespace DokuExtractorCore
                 retVal.DataFields.Add(resultItem);
             }
 
-            retVal.DataFields.AddRange(await textLoader.GetTextFromPdf(pdfFilePath, template.DataFields.Where(x => x.FieldMode == DataFieldMode.Position).ToList()));
+            retVal.DataFields.AddRange(await textLoader.GetTextFromPdfForPositionalDataFields(pdfFilePath, template.DataFields.Where(x => x.FieldMode == DataFieldMode.Position).ToList()));
 
             //var groupTemplate = GetDocumentGroupTemplateByName(template.TemplateGroupName);
             var groupTemplate = groupTemplates.Where(x => x.TemplateGroupName == template.TemplateGroupName).FirstOrDefault();

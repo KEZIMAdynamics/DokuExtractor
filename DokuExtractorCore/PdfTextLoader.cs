@@ -16,9 +16,9 @@ namespace DokuExtractorCore
     /// <summary>
     /// Can open a PDF file and return its content text
     /// </summary>
-    public class PdfTextLoader : IPdfTextLoader
+    public class PdfTextLoader : WorkingWithPopplerBase, IPdfTextLoaderFull
     {
-        private bool popplerChecked;
+        public IPdfTextLoaderArea AreaLoader { get; set; } = new PdfTextLoaderArea();
 
         /// <summary>
         /// Reads the content text from a PDF file and returns it. The text layout is preserved.
@@ -31,18 +31,23 @@ namespace DokuExtractorCore
             return await GetTextFromPdf(pdfFilePath, useMd5Cache, "-layout ");
         }
 
-        public async Task<List<DataFieldResult>> GetTextFromPdf(string pdfFilePath, List<DataFieldClassTemplate> datafields)
+        public async Task<List<DataFieldResult>> GetTextFromPdfForPositionalDataFields(string pdfFilePath, List<DataFieldClassTemplate> datafields)
         {
             var retVal = new List<DataFieldResult>();
 
-            var pdfInfo = await GetPdfPageSize(pdfFilePath);
+            if (string.IsNullOrWhiteSpace(pdfFilePath) || File.Exists(pdfFilePath) == false)
+                return retVal;
+
+            //  var pdfInfo = await GetPdfPageSize(pdfFilePath);
+            var pdfInfo = await AreaLoader.GetPdfPageSize(pdfFilePath);
 
             foreach (var item in datafields)
             {
                 if (item.FieldMode == DataFieldMode.Position)
                 {
                     var resultItem = new DataFieldResult() { FieldType = item.FieldType, Name = item.Name };
-                    resultItem.Value = await GetTextFromPdf(pdfFilePath, item.ValueArea);
+                    //    resultItem.Value = await GetTextFromPdf(pdfFilePath, item.ValueArea);
+                    resultItem.Value = await AreaLoader.GetTextFromPdf(pdfFilePath, item.ValueArea);
                     retVal.Add(resultItem);
                 }
             }
@@ -50,45 +55,9 @@ namespace DokuExtractorCore
             return retVal;
         }
 
-        /// <summary>
-        /// Gets text from a PDF based that is within a given area.
-        /// </summary>
-        /// <param name="pdfFilePath">PDF location on disk.</param>
-        /// <param name="cropAreaInfo">Percentual area which is to be extracted.</param>
-        /// <returns></returns>
         public async Task<string> GetTextFromPdf(string pdfFilePath, PercentalAreaInfo cropAreaInfo)
         {
-            var pdfInfo = await GetPdfPageSize(pdfFilePath);
-            return await GetTextFromPdf(pdfFilePath, cropAreaInfo, pdfInfo);
-        }
-
-        /// <summary>
-        /// Gets text from a PDF based that is within a given area.
-        /// </summary>
-        /// <param name="pdfFilePath">PDF location on disk.</param>
-        /// <param name="cropAreaInfo">Percentual area which is to be extracted.</param>
-        /// <param name="pdfPageSizeInfo">Size information of the PDF file. Used to calculate absolute area from percental area.</param>
-        /// <returns></returns>
-        public async Task<string> GetTextFromPdf(string pdfFilePath, PercentalAreaInfo cropAreaInfo, PdfPageSizeInfo pdfPageSizeInfo)
-        {
-            var pdfInfo = pdfPageSizeInfo;
-            var x = (int)Math.Round(cropAreaInfo.TopLeftX / 100 * pdfInfo.SizeX, 0);
-            var y = (int)Math.Round(cropAreaInfo.TopLeftY / 100 * pdfInfo.SizeY, 0);
-            var W = (int)Math.Round(cropAreaInfo.Width / 100 * pdfInfo.SizeX, 0);
-            var H = (int)Math.Round(cropAreaInfo.Height / 100 * pdfInfo.SizeY, 0);
-
-            var pdfToTextOptions = " -f " + cropAreaInfo.PageNumber + " -l " + cropAreaInfo.PageNumber + " -x " + x + " -y " + y + " -W " + W + " -H " + H + " -layout -nopgbrk ";
-
-            var retVal = await GetTextFromPdf(pdfFilePath, false, pdfToTextOptions);
-
-            // Remove last line break, as it is added by poppler and does not represent the selected area
-            if (retVal.Length > 1)
-                retVal = retVal.Remove(retVal.Length - 2);
-
-            if (retVal is null)
-                retVal = string.Empty;
-
-            return retVal;
+            return await AreaLoader.GetTextFromPdf(pdfFilePath, cropAreaInfo);
         }
 
         private async Task<string> GetTextFromPdf(string pdfFilePath, bool useMd5Cache, string pdfToTextOptions)
@@ -133,45 +102,45 @@ namespace DokuExtractorCore
             return retVal;
         }
 
-        public async Task<PdfPageSizeInfo> GetPdfPageSize(string pdfFilePath)
-        {
-            var info = await GetPdfInfo(pdfFilePath);
+        //public async Task<PdfPageSizeInfo> GetPdfPageSize(string pdfFilePath)
+        //{
+        //    var info = await GetPdfInfo(pdfFilePath);
 
-            var infos = info.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            var sizeString = infos.Where(x => x.StartsWith("Page size:")).FirstOrDefault();
+        //    var infos = info.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+        //    var sizeString = infos.Where(x => x.StartsWith("Page size:")).FirstOrDefault();
 
-            var retVal = new PdfPageSizeInfo();
-            retVal.OriginalSizeString = sizeString;
+        //    var retVal = new PdfPageSizeInfo();
+        //    retVal.OriginalSizeString = sizeString;
 
-            var splitSize = sizeString.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+        //    var splitSize = sizeString.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-            retVal.SizeX = float.Parse(splitSize[2]);
-            retVal.SizeY = float.Parse(splitSize[4]);
-            retVal.Unit = splitSize[5];
+        //    retVal.SizeX = float.Parse(splitSize[2]);
+        //    retVal.SizeY = float.Parse(splitSize[4]);
+        //    retVal.Unit = splitSize[5];
 
-            return retVal;
-        }
+        //    return retVal;
+        //}
 
-        public async Task<string> GetPdfInfo(string pdfFilePath)
-        {
-            if (popplerChecked == false)
-                SupplyPoppler();
+        //public async Task<string> GetPdfInfo(string pdfFilePath)
+        //{
+        //    if (popplerChecked == false)
+        //        SupplyPoppler();
 
-            var pdfInfoExePath = Path.Combine(Environment.CurrentDirectory, "bin", "pdfinfo.exe");
+        //    var pdfInfoExePath = Path.Combine(Environment.CurrentDirectory, "bin", "pdfinfo.exe");
 
-            var pdfProcess = new Process();
-            pdfProcess.StartInfo.FileName = pdfInfoExePath;
-            pdfProcess.StartInfo.Arguments = pdfFilePath.EncapsulateInDoubleQuotes();
-            pdfProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            pdfProcess.StartInfo.RedirectStandardOutput = true;
-            pdfProcess.StartInfo.UseShellExecute = false;
+        //    var pdfProcess = new Process();
+        //    pdfProcess.StartInfo.FileName = pdfInfoExePath;
+        //    pdfProcess.StartInfo.Arguments = pdfFilePath.EncapsulateInDoubleQuotes();
+        //    pdfProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+        //    pdfProcess.StartInfo.RedirectStandardOutput = true;
+        //    pdfProcess.StartInfo.UseShellExecute = false;
 
-            //await Task.Run(() => { pdfProcess.Start(); return pdfProcess.StandardOutput.ReadToEnd(); });
-            pdfProcess.Start();
-            var retVal = await pdfProcess.StandardOutput.ReadToEndAsync();
+        //    //await Task.Run(() => { pdfProcess.Start(); return pdfProcess.StandardOutput.ReadToEnd(); });
+        //    pdfProcess.Start();
+        //    var retVal = await pdfProcess.StandardOutput.ReadToEndAsync();
 
-            return retVal;
-        }
+        //    return retVal;
+        //}
 
         public string CheckMD5(string filename)
         {
@@ -184,38 +153,6 @@ namespace DokuExtractorCore
             }
         }
 
-        public async Task RenderPdfToPngs(string pdfFilePath, string pdfImagesPath)
-        {
-            if (popplerChecked == false)
-                SupplyPoppler();
 
-            var pdfFileInfo = new FileInfo(pdfFilePath);
-
-            var pdfToPpmPath = Path.Combine(Environment.CurrentDirectory, "bin", "pdftoppm.exe");
-
-            var ppmProcess = new Process();
-            ppmProcess.StartInfo.FileName = pdfToPpmPath;
-            ppmProcess.StartInfo.Arguments = "-png " + "\"" + pdfFilePath + "\"" + " " + "\"" + Path.Combine(pdfImagesPath, pdfFileInfo.Name) + "\"";
-            ppmProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-
-            var watch = new Stopwatch();
-            watch.Start();
-            ppmProcess.Start();
-
-            await ppmProcess.WaitForExitAsync();
-
-            watch.Stop();
-
-            Debug.Print("Render time: " + watch.Elapsed);
-        }
-
-        private void SupplyPoppler()
-        {
-            if (File.Exists(Path.Combine(Environment.CurrentDirectory, "bin", "pdftotext.exe")) == false)
-            {
-                ZipFile.ExtractToDirectory(Path.Combine(Directories.PopplerZipPath, "poppler-0.51.zip"), Path.Combine(Environment.CurrentDirectory));
-            }
-            popplerChecked = true;
-        }
     }
 }

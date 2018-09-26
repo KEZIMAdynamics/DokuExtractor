@@ -25,7 +25,7 @@ namespace DokuExtractorGUI
             listBox1.SelectedIndex = 0;
         }
 
-        private void btLos_Click(object sender, EventArgs e)
+        private async void btLos_Click(object sender, EventArgs e)
         {
             //  var processor = new TemplateProcessor(Application.StartupPath);
 
@@ -42,7 +42,7 @@ namespace DokuExtractorGUI
             if (matchingTemplateResult.IsMatchSuccessfull)
             {
                 MessageBox.Show("Yay ich habe " + template.TemplateClassName + " gefunden!");
-                var json = processor.ExtractDataAsJson(template, groupTemplates, inputString);
+                var json = await processor.ExtractDataAsJson(template, groupTemplates, inputString, string.Empty);
                 tbExtractedData.Text = json;
             }
             else
@@ -53,7 +53,7 @@ namespace DokuExtractorGUI
                 else
                     // TODO: Show group template selection dialog instead of defaulting to "Rechnung"
                     template = processor.AutoCreateClassTemplate("NewTemplate", inputString, groupTemplates.Where(x => x.TemplateGroupName == "Rechnung").FirstOrDefault());
-                var json = processor.ExtractDataAsJson(template, groupTemplates, inputString);
+                var json = await processor.ExtractDataAsJson(template, groupTemplates, inputString, string.Empty);
                 tbExtractedData.Text = json;
 
                 var editor = new frmTemplateEditor();
