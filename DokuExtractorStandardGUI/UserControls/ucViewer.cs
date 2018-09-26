@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Reflection;
+using DokuExtractorStandardGUI.Logic;
 
 namespace DokuExtractorStandardGUI.UserControls
 {
@@ -16,10 +17,6 @@ namespace DokuExtractorStandardGUI.UserControls
         /// <summary>
         /// Path of the used viewer plugin for viewing PDF files
         /// </summary>
-
-        //TODO: Set path of used viewer plugin
-        public string ViewerPluginPath { get; set; } = @"..\..\..\KezimaPdfViewer\bin\Debug\KezimaPdfViewer.dll";
-        //public string ViewerPluginPath { get; set; } = @"..\..\..\GdPicturePdfViewer\bin\Debug\GdPicturePdfViewer.dll";
 
         public delegate void TextSelectedHandler(string selectedText);
         /// <summary>
@@ -33,7 +30,7 @@ namespace DokuExtractorStandardGUI.UserControls
         {
             InitializeComponent();
             if (DesignMode == false)
-                LoadViewerPlugin(ViewerPluginPath);
+                LoadViewerPlugin(UserControlSelector.ViewerPluginPath);
         }
 
         private void ucViewer_Load(object sender, EventArgs e)

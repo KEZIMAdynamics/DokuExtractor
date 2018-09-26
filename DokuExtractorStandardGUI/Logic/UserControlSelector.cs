@@ -10,6 +10,8 @@ namespace DokuExtractorStandardGUI.Logic
 {
     public static class UserControlSelector
     {
+        public static string ViewerPluginPath { get; set; } = @"..\..\..\KezimaPdfViewer\bin\Debug\KezimaPdfViewer.dll";
+
         public static Type DataFieldClassTemplateUserControl { get { return dataFieldClassTemplateUserControl; } }
         public static Type DataFieldGroupTemplateUserControl { get { return dataFieldGroupTemplateUserControl; } }
         public static Type CalculationFieldGroupTemplateUserControl { get { return calculationFieldGroupTemplateUserControl; } }
@@ -27,6 +29,11 @@ namespace DokuExtractorStandardGUI.Logic
         private static Type extractedDataFieldsUserControl = typeof(ucExtractedDataFields);
         private static Type extractedCalculationFieldsUserControl = typeof(ucExtractedCalculationFields);
         private static Type extractedConditionalFieldsUserControl = typeof(ucExtractedConditionalFields);
+
+        public static void SetViewerPluginPath(string viewerPluginPath)
+        {
+            ViewerPluginPath = viewerPluginPath;
+        }
 
         public static void RegisterDataFieldClassTemplateUserControl<T>() where T : ucDataFieldClassTemplate
         {

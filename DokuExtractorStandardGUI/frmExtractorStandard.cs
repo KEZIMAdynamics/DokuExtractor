@@ -206,6 +206,10 @@ namespace DokuExtractorStandardGUI
 
         private void RegisterUserControls()
         {
+            //TODO: Set viewer plugin path here
+            //UserControlSelector.RegisterViewerPluginPath(@"..\..\..\GdPicturePdfViewer\bin\Debug\GdPicturePdfViewer.dll");
+            UserControlSelector.SetViewerPluginPath(@"..\..\..\KezimaPdfViewer\bin\Debug\KezimaPdfViewer.dll");
+
             //TODO: To change user controls of the data field templates, change type here (the choosen user control has to be a derivation of the origin user control):
             UserControlSelector.RegisterDataFieldClassTemplateUserControl<ucDataFieldClassTemplate>();
             UserControlSelector.RegisterDataFieldGroupTemplateUserControl<ucDataFieldGroupTemplate>();
