@@ -29,7 +29,7 @@ namespace DokuExtractorCore
         RegexExpressionFinder finder = new RegexExpressionFinder();
         TemplateMatcher templateMatcher = new TemplateMatcher();
 
-        IPdfTextLoaderFull textLoader = new PdfTextLoader();
+        IPdfTextLoaderFull textLoader = new PdfTextLoaderFull();
 
         /// <summary>
         /// For ease of use, Class and Group jsons can be copied to the appRootPath directory into the folders "ExtractorClassTemplates" and "ExtractorGroupTemplates".

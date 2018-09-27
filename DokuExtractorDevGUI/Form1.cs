@@ -170,7 +170,7 @@ namespace DokuExtractorGUI
 
         private async void btLoadPdf_Click(object sender, EventArgs e)
         {
-            var loader = new PdfTextLoader();
+            var loader = new PdfTextLoaderFull();
 
             var pdfContent = await loader.GetTextFromPdf(tbInputPfad.Text, false);
             tbInhalt.Font = new Font("Consolas", 8);

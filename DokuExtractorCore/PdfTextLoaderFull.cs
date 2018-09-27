@@ -16,7 +16,7 @@ namespace DokuExtractorCore
     /// <summary>
     /// Can open a PDF file and return its content text
     /// </summary>
-    public class PdfTextLoader : WorkingWithPopplerBase, IPdfTextLoaderFull
+    public class PdfTextLoaderFull : WorkingWithPopplerBase, IPdfTextLoaderFull
     {
         public IPdfTextLoaderArea AreaLoader { get; set; } = new PdfTextLoaderArea();
 

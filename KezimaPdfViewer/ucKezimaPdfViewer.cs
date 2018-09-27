@@ -22,7 +22,7 @@ namespace KezimaPdfViewer
 {
     public partial class ucKezimaPdfViewer : ucViewerBase
     {
-        public IPdfTextLoaderFull PdfTextLoader { get; set; } = new PdfTextLoader();
+        public IPdfTextLoaderFull PdfTextLoader { get; set; } = new PdfTextLoaderFull();
         public IPdfRenderer PdfRenderer { get; set; } = new PdfRenderer();
 
         private int activePageIndex = 0;

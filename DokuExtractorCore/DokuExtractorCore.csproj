@@ -63,7 +63,7 @@
     <Compile Include="IPdfTextLoaderArea.cs" />
     <Compile Include="IPdfTextLoaderFull.cs" />
     <Compile Include="PdfRenderer.cs" />
-    <Compile Include="PdfTextLoader.cs" />
+    <Compile Include="PdfTextLoaderFull.cs" />
     <Compile Include="PdfTextLoaderArea.cs" />
     <Compile Include="RegexExpressionFinder.cs" />
     <Compile Include="TableProcessor.cs" />

@@ -20,7 +20,7 @@ namespace DokuExtractorStandardGUI
 {
     public partial class frmExtractorStandard : Form
     {
-        public IPdfTextLoaderFull PdfTextLoader { get; set; } = new PdfTextLoader();
+        public IPdfTextLoaderFull PdfTextLoader { get; set; } = new PdfTextLoaderFull();
 
         private List<DocumentClassTemplate> classTemplates { get; set; } = new List<DocumentClassTemplate>();
         private List<DocumentGroupTemplate> groupTemplates { get; set; } = new List<DocumentGroupTemplate>();
