@@ -65,6 +65,10 @@ namespace DokuExtractorStandardGUI
             this.templateProcessor = new TemplateProcessor(Directories.AppRootPath);
 
             this.languageFolderPath = languageFolderPath;
+
+            if (Directory.Exists(languageFolderPath) == false)
+                Directory.CreateDirectory(languageFolderPath);
+
             Translation.LoadLanguageFile(culture, additionalCultureInfo, languageFolderPath);
             SubscribeOnEvents();
 
@@ -120,6 +124,9 @@ namespace DokuExtractorStandardGUI
 
             this.templateProcessor = new TemplateProcessor(Directories.AppRootPath);
             this.languageFolderPath = languageFolderPath;
+
+            if (Directory.Exists(languageFolderPath) == false)
+                Directory.CreateDirectory(languageFolderPath);
 
             Translation.LoadLanguageFile(culture, additionalCultureInfo, languageFolderPath);
             SubscribeOnEvents();

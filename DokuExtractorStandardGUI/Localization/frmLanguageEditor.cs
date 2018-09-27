@@ -34,7 +34,14 @@ namespace DokuExtractorStandardGUI.Localization
 
             Localize();
 
-            var languageFilesList = Translation.LoadAllLanguageFiles(languageFolderPath);
+            var languageFilesList = new List<LanguageStrings>();
+            languageFilesList = Translation.LoadAllLanguageFiles(languageFolderPath);
+
+            if (languageFilesList == null || languageFilesList.Count == 0)
+            {
+                languageFilesList.Add(Translation.LanguageStrings);
+                Translation.SaveAllLanguageFiles(languageFilesList, languageFolderPath);
+            }
 
             TransformLanguageFilesToRotatedArrayAndDisplayInDgv(languageFilesList);
             var headerColumn = true;
