@@ -39,7 +39,7 @@ namespace DokuExtractorCore
                 return retVal;
 
             //  var pdfInfo = await GetPdfPageSize(pdfFilePath);
-            var pdfInfo = await AreaLoader.GetPdfPageSize(pdfFilePath);
+            //var pdfInfo = await AreaLoader.GetPdfPageSize(pdfFilePath);
 
             foreach (var item in datafields)
             {

@@ -55,7 +55,7 @@ namespace DokuExtractorCore
             return retVal;
         }
 
-        public async Task<PdfPageSizeInfo> GetPdfPageSize(string pdfFilePath)
+        private async Task<PdfPageSizeInfo> GetPdfPageSize(string pdfFilePath)
         {
             var info = await GetPdfInfo(pdfFilePath);
 
@@ -74,7 +74,7 @@ namespace DokuExtractorCore
             return retVal;
         }
 
-        public async Task<string> GetPdfInfo(string pdfFilePath)
+        private async Task<string> GetPdfInfo(string pdfFilePath)
         {
             if (popplerChecked == false)
                 SupplyPoppler();

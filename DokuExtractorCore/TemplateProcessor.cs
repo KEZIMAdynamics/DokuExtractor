@@ -16,6 +16,8 @@ namespace DokuExtractorCore
     /// </summary>
     public class TemplateProcessor
     {
+        public IPdfTextLoaderFull TextLoader { get; set; } = new PdfTextLoaderFull();
+
         /// <summary>
         /// Directory where document class templates are located if they shall be loaded from disk.
         /// </summary>
@@ -28,8 +30,6 @@ namespace DokuExtractorCore
         string appRootPath;
         RegexExpressionFinder finder = new RegexExpressionFinder();
         TemplateMatcher templateMatcher = new TemplateMatcher();
-
-        IPdfTextLoaderFull textLoader = new PdfTextLoaderFull();
 
         /// <summary>
         /// For ease of use, Class and Group jsons can be copied to the appRootPath directory into the folders "ExtractorClassTemplates" and "ExtractorGroupTemplates".
@@ -331,7 +331,7 @@ namespace DokuExtractorCore
                 retVal.DataFields.Add(resultItem);
             }
 
-            retVal.DataFields.AddRange(await textLoader.GetTextFromPdfForPositionalDataFields(pdfFilePath, template.DataFields.Where(x => x.FieldMode == DataFieldMode.Position).ToList()));
+            retVal.DataFields.AddRange(await TextLoader.GetTextFromPdfForPositionalDataFields(pdfFilePath, template.DataFields.Where(x => x.FieldMode == DataFieldMode.Position).ToList()));
 
             //var groupTemplate = GetDocumentGroupTemplateByName(template.TemplateGroupName);
             var groupTemplate = groupTemplates.Where(x => x.TemplateGroupName == template.TemplateGroupName).FirstOrDefault();

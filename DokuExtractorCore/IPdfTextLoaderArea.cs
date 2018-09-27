@@ -18,6 +18,6 @@ namespace DokuExtractorCore
         /// <returns></returns>
         Task<string> GetTextFromPdf(string pdfFilePath, PercentalAreaInfo cropAreaInfo);
 
-        Task<PdfPageSizeInfo> GetPdfPageSize(string pdfFilePath);
+        //Task<PdfPageSizeInfo> GetPdfPageSize(string pdfFilePath);
     }
 }
