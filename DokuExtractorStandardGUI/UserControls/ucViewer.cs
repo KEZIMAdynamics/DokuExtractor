@@ -29,8 +29,12 @@ namespace DokuExtractorStandardGUI.UserControls
         public ucViewer()
         {
             InitializeComponent();
-            if (DesignMode == false)
+            try
+            {
                 LoadViewerPlugin(UserControlSelector.ViewerPluginPath);
+            }
+            catch (Exception ex)
+            { }
         }
 
         private void ucViewer_Load(object sender, EventArgs e)

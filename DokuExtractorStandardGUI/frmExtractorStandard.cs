@@ -32,6 +32,7 @@ namespace DokuExtractorStandardGUI
         private string regexHelperAnchorText = string.Empty;
         private string regexHelperValueText = string.Empty;
 
+        private string fileFolderPath = string.Empty;
         private string selectedFilePath = string.Empty;
         private string languageFolderPath = string.Empty;
         private TemplateProcessor templateProcessor;
@@ -71,6 +72,8 @@ namespace DokuExtractorStandardGUI
 
             if (Directory.Exists(fileFolderPath) == false)
                 Directory.CreateDirectory(fileFolderPath);
+
+            this.fileFolderPath = fileFolderPath;
 
             var files = Directory.GetFiles(fileFolderPath);
 
@@ -514,6 +517,87 @@ namespace DokuExtractorStandardGUI
         private void butReCalculate_Click(object sender, EventArgs e)
         {
             ucResultAndEditor1.ReCalculate(groupTemplates);
+        }
+
+        private void panDrop_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effect = DragDropEffects.Copy;
+            }
+        }
+
+        private void panDrop_DragDrop(object sender, DragEventArgs e)
+        {
+            var paths = e.Data.GetData(DataFormats.FileDrop) as string[];
+            if (paths != null)
+            {
+                var pathList = paths.ToList();
+                if (pathList != null && pathList.Count > 0)
+                {
+                    var intFileInfoList = new List<FileInfo>();
+                    foreach (var path in pathList)
+                    {
+                        var extFileInfo = new FileInfo(path);
+                        if (extFileInfo.Extension.ToLower() == ".pdf")
+                        {
+                            var intFileInfo = TryCopyExternalFileToDokuExtractorFileFolderPath(extFileInfo);
+                            if (intFileInfo != null && intFileInfoList.Where(x => x.FullName == intFileInfo.FullName).Count() == 0)
+                                intFileInfoList.Add(intFileInfo);
+                        }
+                    }
+
+                    if (intFileInfoList != null && intFileInfoList.Count > 0)
+                        ucFileSelector1.AddFilesToQueue(intFileInfoList);
+                }
+            }
+        }
+
+        private FileInfo TryCopyExternalFileToDokuExtractorFileFolderPath(FileInfo externalFileInfo)
+        {
+            var retVal = string.Empty;
+            var duplicate = GetDuplicateMatch(externalFileInfo);
+
+            if (duplicate != null)
+            {
+                var now = DateTime.Now;
+                if (duplicate.Length != externalFileInfo.Length || duplicate.LastWriteTimeUtc != externalFileInfo.LastWriteTimeUtc)
+                {
+                    retVal = Path.Combine(fileFolderPath, externalFileInfo.Name.Replace(externalFileInfo.Extension, "")
+                        + "_" + now.Year.ToString() + now.Month.ToString("00") + now.Day.ToString("00") + "-" + now.Hour.ToString("00")
+                        + now.Minute.ToString("00") + now.Second.ToString("00") + externalFileInfo.Extension);
+
+                    File.Copy(externalFileInfo.FullName, retVal);
+                }
+            }
+            else
+            {
+                retVal = Path.Combine(fileFolderPath, externalFileInfo.Name);
+                File.Copy(externalFileInfo.FullName, retVal);
+            }
+
+            if (string.IsNullOrWhiteSpace(retVal))
+                return null;
+            else
+                return new FileInfo(retVal);
+        }
+
+        private FileInfo GetDuplicateMatch(FileInfo externalFileInfo)
+        {
+            FileInfo retVal;
+
+            var oldFileInfos = new List<FileInfo>();
+            var oldFiles = Directory.GetFiles(fileFolderPath);
+
+            foreach (var oldFile in oldFiles)
+            {
+                var oldFileInfo = new FileInfo(oldFile);
+                oldFileInfos.Add(oldFileInfo);
+            }
+
+            retVal = oldFileInfos.Where(x => x.Name.ToLower() == externalFileInfo.Name.ToLower()).FirstOrDefault();
+
+            return retVal;
         }
     }
 }
