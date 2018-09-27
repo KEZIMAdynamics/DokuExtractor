@@ -275,6 +275,12 @@
     <EmbeddedResource Include="UserControls\ucViewerBase.resx">
       <DependentUpon>ucViewerBase.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="DefaultLanguages\DokuExtractorLanguage_de-DE.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="DefaultLanguages\DokuExtractorLanguage_en-US.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\DokuExtractorStandardGUI.Localization.frmLanguageEditor.datasource" />
     <None Include="Properties\DataSources\DokuExtractorStandardGUI.UserControls.ucExtractedCalculationFields.datasource" />

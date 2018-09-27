@@ -31,8 +31,13 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmExtractorStandard));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.panDrop = new System.Windows.Forms.Panel();
             this.butDeleteFile = new System.Windows.Forms.Button();
+            this.ucFileSelector1 = new DokuExtractorStandardGUI.UserControls.ucFileSelector();
+            this.ucViewer1 = new DokuExtractorStandardGUI.UserControls.ucViewer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.ucResultAndEditor1 = new DokuExtractorStandardGUI.UserControls.ucResultAndEditor();
+            this.butReCalculate = new System.Windows.Forms.Button();
             this.butAddConditionalField = new System.Windows.Forms.Button();
             this.butLanguageEditor = new System.Windows.Forms.Button();
             this.lblInstruction = new System.Windows.Forms.Label();
@@ -41,10 +46,7 @@
             this.butSaveTemplate = new System.Windows.Forms.Button();
             this.butGo = new System.Windows.Forms.Button();
             this.butTemplateEditor = new System.Windows.Forms.Button();
-            this.butReCalculate = new System.Windows.Forms.Button();
-            this.ucFileSelector1 = new DokuExtractorStandardGUI.UserControls.ucFileSelector();
-            this.ucViewer1 = new DokuExtractorStandardGUI.UserControls.ucViewer();
-            this.ucResultAndEditor1 = new DokuExtractorStandardGUI.UserControls.ucResultAndEditor();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -53,6 +55,7 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            this.panDrop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
@@ -84,6 +87,7 @@
             // 
             // splitContainer2.Panel1
             // 
+            this.splitContainer2.Panel1.Controls.Add(this.panDrop);
             this.splitContainer2.Panel1.Controls.Add(this.butDeleteFile);
             this.splitContainer2.Panel1.Controls.Add(this.ucFileSelector1);
             // 
@@ -93,6 +97,21 @@
             this.splitContainer2.Size = new System.Drawing.Size(1017, 836);
             this.splitContainer2.SplitterDistance = 261;
             this.splitContainer2.TabIndex = 0;
+            // 
+            // panDrop
+            // 
+            this.panDrop.AllowDrop = true;
+            this.panDrop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panDrop.BackColor = System.Drawing.Color.LightGreen;
+            this.panDrop.Controls.Add(this.label1);
+            this.panDrop.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.panDrop.Location = new System.Drawing.Point(3, 745);
+            this.panDrop.Name = "panDrop";
+            this.panDrop.Size = new System.Drawing.Size(255, 47);
+            this.panDrop.TabIndex = 10;
+            this.panDrop.DragDrop += new System.Windows.Forms.DragEventHandler(this.panDrop_DragDrop);
+            this.panDrop.DragEnter += new System.Windows.Forms.DragEventHandler(this.panDrop_DragEnter);
             // 
             // butDeleteFile
             // 
@@ -106,6 +125,26 @@
             this.butDeleteFile.Text = "Delete File";
             this.butDeleteFile.UseVisualStyleBackColor = true;
             this.butDeleteFile.Click += new System.EventHandler(this.butDeleteFile_Click);
+            // 
+            // ucFileSelector1
+            // 
+            this.ucFileSelector1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ucFileSelector1.BackColor = System.Drawing.Color.White;
+            this.ucFileSelector1.Location = new System.Drawing.Point(3, 3);
+            this.ucFileSelector1.Name = "ucFileSelector1";
+            this.ucFileSelector1.Padding = new System.Windows.Forms.Padding(3);
+            this.ucFileSelector1.Size = new System.Drawing.Size(255, 734);
+            this.ucFileSelector1.TabIndex = 0;
+            // 
+            // ucViewer1
+            // 
+            this.ucViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucViewer1.Location = new System.Drawing.Point(0, 0);
+            this.ucViewer1.Name = "ucViewer1";
+            this.ucViewer1.Size = new System.Drawing.Size(752, 836);
+            this.ucViewer1.TabIndex = 0;
             // 
             // splitContainer3
             // 
@@ -134,6 +173,29 @@
             this.splitContainer3.Size = new System.Drawing.Size(545, 836);
             this.splitContainer3.SplitterDistance = 700;
             this.splitContainer3.TabIndex = 0;
+            // 
+            // ucResultAndEditor1
+            // 
+            this.ucResultAndEditor1.BackColor = System.Drawing.Color.White;
+            this.ucResultAndEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucResultAndEditor1.Location = new System.Drawing.Point(0, 0);
+            this.ucResultAndEditor1.Name = "ucResultAndEditor1";
+            this.ucResultAndEditor1.Padding = new System.Windows.Forms.Padding(5, 5, 5, 0);
+            this.ucResultAndEditor1.Size = new System.Drawing.Size(545, 700);
+            this.ucResultAndEditor1.TabIndex = 0;
+            // 
+            // butReCalculate
+            // 
+            this.butReCalculate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.butReCalculate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.butReCalculate.ForeColor = System.Drawing.Color.Brown;
+            this.butReCalculate.Location = new System.Drawing.Point(150, 41);
+            this.butReCalculate.Name = "butReCalculate";
+            this.butReCalculate.Size = new System.Drawing.Size(65, 88);
+            this.butReCalculate.TabIndex = 9;
+            this.butReCalculate.Text = "Calculate Again";
+            this.butReCalculate.UseVisualStyleBackColor = true;
+            this.butReCalculate.Click += new System.EventHandler(this.butReCalculate_Click);
             // 
             // butAddConditionalField
             // 
@@ -235,48 +297,15 @@
             this.butTemplateEditor.UseVisualStyleBackColor = true;
             this.butTemplateEditor.Click += new System.EventHandler(this.butTemplateEditor_Click);
             // 
-            // butReCalculate
+            // label1
             // 
-            this.butReCalculate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.butReCalculate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.butReCalculate.ForeColor = System.Drawing.Color.Brown;
-            this.butReCalculate.Location = new System.Drawing.Point(150, 41);
-            this.butReCalculate.Name = "butReCalculate";
-            this.butReCalculate.Size = new System.Drawing.Size(65, 88);
-            this.butReCalculate.TabIndex = 9;
-            this.butReCalculate.Text = "Calculate Again";
-            this.butReCalculate.UseVisualStyleBackColor = true;
-            this.butReCalculate.Click += new System.EventHandler(this.butReCalculate_Click);
-            // 
-            // ucFileSelector1
-            // 
-            this.ucFileSelector1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ucFileSelector1.BackColor = System.Drawing.Color.White;
-            this.ucFileSelector1.Location = new System.Drawing.Point(3, 3);
-            this.ucFileSelector1.Name = "ucFileSelector1";
-            this.ucFileSelector1.Padding = new System.Windows.Forms.Padding(3);
-            this.ucFileSelector1.Size = new System.Drawing.Size(255, 789);
-            this.ucFileSelector1.TabIndex = 0;
-            // 
-            // ucViewer1
-            // 
-            this.ucViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucViewer1.Location = new System.Drawing.Point(0, 0);
-            this.ucViewer1.Name = "ucViewer1";
-            this.ucViewer1.Size = new System.Drawing.Size(752, 836);
-            this.ucViewer1.TabIndex = 0;
-            // 
-            // ucResultAndEditor1
-            // 
-            this.ucResultAndEditor1.BackColor = System.Drawing.Color.White;
-            this.ucResultAndEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucResultAndEditor1.Location = new System.Drawing.Point(0, 0);
-            this.ucResultAndEditor1.Name = "ucResultAndEditor1";
-            this.ucResultAndEditor1.Padding = new System.Windows.Forms.Padding(5, 5, 5, 0);
-            this.ucResultAndEditor1.Size = new System.Drawing.Size(545, 700);
-            this.ucResultAndEditor1.TabIndex = 0;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(255, 47);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "DROPZONE";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // frmExtractorStandard
             // 
@@ -298,6 +327,7 @@
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            this.panDrop.ResumeLayout(false);
             this.splitContainer3.Panel1.ResumeLayout(false);
             this.splitContainer3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
@@ -324,6 +354,8 @@
         private System.Windows.Forms.Button butAddConditionalField;
         private System.Windows.Forms.Button butDeleteFile;
         private System.Windows.Forms.Button butReCalculate;
+        private System.Windows.Forms.Panel panDrop;
+        private System.Windows.Forms.Label label1;
     }
 }
 
