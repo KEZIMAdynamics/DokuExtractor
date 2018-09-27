@@ -66,10 +66,8 @@ namespace DokuExtractorStandardGUI
 
             this.languageFolderPath = languageFolderPath;
 
-            if (Directory.Exists(languageFolderPath) == false)
-                Directory.CreateDirectory(languageFolderPath);
+            InitializeLanguages();
 
-            Translation.LoadLanguageFile(culture, additionalCultureInfo, languageFolderPath);
             SubscribeOnEvents();
 
             var fileInfos = new List<FileInfo>();
@@ -125,10 +123,8 @@ namespace DokuExtractorStandardGUI
             this.templateProcessor = new TemplateProcessor(Directories.AppRootPath);
             this.languageFolderPath = languageFolderPath;
 
-            if (Directory.Exists(languageFolderPath) == false)
-                Directory.CreateDirectory(languageFolderPath);
+            InitializeLanguages();
 
-            Translation.LoadLanguageFile(culture, additionalCultureInfo, languageFolderPath);
             SubscribeOnEvents();
 
             if (allowEditTemplates == false)
@@ -158,6 +154,28 @@ namespace DokuExtractorStandardGUI
             this.WindowState = FormWindowState.Maximized;
 
             UcResultAndEditor1_TabSwitched(false);
+        }
+
+        private void InitializeLanguages()
+        {
+            if (Directory.Exists(languageFolderPath) == false)
+                Directory.CreateDirectory(languageFolderPath);
+
+            var defaultLanguagesPath = Path.Combine(Directories.AppRootPath, "DefaultLanguages");
+            if (Directory.Exists(defaultLanguagesPath))
+            {
+                var defaultLanguageFiles = Directory.GetFiles(defaultLanguagesPath);
+                foreach (var file in defaultLanguageFiles)
+                {
+                    var fileInfo = new FileInfo(file);
+                    var languageFilePath = Path.Combine(languageFolderPath, fileInfo.Name);
+
+                    if (File.Exists(languageFilePath) == false)
+                        File.Copy(file, languageFilePath);
+                }
+            }
+
+            Translation.LoadLanguageFile(culture, additionalCultureInfo, languageFolderPath);
         }
 
         private void TemplateEditor_GroupTemplateSavedInGroupTemplateEditor(DocumentGroupTemplate savedGroupTemplate)
