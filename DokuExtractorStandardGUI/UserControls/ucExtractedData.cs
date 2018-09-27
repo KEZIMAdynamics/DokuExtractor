@@ -18,9 +18,6 @@ namespace DokuExtractorStandardGUI.UserControls
     {
         public ucExtractedData()
         {
-            this.ucExtractedCalculationFields1 = (ucExtractedCalculationFields)Activator.CreateInstance(UserControlSelector.ExtractedCalculationFieldsUserControl);
-            this.ucExtractedConditionalFields1 = (ucExtractedConditionalFields)Activator.CreateInstance(UserControlSelector.ExtractedConditionalFieldsUserControl);
-            this.ucExtractedDataFields1 = (ucExtractedDataFields)Activator.CreateInstance(UserControlSelector.ExtractedDataFieldsUserControl);
             InitializeComponent();
         }
 
