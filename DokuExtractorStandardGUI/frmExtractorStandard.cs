@@ -66,7 +66,7 @@ namespace DokuExtractorStandardGUI
 
             this.languageFolderPath = languageFolderPath;
 
-            InitializeLanguages();
+            InitializeLanguages(culture, additionalCultureInfo);
 
             SubscribeOnEvents();
 
@@ -123,7 +123,7 @@ namespace DokuExtractorStandardGUI
             this.templateProcessor = new TemplateProcessor(Directories.AppRootPath);
             this.languageFolderPath = languageFolderPath;
 
-            InitializeLanguages();
+            InitializeLanguages(culture, additionalCultureInfo);
 
             SubscribeOnEvents();
 
@@ -156,7 +156,7 @@ namespace DokuExtractorStandardGUI
             UcResultAndEditor1_TabSwitched(false);
         }
 
-        private void InitializeLanguages()
+        private void InitializeLanguages(CultureInfo culture, string additionalCultureInfo)
         {
             if (Directory.Exists(languageFolderPath) == false)
                 Directory.CreateDirectory(languageFolderPath);
