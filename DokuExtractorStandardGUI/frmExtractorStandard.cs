@@ -236,8 +236,8 @@ namespace DokuExtractorStandardGUI
         private void RegisterUserControls()
         {
             //TODO: Set viewer plugin path here
-            UserControlSelector.SetViewerPluginPath(@"..\..\..\GdPicturePdfViewer\bin\Debug\GdPicturePdfViewer.dll");
-            //UserControlSelector.SetViewerPluginPath(@"..\..\..\KezimaPdfViewer\bin\Debug\KezimaPdfViewer.dll");
+            //UserControlSelector.SetViewerPluginPath(@"..\..\..\GdPicturePdfViewer\bin\Debug\GdPicturePdfViewer.dll");
+            UserControlSelector.SetViewerPluginPath(@"..\..\..\KezimaPdfViewer\bin\Debug\KezimaPdfViewer.dll");
 
             //TODO: To change user controls of the data field templates, change type here (the choosen user control has to be a derivation of the origin user control):
             UserControlSelector.RegisterDataFieldClassTemplateUserControl<ucDataFieldClassTemplate>();
@@ -318,8 +318,8 @@ namespace DokuExtractorStandardGUI
 
                 var result = MessageBox.Show(Translation.LanguageStrings.MsgAskAcceptRegexExpressionHelperResult + Environment.NewLine + Environment.NewLine
                                 + "Position:" + Environment.NewLine + "page\t" + areaInfo.PageNumber + Environment.NewLine + "x\t" + Math.Round(areaInfo.TopLeftX * 100, 1) + " %"
-                                + Environment.NewLine + "y\t" + Math.Round(areaInfo.TopLeftY * 100, 1) + "%" + Environment.NewLine + "width\t" + Math.Round(areaInfo.Width * 100, 1) + "%"
-                                + Environment.NewLine + "height\t" + Math.Round(areaInfo.Height * 100, 1) + "%" + Environment.NewLine + Environment.NewLine
+                                + Environment.NewLine + "y\t" + Math.Round(areaInfo.TopLeftY * 100, 1) + " %" + Environment.NewLine + "width\t" + Math.Round(areaInfo.Width * 100, 1) + " %"
+                                + Environment.NewLine + "height\t" + Math.Round(areaInfo.Height * 100, 1) + " %" + Environment.NewLine + Environment.NewLine
                                 + "Text: " + Environment.NewLine + selectedText, string.Empty, MessageBoxButtons.YesNo);
 
                 if (result == DialogResult.Yes)

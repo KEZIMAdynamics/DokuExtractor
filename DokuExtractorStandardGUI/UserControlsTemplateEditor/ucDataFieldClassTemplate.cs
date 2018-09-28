@@ -122,8 +122,8 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             this.ValueArea = areaInfo;
 
             txtRegexOrPosition.Text = "page\t" + areaInfo.PageNumber + Environment.NewLine + "x\t" + Math.Round(areaInfo.TopLeftX * 100, 1) + " %"
-                                      + Environment.NewLine + "y\t" + Math.Round(areaInfo.TopLeftY * 100, 1) + "%" + Environment.NewLine + "width\t" + Math.Round(areaInfo.Width * 100, 1) + "%"
-                                      + Environment.NewLine + "height\t" + Math.Round(areaInfo.Height * 100, 1) + "%";
+                                      + Environment.NewLine + "y\t" + Math.Round(areaInfo.TopLeftY * 100, 1) + " %" + Environment.NewLine + "width\t" + Math.Round(areaInfo.Width * 100, 1) + " %"
+                                      + Environment.NewLine + "height\t" + Math.Round(areaInfo.Height * 100, 1) + " %";
         }
 
         private void Localize()
