@@ -1,16 +1,16 @@
-# KEZIMA DYNAMICS SOFTWARE LICENSE
+# KEZIMA DYNAMICS COMMUNITY SOFTWARE LICENSES
 ## DOKUEXTRACTOR
-These license terms are an agreement between you and KEZIMA dynamics UG (haftungsbeschränkt) - hereinafter called KEZIMA dynamics. They apply to the software named above.
+These license terms are an agreement between you and [KEZIMA dynamics UG (haftungsbeschränkt)](https://kezima-dynamics.de) - hereinafter called KEZIMA dynamics. They apply to the software named above.
 
 IF YOU COMPLY WITH THESE LICENSE TERMS, YOU HAVE THE RIGHTS BELOW.
 
 ### 1. USE RIGHTS
 
-#### a. Individual Developer License
+#### a. Individual Developer License Community Edition
 
 If you are an individual working on your own applications to sell or for any other purpose, you may use or embed the software into your applications.
 
-#### b. Organization License
+#### b. Organization License Community Edition
 
 If you are an organization, your employees may use the software as follows:
 * Any number of your developers may embed the software into your applications released under open source software licenses.
