@@ -324,14 +324,22 @@ namespace DokuExtractorCore
         {
             var retVal = new FieldExtractionResult() { TemplateClassName = template.TemplateClassName, TemplateGroupName = template.TemplateGroupName };
 
-            foreach (var item in template.DataFields.Where(x => x.FieldMode == DataFieldMode.Regex))
+            foreach (var item in template.DataFields)
             {
                 var resultItem = new DataFieldResult() { FieldType = item.FieldType, Name = item.Name };
-                resultItem.Value = ExecuteRegexExpression(inputText, item.RegexExpressions);
+                if (item.FieldMode == DataFieldMode.Regex)
+                    resultItem.Value = ExecuteRegexExpression(inputText, item.RegexExpressions);
                 retVal.DataFields.Add(resultItem);
             }
 
-            retVal.DataFields.AddRange(await TextLoader.GetTextFromPdfForPositionalDataFields(pdfFilePath, template.DataFields.Where(x => x.FieldMode == DataFieldMode.Position).ToList()));
+            var dataFieldsPosition = await TextLoader.GetTextFromPdfForPositionalDataFields(pdfFilePath, template.DataFields.Where(x => x.FieldMode == DataFieldMode.Position).ToList());
+            foreach (var dataFieldPos in dataFieldsPosition)
+            {
+                var retValDataField = retVal.DataFields.Where(x => x.Name == dataFieldPos.Name).FirstOrDefault();
+                if (retValDataField != null)
+                    retValDataField.Value = dataFieldPos.Value;
+            }
+
 
             //var groupTemplate = GetDocumentGroupTemplateByName(template.TemplateGroupName);
             var groupTemplate = groupTemplates.Where(x => x.TemplateGroupName == template.TemplateGroupName).FirstOrDefault();

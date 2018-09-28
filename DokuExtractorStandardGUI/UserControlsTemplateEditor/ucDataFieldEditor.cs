@@ -15,11 +15,11 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
 {
     public partial class ucDataFieldEditor : UserControl
     {
-        public delegate void RegexExpressionHelperHandler(Guid id, DataFieldType dataFieldType);
+        public delegate void RegexOrPositionHelperHandler(Guid id, DataFieldType dataFieldType, DataFieldMode dataFieldMode);
         /// <summary>
-        /// Fired, when user wishes to start the regex expression helper
+        /// Fired, when user wishes to start the regex expression helper or area position helper
         /// </summary>
-        public event RegexExpressionHelperHandler RegexExpressionHelper;
+        public event RegexOrPositionHelperHandler RegexOrPositionHelper;
 
         private DocumentClassTemplate classTemplate = new DocumentClassTemplate();
         private DocumentGroupTemplate groupTemplate = new DocumentGroupTemplate();
@@ -36,7 +36,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         {
             var newDataField = (ucDataFieldClassTemplate)Activator.CreateInstance(UserControlSelector.DataFieldClassTemplateUserControl);
             newDataField.Tag = Guid.NewGuid();
-            newDataField.RegexExpressionHelper += FireRegexExpressionHelper;
+            newDataField.RegexOrPositionHelper += FireRegexOrPositionHelper;
             newDataField.DataFieldEraser += DeleteDataFieldClassTemplate;
 
             var ucConditionalFieldTemplateList = new List<ucConditionalFieldTemplate>();
@@ -297,7 +297,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
                 {
                     var newDataField = (ucDataFieldClassTemplate)Activator.CreateInstance(UserControlSelector.DataFieldClassTemplateUserControl, item);
                     newDataField.Tag = Guid.NewGuid();
-                    newDataField.RegexExpressionHelper += FireRegexExpressionHelper;
+                    newDataField.RegexOrPositionHelper += FireRegexOrPositionHelper;
                     newDataField.DataFieldEraser += DeleteDataFieldClassTemplate;
                     flowLayoutPanel1.Controls.Add(newDataField);
                 }
@@ -472,6 +472,33 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             }
         }
 
+        /// <summary>
+        /// Changes or defines a new value area
+        /// </summary>
+        /// <param name="positionHelperID">ID of the area position, which shall be changed</param>
+        /// <param name="areaInfo">percental area info</param>
+        public void ChangeValueArea(Guid positionHelperID, PercentalAreaInfo areaInfo)
+        {
+            foreach (Control control in flowLayoutPanel1.Controls)
+            {
+                var dataFieldControl = control as ucDataFieldClassTemplate;
+                if (dataFieldControl != null)
+                {
+                    try
+                    {
+                        var id = (Guid)(dataFieldControl.Tag);
+                        if (id == positionHelperID)
+                        {
+                            dataFieldControl.ChangeValueArea(areaInfo);
+                            return;
+                        }
+                    }
+                    catch (Exception ex)
+                    { }
+                }
+            }
+        }
+
         private DataFieldClassTemplate GetDataFieldClassTemplateFromUcDataField(Control ucDataFieldControl)
         {
             var retVal = new DataFieldClassTemplate();
@@ -481,6 +508,8 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             {
                 retVal.Name = ucDataFieldClassTemplate.NameText;
                 retVal.FieldType = (DataFieldType)(ucDataFieldClassTemplate.FieldTypeInt);
+                retVal.FieldMode = (DataFieldMode)(ucDataFieldClassTemplate.FieldModeInt);
+                retVal.ValueArea = ucDataFieldClassTemplate.ValueArea;
 
                 var splitArray = new string[1];
                 splitArray[0] = Environment.NewLine;
@@ -557,9 +586,9 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             return retVal;
         }
 
-        private void FireRegexExpressionHelper(Guid id, DataFieldType dataFieldType)
+        private void FireRegexOrPositionHelper(Guid id, DataFieldType dataFieldType, DataFieldMode dataFieldMode)
         {
-            RegexExpressionHelper?.Invoke(id, dataFieldType);
+            RegexOrPositionHelper?.Invoke(id, dataFieldType, dataFieldMode);
         }
     }
 }

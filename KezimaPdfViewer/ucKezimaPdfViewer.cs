@@ -176,7 +176,7 @@ namespace KezimaPdfViewer
                 var rectText = await PdfTextLoader.GetTextFromPdf(pdfPath, crop);
 
                 tooltip.Hide(this);
-                FireTextSelected(rectText);
+                FireTextSelected(rectText, crop.PageNumber, crop.TopLeftX, crop.TopLeftY, crop.Width, crop.Height);
                 if (string.IsNullOrEmpty(rectText) == false)
                     Clipboard.SetText(rectText);
                 tooltip.Show(rectText, this, this.PointToClient(Control.MousePosition), 5000);

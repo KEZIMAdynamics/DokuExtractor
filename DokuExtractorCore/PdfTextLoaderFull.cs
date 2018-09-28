@@ -41,13 +41,18 @@ namespace DokuExtractorCore
             //  var pdfInfo = await GetPdfPageSize(pdfFilePath);
             //var pdfInfo = await AreaLoader.GetPdfPageSize(pdfFilePath);
 
+            var areaInfoList = datafields.Where(x => x.FieldMode == DataFieldMode.Position).Select(x => x.ValueArea).ToList();
+
+            var textList = await AreaLoader.GetTextFromPdf(pdfFilePath, areaInfoList);
+
             foreach (var item in datafields)
             {
                 if (item.FieldMode == DataFieldMode.Position)
                 {
                     var resultItem = new DataFieldResult() { FieldType = item.FieldType, Name = item.Name };
                     //    resultItem.Value = await GetTextFromPdf(pdfFilePath, item.ValueArea);
-                    resultItem.Value = await AreaLoader.GetTextFromPdf(pdfFilePath, item.ValueArea);
+                    resultItem.Value = textList.First();
+                    textList.RemoveAt(0);
                     retVal.Add(resultItem);
                 }
             }

@@ -61,7 +61,13 @@ namespace GdPicturePdfViewer
                 if (string.IsNullOrEmpty(text) == false)
                 {
                     tooltip.Hide(this);
-                    FireTextSelected(text);
+
+                    float percentalTopLeftX = (float)gdViewer1.GetRectLeftOnDocument() / (float)gdViewer1.PageWidth;
+                    float percentalTopLeftY = (float)gdViewer1.GetRectTopOnDocument() / (float)gdViewer1.PageHeight;
+                    float percentalWidth = (float)gdViewer1.GetRectWidthOnDocument() / (float)gdViewer1.PageWidth;
+                    float percentalHeight = (float)gdViewer1.GetRectHeightOnDocument() / (float)gdViewer1.PageHeight;
+
+                    FireTextSelected(text, gdViewer1.CurrentPage, percentalTopLeftX, percentalTopLeftY, percentalWidth, percentalHeight);
                     Clipboard.SetText(text);
                     tooltip.Show(text, this, this.PointToClient(Control.MousePosition), 5000);
                 }

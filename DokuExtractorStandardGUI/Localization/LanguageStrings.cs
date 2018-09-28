@@ -24,6 +24,7 @@ namespace DokuExtractorStandardGUI.Localization
         public string ButLanguageEditor { get; set; } = "Language editor";
         public string InstructionSelectAnchor { get; set; } = "Select an anchor!";
         public string InstructionSelectValue { get; set; } = "Select a value!";
+        public string InstructionSelectAreaPosition { get; set; } = "Select an area!";
 
         public string ButTextEditOk { get; set; } = "OK";
         public string ButTextEditCancel { get; set; } = "Cancel";
@@ -49,9 +50,12 @@ namespace DokuExtractorStandardGUI.Localization
         public string DataFieldName { get; set; } = "Name";
         public string DataFieldValue { get; set; } = "Value";
         public string DataFieldType { get; set; } = "Type";
+        public string DataFieldMode { get; set; } = "Mode";
 
         public string DataFieldRegexExpressions { get; set; } = "Regex expressions";
+        public string DataFieldAreaPosition { get; set; } = "Area position";
         public string ButStartRegexExpressionHelper { get; set; } = "Start regex expression helper";
+        public string ButStartAreaPositionHelper { get; set; } = "Start area position helper";
         public string ButDeleteDataField { get; set; } = "Delete data field";
 
         public string DataFieldGroupTemplateTextAnchors { get; set; } = "Text anchors";
@@ -135,6 +139,7 @@ namespace DokuExtractorStandardGUI.Localization
         public string MsgAskDeleteFile { get; set; } = "Do you really want to delete this file?";
         public string MsgAskDeleteLanguage { get; set; } = "Do you really want to delete this language?";
         public string MsgAskStartRegexExpressionHelper { get; set; } = "Start regex expression helper?";
+        public string MsgAskStartAreaPositionHelper { get; set; } = "Start area position helper?";
         public string MsgAskAcceptRegexExpressionHelperResult { get; set; } = "Do you accept the following result?";
         public string MsgAskAdditionalRegexExpression { get; set; } = "Do you want to add this expression as an ADDITIONAL expression?";
         public string MsgNoRegexExpressionFinderResult { get; set; } = "Could not get a regex expression finder result. No regex expression found!";

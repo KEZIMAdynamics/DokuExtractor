@@ -25,10 +25,11 @@ namespace DokuExtractorStandardGUI
         private List<DocumentClassTemplate> classTemplates { get; set; } = new List<DocumentClassTemplate>();
         private List<DocumentGroupTemplate> groupTemplates { get; set; } = new List<DocumentGroupTemplate>();
 
-        private Guid regexHelperID = Guid.Empty;
+        private Guid regexOrPositionHelperId = Guid.Empty;
         private DataFieldType regexHelperFieldType = DataFieldType.Text;
         private bool isAnchorSelectionRunning = false;
         private bool isValueSelectionRunning = false;
+        private bool isPositionSelectionRunning = false;
         private string regexHelperAnchorText = string.Empty;
         private string regexHelperValueText = string.Empty;
 
@@ -215,7 +216,7 @@ namespace DokuExtractorStandardGUI
             ucFileSelector1.SelectedFileChanged += UcFileSelector1_SelectedFileChanged;
             ucViewer1.TextSelected += UcViewer1_TextSelected;
             ucResultAndEditor1.TabSwitched += UcResultAndEditor1_TabSwitched;
-            ucResultAndEditor1.RegexExpressionHelper += UcResultAndEditor1_RegexExpressionHelper;
+            ucResultAndEditor1.RegexOrPositionHelper += UcResultAndEditor1_RegexOrPositionHelper;
         }
 
         private void DisableBuiltInEditor()
@@ -235,8 +236,8 @@ namespace DokuExtractorStandardGUI
         private void RegisterUserControls()
         {
             //TODO: Set viewer plugin path here
-            //UserControlSelector.RegisterViewerPluginPath(@"..\..\..\GdPicturePdfViewer\bin\Debug\GdPicturePdfViewer.dll");
-            UserControlSelector.SetViewerPluginPath(@"..\..\..\KezimaPdfViewer\bin\Debug\KezimaPdfViewer.dll");
+            UserControlSelector.SetViewerPluginPath(@"..\..\..\GdPicturePdfViewer\bin\Debug\GdPicturePdfViewer.dll");
+            //UserControlSelector.SetViewerPluginPath(@"..\..\..\KezimaPdfViewer\bin\Debug\KezimaPdfViewer.dll");
 
             //TODO: To change user controls of the data field templates, change type here (the choosen user control has to be a derivation of the origin user control):
             UserControlSelector.RegisterDataFieldClassTemplateUserControl<ucDataFieldClassTemplate>();
@@ -263,7 +264,7 @@ namespace DokuExtractorStandardGUI
             butLanguageEditor.Text = Translation.LanguageStrings.ButLanguageEditor;
         }
 
-        private async void UcViewer1_TextSelected(string selectedText)
+        private async void UcViewer1_TextSelected(string selectedText, PercentalAreaInfo areaInfo)
         {
             if (isAnchorSelectionRunning)
             {
@@ -298,14 +299,32 @@ namespace DokuExtractorStandardGUI
 
                         var additionalRegex = MessageBox.Show(Translation.LanguageStrings.MsgAskAdditionalRegexExpression, string.Empty, MessageBoxButtons.YesNo);
                         if (additionalRegex == DialogResult.Yes)
-                            ChangeOrAddRegexExpression(this.regexHelperID, regexResult.RegexExpression, true);
+                            ChangeOrAddRegexExpression(this.regexOrPositionHelperId, regexResult.RegexExpression, true);
                         else
-                            ChangeOrAddRegexExpression(this.regexHelperID, regexResult.RegexExpression, false);
+                            ChangeOrAddRegexExpression(this.regexOrPositionHelperId, regexResult.RegexExpression, false);
                     }
                 }
                 else
                 {
                     MessageBox.Show(Translation.LanguageStrings.MsgNoRegexExpressionFinderResult, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+                EnableOrDisableControlsAndButtons(true);
+            }
+            else if (isPositionSelectionRunning)
+            {
+                isPositionSelectionRunning = false;
+                lblInstruction.Text = string.Empty;
+
+                var result = MessageBox.Show(Translation.LanguageStrings.MsgAskAcceptRegexExpressionHelperResult + Environment.NewLine + Environment.NewLine
+                                + "Position:" + Environment.NewLine + "page\t" + areaInfo.PageNumber + Environment.NewLine + "x\t" + Math.Round(areaInfo.TopLeftX * 100, 1) + " %"
+                                + Environment.NewLine + "y\t" + Math.Round(areaInfo.TopLeftY * 100, 1) + "%" + Environment.NewLine + "width\t" + Math.Round(areaInfo.Width * 100, 1) + "%"
+                                + Environment.NewLine + "height\t" + Math.Round(areaInfo.Height * 100, 1) + "%" + Environment.NewLine + Environment.NewLine
+                                + "Text: " + Environment.NewLine + selectedText, string.Empty, MessageBoxButtons.YesNo);
+
+                if (result == DialogResult.Yes)
+                {
+                    ChangeValueArea(this.regexOrPositionHelperId, areaInfo);
                 }
 
                 EnableOrDisableControlsAndButtons(true);
@@ -321,6 +340,16 @@ namespace DokuExtractorStandardGUI
         private void ChangeOrAddRegexExpression(Guid regexHelperID, string regex, bool additionalRegex)
         {
             ucResultAndEditor1.ChangeOrAddRegexExpression(regexHelperID, regex, additionalRegex);
+        }
+
+        /// <summary>
+        /// Changes or defines a new value area
+        /// </summary>
+        /// <param name="positionHelperID">ID of the area position, which shall be changed</param>
+        /// <param name="areaInfo">percental area info</param>
+        private void ChangeValueArea(Guid positionHelperID, PercentalAreaInfo areaInfo)
+        {
+            ucResultAndEditor1.ChangeValueArea(positionHelperID, areaInfo);
         }
 
         private async void UcFileSelector1_SelectedFileChanged(string oldPath, string newPath)
@@ -355,14 +384,23 @@ namespace DokuExtractorStandardGUI
             }
         }
 
-        private void UcResultAndEditor1_RegexExpressionHelper(Guid id, DataFieldType dataFieldType)
+        private void UcResultAndEditor1_RegexOrPositionHelper(Guid id, DataFieldType dataFieldType, DataFieldMode dataFieldMode)
         {
             EnableOrDisableControlsAndButtons(false);
 
-            regexHelperID = id;
+            regexOrPositionHelperId = id;
             regexHelperFieldType = dataFieldType;
-            isAnchorSelectionRunning = true;
-            lblInstruction.Text = Translation.LanguageStrings.InstructionSelectAnchor;
+
+            if (dataFieldMode == DataFieldMode.Regex)
+            {
+                isAnchorSelectionRunning = true;
+                lblInstruction.Text = Translation.LanguageStrings.InstructionSelectAnchor;
+            }
+            else if (dataFieldMode == DataFieldMode.Position)
+            {
+                isPositionSelectionRunning = true;
+                lblInstruction.Text = Translation.LanguageStrings.InstructionSelectAreaPosition;
+            }
         }
 
         private void EnableOrDisableControlsAndButtons(bool enablingState)
@@ -402,7 +440,7 @@ namespace DokuExtractorStandardGUI
             if (matchingTemplateResult.IsMatchSuccessfull)
             {
                 MessageBox.Show(Translation.LanguageStrings.MsgTemplateFound + template.TemplateClassName, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                var result = await templateProcessor.ExtractData(template, groupTemplates, inputString, string.Empty);
+                var result = await templateProcessor.ExtractData(template, groupTemplates, inputString, selectedFilePath);
 
                 var groupTemplate = groupTemplates.Where(x => x.TemplateGroupName == template.TemplateGroupName).FirstOrDefault();
                 ucResultAndEditor1.ShowExtractedData(result, template, groupTemplate);
@@ -426,7 +464,7 @@ namespace DokuExtractorStandardGUI
                     }
                 }
 
-                var result = await templateProcessor.ExtractData(template, groupTemplates, inputString, string.Empty);
+                var result = await templateProcessor.ExtractData(template, groupTemplates, inputString, selectedFilePath);
 
                 var groupTemplate = groupTemplates.Where(x => x.TemplateGroupName == template.TemplateGroupName).FirstOrDefault();
                 ucResultAndEditor1.ShowExtractedData(result, template, groupTemplate);
@@ -505,7 +543,7 @@ namespace DokuExtractorStandardGUI
                 ucFileSelector1.SelectedFileChanged -= UcFileSelector1_SelectedFileChanged;
                 ucViewer1.TextSelected -= UcViewer1_TextSelected;
                 ucResultAndEditor1.TabSwitched -= UcResultAndEditor1_TabSwitched;
-                ucResultAndEditor1.RegexExpressionHelper -= UcResultAndEditor1_RegexExpressionHelper;
+                ucResultAndEditor1.RegexOrPositionHelper -= UcResultAndEditor1_RegexOrPositionHelper;
             }
             catch (Exception ex)
             { }

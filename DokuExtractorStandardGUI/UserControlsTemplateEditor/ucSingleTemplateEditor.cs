@@ -13,16 +13,16 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
 {
     public partial class ucSingleTemplateEditor : UserControl
     {
-        public delegate void RegexExpressionHelperHandler(Guid id, DataFieldType dataFieldType);
+        public delegate void RegexOrPositionHelperHandler(Guid id, DataFieldType dataFieldType, DataFieldMode dataFieldMode);
         /// <summary>
-        /// Fired, when user wishes to start the regex expression helper
+        /// Fired, when user wishes to start the regex expression helper or area position helper
         /// </summary>
-        public event RegexExpressionHelperHandler RegexExpressionHelper;
+        public event RegexOrPositionHelperHandler RegexOrPositionHelper;
 
         public ucSingleTemplateEditor()
         {
             InitializeComponent();
-            ucDataFieldEditor1.RegexExpressionHelper += FireRegexExpressionHelper;
+            ucDataFieldEditor1.RegexOrPositionHelper += FireRegexOrPositionHelper;
         }
 
         /// <summary>
@@ -129,6 +129,16 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         }
 
         /// <summary>
+        /// Changes or defines a new value area
+        /// </summary>
+        /// <param name="positionHelperID">ID of the area position, which shall be changed</param>
+        /// <param name="areaInfo">percental area info</param>
+        public void ChangeValueArea(Guid positionHelperID, PercentalAreaInfo areaInfo)
+        {
+            ucDataFieldEditor1.ChangeValueArea(positionHelperID, areaInfo);
+        }
+
+        /// <summary>
         /// Shows the general properties of a class template
         /// </summary>
         private void ShowGeneralProperties(DocumentClassTemplate classTemplate)
@@ -161,9 +171,9 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             ucDataFieldEditor1.ShowDataFields(groupTemplate);
         }
 
-        private void FireRegexExpressionHelper(Guid id, DataFieldType dataFieldType)
+        private void FireRegexOrPositionHelper(Guid id, DataFieldType dataFieldType, DataFieldMode dataFieldMode)
         {
-            RegexExpressionHelper?.Invoke(id, dataFieldType);
+            RegexOrPositionHelper?.Invoke(id, dataFieldType, dataFieldMode);
         }
     }
 }

@@ -20,16 +20,16 @@ namespace DokuExtractorStandardGUI.UserControls
         /// </summary>
         public event TabSwitchedHandler TabSwitched;
 
-        public delegate void RegexExpressionHelperHandler(Guid id, DataFieldType dataFieldType);
+        public delegate void RegexOrPositionHelperHandler(Guid id, DataFieldType dataFieldType, DataFieldMode dataFieldMode);
         /// <summary>
-        /// Fired, when user wishes to start the regex expression helper
+        /// Fired, when user wishes to start the regex expression helper or area position helper
         /// </summary>
-        public event RegexExpressionHelperHandler RegexExpressionHelper;
+        public event RegexOrPositionHelperHandler RegexOrPositionHelper;
 
         public ucResultAndEditor()
         {
             InitializeComponent();
-            ucSingleTemplateEditor1.RegexExpressionHelper += FireRegexExpressionHelper;
+            ucSingleTemplateEditor1.RegexOrPositionHelper += FirRegexOrPositionHelper;
         }
 
         private void ucResultAndEditor_Load(object sender, EventArgs e)
@@ -153,6 +153,16 @@ namespace DokuExtractorStandardGUI.UserControls
             ucSingleTemplateEditor1.ChangeOrAddRegexExpression(regexHelperID, regex, additionalRegex);
         }
 
+        /// <summary>
+        /// Changes or defines a new value area
+        /// </summary>
+        /// <param name="positionHelperID">ID of the area position, which shall be changed</param>
+        /// <param name="areaInfo">percental area info</param>
+        public void ChangeValueArea(Guid positionHelperID, PercentalAreaInfo areaInfo)
+        {
+            ucSingleTemplateEditor1.ChangeValueArea(positionHelperID, areaInfo);
+        }
+        
         public void ReCalculate(List<DocumentGroupTemplate> groupTemplates)
         {
             ucExtractedData1.ReCalculate(groupTemplates);
@@ -177,9 +187,9 @@ namespace DokuExtractorStandardGUI.UserControls
             TabSwitched?.Invoke(switchedToSingleTemplateEditor);
         }
 
-        private void FireRegexExpressionHelper(Guid id, DataFieldType dataFieldType)
+        private void FirRegexOrPositionHelper(Guid id, DataFieldType dataFieldType, DataFieldMode dataFieldMode)
         {
-            RegexExpressionHelper?.Invoke(id, dataFieldType);
+            RegexOrPositionHelper?.Invoke(id, dataFieldType, dataFieldMode);
         }
     }
 }

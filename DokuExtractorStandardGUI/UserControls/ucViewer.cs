@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Reflection;
 using DokuExtractorStandardGUI.Logic;
+using DokuExtractorCore.Model;
 
 namespace DokuExtractorStandardGUI.UserControls
 {
@@ -18,7 +19,7 @@ namespace DokuExtractorStandardGUI.UserControls
         /// Path of the used viewer plugin for viewing PDF files
         /// </summary>
 
-        public delegate void TextSelectedHandler(string selectedText);
+        public delegate void TextSelectedHandler(string selectedText, PercentalAreaInfo areaInfo);
         /// <summary>
         /// Fired, when some text has been selected within the viewer (contains the selected text)
         /// </summary>
@@ -82,9 +83,9 @@ namespace DokuExtractorStandardGUI.UserControls
             viewerControlBase?.CloseDisplayedPdf();
         }
 
-        private void ViewerControlBase_TextSelected(string selectedText)
+        private void ViewerControlBase_TextSelected(string selectedText, PercentalAreaInfo areaInfo)
         {
-            TextSelected?.Invoke(selectedText);
+            TextSelected?.Invoke(selectedText, areaInfo);
         }
     }
 }

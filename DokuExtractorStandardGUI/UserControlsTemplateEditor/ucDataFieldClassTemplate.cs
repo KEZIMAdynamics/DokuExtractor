@@ -14,11 +14,11 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
 {
     public partial class ucDataFieldClassTemplate : UserControl
     {
-        public delegate void RegexExpressionHelperHandler(Guid id, DataFieldType dataFieldType);
+        public delegate void RegexOrPositionHelperHandler(Guid id, DataFieldType dataFieldType, DataFieldMode dataFieldMode);
         /// <summary>
-        /// Fired, when user wishes to start the regex expression helper
+        /// Fired, when user wishes to start the regex expression helper or area position helper
         /// </summary>
-        public event RegexExpressionHelperHandler RegexExpressionHelper;
+        public event RegexOrPositionHelperHandler RegexOrPositionHelper;
 
         public delegate void DataFieldEraserHandler(Guid id);
         /// <summary>
@@ -35,9 +35,17 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         /// </summary>
         public int FieldTypeInt { get { return cbxFieldType.SelectedIndex; } }
         /// <summary>
+        /// Gets the field mode of the data field from the combo box as integer
+        /// </summary>
+        public int FieldModeInt { get { return cbxFieldMode.SelectedIndex; } }
+        /// <summary>
         /// Gets the regex expressions of the data field from the text box
         /// </summary>
-        public string RegexText { get { return txtRegexExpression.Text; } }
+        public string RegexText { get { return txtRegexOrPosition.Text; } }
+        /// <summary>
+        /// Percental area info of the given data field class template
+        /// </summary>
+        public PercentalAreaInfo ValueArea { get; set; } = new PercentalAreaInfo();
 
         private DataFieldClassTemplate dataFieldClassTemplate { get; set; } = new DataFieldClassTemplate();
         private bool isRegexExpressionHelperActivated = false;
@@ -59,10 +67,12 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             InitializeComponent();
             cbxFieldType.MouseWheel += (o, e) => ((HandledMouseEventArgs)e).Handled = true;
             this.dataFieldClassTemplate = dataFieldClassTemplate;
+            ChangeValueArea(dataFieldClassTemplate.ValueArea);
         }
 
         private void ucDataField_Load(object sender, EventArgs e)
         {
+            cbxFieldMode.SelectedIndex = (int)(this.dataFieldClassTemplate.FieldMode);
             Localize();
 
             txtName.Text = this.dataFieldClassTemplate.Name;
@@ -72,7 +82,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             if (dataFieldClassTemplate.RegexExpressions != null)
                 foreach (var item in dataFieldClassTemplate.RegexExpressions)
                 {
-                    txtRegexExpression.Text = txtRegexExpression.Text + item + Environment.NewLine;
+                    txtRegexOrPosition.Text = txtRegexOrPosition.Text + item + Environment.NewLine;
                 }
         }
 
@@ -81,11 +91,11 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         /// </summary>
         public void ActivateRegexExpressionHelper()
         {
-            txtRegexExpression.Enabled = false;
-            lblRegexExpression.Font = new Font(lblRegexExpression.Font.Name, lblRegexExpression.Font.SizeInPoints, FontStyle.Underline);
+            txtRegexOrPosition.Enabled = false;
+            lblRegexOrPosition.Font = new Font(lblRegexOrPosition.Font.Name, lblRegexOrPosition.Font.SizeInPoints, FontStyle.Underline);
             if (isRegexExpressionHelperActivated == false)
             {
-                lblRegexExpression.DoubleClick += LblRegexExpression_DoubleClick;
+                lblRegexOrPosition.DoubleClick += LblRegexOrPosition_DoubleClick;
                 isRegexExpressionHelperActivated = true;
             }
         }
@@ -98,18 +108,32 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         public void ChangeOrAddRegexExpression(string regex, bool additionalRegex)
         {
             if (additionalRegex)
-                txtRegexExpression.Text = txtRegexExpression.Text + regex + Environment.NewLine;
+                txtRegexOrPosition.Text = txtRegexOrPosition.Text + regex + Environment.NewLine;
             else
-                txtRegexExpression.Text = regex;
+                txtRegexOrPosition.Text = regex;
+        }
+
+        /// <summary>
+        /// Changes or defines a new value area
+        /// </summary>
+        /// <param name="areaInfo">percental area info</param>
+        public void ChangeValueArea(PercentalAreaInfo areaInfo)
+        {
+            this.ValueArea = areaInfo;
+
+            txtRegexOrPosition.Text = "page\t" + areaInfo.PageNumber + Environment.NewLine + "x\t" + Math.Round(areaInfo.TopLeftX * 100, 1) + " %"
+                                      + Environment.NewLine + "y\t" + Math.Round(areaInfo.TopLeftY * 100, 1) + "%" + Environment.NewLine + "width\t" + Math.Round(areaInfo.Width * 100, 1) + "%"
+                                      + Environment.NewLine + "height\t" + Math.Round(areaInfo.Height * 100, 1) + "%";
         }
 
         private void Localize()
         {
             lblName.Text = Translation.LanguageStrings.DataFieldName;
             lblFieldType.Text = Translation.LanguageStrings.DataFieldType;
-            lblRegexExpression.Text = Translation.LanguageStrings.DataFieldRegexExpressions;
-            butStartRegexExpressionHelper.Text = Translation.LanguageStrings.ButStartRegexExpressionHelper;
+            lblFieldMode.Text = Translation.LanguageStrings.DataFieldMode;
             butDeleteDataField.Text = Translation.LanguageStrings.ButDeleteDataField;
+
+            LocalizeConditionally();
 
             cbxFieldType.Items[(int)(DataFieldType.Text)] = Translation.LanguageStrings.FieldTypeText;
             cbxFieldType.Items[(int)(DataFieldType.Date)] = Translation.LanguageStrings.FieldTypeDate;
@@ -120,20 +144,38 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             cbxFieldType.Items[(int)(DataFieldType.Term)] = Translation.LanguageStrings.FieldTypeTerm;
         }
 
-        private void LblRegexExpression_DoubleClick(object sender, EventArgs e)
+        private void LocalizeConditionally()
         {
-            StartRegexExpressionHelper();
+            if ((DataFieldMode)FieldModeInt == DataFieldMode.Regex)
+            {
+                lblRegexOrPosition.Text = Translation.LanguageStrings.DataFieldRegexExpressions;
+                butStartRegexOrPositionHelper.Text = Translation.LanguageStrings.ButStartRegexExpressionHelper;
+            }
+            else if ((DataFieldMode)FieldModeInt == DataFieldMode.Position)
+            {
+                lblRegexOrPosition.Text = Translation.LanguageStrings.DataFieldAreaPosition;
+                butStartRegexOrPositionHelper.Text = Translation.LanguageStrings.ButStartAreaPositionHelper;
+            }
         }
 
-        private void StartRegexExpressionHelper()
+        private void LblRegexOrPosition_DoubleClick(object sender, EventArgs e)
         {
-            var result = MessageBox.Show(Translation.LanguageStrings.MsgAskStartRegexExpressionHelper, string.Empty, MessageBoxButtons.YesNo);
+            StartRegexOrPositionHelper();
+        }
+
+        private void StartRegexOrPositionHelper()
+        {
+            var result = DialogResult.No;
+            if ((DataFieldMode)FieldModeInt == DataFieldMode.Regex)
+                result = MessageBox.Show(Translation.LanguageStrings.MsgAskStartRegexExpressionHelper, string.Empty, MessageBoxButtons.YesNo);
+            else if ((DataFieldMode)FieldModeInt == DataFieldMode.Position)
+                result = MessageBox.Show(Translation.LanguageStrings.MsgAskStartAreaPositionHelper, string.Empty, MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes)
             {
                 try
                 {
                     var id = (Guid)(this.Tag);
-                    FireRegexExpressionHelper(id, (DataFieldType)FieldTypeInt);
+                    FireRegexOrPositionHelper(id, (DataFieldType)FieldTypeInt, (DataFieldMode)FieldModeInt);
                 }
                 catch (Exception ex)
                 { }
@@ -151,9 +193,9 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             { }
         }
 
-        private void FireRegexExpressionHelper(Guid id, DataFieldType dataFieldType)
+        private void FireRegexOrPositionHelper(Guid id, DataFieldType dataFieldType, DataFieldMode dataFieldMode)
         {
-            RegexExpressionHelper?.Invoke(id, dataFieldType);
+            RegexOrPositionHelper?.Invoke(id, dataFieldType, dataFieldMode);
         }
 
         private void FireDataFieldEraser(Guid id)
@@ -161,17 +203,23 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             DataFieldEraser?.Invoke(id);
         }
 
-        private void butStartRegexExpressionHelper_Click(object sender, EventArgs e)
+        private void butStartRegexOrPositionHelper_Click(object sender, EventArgs e)
         {
-            StartRegexExpressionHelper();
+            StartRegexOrPositionHelper();
         }
 
-        private void txtRegexExpression_TextChanged(object sender, EventArgs e)
+        private void txtRegexOrPosition_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtRegexExpression.Text))
-                txtRegexExpression.BackColor = Color.Yellow;
+            if (string.IsNullOrWhiteSpace(txtRegexOrPosition.Text))
+                txtRegexOrPosition.BackColor = Color.Yellow;
             else
-                txtRegexExpression.BackColor = Color.White;
+                txtRegexOrPosition.BackColor = Color.White;
+        }
+
+        private void cbxFieldMode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LocalizeConditionally();
+            txtRegexOrPosition.Text = string.Empty;
         }
     }
 }

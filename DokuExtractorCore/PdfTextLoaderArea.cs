@@ -27,6 +27,26 @@ namespace DokuExtractorCore
         }
 
         /// <summary>
+        /// Gets text from a PDF based that is within a given areas.
+        /// </summary>
+        /// <param name="pdfFilePath">PDF location on disk.</param>
+        /// <param name="cropAreaInfos">Percentual areas which is to be extracted.</param>
+        /// <returns></returns>
+        public async Task<List<string>> GetTextFromPdf(string pdfFilePath, List<PercentalAreaInfo> cropAreaInfos)
+        {
+            var retVal = new List<string>();
+            var pdfInfo = await GetPdfPageSize(pdfFilePath);
+
+            foreach (var cropArea in cropAreaInfos)
+            {
+                var text = await GetTextFromPdf(pdfFilePath, cropArea, pdfInfo);
+                retVal.Add(text);
+            }
+
+            return retVal;
+        }
+
+        /// <summary>
         /// Gets text from a PDF based that is within a given area.
         /// </summary>
         /// <param name="pdfFilePath">PDF location on disk.</param>

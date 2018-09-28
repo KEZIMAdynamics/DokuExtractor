@@ -8,12 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DokuExtractorStandardGUI.Localization;
+using DokuExtractorCore.Model;
 
 namespace DokuExtractorStandardGUI.UserControls
 {
     public partial class ucViewerBase : UserControl
     {
-        public delegate void TextSelectedHandler(string selectedText);
+        public delegate void TextSelectedHandler(string selectedText, PercentalAreaInfo areaInfo);
         public event TextSelectedHandler TextSelected;
 
         public ucViewerBase()
@@ -31,9 +32,18 @@ namespace DokuExtractorStandardGUI.UserControls
             MessageBox.Show(Translation.LanguageStrings.MsgDllNotFound, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        public void FireTextSelected(string selectedText)
+        public void FireTextSelected(string selectedText, int pageNumber, float percentalTopLeftX, float percentalTopLeftY, float percentalWidth, float percentalHeight)
         {
-            TextSelected?.Invoke(selectedText);
+            var areaInfo = new PercentalAreaInfo()
+            {
+                PageNumber = pageNumber,
+                TopLeftX = percentalTopLeftX,
+                TopLeftY = percentalTopLeftY,
+                Width = percentalWidth,
+                Height = percentalHeight
+            };
+
+            TextSelected?.Invoke(selectedText, areaInfo);
         }
     }
 }
