@@ -21,6 +21,11 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         /// </summary>
         public event RegexOrPositionHelperHandler RegexOrPositionHelper;
 
+        /// <summary>
+        /// Indicates, if this UC is within the (global) class template editor
+        /// </summary>
+        public bool IsInClassTemplateEditor { get; set; }
+
         private DocumentClassTemplate classTemplate = new DocumentClassTemplate();
         private DocumentGroupTemplate groupTemplate = new DocumentGroupTemplate();
 
@@ -36,6 +41,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         {
             var newDataField = (ucDataFieldClassTemplate)Activator.CreateInstance(UserControlSelector.DataFieldClassTemplateUserControl);
             newDataField.Tag = Guid.NewGuid();
+            newDataField.IsInTemplateEditor = this.IsInClassTemplateEditor;
             newDataField.RegexOrPositionHelper += FireRegexOrPositionHelper;
             newDataField.DataFieldEraser += DeleteDataFieldClassTemplate;
 
@@ -297,6 +303,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
                 {
                     var newDataField = (ucDataFieldClassTemplate)Activator.CreateInstance(UserControlSelector.DataFieldClassTemplateUserControl, item);
                     newDataField.Tag = Guid.NewGuid();
+                    newDataField.IsInTemplateEditor = this.IsInClassTemplateEditor;
                     newDataField.RegexOrPositionHelper += FireRegexOrPositionHelper;
                     newDataField.DataFieldEraser += DeleteDataFieldClassTemplate;
                     flowLayoutPanel1.Controls.Add(newDataField);
@@ -430,16 +437,16 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         }
 
         /// <summary>
-        /// Activates the regex expression helper for defining regex expressions
+        /// Activates the regex expression helper for defining regex expressions and the position helper for defining value areas
         /// </summary>
-        public void ActivateRegexExpressionHelper()
+        public void ActivateRegexAndPositionHelper()
         {
             foreach (Control control in flowLayoutPanel1.Controls)
             {
                 var dataFieldControl = control as ucDataFieldClassTemplate;
                 if (dataFieldControl != null)
                 {
-                    dataFieldControl.ActivateRegexExpressionHelper();
+                    dataFieldControl.ActivateRegexAndPositionHelper();
                 }
             }
         }

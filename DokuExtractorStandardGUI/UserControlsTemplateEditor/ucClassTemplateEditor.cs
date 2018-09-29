@@ -33,6 +33,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         public ucClassTemplateEditor()
         {
             InitializeComponent();
+            ucSingleTemplateEditor1.IsInClassTemplateEditor = true;
         }
 
         private void ucClassTemplateEditor_Load(object sender, EventArgs e)

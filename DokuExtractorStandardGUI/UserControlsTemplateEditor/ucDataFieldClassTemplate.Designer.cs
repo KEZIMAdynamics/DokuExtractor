@@ -132,6 +132,7 @@
             this.butStartRegexOrPositionHelper.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.butStartRegexOrPositionHelper.BackColor = System.Drawing.Color.White;
+            this.butStartRegexOrPositionHelper.Enabled = false;
             this.butStartRegexOrPositionHelper.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.butStartRegexOrPositionHelper.Location = new System.Drawing.Point(10, 114);
             this.butStartRegexOrPositionHelper.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);

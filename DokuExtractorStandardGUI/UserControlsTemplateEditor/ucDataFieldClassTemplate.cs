@@ -47,8 +47,10 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         /// </summary>
         public PercentalAreaInfo ValueArea { get; set; } = new PercentalAreaInfo();
 
+        public bool IsInTemplateEditor { get; set; }
+
         private DataFieldClassTemplate dataFieldClassTemplate { get; set; } = new DataFieldClassTemplate();
-        private bool isRegexExpressionHelperActivated = false;
+        private bool isRegexAndPositionHelperActivated = false;
 
         /// <summary>
         /// Data field user control for class templates
@@ -89,16 +91,17 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         }
 
         /// <summary>
-        /// Activates the regex expression helper for defining regex expressions
+        /// Activates the regex expression helper for defining regex expressions and the position helper for defining value areas
         /// </summary>
-        public void ActivateRegexExpressionHelper()
+        public void ActivateRegexAndPositionHelper()
         {
             txtRegexOrPosition.Enabled = false;
+            butStartRegexOrPositionHelper.Enabled = true;
             lblRegexOrPosition.Font = new Font(lblRegexOrPosition.Font.Name, lblRegexOrPosition.Font.SizeInPoints, FontStyle.Underline);
-            if (isRegexExpressionHelperActivated == false)
+            if (isRegexAndPositionHelperActivated == false)
             {
                 lblRegexOrPosition.DoubleClick += LblRegexOrPosition_DoubleClick;
-                isRegexExpressionHelperActivated = true;
+                isRegexAndPositionHelperActivated = true;
             }
         }
 
@@ -222,6 +225,18 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         {
             LocalizeConditionally();
             txtRegexOrPosition.Text = string.Empty;
+
+            if ((DataFieldMode)FieldModeInt == DataFieldMode.Regex)
+            {
+                if (this.IsInTemplateEditor)
+                    txtRegexOrPosition.Enabled = true;
+            }
+            else if ((DataFieldMode)FieldModeInt == DataFieldMode.Position)
+            {
+                if (this.IsInTemplateEditor)
+                    txtRegexOrPosition.Enabled = false;
+            }
+
         }
     }
 }

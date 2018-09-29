@@ -19,6 +19,11 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         /// </summary>
         public event RegexOrPositionHelperHandler RegexOrPositionHelper;
 
+        /// <summary>
+        /// Indicates, if this UC is within the (global) class template editor
+        /// </summary>
+        public bool IsInClassTemplateEditor { set { ucDataFieldEditor1.IsInClassTemplateEditor = value; } }
+
         public ucSingleTemplateEditor()
         {
             InitializeComponent();
@@ -26,11 +31,11 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         }
 
         /// <summary>
-        /// Activates the regex expression helper for defining regex expressions
+        /// Activates the regex expression helper for defining regex expressions and the position helper for defining value areas
         /// </summary>
-        public void ActivateRegexExpressionHelper()
+        public void ActivateRegexAndPositionHelper()
         {
-            ucDataFieldEditor1.ActivateRegexExpressionHelper();
+            ucDataFieldEditor1.ActivateRegexAndPositionHelper();
         }
 
         /// <summary>

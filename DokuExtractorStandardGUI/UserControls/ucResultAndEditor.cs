@@ -66,7 +66,7 @@ namespace DokuExtractorStandardGUI.UserControls
         {
             ucExtractedData1.ShowExtractedData(result, classTemplate, groupTemplate);
             ucSingleTemplateEditor1.ShowPropertiesAndDataFields(classTemplate);
-            ucSingleTemplateEditor1.ActivateRegexExpressionHelper();
+            ucSingleTemplateEditor1.ActivateRegexAndPositionHelper();
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace DokuExtractorStandardGUI.UserControls
         {
             ucSingleTemplateEditor1.ShowPropertiesAndDataFields(classTemplate);
             ucExtractedData1.ShowExtractedData(new FieldExtractionResult(), classTemplate, groupTemplate);
-            ucSingleTemplateEditor1.ActivateRegexExpressionHelper();
+            ucSingleTemplateEditor1.ActivateRegexAndPositionHelper();
         }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace DokuExtractorStandardGUI.UserControls
         public void AddDataField()
         {
             ucSingleTemplateEditor1.AddDataFieldClassTemplate();
-            ucSingleTemplateEditor1.ActivateRegexExpressionHelper();
+            ucSingleTemplateEditor1.ActivateRegexAndPositionHelper();
         }
 
         /// <summary>
