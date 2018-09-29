@@ -34,6 +34,11 @@ namespace DokuExtractorStandardGUI
 
         private void butOk_Click(object sender, EventArgs e)
         {
+            OnButOkClick();
+        }
+
+        private void OnButOkClick()
+        {
             var selectedRows = dataGridView1.SelectedRows;
             if (selectedRows != null)
             {
@@ -58,6 +63,14 @@ namespace DokuExtractorStandardGUI
         private void Localize()
         {
             dataGridView1.Columns["col" + nameof(DocumentGroupTemplate.TemplateGroupName)].HeaderText = Translation.LanguageStrings.TemplateGroupName;
+        }
+
+        private void dataGridView1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                OnButOkClick();
+            }
         }
     }
 }

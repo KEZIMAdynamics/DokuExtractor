@@ -173,13 +173,29 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
         private void butDeleteCondition_Click(object sender, EventArgs e)
         {
             var selectedRows = dgvConditions.SelectedRows;
-            if (selectedRows != null)
+            if (selectedRows != null && selectedRows.Count > 0)
+            {
                 foreach (DataGridViewRow row in selectedRows)
                 {
                     var conditionValue = row.DataBoundItem as ConditionValue;
                     this.ConditionsBindingList.Remove(conditionValue);
                     break;
                 }
+            }
+            else if (selectedRows != null && selectedRows.Count == 0)
+            {
+                var selectedCells = dgvConditions.SelectedCells;
+                if (selectedCells != null && selectedCells.Count > 0)
+                {
+                    foreach (DataGridViewCell cell in selectedCells)
+                    {
+                        var row = dgvConditions.Rows[cell.RowIndex];
+                        var conditionValue = row.DataBoundItem as ConditionValue;
+                        this.ConditionsBindingList.Remove(conditionValue);
+                        break;
+                    }
+                }
+            }
         }
 
         private void butDeleteConditionalField_Click(object sender, EventArgs e)

@@ -45,6 +45,7 @@
             this.txtRetVal.Name = "txtRetVal";
             this.txtRetVal.Size = new System.Drawing.Size(386, 23);
             this.txtRetVal.TabIndex = 0;
+            this.txtRetVal.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtRetVal_KeyDown);
             // 
             // butOk
             // 
@@ -81,6 +82,7 @@
             this.cbxRetVal.Name = "cbxRetVal";
             this.cbxRetVal.Size = new System.Drawing.Size(347, 24);
             this.cbxRetVal.TabIndex = 6;
+            this.cbxRetVal.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cbxRetVal_KeyDown);
             // 
             // butIndividualConditionalValue
             // 

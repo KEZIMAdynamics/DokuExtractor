@@ -31,11 +31,11 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmGroupTemplateSelection));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.butOk = new System.Windows.Forms.Button();
-            this.groupTemplatesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTemplateGroupName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupTemplatesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.frmGroupTemplateSelectionBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.butOk = new System.Windows.Forms.Button();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupTemplatesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.frmGroupTemplateSelectionBindingSource)).BeginInit();
@@ -59,6 +59,24 @@
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(465, 199);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView1_KeyDown);
+            // 
+            // colTemplateGroupName
+            // 
+            this.colTemplateGroupName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colTemplateGroupName.DataPropertyName = "TemplateGroupName";
+            this.colTemplateGroupName.HeaderText = "TemplateGroupName";
+            this.colTemplateGroupName.Name = "colTemplateGroupName";
+            this.colTemplateGroupName.ReadOnly = true;
+            // 
+            // groupTemplatesBindingSource
+            // 
+            this.groupTemplatesBindingSource.DataMember = "GroupTemplates";
+            this.groupTemplatesBindingSource.DataSource = this.frmGroupTemplateSelectionBindingSource;
+            // 
+            // frmGroupTemplateSelectionBindingSource
+            // 
+            this.frmGroupTemplateSelectionBindingSource.DataSource = typeof(DokuExtractorStandardGUI.frmGroupTemplateSelection);
             // 
             // butOk
             // 
@@ -73,28 +91,11 @@
             this.butOk.UseVisualStyleBackColor = false;
             this.butOk.Click += new System.EventHandler(this.butOk_Click);
             // 
-            // groupTemplatesBindingSource
-            // 
-            this.groupTemplatesBindingSource.DataMember = "GroupTemplates";
-            this.groupTemplatesBindingSource.DataSource = this.frmGroupTemplateSelectionBindingSource;
-            // 
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.DataPropertyName = "PreSelectionCondition";
             this.dataGridViewTextBoxColumn1.HeaderText = "PreSelectionCondition";
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            // 
-            // colTemplateGroupName
-            // 
-            this.colTemplateGroupName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colTemplateGroupName.DataPropertyName = "TemplateGroupName";
-            this.colTemplateGroupName.HeaderText = "TemplateGroupName";
-            this.colTemplateGroupName.Name = "colTemplateGroupName";
-            this.colTemplateGroupName.ReadOnly = true;
-            // 
-            // frmGroupTemplateSelectionBindingSource
-            // 
-            this.frmGroupTemplateSelectionBindingSource.DataSource = typeof(DokuExtractorStandardGUI.frmGroupTemplateSelection);
             // 
             // frmGroupTemplateSelection
             // 

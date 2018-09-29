@@ -71,6 +71,11 @@ namespace DokuExtractorStandardGUI
 
         private void butOk_Click(object sender, EventArgs e)
         {
+            OnButOkClick();
+        }
+
+        private void OnButOkClick()
+        {
             if (isComboBoxForm)
             {
                 if (string.IsNullOrWhiteSpace(cbxRetVal.SelectedItem?.ToString()))
@@ -111,6 +116,22 @@ namespace DokuExtractorStandardGUI
         private void butIndividualConditionalValue_Click(object sender, EventArgs e)
         {
             IndividualConditionalValueButtonClicked?.Invoke(this, e);
+        }
+
+        private void cbxRetVal_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                OnButOkClick();
+            }
+        }
+
+        private void txtRetVal_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                OnButOkClick();
+            }
         }
     }
 }
