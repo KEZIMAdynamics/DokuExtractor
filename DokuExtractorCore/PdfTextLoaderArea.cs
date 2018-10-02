@@ -56,10 +56,10 @@ namespace DokuExtractorCore
         public async Task<string> GetTextFromPdf(string pdfFilePath, PercentalAreaInfo cropAreaInfo, PdfPageSizeInfo pdfPageSizeInfo)
         {
             var pdfInfo = pdfPageSizeInfo;
-            var x = (int)Math.Round(cropAreaInfo.TopLeftX / 100 * pdfInfo.SizeX, 0);
-            var y = (int)Math.Round(cropAreaInfo.TopLeftY / 100 * pdfInfo.SizeY, 0);
-            var W = (int)Math.Round(cropAreaInfo.Width / 100 * pdfInfo.SizeX, 0);
-            var H = (int)Math.Round(cropAreaInfo.Height / 100 * pdfInfo.SizeY, 0);
+            var x = (int)Math.Round(cropAreaInfo.TopLeftX * pdfInfo.SizeX, 0);
+            var y = (int)Math.Round(cropAreaInfo.TopLeftY * pdfInfo.SizeY, 0);
+            var W = (int)Math.Round(cropAreaInfo.Width * pdfInfo.SizeX, 0);
+            var H = (int)Math.Round(cropAreaInfo.Height * pdfInfo.SizeY, 0);
 
             var pdfToTextOptions = " -f " + cropAreaInfo.PageNumber + " -l " + cropAreaInfo.PageNumber + " -x " + x + " -y " + y + " -W " + W + " -H " + H + " -layout -nopgbrk ";
 
@@ -87,8 +87,8 @@ namespace DokuExtractorCore
 
             var splitSize = sizeString.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-            retVal.SizeX = float.Parse(splitSize[2]);
-            retVal.SizeY = float.Parse(splitSize[4]);
+            retVal.SizeX = float.Parse(splitSize[2].Replace('.',','), new System.Globalization.CultureInfo("de-DE"));
+            retVal.SizeY = float.Parse(splitSize[4].Replace('.',','), new System.Globalization.CultureInfo("de-DE"));
             retVal.Unit = splitSize[5];
 
             return retVal;

@@ -83,7 +83,7 @@
   "MsgAskDeleteFile": "Soll die Datei wirklich gelöscht werden?",
   "MsgAskDeleteLanguage": "Soll diese Sprache wirklich gelöscht werden?",
   "MsgAskStartRegexExpressionHelper": "Regex-Expression-Helper starten?",
-  "MsgAskStartAreaPositionHelper": "Wertebereichsauswahl starten?",
+  "MsgAskStartAreaPositionHelper": "Wertbereichsauswahl starten?",
   "MsgAskAcceptRegexExpressionHelperResult": "Ist das folgende Ergebnis akzeptabel?",
   "MsgAskAdditionalRegexExpression": "Soll der Ausdruck als ZUSÄTZLICHER Ausdruck hinzugefügt werden?",
   "MsgNoRegexExpressionFinderResult": "Keine Regex-Expression gefunden!",

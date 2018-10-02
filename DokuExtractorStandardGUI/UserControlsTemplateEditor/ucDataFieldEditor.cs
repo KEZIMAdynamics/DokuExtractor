@@ -520,12 +520,20 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
 
                 var splitArray = new string[1];
                 splitArray[0] = Environment.NewLine;
-                var regexArray = ucDataFieldClassTemplate.RegexText.Split(splitArray, StringSplitOptions.RemoveEmptyEntries);
+                var regexArray = new string[0];
 
-                foreach (var item in regexArray)
+                if (retVal.FieldMode == DataFieldMode.Regex)
                 {
-                    retVal.RegexExpressions.Add(item);
+                    retVal.ValueArea = new PercentalAreaInfo();
+                    regexArray = ucDataFieldClassTemplate.RegexText.Split(splitArray, StringSplitOptions.RemoveEmptyEntries);
+
+                    foreach (var item in regexArray)
+                    {
+                        retVal.RegexExpressions.Add(item);
+                    }
                 }
+                else if (retVal.FieldMode == DataFieldMode.Position)
+                    regexArray = new string[0];
             }
             return retVal;
         }

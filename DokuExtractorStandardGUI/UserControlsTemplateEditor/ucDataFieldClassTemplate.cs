@@ -71,7 +71,9 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             cbxFieldType.MouseWheel += (o, e) => ((HandledMouseEventArgs)e).Handled = true;
             cbxFieldMode.MouseWheel += (o, e) => ((HandledMouseEventArgs)e).Handled = true;
             this.dataFieldClassTemplate = dataFieldClassTemplate;
-            ChangeValueArea(dataFieldClassTemplate.ValueArea);
+
+            if (dataFieldClassTemplate.FieldMode == DataFieldMode.Position)
+                ChangeValueArea(dataFieldClassTemplate.ValueArea);
         }
 
         private void ucDataField_Load(object sender, EventArgs e)
@@ -83,7 +85,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
 
             cbxFieldType.SelectedIndex = (int)(this.dataFieldClassTemplate.FieldType);
 
-            if (dataFieldClassTemplate.RegexExpressions != null)
+            if (dataFieldClassTemplate.FieldMode == DataFieldMode.Regex && dataFieldClassTemplate.RegexExpressions != null)
                 foreach (var item in dataFieldClassTemplate.RegexExpressions)
                 {
                     txtRegexOrPosition.Text = txtRegexOrPosition.Text + item + Environment.NewLine;
@@ -233,10 +235,12 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
             }
             else if ((DataFieldMode)FieldModeInt == DataFieldMode.Position)
             {
+                if (this.ValueArea != null && (this.ValueArea.TopLeftX > 0 || this.ValueArea.TopLeftY > 0 || this.ValueArea.Height > 0 || this.ValueArea.Width > 0))
+                    ChangeValueArea(this.ValueArea);
+
                 if (this.IsInTemplateEditor)
                     txtRegexOrPosition.Enabled = false;
             }
-
         }
     }
 }

@@ -44,7 +44,7 @@ namespace DokuExtractorCore
                     if (item.FieldType == DataFieldType.Currency)
                         filledExpression = filledExpression.Replace("[" + item.Name + "]", MakeCurrencyTextParseableAsFloat(item.Value));
                     else
-                        filledExpression = filledExpression.Replace("[" + item.Name + "]", item.Value.Replace(',', '.'));
+                        filledExpression = filledExpression.Replace("[" + item.Name + "]", item.Value.Replace(',', '.').Replace(" ", string.Empty).Replace("'",string.Empty));
                 }
 
                 var calculator = new XtensibleCalculator();
@@ -110,7 +110,7 @@ namespace DokuExtractorCore
             if (string.IsNullOrEmpty(inputText))
                 return "0";
 
-            var retVal = inputText.Replace("‚", ","); // Replace Comma with ASCII Code Dec130 with comma with ASCII Code Dec44 to unfuck OCR results
+            var retVal = inputText.Replace("‚", ",").Replace(" ", string.Empty).Replace("'",string.Empty); // Replace Comma with ASCII Code Dec130 with comma with ASCII Code Dec44 to unfuck OCR results
 
             retVal = retVal.Replace(".", ",").TrimEnd(','); // Prepare decimal seperator magic by setting als seperators to ','...
 
