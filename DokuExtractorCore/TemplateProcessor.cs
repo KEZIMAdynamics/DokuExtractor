@@ -251,7 +251,7 @@ namespace DokuExtractorCore
                     return true;
                 }
                 else
-                    return false;
+                    return true;
             }
             catch (Exception ex)
             {
@@ -436,7 +436,10 @@ namespace DokuExtractorCore
                     retVal.DataFields.Add(newDataField);
                 }
 
-                retVal.ConditionalFields = baseGroupTemplate.ConditionalFields.Where(x => x.OnlyStoreInGroupTemplate == false).ToList();
+                //It's important to create a clone of the List<ConditionalFieldTemplate> to make the reference to the baseGroupTemplate.ConditionalFields disappear
+                var baseConditionalFields = baseGroupTemplate.ConditionalFields.Where(x => x.OnlyStoreInGroupTemplate == false).ToList();
+                var objectClone = HelperExtensions.JsonDeepClone(baseConditionalFields);
+                retVal.ConditionalFields.AddRange(objectClone);
             }
 
             return retVal;

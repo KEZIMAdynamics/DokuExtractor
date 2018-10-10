@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -83,6 +84,19 @@ namespace DokuExtractorCore
                     retVal.Add(item);
             }
 
+            return retVal;
+        }
+
+        /// <summary>
+        /// Clones an object
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="sourceObject">object which shall be cloned</param>
+        /// <returns></returns>
+        public static T JsonDeepClone<T>(this T sourceObject)
+        {
+            var jsonClone = JsonConvert.SerializeObject(sourceObject);
+            var retVal = JsonConvert.DeserializeObject<T>(jsonClone);
             return retVal;
         }
     }
