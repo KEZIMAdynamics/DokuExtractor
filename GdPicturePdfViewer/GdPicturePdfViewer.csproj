@@ -94,6 +94,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DokuExtractorCore\DokuExtractorCore.csproj">
+      <Project>{7A7F0155-A57F-4F47-9441-A0FD725719CB}</Project>
+      <Name>DokuExtractorCore</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DokuExtractorStandardGUI\DokuExtractorStandardGUI.csproj">
       <Project>{3305cf5d-f4c7-48b0-9d4d-a60f7bb4b61f}</Project>
       <Name>DokuExtractorStandardGUI</Name>

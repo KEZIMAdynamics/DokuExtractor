@@ -60,6 +60,20 @@ namespace DokuExtractorCore
             return retVal;
         }
 
+        public async Task<string> GetTextFromPdf(string pdfFilePath, int pageNumber, float percentalLeftX, float percentalTopY, float percentalWidth, float percentalHeigth)
+        {
+            var cropArea = new PercentalAreaInfo()
+            {
+                PageNumber = pageNumber,
+                TopLeftX = percentalLeftX,
+                TopLeftY = percentalTopY,
+                Width = percentalWidth,
+                Height = percentalHeigth
+            };
+
+            return await AreaLoader.GetTextFromPdf(pdfFilePath, cropArea);
+        }
+
         public async Task<string> GetTextFromPdf(string pdfFilePath, PercentalAreaInfo cropAreaInfo)
         {
             return await AreaLoader.GetTextFromPdf(pdfFilePath, cropAreaInfo);

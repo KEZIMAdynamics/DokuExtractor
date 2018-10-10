@@ -6,19 +6,29 @@ namespace DokuExtractorCore.Model
 {
    public class PercentalAreaInfo
     {
-        //Page number of the document
+        /// <summary>
+        /// Page number of the document
+        /// </summary>
         public int PageNumber { get; set; }
 
-        //Percentual X-Coordinate of the area which is to be extracted
+        /// <summary>
+        /// Percentual X-Coordinate of the area which is to be extracted
+        /// </summary>
         public float TopLeftX { get; set; }
 
-        //Percentual Y-Coordinate of the area which is to be extracted
+        /// <summary>
+        /// Percentual Y-Coordinate of the area which is to be extracted
+        /// </summary>
         public float TopLeftY { get; set; }
 
-        //Percentual width of the area which is to be extracted
+        /// <summary>
+        /// Percentual width of the area which is to be extracted
+        /// </summary>
         public float Width { get; set; }
 
-        //Percentual height of the area which is to be extracted
+        /// <summary>
+        /// Percentual height of the area which is to be extracted
+        /// </summary>
         public float Height { get; set; }
     }
 }

@@ -107,6 +107,7 @@ namespace DokuExtractorCore
             pdfProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             pdfProcess.StartInfo.RedirectStandardOutput = true;
             pdfProcess.StartInfo.UseShellExecute = false;
+            pdfProcess.StartInfo.CreateNoWindow = true;
 
             //await Task.Run(() => { pdfProcess.Start(); return pdfProcess.StandardOutput.ReadToEnd(); });
             pdfProcess.Start();

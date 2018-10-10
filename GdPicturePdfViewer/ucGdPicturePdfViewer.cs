@@ -9,13 +9,17 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using GdPicture14;
 using DokuExtractorStandardGUI.UserControls;
+using DokuExtractorCore;
 
 namespace GdPicturePdfViewer
 {
     public partial class ucGdPicturePdfViewer : ucViewerBase
     {
+        public IPdfTextLoaderFull PdfTextLoader { get; set; } = new PdfTextLoaderFull();
+
         private GdPicturePDF gdPdf = new GdPicturePDF();
         private ToolTip tooltip = new ToolTip();
+        private string pdfPath = string.Empty;
 
         public ucGdPicturePdfViewer()
         {
@@ -32,6 +36,7 @@ namespace GdPicturePdfViewer
         /// <param name="pdfPath">Path of the PDF file</param>
         public override async Task LoadPdf(string pdfPath)
         {
+            this.pdfPath = pdfPath;
             gdPdf = new GdPicturePDF();
             var gdStatus = gdPdf.LoadFromFile(pdfPath, false);
             if (gdStatus == GdPictureStatus.OK)
@@ -47,7 +52,7 @@ namespace GdPicturePdfViewer
             gdViewer1.CloseDocument();
         }
 
-        private void gdViewer1_MouseUp(object sender, MouseEventArgs e)
+        private async void gdViewer1_MouseUp(object sender, MouseEventArgs e)
         {
             if (gdViewer1.IsRect() && e.Button == MouseButtons.Left)
             {
@@ -57,15 +62,18 @@ namespace GdPicturePdfViewer
                 float height = 0;
 
                 gdViewer1.GetRectCoordinatesOnDocumentInches(ref left, ref top, ref width, ref height);
-                var text = gdViewer1.GetPageTextArea(gdViewer1.CurrentPage, left, top, width, height);
+                
+                float percentalTopLeftX = (float)gdViewer1.GetRectLeftOnDocument() / (float)gdViewer1.PageWidth;
+                float percentalTopLeftY = (float)gdViewer1.GetRectTopOnDocument() / (float)gdViewer1.PageHeight;
+                float percentalWidth = (float)gdViewer1.GetRectWidthOnDocument() / (float)gdViewer1.PageWidth;
+                float percentalHeight = (float)gdViewer1.GetRectHeightOnDocument() / (float)gdViewer1.PageHeight;
+
+                var text = await PdfTextLoader.GetTextFromPdf(pdfPath, gdViewer1.CurrentPage, percentalTopLeftX, percentalTopLeftY, percentalWidth, percentalHeight);
+                //var text = gdViewer1.GetPageTextArea(gdViewer1.CurrentPage, left, top, width, height);
+
                 if (string.IsNullOrEmpty(text) == false)
                 {
                     tooltip.Hide(this);
-
-                    float percentalTopLeftX = (float)gdViewer1.GetRectLeftOnDocument() / (float)gdViewer1.PageWidth;
-                    float percentalTopLeftY = (float)gdViewer1.GetRectTopOnDocument() / (float)gdViewer1.PageHeight;
-                    float percentalWidth = (float)gdViewer1.GetRectWidthOnDocument() / (float)gdViewer1.PageWidth;
-                    float percentalHeight = (float)gdViewer1.GetRectHeightOnDocument() / (float)gdViewer1.PageHeight;
 
                     FireTextSelected(text, gdViewer1.CurrentPage, percentalTopLeftX, percentalTopLeftY, percentalWidth, percentalHeight);
                     Clipboard.SetText(text);

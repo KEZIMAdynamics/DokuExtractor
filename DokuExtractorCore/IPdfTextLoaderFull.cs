@@ -29,6 +29,18 @@ namespace DokuExtractorCore
         /// <returns></returns>
         Task<string> GetTextFromPdf(string pdfFilePath, PercentalAreaInfo cropAreaInfo);
 
+        /// <summary>
+        /// Gets text from a PDF based that is within a given area.
+        /// </summary>
+        /// <param name="pdfFilePath">PDF location on disk.</param>
+        /// <param name="pageNumber">Page number of the document</param>
+        /// <param name="percentalLeftX">Percentual X-Coordinate of the area which is to be extracted</param>
+        /// <param name="percentalTopY">Percentual Y-Coordinate of the area which is to be extracted</param>
+        /// <param name="percentalWidth">Percentual width of the area which is to be extracted</param>
+        /// <param name="percentalHeigth">Percentual height of the area which is to be extracted</param>
+        /// <returns></returns>
+        Task<string> GetTextFromPdf(string pdfFilePath, int pageNumber, float percentalLeftX, float percentalTopY, float percentalWidth, float percentalHeigth);
+
         Task<List<DataFieldResult>> GetTextFromPdfForPositionalDataFields(string pdfFilePath, List<DataFieldClassTemplate> datafields);
 
         string CheckMD5(string filename);
