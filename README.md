@@ -53,6 +53,8 @@ This basically means:
 -  DokuExtractor licenses are **free** for commercial projects for **individual developers and small business**.
 -  If you are *not* an individual developer or a small business and want to use DokuExtractor for commercial projects, you have to **purchase** a license.
 
+All DokuExtractor licenses include **royalty free deployment**.
+
 For more detailed information please refer to the [LICENSE.md](https://github.com/KEZIMAdynamics/DokuExtractor/blob/master/LICENSE.md) file in this repository.
 
 
