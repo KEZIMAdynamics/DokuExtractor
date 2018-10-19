@@ -1,3 +1,5 @@
+[![Build Status](https://dev.azure.com/thomas0077/thomas_0077/_apis/build/status/KEZIMAdynamics.DokuExtractor)](https://dev.azure.com/thomas0077/thomas_0077/_build/latest?definitionId=1)
+
 # DokuExtractor
 
 Easily **extract data** from PDF **documents**!
