@@ -12,6 +12,9 @@ using System.Threading.Tasks;
 
 namespace DokuExtractorCore
 {
+    /// <summary>
+    /// PDF text loader area
+    /// </summary>
     public class PdfTextLoaderArea : WorkingWithPopplerBase, IPdfTextLoaderArea
     {
         /// <summary>

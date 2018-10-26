@@ -35,7 +35,9 @@ namespace DokuExtractorStandardGUI.UserControls
                 LoadViewerPlugin(UserControlSelector.ViewerPluginPath);
             }
             catch (Exception ex)
-            { }
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         private void ucViewer_Load(object sender, EventArgs e)

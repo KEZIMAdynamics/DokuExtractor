@@ -7,8 +7,14 @@ using System.Threading.Tasks;
 
 namespace DokuExtractorCore
 {
+    /// <summary>
+    /// Two line table processor
+    /// </summary>
     public class TwoLineTableProcessor
     {
+        /// <summary>
+        /// Runs two line table processor test
+        /// </summary>
         public void RunTest()
         {
             string LineTableInbut = @"Pos, EAN Stück/ Listen Nettopreis Pos,
@@ -38,13 +44,17 @@ LS/RG 4003318 Bezeichnung Anzahl preis je Stück gesamt";   //Inputstring, 2 lin
             //Table1.FirstLine = Table1.OcrEmptySpaceReplace(OldString, NewString)[0].ToString();
             //Table1.SecondLine = Table1.OcrEmptySpaceReplace(OldString, NewString)[1].ToString();
 
-                        CheckIfNeedEmptySpaceReplace(table1);
+            CheckIfNeedEmptySpaceReplace(table1);
 
             List<List<string>> Final2LineTable = ExtractTwoLineTableLinePairs(table1);
             var bla = ExtractTwoLineTableKeyValues(table1);
         }
 
-
+        /// <summary>
+        /// Extracts two line table key values
+        /// </summary>
+        /// <param name="twoLineTable"></param>
+        /// <returns></returns>
         public Dictionary<string, string> ExtractTwoLineTableKeyValues(TwoLineTable twoLineTable)
         {
             var retVal = new Dictionary<string, string>();
@@ -68,6 +78,11 @@ LS/RG 4003318 Bezeichnung Anzahl preis je Stück gesamt";   //Inputstring, 2 lin
             return retVal;
         }
 
+        /// <summary>
+        /// Extracts two line table line pairs
+        /// </summary>
+        /// <param name="twoLineTable"></param>
+        /// <returns></returns>
         public List<List<string>> ExtractTwoLineTableLinePairs(TwoLineTable twoLineTable)   // Erzeugt die List of Lists mit den richtig zugeordneten Elementen
         {
             List<List<string>> TableListOfStrings = new List<List<string>>();
@@ -94,8 +109,11 @@ LS/RG 4003318 Bezeichnung Anzahl preis je Stück gesamt";   //Inputstring, 2 lin
             }
         }
 
-
-
+        /// <summary>
+        /// Checks if empty space replace is needed
+        /// </summary>
+        /// <param name="twoLineTable"></param>
+        /// <returns></returns>
         public bool CheckIfNeedEmptySpaceReplace(TwoLineTable twoLineTable) //Checks if need Blankspace(Emptyspace)  
         {
             {
@@ -113,6 +131,13 @@ LS/RG 4003318 Bezeichnung Anzahl preis je Stück gesamt";   //Inputstring, 2 lin
             }
         }
 
+        /// <summary>
+        /// OCR empty space replace
+        /// </summary>
+        /// <param name="twoLineTable"></param>
+        /// <param name="OldString"></param>
+        /// <param name="ReplaceOldString"></param>
+        /// <returns></returns>
         public TwoLineTable OcrEmptySpaceReplace(TwoLineTable twoLineTable, string OldString, string ReplaceOldString)  // Either replaces faulty OCR input (save only localy), or removes Emptyspace, so empty space count works and 
         {
             twoLineTable.FirstLine = twoLineTable.FirstLine.Replace(OldString, ReplaceOldString);

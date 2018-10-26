@@ -41,7 +41,9 @@ namespace DokuExtractorTableGUI
                     this.dataGridView1.Rows.Add(row);
                 }
                 catch (Exception ex)
-                { }
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
         }
     }

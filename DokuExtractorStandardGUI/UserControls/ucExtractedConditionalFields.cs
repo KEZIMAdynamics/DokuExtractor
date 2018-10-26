@@ -73,7 +73,9 @@ namespace DokuExtractorStandardGUI.UserControls
                     }
                 }
                 catch (Exception ex)
-                { }
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
         }
 
@@ -202,7 +204,9 @@ namespace DokuExtractorStandardGUI.UserControls
                             }
                         }
                         catch (Exception ex)
-                        { }
+                        {
+                            Console.WriteLine(ex.Message);
+                        }
                     }
                     else
                     {
@@ -211,7 +215,9 @@ namespace DokuExtractorStandardGUI.UserControls
                             OnDgvConditionalFieldCellDoubleClick(sender, new DataGridViewCellEventArgs(colIndex, e.RowIndex));
                         }
                         catch (Exception ex)
-                        { }
+                        {
+                            Console.WriteLine(ex.Message);
+                        }
                     }
                 }
             }
@@ -278,7 +284,9 @@ namespace DokuExtractorStandardGUI.UserControls
                 }
             }
             catch (Exception ex)
-            { }
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }
