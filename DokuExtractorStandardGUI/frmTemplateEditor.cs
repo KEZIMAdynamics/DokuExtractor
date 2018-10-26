@@ -104,9 +104,7 @@ namespace DokuExtractorStandardGUI
                 ucClassTemplateEditor1.ClassTemplateDeletedInClassTemplateEditor -= UcClassTemplateEditor1_ClassTemplateDeletedInClassTemplateEditor;
             }
             catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            { }
         }
     }
 }

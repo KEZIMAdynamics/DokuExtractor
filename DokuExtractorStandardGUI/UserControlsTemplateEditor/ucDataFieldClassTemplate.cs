@@ -178,9 +178,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
                     FireRegexOrPositionHelper(id, (DataFieldType)FieldTypeInt, (DataFieldMode)FieldModeInt);
                 }
                 catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
+                { }
             }
         }
 
@@ -192,9 +190,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
                 FireDataFieldEraser(id);
             }
             catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            { }
         }
 
         private void FireRegexOrPositionHelper(Guid id, DataFieldType dataFieldType, DataFieldMode dataFieldMode)

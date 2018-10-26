@@ -8,9 +8,6 @@ using System.Threading.Tasks;
 
 namespace DokuExtractorCore
 {
-    /// <summary>
-    /// PDF text loader area interface
-    /// </summary>
     public interface IPdfTextLoaderArea
     {
         /// <summary>

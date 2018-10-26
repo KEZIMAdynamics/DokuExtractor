@@ -190,9 +190,7 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
                 FireConditionalFieldEraser(id);
             }
             catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            { }
         }
 
         private void FireConditionalFieldEraser(Guid id)

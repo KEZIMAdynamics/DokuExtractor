@@ -67,9 +67,7 @@ namespace DokuExtractorStandardGUI.UserControls
                     }
                 }
                 catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
+                { }
             }
         }
 

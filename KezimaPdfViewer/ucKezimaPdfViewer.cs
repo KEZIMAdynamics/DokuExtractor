@@ -54,16 +54,12 @@ namespace KezimaPdfViewer
                             Directory.Delete(dir);
                         }
                         catch (Exception ex)
-                        {
-                            Console.WriteLine(ex.Message);
-                        }
+                        { }
                     }
                     Directory.Delete(dexTempPath);
                 }
                 catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
+                { }
             }
         }
 
@@ -143,9 +139,7 @@ namespace KezimaPdfViewer
                     previousActiveBox.BackColor = Color.Black;
                 }
                 catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
+                { }
 
                 imageViewer.BackColor = Color.LightBlue;
                 activePageIndex = int.Parse(imageViewer.Tag.ToString());
@@ -212,9 +206,7 @@ namespace KezimaPdfViewer
                                 g.DrawRectangle(pen, GetRectangleOnImageFromLastPoint(e.Location));
                             }
                             catch (Exception ex)
-                            {
-                                Console.WriteLine(ex.Message);
-                            }
+                            { }
                         }
 
                         pictureBox1.Invalidate();

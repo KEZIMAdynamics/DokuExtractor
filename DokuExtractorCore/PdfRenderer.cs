@@ -8,17 +8,8 @@ using System.Threading.Tasks;
 
 namespace DokuExtractorCore
 {
-    /// <summary>
-    /// PDF renderer
-    /// </summary>
     public class PdfRenderer : WorkingWithPopplerBase, IPdfRenderer
     {
-        /// <summary>
-        /// Renders a PDF to PNGs
-        /// </summary>
-        /// <param name="pdfFilePath"></param>
-        /// <param name="pdfImagesPath"></param>
-        /// <returns></returns>
         public async Task RenderPdfToPngs(string pdfFilePath, string pdfImagesPath)
         {
             if (popplerChecked == false)

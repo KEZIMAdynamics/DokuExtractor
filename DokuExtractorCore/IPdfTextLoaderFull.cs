@@ -7,9 +7,6 @@ using System.Threading.Tasks;
 
 namespace DokuExtractorCore
 {
-    /// <summary>
-    /// PDF text loader full interface
-    /// </summary>
     public interface IPdfTextLoaderFull
     {
         // Currently disabled until it's actually needed.
@@ -25,26 +22,15 @@ namespace DokuExtractorCore
         Task<string> GetTextFromPdf(string pdfFilePath, bool useMd5Cache);
 
         /// <summary>
-        /// Gets text from a PDF that is within a given area.
+        /// Gets text from a PDF based that is within a given area.
         /// </summary>
         /// <param name="pdfFilePath">PDF location on disk.</param>
         /// <param name="cropAreaInfo">Percentual area which is to be extracted.</param>
         /// <returns></returns>
         Task<string> GetTextFromPdf(string pdfFilePath, PercentalAreaInfo cropAreaInfo);
 
-        /// <summary>
-        /// Gets text from PDF for positional data fields
-        /// </summary>
-        /// <param name="pdfFilePath"></param>
-        /// <param name="datafields"></param>
-        /// <returns></returns>
         Task<List<DataFieldResult>> GetTextFromPdfForPositionalDataFields(string pdfFilePath, List<DataFieldClassTemplate> datafields);
 
-        /// <summary>
-        /// Returns MD5-Hashwert
-        /// </summary>
-        /// <param name="filename"></param>
-        /// <returns></returns>
         string CheckMD5(string filename);
     }
 }

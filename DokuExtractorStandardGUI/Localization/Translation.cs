@@ -40,9 +40,7 @@ namespace DokuExtractorStandardGUI.Localization
                 }
             }
             catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            { }
         }
 
         public static List<LanguageStrings> LoadAllLanguageFiles(string languageFolderPath)
@@ -61,9 +59,7 @@ namespace DokuExtractorStandardGUI.Localization
                 }
             }
             catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            { }
 
             return retVal;
         }

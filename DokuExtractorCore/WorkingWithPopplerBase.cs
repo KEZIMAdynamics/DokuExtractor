@@ -8,19 +8,10 @@ using System.Threading.Tasks;
 
 namespace DokuExtractorCore
 {
-    /// <summary>
-    /// Working with poppler base
-    /// </summary>
     public abstract class WorkingWithPopplerBase
     {
-        /// <summary>
-        /// Has poppler been checked
-        /// </summary>
         protected bool popplerChecked;
 
-        /// <summary>
-        /// Supply poppler
-        /// </summary>
         protected void SupplyPoppler()
         {
             if (File.Exists(Path.Combine(Environment.CurrentDirectory, "bin", "pdftotext.exe")) == false)

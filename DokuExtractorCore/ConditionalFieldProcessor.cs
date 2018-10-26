@@ -8,17 +8,8 @@ using System.Threading.Tasks;
 
 namespace DokuExtractorCore
 {
-    /// <summary>
-    /// Processor vor conditioal fields
-    /// </summary>
     public class ConditionalFieldProcessor
     {
-        /// <summary>
-        /// Returns a conditional field result according to the given condition
-        /// </summary>
-        /// <param name="inputText"></param>
-        /// <param name="fieldTemplate">conditional field template</param>
-        /// <returns></returns>
         public ConditionalFieldResult ProcessConditions(string inputText, ConditionalFieldTemplate fieldTemplate)
         {
             switch (fieldTemplate.ConditionType)

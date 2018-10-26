@@ -94,7 +94,6 @@ namespace DokuExtractorStandardGUI.UserControls
                         }
                         catch (Exception e)
                         {
-                            Console.WriteLine(e.Message);
                             retryCounter++;
                         }
                     }
@@ -157,9 +156,7 @@ namespace DokuExtractorStandardGUI.UserControls
                             DoDragDrop(dragDropDaten, DragDropEffects.Copy);
                         }
                         catch (Exception ex)
-                        {
-                            Console.WriteLine(ex.Message);
-                        }
+                        { }
 
                         break;
                     }

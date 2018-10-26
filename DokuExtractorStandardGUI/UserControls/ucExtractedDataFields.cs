@@ -60,9 +60,7 @@ namespace DokuExtractorStandardGUI.UserControls
                     }
                 }
                 catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
+                { }
             }
         }
 
@@ -134,9 +132,7 @@ namespace DokuExtractorStandardGUI.UserControls
                 }
             }
             catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            { }
         }
     }
 }

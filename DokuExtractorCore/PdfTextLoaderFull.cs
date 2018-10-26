@@ -18,9 +18,6 @@ namespace DokuExtractorCore
     /// </summary>
     public class PdfTextLoaderFull : WorkingWithPopplerBase, IPdfTextLoaderFull
     {
-        /// <summary>
-        /// PDF text loader area interface
-        /// </summary>
         public IPdfTextLoaderArea AreaLoader { get; set; } = new PdfTextLoaderArea();
 
         /// <summary>
@@ -34,12 +31,6 @@ namespace DokuExtractorCore
             return await GetTextFromPdf(pdfFilePath, useMd5Cache, "-layout ");
         }
 
-        /// <summary>
-        /// Gets text from PDF for positional data fields
-        /// </summary>
-        /// <param name="pdfFilePath"></param>
-        /// <param name="datafields"></param>
-        /// <returns></returns>
         public async Task<List<DataFieldResult>> GetTextFromPdfForPositionalDataFields(string pdfFilePath, List<DataFieldClassTemplate> datafields)
         {
             var retVal = new List<DataFieldResult>();
@@ -69,12 +60,6 @@ namespace DokuExtractorCore
             return retVal;
         }
 
-        /// <summary>
-        /// Gets text from a PDF that is within a given area.
-        /// </summary>
-        /// <param name="pdfFilePath"></param>
-        /// <param name="cropAreaInfo"></param>
-        /// <returns></returns>
         public async Task<string> GetTextFromPdf(string pdfFilePath, PercentalAreaInfo cropAreaInfo)
         {
             return await AreaLoader.GetTextFromPdf(pdfFilePath, cropAreaInfo);
@@ -162,11 +147,6 @@ namespace DokuExtractorCore
         //    return retVal;
         //}
 
-        /// <summary>
-        /// Returns MD5-Hashwert
-        /// </summary>
-        /// <param name="filename"></param>
-        /// <returns></returns>
         public string CheckMD5(string filename)
         {
             using (var md5 = MD5.Create())

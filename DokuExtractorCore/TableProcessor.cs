@@ -9,26 +9,15 @@ using System.Threading.Tasks;
 
 namespace DokuExtractorCore
 {
-    /// <summary>
-    /// Table Processoner
-    /// </summary>
     public class TableProcessor
     {
         string inputFileDirectory;
 
-        /// <summary>
-        /// Table Processor
-        /// </summary>
-        /// <param name="inputFileDirectory"></param>
         public TableProcessor(string inputFileDirectory)
         {
             this.inputFileDirectory = inputFileDirectory;
         }
 
-        /// <summary>
-        /// Runs table processor demo
-        /// </summary>
-        /// <returns></returns>
         public TableResult RunDemo()
         {
 
@@ -37,15 +26,11 @@ namespace DokuExtractorCore
 
             var table = BuildTableFromLinesAndColumns(lines, columns);
             var maxAmountOfItemsPerLineToBeMovedUp = table.TableCountDictionary.Values.Max() / 2;
-            table = CleanMultilineTableItems(table, maxAmountOfItemsPerLineToBeMovedUp);
+             table = CleanMultilineTableItems(table, maxAmountOfItemsPerLineToBeMovedUp);
 
             return table;
         }
 
-        /// <summary>
-        /// Loads table lines from file
-        /// </summary>
-        /// <returns></returns>
         public List<string> LoadTableLinesFromFile()
         {
             var filePath = Path.Combine(inputFileDirectory, "AllTableLines.txt");
@@ -57,11 +42,6 @@ namespace DokuExtractorCore
             return LoadTableLinesFromString(content);
         }
 
-        /// <summary>
-        /// Loads table lines from string
-        /// </summary>
-        /// <param name="allTableLines"></param>
-        /// <returns></returns>
         public List<string> LoadTableLinesFromString(string allTableLines)
         {
             //var filePath = Path.Combine(inputFileDirectory, "AllTableLines.txt");
@@ -72,10 +52,6 @@ namespace DokuExtractorCore
             return lines.ToList();
         }
 
-        /// <summary>
-        /// Loads table columns from file
-        /// </summary>
-        /// <returns></returns>
         public List<TableColumn> LoadTableColumnsFromFile()
         {
             var retVal = new List<TableColumn>();
@@ -103,11 +79,6 @@ namespace DokuExtractorCore
             //return retVal;
         }
 
-        /// <summary>
-        /// Loads table columns from string
-        /// </summary>
-        /// <param name="allTableColumns"></param>
-        /// <returns></returns>
         public List<TableColumn> LoadTableColumnsFromString(string allTableColumns)
         {
             var retVal = new List<TableColumn>();
@@ -133,12 +104,6 @@ namespace DokuExtractorCore
             return retVal;
         }
 
-        /// <summary>
-        /// Bilds a table from lines and columns
-        /// </summary>
-        /// <param name="allTableLines"></param>
-        /// <param name="allTableColumns"></param>
-        /// <returns></returns>
         public TableResult BuildTableFromLinesAndColumns(List<string> allTableLines, List<TableColumn> allTableColumns)
         {
             int tableWidth = allTableColumns.Count;

@@ -546,9 +546,7 @@ namespace DokuExtractorStandardGUI
                 ucResultAndEditor1.RegexOrPositionHelper -= UcResultAndEditor1_RegexOrPositionHelper;
             }
             catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            { }
         }
 
         private void butAddDataField_Click(object sender, EventArgs e)

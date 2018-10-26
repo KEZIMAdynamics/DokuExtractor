@@ -8,9 +8,6 @@ using System.Threading.Tasks;
 
 namespace DokuExtractorCore
 {
-    /// <summary>
-    /// Template Matcher
-    /// </summary>
     public class TemplateMatcher
     {
         RegexExpressionFinder finder = new RegexExpressionFinder();
