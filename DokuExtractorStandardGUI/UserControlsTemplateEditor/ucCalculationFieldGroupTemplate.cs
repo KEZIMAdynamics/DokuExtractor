@@ -113,7 +113,9 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
                 FireCalculationFieldEraser(id);
             }
             catch (Exception ex)
-            { }
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         private void FireCalculationFieldEraser(Guid id)

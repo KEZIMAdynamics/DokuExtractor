@@ -197,7 +197,9 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
                         }
                     }
                     catch (Exception ex)
-                    { }
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
                 }
             }
         }
@@ -222,7 +224,9 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
                         }
                     }
                     catch (Exception ex)
-                    { }
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
                 }
             }
         }
@@ -247,7 +251,9 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
                         }
                     }
                     catch (Exception ex)
-                    { }
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
                 }
             }
         }
@@ -273,7 +279,9 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
                         }
                     }
                     catch (Exception ex)
-                    { }
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
                 }
             }
         }
@@ -474,7 +482,9 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
                         }
                     }
                     catch (Exception ex)
-                    { }
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
                 }
             }
         }
@@ -501,7 +511,9 @@ namespace DokuExtractorStandardGUI.UserControlsTemplateEditor
                         }
                     }
                     catch (Exception ex)
-                    { }
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
                 }
             }
         }

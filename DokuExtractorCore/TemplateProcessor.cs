@@ -59,7 +59,7 @@ namespace DokuExtractorCore
                 }
                 catch (Exception ex)
                 {
-
+                    Console.WriteLine(ex.Message);
                     throw;
                 }
             }
@@ -83,7 +83,7 @@ namespace DokuExtractorCore
                 }
                 catch (Exception ex)
                 {
-
+                    Console.WriteLine(ex.Message);
                     throw;
                 }
             }
@@ -203,7 +203,7 @@ namespace DokuExtractorCore
         }
 
         /// <summary>
-        /// Can be called to prepare modified class templates for being saved externally. Takes care removing double blank spaces in <see cref="DocumentClassTemplate.KeyWords"/>.
+        /// Can be called to prepare modified class templates for being saved externally. Takes care removing double blank spaces in <see cref="DocumentBaseTemplate.KeyWords"/>.
         /// Will be called automatically if the template is saved by the internally provided methods. (<see cref="SaveTemplateToFile(DocumentClassTemplate, string)"/>) and its derivates.
         /// </summary>
         /// <param name="template"></param>
@@ -231,6 +231,7 @@ namespace DokuExtractorCore
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 return false;
             }
         }
@@ -255,6 +256,7 @@ namespace DokuExtractorCore
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 return false;
             }
         }
@@ -319,6 +321,7 @@ namespace DokuExtractorCore
         /// <param name="template">The class template to be used</param>
         /// <param name="groupTemplates">Available group templates. The correct group template for the given class template will be selected automatically. If it is the correct one, it's okay if only one group template is in the list.</param>
         /// <param name="inputText"></param>
+        /// <param name="pdfFilePath"></param>
         /// <returns></returns>
         public async Task<FieldExtractionResult> ExtractData(DocumentClassTemplate template, List<DocumentGroupTemplate> groupTemplates, string inputText, string pdfFilePath)
         {
@@ -386,11 +389,12 @@ namespace DokuExtractorCore
         }
 
         /// <summary>
-        /// Returns extracted data from <see cref=" ExtractData(DocumentClassTemplate, List{DocumentGroupTemplate}, string)"/> as JSON text.
+        /// Returns extracted data from <see cref=" ExtractData(DocumentClassTemplate, List{DocumentGroupTemplate}, string, string)"/> as JSON text.
         /// </summary>
         /// <param name="template"></param>
         /// <param name="groupTemplates"></param>
         /// <param name="inputText"></param>
+        /// <param name="pdfFilePath"></param>
         /// <returns></returns>
         public async Task<string> ExtractDataAsJson(DocumentClassTemplate template, List<DocumentGroupTemplate> groupTemplates, string inputText, string pdfFilePath)
         {
