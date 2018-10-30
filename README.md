@@ -44,7 +44,13 @@ It's simple: Need it, get it, use it :smiley:
 
 ## Using DokuExtractor
 
-Coming soon 
+### Vocabulary
+
+**Groups**
+
+**Classes**
+
+![groups and classes](\docs\GroupsAndClasses.png)
 
 ## License Information
 
