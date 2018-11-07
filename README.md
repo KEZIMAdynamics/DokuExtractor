@@ -46,11 +46,27 @@ It's simple: Need it, get it, use it :smiley:
 
 ### Vocabulary
 
-**Groups**
+**Groups** define the general type of documents you want to extract data from (e.g. Invoice, Offer, ...).
 
-**Classes**
+**Classes** are the sub categories of groups and belong to specific documents (e.g. Invoice Amazon, Invoice PayPal, ...).
 
-![groups and classes](\docs\GroupsAndClasses.png)
+![groups and classes](/docs/GroupsAndClasses.png)
+
+### DokuExtractor Standard GUI
+
+![dokuextractor gui](/docs/DokuExtractorGUI.png)
+
+### Data extraction
+
+![extraction process](/docs/ExtractionProcess.png)
+
+### Templates
+
+![field templates](/docs/FieldTemplates.png)
+
+### DokuExtractor Code
+
+Comming soon...
 
 ## License Information
 
