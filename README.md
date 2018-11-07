@@ -52,13 +52,40 @@ It's simple: Need it, get it, use it :smiley:
 
 ![groups and classes](/docs/GroupsAndClasses.png)
 
-### DokuExtractor Standard GUI
+**Group Templates** are templates containing definitions to extract data from documents of a document group. 
+Additionally they are the base to create Class Templates
 
-![dokuextractor gui](/docs/DokuExtractorGUI.png)
+**Class Templates** are templates containing definitions to extract data from specific document classes.
+
+**Extracted Data Fields** are data fields, which can directly be extracted from the PDF text by regex or position.
+
+**Extracted Calculation Fields** contain the result of calculations of Extracted Data Fields (e.g. to validate VAT of an invoice).
+
+**Extracted Conditional Fields** contain the result of a condition check (according to the extracted text).
+
+**Data Field Group Templates** are templates to extract data by using simple text anchors, if there is no Data Field Class Template.
+
+![data field group template](/docs/DataFieldGroupTemplate.png)
+
+**Data Field Class Templates** are templates to extract data by using regex or defined areas.
+
+![data field class template](/docs/DataFieldClassTemplate.png)
+
+**Calculation Field Templates** are templates, which define what shall be calculated by which data fields.
+
+![calculation field template](/docs/CalculationFieldTemplate.png)
+
+**Conditional Field Templates** define values according to conditions.
+
+![conditional field template](/docs/ConditionalFieldTemplate.png)
 
 ### Data extraction
 
 ![extraction process](/docs/ExtractionProcess.png)
+
+### DokuExtractor Standard GUI
+
+![dokuextractor gui](/docs/DokuExtractorGUI.png)
 
 ### Templates
 
