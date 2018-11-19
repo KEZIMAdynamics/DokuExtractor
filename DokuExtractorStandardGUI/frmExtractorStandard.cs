@@ -272,12 +272,14 @@ namespace DokuExtractorStandardGUI
                 isAnchorSelectionRunning = false;
                 isValueSelectionRunning = true;
                 lblInstruction.Text = Translation.LanguageStrings.InstructionSelectValue;
+                lblInstruction.BackColor = Color.Yellow;
             }
             else if (isValueSelectionRunning)
             {
                 this.regexHelperValueText = selectedText;
                 isValueSelectionRunning = false;
                 lblInstruction.Text = string.Empty;
+                lblInstruction.BackColor = Color.White;
 
                 // var loader = new PdfTextLoader();
                 var inputString = await PdfTextLoader.GetTextFromPdf(selectedFilePath, false);
@@ -315,6 +317,7 @@ namespace DokuExtractorStandardGUI
             {
                 isPositionSelectionRunning = false;
                 lblInstruction.Text = string.Empty;
+                lblInstruction.BackColor = Color.White;
 
                 var result = MessageBox.Show(Translation.LanguageStrings.MsgAskAcceptRegexExpressionHelperResult + Environment.NewLine + Environment.NewLine
                                 + "Position:" + Environment.NewLine + "page\t" + areaInfo.PageNumber + Environment.NewLine + "x\t" + Math.Round(areaInfo.TopLeftX * 100, 1) + " %"
@@ -395,11 +398,13 @@ namespace DokuExtractorStandardGUI
             {
                 isAnchorSelectionRunning = true;
                 lblInstruction.Text = Translation.LanguageStrings.InstructionSelectAnchor;
+                lblInstruction.BackColor = Color.Orange;
             }
             else if (dataFieldMode == DataFieldMode.Position)
             {
                 isPositionSelectionRunning = true;
                 lblInstruction.Text = Translation.LanguageStrings.InstructionSelectAreaPosition;
+                lblInstruction.BackColor = Color.Orange;
             }
         }
 
