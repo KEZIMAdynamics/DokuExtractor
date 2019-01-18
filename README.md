@@ -1,3 +1,5 @@
+[![Build Status](https://dev.azure.com/thomas0077/thomas_0077/_apis/build/status/KEZIMAdynamics.DokuExtractor)](https://dev.azure.com/thomas0077/thomas_0077/_build/latest?definitionId=1)
+
 # DokuExtractor
 
 Easily **extract data** from PDF **documents**!
@@ -42,20 +44,91 @@ It's simple: Need it, get it, use it :smiley:
 
 ## Using DokuExtractor
 
-Coming soon 
+### Vocabulary
+
+**Groups** define the general type of documents you want to extract data from (e.g. Invoice, Offer, ...).
+
+**Classes** are the sub categories of groups and belong to specific documents (e.g. Invoice Amazon, Invoice PayPal, ...).
+
+![groups and classes](/docs/GroupsAndClasses.png)
+
+**Group Templates** are templates containing definitions to extract data from documents of a document group. 
+Additionally they are the base to create Class Templates
+
+**Class Templates** are templates containing definitions to extract data from specific document classes.
+
+**Extracted Data Fields** are data fields, which can directly be extracted from the PDF text by regex or position.
+
+**Extracted Calculation Fields** contain the result of calculations of Extracted Data Fields (e.g. to validate VAT of an invoice).
+
+**Extracted Conditional Fields** contain the result of a condition check (according to the extracted text).
+
+**Data Field Group Templates** are templates to extract data by using simple text anchors, if there is no Data Field Class Template.
+
+![data field group template](/docs/DataFieldGroupTemplate.png)
+
+**Data Field Class Templates** are templates to extract data by using regex or defined areas.
+
+![data field class template](/docs/DataFieldClassTemplate.png)
+
+**Calculation Field Templates** are templates, which define what shall be calculated by which data fields.
+
+![calculation field template](/docs/CalculationFieldTemplate.png)
+
+**Conditional Field Templates** define values according to conditions.
+
+![conditional field template](/docs/ConditionalFieldTemplate.png)
+
+### Data extraction
+
+![extraction process](/docs/ExtractionProcess.png)
+
+### DokuExtractor Standard GUI
+
+![dokuextractor gui](/docs/DokuExtractorGUI.png)
+
+### Templates
+
+![field templates](/docs/FieldTemplates.png)
+
+### DokuExtractor Code
+
+Using DokuExtractor in your code with predefined templates is easy and can be done in a few lines of code:
+```Csharp
+// Create a new template processor.
+var templateProcessor = new TemplateProcessor(Application.StartupPath);
+
+// Load group and class templates. You may use the template processor to load them from disk if desired or you can them from somewhere else (database or whatever)
+var classTemplates = templateProcessor.LoadClassTemplatesFromDisk();
+var groupTemplates = templateProcessor.LoadGroupTemplatesFromDisk();
+
+// Create a new pdf text loader. It will extract the text from your pdf document.
+IPdfTextLoaderFull pdfTextLoader = new PdfTextLoaderFull();
+
+// Get the text from your pdf.
+var inputString = await PdfTextLoader.GetTextFromPdf(selectedFilePath, false);
+
+// Let the template processsor find the matching class template for your pdf
+var matchingTemplateResult = templateProcessor.MatchTemplates(this.classTemplates, inputString);
+var template = matchingTemplateResult.GetTemplate();
+
+// Let the template processor perform its magic extract the pdf data according to your document template fields!
+var result = await templateProcessor.ExtractData(template, groupTemplates, inputString, selectedFilePath);
+
+// For your convenience, DokuExtractor can also give you the extracted data as JSON if you prefer.
+var resultAsJson = await templateProcessor.ExtractDataAsJson(template, groupTemplates, inputString, selectedFilePath);
+```
+
+
 
 ## License Information
 
-DokuExtractor is Copyright Â© 2018 by [KEZIMA dynamics UG (haftungsbeschrÃ¤nkt)](https://kezima-dynamics.de) and is licensed under a Community License. 
+DokuExtractor is Copyright © 2018 by [KEZIMA dynamics UG (haftungsbeschränkt)](https://kezima-dynamics.de) and is licensed under a Community License. 
 This basically means:
 
 -  DokuExtractor licenses are **free for non commercial projects**. 
 -  DokuExtractor licenses are **free** for commercial projects for **individual developers and small business**.
 -  If you are *not* an individual developer or a small business and want to use DokuExtractor for commercial projects, you have to **purchase** a license.
 
-All DokuExtractor licenses include **royalty free deployment**.
-
 For more detailed information please refer to the [LICENSE.md](https://github.com/KEZIMAdynamics/DokuExtractor/blob/master/LICENSE.md) file in this repository.
-
-
 
