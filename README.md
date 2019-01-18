@@ -93,7 +93,33 @@ Additionally they are the base to create Class Templates
 
 ### DokuExtractor Code
 
-Comming soon...
+Using DokuExtractor in your code with predefined templates is easy and can be done in a few lines of code:
+```Csharp
+// Create a new template processor.
+var templateProcessor = new TemplateProcessor(Application.StartupPath);
+
+// Load group and class templates. You may use the template processor to load them from disk if desired or you can them from somewhere else (database or whatever)
+var classTemplates = templateProcessor.LoadClassTemplatesFromDisk();
+var groupTemplates = templateProcessor.LoadGroupTemplatesFromDisk();
+
+// Create a new pdf text loader. It will extract the text from your pdf document.
+IPdfTextLoaderFull pdfTextLoader = new PdfTextLoaderFull();
+
+// Get the text from your pdf.
+var inputString = await PdfTextLoader.GetTextFromPdf(selectedFilePath, false);
+
+// Let the template processsor find the matching class template for your pdf
+var matchingTemplateResult = templateProcessor.MatchTemplates(this.classTemplates, inputString);
+var template = matchingTemplateResult.GetTemplate();
+
+// Let the template processor perform its magic extract the pdf data according to your document template fields!
+var result = await templateProcessor.ExtractData(template, groupTemplates, inputString, selectedFilePath);
+
+// For your convenience, DokuExtractor can also give you the extracted data as JSON if you prefer.
+var resultAsJson = await templateProcessor.ExtractDataAsJson(template, groupTemplates, inputString, selectedFilePath);
+```
+
+
 
 ## License Information
 
@@ -105,48 +131,4 @@ This basically means:
 -  If you are *not* an individual developer or a small business and want to use DokuExtractor for commercial projects, you have to **purchase** a license.
 
 For more detailed information please refer to the [LICENSE.md](https://github.com/KEZIMAdynamics/DokuExtractor/blob/master/LICENSE.md) file in this repository.
-
-
-
-
-> EOF
-> 
-> Markdown samples:
-
-++d++
-==d==
-^k^
-~d~
-~~bb~~
-
-```Csharp
-private void SomeThing()
-{
-int foo = new object();
-string.IsnullOrEmpty(x);
-} 
-```
-
-* asdf
-* asdfasdf
-* asdfsad
-  * asasdf
-  * asdfasdf
-  * asdfasd
-    * asdfasdfasd
-
-```javascript
-function fancyAlert(arg) {
-  if(arg) {
-    $.facebox({div:'#foo'})
-  }
-}
-```
-
-### 1. adsfasdf
-2. asdfasdf
-   1. __*adfasdf*__
-   2. df
-   3. dfasdf
-      1. asdfasdf
 
