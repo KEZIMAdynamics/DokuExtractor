@@ -1,4 +1,4 @@
-[![Build Status](https://dev.azure.com/thomas0077/thomas_0077/_apis/build/status/KEZIMAdynamics.DokuExtractor)](https://dev.azure.com/thomas0077/thomas_0077/_build/latest?definitionId=1)
+ï»¿[![Build Status](https://dev.azure.com/thomas0077/thomas_0077/_apis/build/status/KEZIMAdynamics.DokuExtractor)](https://dev.azure.com/thomas0077/thomas_0077/_build/latest?definitionId=1)
 
 # DokuExtractor
 
@@ -93,12 +93,16 @@ Additionally they are the base to create Class Templates
 
 ### DokuExtractor Code
 
-Using DokuExtractor in your code with predefined templates is easy and can be done in a few lines of code:
+DokuExtractor is not limited to being a standalone application, ofcourse.
+You can use or embed DokuExtractor in your own projects as well. 
+
+Using DokuExtractor in your code with predefined templates is easy and can be done in just a few lines of code:
 ```Csharp
 // Create a new template processor.
 var templateProcessor = new TemplateProcessor(Application.StartupPath);
 
-// Load group and class templates. You may use the template processor to load them from disk if desired or you can them from somewhere else (database or whatever)
+// Load group and class templates. You may use the template processor to load them from disk if desired or you 
+// can load them from somewhere else (database or whatever)
 var classTemplates = templateProcessor.LoadClassTemplatesFromDisk();
 var groupTemplates = templateProcessor.LoadGroupTemplatesFromDisk();
 
@@ -120,15 +124,33 @@ var resultAsJson = await templateProcessor.ExtractDataAsJson(template, groupTemp
 ```
 
 
+If you need to create new document class templates from a group template, DokuExtractor's template processor can automatically create
+the class template for you. DokuExtractor will also try fill in the necessary information in the new template to minimize user interaction.
+```Csharp
+var newDocumentClassTemplate = templateProcessor.AutoCreateClassTemplate("NewTemplateName", inputString, selectedGroupTemplate);
+```
+
+In case you are working with more than one group template, Dokuextractor can also help finding the right one:
+```Csharp
+ templateProcessor.MatchTemplates(groupTemplates, inputString);
+```
+
+When editing data fields within new class templates, there is also support for automatic regex expression generation using the RegexExpressionFinder class.
+
+
+Ofcourse it is also possible to create/edit your templates with the *DokuExtractor Standard GUI* and then use those templates from your own code.
+
 
 ## License Information
 
-DokuExtractor is Copyright © 2018 by [KEZIMA dynamics UG (haftungsbeschränkt)](https://kezima-dynamics.de) and is licensed under a Community License. 
+DokuExtractor is Copyright Â© 2018-2019 by [KEZIMA dynamics UG (haftungsbeschrÃ¤nkt)](https://kezima-dynamics.de) and is licensed under a Community License. 
 This basically means:
 
 -  DokuExtractor licenses are **free for non commercial projects**. 
 -  DokuExtractor licenses are **free** for commercial projects for **individual developers and small business**.
 -  If you are *not* an individual developer or a small business and want to use DokuExtractor for commercial projects, you have to **purchase** a license.
+
+All DokuExtractor licenses include **royalty free deployment**.
 
 For more detailed information please refer to the [LICENSE.md](https://github.com/KEZIMAdynamics/DokuExtractor/blob/master/LICENSE.md) file in this repository.
 
