@@ -85,6 +85,8 @@ Additionally they are the base to create Class Templates
 
 ### DokuExtractor Standard GUI
 
+PDF documents you drop on the PDF dropzone are listed on the left side. The selected document is shown within the PDF viewer in the middle. By clicking the "Go!" button the data extraction is processed.
+
 ![dokuextractor gui](/docs/DokuExtractorGUI.png)
 
 ### Templates
