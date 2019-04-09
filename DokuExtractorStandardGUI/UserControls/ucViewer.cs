@@ -25,6 +25,11 @@ namespace DokuExtractorStandardGUI.UserControls
         /// </summary>
         public event TextSelectedHandler TextSelected;
 
+        /// <summary>
+        /// Fired, when Mouse entered GdPicturePdfViewer (if used); Subscribe on this event at form to activate it for better zooming experience
+        /// </summary>
+        public event EventHandler GdPicturePdfViewerMouseEntered;
+
         ucViewerBase viewerControlBase;
 
         public ucViewer()
@@ -33,6 +38,7 @@ namespace DokuExtractorStandardGUI.UserControls
             try
             {
                 LoadViewerPlugin(UserControlSelector.ViewerPluginPath);
+                viewerControlBase.GdPicturePdfViewerMouseEntered += FireGdPicturePdfViewerMouseEntered;
             }
             catch (Exception ex)
             {
@@ -88,6 +94,11 @@ namespace DokuExtractorStandardGUI.UserControls
         private void ViewerControlBase_TextSelected(string selectedText, PercentalAreaInfo areaInfo)
         {
             TextSelected?.Invoke(selectedText, areaInfo);
+        }
+
+        protected void FireGdPicturePdfViewerMouseEntered(object sender, EventArgs e)
+        {
+            GdPicturePdfViewerMouseEntered?.Invoke(sender, e);
         }
     }
 }

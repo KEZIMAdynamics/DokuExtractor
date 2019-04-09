@@ -103,6 +103,10 @@
             this.gdViewer1.ZoomCenterAtMousePosition = true;
             this.gdViewer1.ZoomMode = GdPicture14.ViewerZoomMode.ZoomModeHeightViewer;
             this.gdViewer1.ZoomStep = 25;
+            this.gdViewer1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gdViewer1_KeyDown);
+            this.gdViewer1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.gdViewer1_KeyUp);
+            this.gdViewer1.MouseEnter += new System.EventHandler(this.gdViewer1_MouseEnter);
+            this.gdViewer1.MouseLeave += new System.EventHandler(this.gdViewer1_MouseLeave);
             this.gdViewer1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.gdViewer1_MouseUp);
             // 
             // thumbnailEx1

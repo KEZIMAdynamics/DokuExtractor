@@ -16,7 +16,7 @@ namespace GdPicturePdfViewer
     public partial class ucGdPicturePdfViewer : ucViewerBase
     {
         public IPdfTextLoaderFull PdfTextLoader { get; set; } = new PdfTextLoaderFull();
-
+        
         private GdPicturePDF gdPdf = new GdPicturePDF();
         private ToolTip tooltip = new ToolTip();
         private string pdfPath = string.Empty;
@@ -62,7 +62,7 @@ namespace GdPicturePdfViewer
                 float height = 0;
 
                 gdViewer1.GetRectCoordinatesOnDocumentInches(ref left, ref top, ref width, ref height);
-                
+
                 float percentalTopLeftX = (float)gdViewer1.GetRectLeftOnDocument() / (float)gdViewer1.PageWidth;
                 float percentalTopLeftY = (float)gdViewer1.GetRectTopOnDocument() / (float)gdViewer1.PageHeight;
                 float percentalWidth = (float)gdViewer1.GetRectWidthOnDocument() / (float)gdViewer1.PageWidth;
@@ -80,6 +80,30 @@ namespace GdPicturePdfViewer
                     tooltip.Show(text, this, this.PointToClient(Control.MousePosition), 5000);
                 }
             }
+        }
+
+        private void gdViewer1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.ControlKey)
+                gdViewer1.MouseWheelMode = ViewerMouseWheelMode.MouseWheelModeZoom;
+        }
+
+        private void gdViewer1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.ControlKey)
+                gdViewer1.MouseWheelMode = ViewerMouseWheelMode.MouseWheelModeVerticalScroll;
+        }
+
+        private void gdViewer1_MouseEnter(object sender, EventArgs e)
+        {
+            gdViewer1.MouseWheelMode = ViewerMouseWheelMode.MouseWheelModeVerticalScroll;
+            gdViewer1.Focus();
+            FireGdPicturePdfViewerMouseEntered();
+        }
+
+        private void gdViewer1_MouseLeave(object sender, EventArgs e)
+        {
+            gdViewer1.MouseWheelMode = ViewerMouseWheelMode.MouseWheelModeVerticalScroll;
         }
     }
 }

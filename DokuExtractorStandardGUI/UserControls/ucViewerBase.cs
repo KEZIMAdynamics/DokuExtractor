@@ -17,6 +17,8 @@ namespace DokuExtractorStandardGUI.UserControls
         public delegate void TextSelectedHandler(string selectedText, PercentalAreaInfo areaInfo);
         public event TextSelectedHandler TextSelected;
 
+        public event EventHandler GdPicturePdfViewerMouseEntered;
+
         public ucViewerBase()
         {
             InitializeComponent();
@@ -44,6 +46,11 @@ namespace DokuExtractorStandardGUI.UserControls
             };
 
             TextSelected?.Invoke(selectedText, areaInfo);
+        }
+
+        protected void FireGdPicturePdfViewerMouseEntered()
+        {
+            GdPicturePdfViewerMouseEntered?.Invoke(this, EventArgs.Empty);
         }
     }
 }

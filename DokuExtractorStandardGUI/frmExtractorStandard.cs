@@ -217,6 +217,12 @@ namespace DokuExtractorStandardGUI
             ucViewer1.TextSelected += UcViewer1_TextSelected;
             ucResultAndEditor1.TabSwitched += UcResultAndEditor1_TabSwitched;
             ucResultAndEditor1.RegexOrPositionHelper += UcResultAndEditor1_RegexOrPositionHelper;
+            ucViewer1.GdPicturePdfViewerMouseEntered += ActivateForm;
+        }
+
+        private void ActivateForm(object sender, EventArgs e)
+        {
+            this.Activate();
         }
 
         private void DisableBuiltInEditor()
@@ -549,6 +555,7 @@ namespace DokuExtractorStandardGUI
                 ucViewer1.TextSelected -= UcViewer1_TextSelected;
                 ucResultAndEditor1.TabSwitched -= UcResultAndEditor1_TabSwitched;
                 ucResultAndEditor1.RegexOrPositionHelper -= UcResultAndEditor1_RegexOrPositionHelper;
+                ucViewer1.GdPicturePdfViewerMouseEntered -= ActivateForm;
             }
             catch (Exception ex)
             {
