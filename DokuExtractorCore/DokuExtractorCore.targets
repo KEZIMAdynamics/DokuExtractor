@@ -1,0 +1,8 @@
+<Project>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)poppler-0.51.zip">
+      <Link>poppler-0.51.zip</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

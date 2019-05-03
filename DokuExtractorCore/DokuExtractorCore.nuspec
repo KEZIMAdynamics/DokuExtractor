@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    //TODO: License Shit auf die Reihe kriegen
+    <license type="file">LICENSE.md</license>
+    <projectUrl>https://github.com/KEZIMAdynamics/DokuExtractor</projectUrl>
+    <iconUrl>https://www.kezima-dynamics.de/wp-content/uploads/2019/04/Kd_Logo_medium.ico</iconUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>DokuExtractorCore is a .NET (core) library to simplify data extraction from PDF documents.</releaseNotes>
+    <copyright>Copyright 2019</copyright>
+    <tags>pdf data extraction invoice document regex extract</tags>
+  </metadata>
+  <files>
+	  <file src="poppler-0.51.zip" target="build"/>
+    <file src="DokuExtractorCore.targets" target="build"/>
+  </files>
+</package>

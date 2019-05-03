@@ -74,6 +74,7 @@
     <Compile Include="WorkingWithPopplerBase.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="DokuExtractorCore.targets" />
     <None Include="packages.config" />
     <None Include="poppler-0.51.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -91,11 +92,11 @@
     <None Include="ExtractorClassTemplates\ColumbusMcKinnonenTemplate.Json.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Content Include="ExtractorClassTemplates\CompotecTemplate.json.txt">
+    <None Include="ExtractorClassTemplates\CompotecTemplate.json.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SampleFiles\AllTableColumns.txt" />
-    <Content Include="SampleFiles\AllTableLines.txt" />
+    </None>
+    <None Include="SampleFiles\AllTableColumns.txt" />
+    <None Include="SampleFiles\AllTableLines.txt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
