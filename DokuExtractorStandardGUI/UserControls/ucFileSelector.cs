@@ -23,6 +23,12 @@ namespace DokuExtractorStandardGUI.UserControls
         /// </summary>
         public event SelectedFileChangedHandler SelectedFileChanged;
 
+        public delegate void DeleteKeyDownHandler();
+        /// <summary>
+        /// Fired, when Delete Key has been pushed down
+        /// </summary>
+        public event DeleteKeyDownHandler DeleteKeyDown;
+
         private FileInfo prevSelectedFile;
 
         public ucFileSelector()
@@ -164,6 +170,12 @@ namespace DokuExtractorStandardGUI.UserControls
                         break;
                     }
             }
+        }
+
+        private void dataGridView1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+                DeleteKeyDown?.Invoke();
         }
     }
 }

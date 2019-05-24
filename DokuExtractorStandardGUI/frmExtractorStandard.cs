@@ -214,6 +214,7 @@ namespace DokuExtractorStandardGUI
         private void SubscribeOnEvents()
         {
             ucFileSelector1.SelectedFileChanged += UcFileSelector1_SelectedFileChanged;
+            ucFileSelector1.DeleteKeyDown += UcFileSelector1_DeleteKeyDown;
             ucViewer1.TextSelected += UcViewer1_TextSelected;
             ucResultAndEditor1.TabSwitched += UcResultAndEditor1_TabSwitched;
             ucResultAndEditor1.RegexOrPositionHelper += UcResultAndEditor1_RegexOrPositionHelper;
@@ -376,6 +377,10 @@ namespace DokuExtractorStandardGUI
                 ucViewer1.CloseDisplayedPdf();
         }
 
+        private async void UcFileSelector1_DeleteKeyDown()
+        {
+            await OnDeleteFileClick();
+        }
 
         private void UcResultAndEditor1_TabSwitched(bool switchedToSingleTemplateEditor)
         {
@@ -552,6 +557,7 @@ namespace DokuExtractorStandardGUI
             try
             {
                 ucFileSelector1.SelectedFileChanged -= UcFileSelector1_SelectedFileChanged;
+                ucFileSelector1.DeleteKeyDown -= UcFileSelector1_DeleteKeyDown;
                 ucViewer1.TextSelected -= UcViewer1_TextSelected;
                 ucResultAndEditor1.TabSwitched -= UcResultAndEditor1_TabSwitched;
                 ucResultAndEditor1.RegexOrPositionHelper -= UcResultAndEditor1_RegexOrPositionHelper;
@@ -580,6 +586,11 @@ namespace DokuExtractorStandardGUI
         }
 
         private async void butDeleteFile_Click(object sender, EventArgs e)
+        {
+            await OnDeleteFileClick();
+        }
+
+        private async Task OnDeleteFileClick()
         {
             var selectedFilePath = this.selectedFilePath;
             if (string.IsNullOrWhiteSpace(selectedFilePath) == false)

@@ -32,8 +32,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.fileInfosBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.ucFileSelectorBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDirectoryName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,6 +47,8 @@
             this.colLastWriteTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLastWriteTimeUtc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAttributes = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fileInfosBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.ucFileSelectorBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileInfosBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ucFileSelectorBindingSource)).BeginInit();
@@ -56,6 +56,7 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -84,16 +85,8 @@
             this.dataGridView1.Size = new System.Drawing.Size(451, 490);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
+            this.dataGridView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView1_KeyDown);
             this.dataGridView1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.dataGridView1_MouseMove);
-            // 
-            // fileInfosBindingSource
-            // 
-            this.fileInfosBindingSource.DataMember = "FileInfos";
-            this.fileInfosBindingSource.DataSource = this.ucFileSelectorBindingSource;
-            // 
-            // ucFileSelectorBindingSource
-            // 
-            this.ucFileSelectorBindingSource.DataSource = typeof(DokuExtractorStandardGUI.UserControls.ucFileSelector);
             // 
             // colName
             // 
@@ -162,7 +155,6 @@
             this.colExtension.Name = "colExtension";
             this.colExtension.ReadOnly = true;
             this.colExtension.Visible = false;
-            this.colExtension.Width = 78;
             // 
             // colCreationTime
             // 
@@ -172,7 +164,6 @@
             this.colCreationTime.Name = "colCreationTime";
             this.colCreationTime.ReadOnly = true;
             this.colCreationTime.Visible = false;
-            this.colCreationTime.Width = 94;
             // 
             // colCreationTimeUtc
             // 
@@ -223,6 +214,15 @@
             this.colAttributes.Name = "colAttributes";
             this.colAttributes.ReadOnly = true;
             this.colAttributes.Visible = false;
+            // 
+            // fileInfosBindingSource
+            // 
+            this.fileInfosBindingSource.DataMember = "FileInfos";
+            this.fileInfosBindingSource.DataSource = this.ucFileSelectorBindingSource;
+            // 
+            // ucFileSelectorBindingSource
+            // 
+            this.ucFileSelectorBindingSource.DataSource = typeof(DokuExtractorStandardGUI.UserControls.ucFileSelector);
             // 
             // ucFileSelector
             // 
