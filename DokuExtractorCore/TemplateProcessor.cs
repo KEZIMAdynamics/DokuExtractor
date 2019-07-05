@@ -359,18 +359,22 @@ namespace DokuExtractorCore
             var conditionProcessor = new ConditionalFieldProcessor();
             var allConditionalClassFields = template.ConditionalFields;
 
-            // Add conditional fields to class template if necessary.
-            var conditionalFieldsHash = allConditionalClassFields.Select(x => x.Name.ToLower()).ToHashSet();
-            foreach (var item in groupTemplate.ConditionalFields.Where(x => x.OnlyStoreInGroupTemplate == false))
-            {
-                var lowerName = item.Name.ToLower();
-                if (conditionalFieldsHash.Contains(lowerName) == false)
-                {
-                    allConditionalClassFields.Add(item);
-                }
-            }
-            //allConditionalFields.AddRange(groupTemplate.ConditionalFields.Where(x => x.OnlyStoreInGroupTemplate));
 
+            // Add conditional fields to class template if necessary.
+            if (groupTemplate != null)
+            {
+                var conditionalFieldsHash = allConditionalClassFields.Select(x => x.Name.ToLower()).ToHashSet();
+                foreach (var item in groupTemplate.ConditionalFields.Where(x => x.OnlyStoreInGroupTemplate == false))
+                {
+                    var lowerName = item.Name.ToLower();
+                    if (conditionalFieldsHash.Contains(lowerName) == false)
+                    {
+                        allConditionalClassFields.Add(item);
+                    }
+                }
+                //allConditionalFields.AddRange(groupTemplate.ConditionalFields.Where(x => x.OnlyStoreInGroupTemplate));
+
+            }
 
             foreach (var item in allConditionalClassFields)
             {
@@ -379,12 +383,16 @@ namespace DokuExtractorCore
                     retVal.ConditionalFields.Add(conditionalFieldResult);
             }
 
-            foreach (var item in groupTemplate.ConditionalFields.Where(x => x.OnlyStoreInGroupTemplate == true))
+            if (groupTemplate != null)
             {
-                var conditionalFieldResult = conditionProcessor.ProcessConditions(inputText, item);
-                if (retVal.ConditionalFields.Where(x => x.Name == conditionalFieldResult.Name).Count() == 0)
-                    retVal.ConditionalFields.Add(conditionalFieldResult);
+                foreach (var item in groupTemplate?.ConditionalFields.Where(x => x.OnlyStoreInGroupTemplate == true))
+                {
+                    var conditionalFieldResult = conditionProcessor.ProcessConditions(inputText, item);
+                    if (retVal.ConditionalFields.Where(x => x.Name == conditionalFieldResult.Name).Count() == 0)
+                        retVal.ConditionalFields.Add(conditionalFieldResult);
+                }
             }
+
             return retVal;
         }
 
