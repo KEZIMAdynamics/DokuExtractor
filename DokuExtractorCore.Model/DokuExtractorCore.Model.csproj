@@ -6,6 +6,7 @@
     <Authors>KEZIMA dynamics</Authors>
     <Copyright>Copyright © 2019</Copyright>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+    <Version>1.1.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
