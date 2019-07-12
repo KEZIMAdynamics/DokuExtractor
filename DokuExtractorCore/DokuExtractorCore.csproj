@@ -7,6 +7,10 @@
     <Company>KEZIMA dynamics</Company>
     <Version>1.2.0</Version>
     <Copyright>Copyright © 2019</Copyright>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Authors>KEZIMA dynamics</Authors>
+    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
@@ -26,6 +30,11 @@
   <ItemGroup>
     <None Update="poppler-0.51.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="LICENSE.md">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 </Project>
