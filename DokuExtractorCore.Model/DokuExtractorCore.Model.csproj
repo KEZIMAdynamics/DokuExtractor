@@ -2,6 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Description>DokuExtractorCore.Model is the data model for DokuExtractorCore</Description>
+    <Authors>KEZIMA dynamics</Authors>
+    <Copyright>Copyright © 2019</Copyright>
+    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Update="DokuExtractorCore.Model.nuspec">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 
 </Project>

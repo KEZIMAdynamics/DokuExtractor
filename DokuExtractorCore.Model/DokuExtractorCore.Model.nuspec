@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>DokuExtractorCore.Model</id>
+    <version>1.1.0</version>
+    <title>DokuExtractorCore.Model</title>
+    <authors>KEZIMA dynamics</authors>
+    <owners>KEZIMA dynamics</owners>
+    <license type="file">LICENSE.md</license>
+    <projectUrl>https://github.com/KEZIMAdynamics/DokuExtractor</projectUrl>
+    <iconUrl>https://www.kezima-dynamics.de/wp-content/uploads/2019/04/Kd_Logo_medium.ico</iconUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>DokuExtractorCore.Model is the data model for DokuExtractorCore</description>
+    <releaseNotes>DokuExtractorCore.Model is the data model for DokuExtractorCore</releaseNotes>
+    <copyright>Copyright 2019</copyright>
+    <tags>pdf data extraction invoice document regex extract</tags>
+  </metadata>
+  <files>
+    <file src="LICENSE.md" target="" />
+  </files>
+</package>
