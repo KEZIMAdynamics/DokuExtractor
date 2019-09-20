@@ -98,7 +98,8 @@ namespace DokuExtractorCore
                     targetFilePath = hashPath;
             }
 
-            var pdfToTextPath = Path.Combine(Environment.CurrentDirectory, "bin", "pdftotext.exe");
+            //var pdfToTextPath = Path.Combine(Environment.CurrentDirectory, "bin", "pdftotext.exe");
+            var pdfToTextPath = "pdftotext";
 
             var pdfProcess = new Process();
             pdfProcess.StartInfo.FileName = pdfToTextPath;
