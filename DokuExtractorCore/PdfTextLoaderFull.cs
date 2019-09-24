@@ -10,6 +10,7 @@ using System.IO.Compression;
 using DokuExtractorCore.Model.PdfHelper;
 using DokuExtractorCore.Model;
 using System.Collections;
+using System.Runtime.InteropServices;
 
 namespace DokuExtractorCore
 {
@@ -98,8 +99,15 @@ namespace DokuExtractorCore
                     targetFilePath = hashPath;
             }
 
-            //var pdfToTextPath = Path.Combine(Environment.CurrentDirectory, "bin", "pdftotext.exe");
-            var pdfToTextPath = "pdftotext";
+            string pdfToTextPath = string.Empty;
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                pdfToTextPath = "pdftotext";
+            }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                pdfToTextPath = Path.Combine(Environment.CurrentDirectory, "bin", "pdftotext.exe");
+            }
 
             var pdfProcess = new Process();
             pdfProcess.StartInfo.FileName = pdfToTextPath;
