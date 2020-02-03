@@ -62,8 +62,6 @@
             this.gdViewer1.EnableMouseWheel = true;
             this.gdViewer1.EnableTextSelection = true;
             this.gdViewer1.ForceScrollBars = false;
-            this.gdViewer1.ForceTemporaryModeForImage = false;
-            this.gdViewer1.ForceTemporaryModeForPDF = false;
             this.gdViewer1.ForeColor = System.Drawing.Color.Black;
             this.gdViewer1.Gamma = 1F;
             this.gdViewer1.HQAnnotationRendering = true;
