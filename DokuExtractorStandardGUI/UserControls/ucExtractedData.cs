@@ -24,6 +24,10 @@ namespace DokuExtractorStandardGUI.UserControls
         private void ucExtractedData_Load(object sender, EventArgs e)
         {
             Localize();
+
+            splitContainer1.SplitterDistance = splitContainer1.Height / 8;
+            splitContainer2.SplitterDistance = splitContainer2.Height / 3;
+            splitContainer3.SplitterDistance = splitContainer2.Height / 3;
         }
 
         /// <summary>
@@ -39,11 +43,12 @@ namespace DokuExtractorStandardGUI.UserControls
             ucExtractedCalculationFields1.ShowExtractedCalculationFields(extractionResult.CalculationFields);
 
             var conditionalFields = classTemplate.ConditionalFields;
-            foreach (var item in groupTemplate.ConditionalFields)
-            {
-                if (item.OnlyStoreInGroupTemplate)
-                    conditionalFields.Add(item);
-            }
+            if (groupTemplate != null)
+                foreach (var item in groupTemplate.ConditionalFields)
+                {
+                    if (item.OnlyStoreInGroupTemplate)
+                        conditionalFields.Add(item);
+                }
 
             ucExtractedConditionalFields1.ShowExtractedConditionalFields(extractionResult.ConditionalFields, conditionalFields);
         }
