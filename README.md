@@ -145,7 +145,7 @@ Ofcourse it is also possible to create/edit your templates with the *DokuExtract
 
 ## License Information
 
-DokuExtractor is Copyright © 2018-2019 by [KEZIMA dynamics UG (haftungsbeschränkt)](https://kezima-dynamics.de) and is licensed under a Community License. 
+DokuExtractor is Copyright © 2018-2021 by [KEZIMA dynamics UG (haftungsbeschränkt)](https://kezima-dynamics.de) and is licensed under a Community License. 
 This basically means:
 
 -  DokuExtractor licenses are **free for non commercial projects**. 
