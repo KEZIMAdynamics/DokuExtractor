@@ -44,7 +44,7 @@ namespace DokuExtractorCore
                     if (item.FieldType == DataFieldType.Currency)
                         filledExpression = filledExpression.Replace("[" + item.Name + "]", MakeCurrencyTextParseableAsFloat(item.Value));
                     else
-                        filledExpression = filledExpression.Replace("[" + item.Name + "]", item.Value.Replace(',', '.').Replace(" ", string.Empty).Replace("'",string.Empty));
+                        filledExpression = filledExpression.Replace("[" + item.Name + "]", item.Value.Replace(',', '.').Replace(" ", string.Empty).Replace("'", string.Empty));
                 }
 
                 var calculator = new XtensibleCalculator();
@@ -110,14 +110,14 @@ namespace DokuExtractorCore
             if (string.IsNullOrEmpty(inputText))
                 return "0";
 
-            var retVal = inputText.Replace("‚", ",").Replace(" ", string.Empty).Replace("'",string.Empty); // Replace Comma with ASCII Code Dec130 with comma with ASCII Code Dec44 to unfuck OCR results
+            var retVal = inputText.Replace("‚", ",").Replace(" ", string.Empty).Replace("'", string.Empty); // Replace Comma with ASCII Code Dec130 with comma with ASCII Code Dec44 to unfuck OCR results
 
             retVal = retVal.Replace(".", ",").TrimEnd(','); // Prepare decimal seperator magic by setting als seperators to ','...
 
             var tempArray = retVal.ToCharArray();
 
             if (tempArray.Length >= 2)                      // ...and then replacing the ',' (which is supposed to be a decimal seperator and not a seperator for thousands) based on its position. If it is the second or third last character of a number, it's assumed to be the decimal seperator.
-            {                                               
+            {
                 if (tempArray[tempArray.Length - 2] == ',')
                     tempArray[tempArray.Length - 2] = '.';
             }
@@ -132,9 +132,10 @@ namespace DokuExtractorCore
             // The input text is sanitized and ready to be parsed to double by the actual parser.
             // TODO: Stabilize function against further funny characters from OCR
 
-            var temp = double.Parse(retVal, System.Globalization.NumberStyles.Currency, CultureInfo.InvariantCulture.NumberFormat);
 
-            return temp.ToString(CultureInfo.InvariantCulture);           
+            double.TryParse(retVal, System.Globalization.NumberStyles.Currency, CultureInfo.InvariantCulture.NumberFormat, out double temp);
+
+            return temp.ToString(CultureInfo.InvariantCulture);
         }
     }
 }
