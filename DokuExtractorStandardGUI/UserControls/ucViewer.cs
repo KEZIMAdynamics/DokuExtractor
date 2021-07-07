@@ -86,9 +86,12 @@ namespace DokuExtractorStandardGUI.UserControls
                 await viewerControlBase?.LoadPdf(pdfPath);
         }
 
-        public void CloseDisplayedPdf()
+        public bool CloseDisplayedPdf()
         {
-            viewerControlBase?.CloseDisplayedPdf();
+            if (viewerControlBase != null)
+                return viewerControlBase.CloseDisplayedPdf();
+            else
+                return false;
         }
 
         private void ViewerControlBase_TextSelected(string selectedText, PercentalAreaInfo areaInfo)

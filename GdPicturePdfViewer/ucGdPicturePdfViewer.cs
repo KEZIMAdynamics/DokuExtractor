@@ -46,10 +46,11 @@ namespace GdPicturePdfViewer
             }
         }
 
-        public override void CloseDisplayedPdf()
+        public override bool CloseDisplayedPdf()
         {
-            gdPdf.CloseDocument();
+            var retVal = gdPdf.CloseDocument() == GdPictureStatus.OK;
             gdViewer1.CloseDocument();
+            return retVal;
         }
 
         private async void gdViewer1_MouseUp(object sender, MouseEventArgs e)

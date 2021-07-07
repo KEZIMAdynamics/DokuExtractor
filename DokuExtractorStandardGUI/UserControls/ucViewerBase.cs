@@ -29,9 +29,10 @@ namespace DokuExtractorStandardGUI.UserControls
             MessageBox.Show(Translation.LanguageStrings.MsgDllNotFound, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        public virtual void CloseDisplayedPdf()
+        public virtual bool CloseDisplayedPdf()
         {
             MessageBox.Show(Translation.LanguageStrings.MsgDllNotFound, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return false;
         }
 
         public void FireTextSelected(string selectedText, int pageNumber, float percentalTopLeftX, float percentalTopLeftY, float percentalWidth, float percentalHeight)

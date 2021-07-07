@@ -67,7 +67,7 @@ namespace KezimaPdfViewer
             }
         }
 
-        public override void CloseDisplayedPdf()
+        public override bool CloseDisplayedPdf()
         {
             var flowLayoutControls = flowLayoutPanel1.Controls.Cast<Control>().ToList();
             foreach (Control control in flowLayoutControls)
@@ -80,6 +80,8 @@ namespace KezimaPdfViewer
                 pictureBox1.Image.Dispose();
 
             pictureBox1.Image = null;
+
+            return true;
         }
 
         public override async Task LoadPdf(string pdfPath)
