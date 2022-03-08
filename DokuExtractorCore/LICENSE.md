@@ -1,6 +1,6 @@
 # KEZIMA DYNAMICS COMMUNITY SOFTWARE LICENSES
 ## DOKUEXTRACTOR
-These license terms are an agreement between you and [KEZIMA dynamics UG (haftungsbeschränkt)](https://kezima-dynamics.de) - hereinafter called KEZIMA dynamics. They apply to the software named above.
+These license terms are an agreement between you and [KEZIMA dynamics GmbH](https://kezima-dynamics.de) - hereinafter called KEZIMA dynamics. They apply to the software named above.
 
 IF YOU COMPLY WITH THESE LICENSE TERMS, YOU HAVE THE RIGHTS BELOW.
 

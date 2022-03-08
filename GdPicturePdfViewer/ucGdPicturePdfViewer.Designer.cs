@@ -82,7 +82,6 @@
             this.gdViewer1.PdfEnableFileLinks = true;
             this.gdViewer1.PdfEnableLinks = true;
             this.gdViewer1.PdfIncreaseTextContrast = false;
-            this.gdViewer1.PdfRasterizerEngine = GdPicture14.PdfRasterizerEngine.PdfRasterizerEngineHybrid;
             this.gdViewer1.PdfShowDialogForPassword = true;
             this.gdViewer1.PdfShowOpenFileDialogForDecryption = true;
             this.gdViewer1.PdfVerifyDigitalCertificates = false;
@@ -115,7 +114,6 @@
             this.thumbnailEx1.CheckBoxes = false;
             this.thumbnailEx1.CheckBoxesMarginLeft = 0;
             this.thumbnailEx1.CheckBoxesMarginTop = 0;
-            this.thumbnailEx1.DefaultItemTextPrefixe = "";
             this.thumbnailEx1.DisplayAnnotations = true;
             this.thumbnailEx1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.thumbnailEx1.HorizontalTextAlignment = GdPicture14.TextAlignment.TextAlignmentCenter;
@@ -127,7 +125,6 @@
             this.thumbnailEx1.OwnDrop = false;
             this.thumbnailEx1.PauseThumbsLoading = false;
             this.thumbnailEx1.PdfIncreaseTextContrast = false;
-            this.thumbnailEx1.PdfRasterizerEngine = GdPicture14.PdfRasterizerEngine.PdfRasterizerEngineHybrid;
             this.thumbnailEx1.PreloadAllItems = true;
             this.thumbnailEx1.RotateExif = true;
             this.thumbnailEx1.SelectedThumbnailBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
