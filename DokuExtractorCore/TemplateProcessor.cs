@@ -50,19 +50,21 @@ namespace DokuExtractorCore
         {
             var retVal = new List<DocumentGroupTemplate>();
 
-            foreach (var item in Directory.GetFiles(TemplateGroupDirectory))
-            {
-                try
+            if (Directory.Exists(TemplateGroupDirectory))
+                foreach (var item in Directory.GetFiles(TemplateGroupDirectory))
                 {
-                    var template = JsonConvert.DeserializeObject<DocumentGroupTemplate>(File.ReadAllText(item));
-                    retVal.Add(template);
+                    try
+                    {
+                        var template = JsonConvert.DeserializeObject<DocumentGroupTemplate>(File.ReadAllText(item));
+                        retVal.Add(template);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                        throw;
+                    }
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    throw;
-                }
-            }
+
             return retVal;
         }
 
@@ -74,19 +76,21 @@ namespace DokuExtractorCore
         {
             var retVal = new List<DocumentClassTemplate>();
 
-            foreach (var item in Directory.GetFiles(TemplateClassDirectory))
-            {
-                try
+            if (Directory.Exists(TemplateClassDirectory))
+                foreach (var item in Directory.GetFiles(TemplateClassDirectory))
                 {
-                    var template = JsonConvert.DeserializeObject<DocumentClassTemplate>(File.ReadAllText(item));
-                    retVal.Add(template);
+                    try
+                    {
+                        var template = JsonConvert.DeserializeObject<DocumentClassTemplate>(File.ReadAllText(item));
+                        retVal.Add(template);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                        throw;
+                    }
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    throw;
-                }
-            }
+
             return retVal;
         }
 
@@ -137,6 +141,9 @@ namespace DokuExtractorCore
             {
                 var templateJson = JsonConvert.SerializeObject(template, Formatting.Indented);
                 var filePath = Path.Combine(templateDirectory, template.TemplateGroupName + ".json.txt");
+
+                if (Directory.Exists(templateDirectory) == false)
+                    Directory.CreateDirectory(templateDirectory);
 
                 File.WriteAllText(filePath, templateJson);
                 retVal = true;
@@ -194,6 +201,9 @@ namespace DokuExtractorCore
             {
                 var templateJson = JsonConvert.SerializeObject(template, Formatting.Indented);
                 var filePath = Path.Combine(templateDirectory, template.TemplateClassName + ".json.txt");
+
+                if (Directory.Exists(templateDirectory) == false)
+                    Directory.CreateDirectory(templateDirectory);
 
                 File.WriteAllText(filePath, templateJson);
                 retVal = true;
