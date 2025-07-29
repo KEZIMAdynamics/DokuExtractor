@@ -6,13 +6,11 @@ using DokuExtractorStandardGUI.UserControls;
 using DokuExtractorStandardGUI.UserControlsTemplateEditor;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -243,8 +241,8 @@ namespace DokuExtractorStandardGUI
         private void RegisterUserControls()
         {
             //TODO: Set viewer plugin path here
-            //UserControlSelector.SetViewerPluginPath(@"..\..\..\GdPicturePdfViewer\bin\Debug\GdPicturePdfViewer.dll");
-            UserControlSelector.SetViewerPluginPath(@"..\..\..\KezimaPdfViewer\bin\Debug\KezimaPdfViewer.dll");
+            UserControlSelector.SetViewerPluginPath(@"..\..\..\GdPicturePdfViewer\bin\Debug\GdPicturePdfViewer.dll");
+            //UserControlSelector.SetViewerPluginPath(@"..\..\..\KezimaPdfViewer\bin\Debug\KezimaPdfViewer.dll");
 
             //TODO: To change user controls of the data field templates, change type here (the choosen user control has to be a derivation of the origin user control):
             UserControlSelector.RegisterDataFieldClassTemplateUserControl<ucDataFieldClassTemplate>();

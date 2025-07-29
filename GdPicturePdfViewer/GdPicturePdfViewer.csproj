@@ -12,6 +12,8 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -36,11 +38,141 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GdPicture.NET.14">
-      <HintPath>ExRes\GdPicture.NET.14.dll</HintPath>
+    <Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938, processorArchitecture=MSIL">
+      <HintPath>..\packages\BouncyCastle.Cryptography.2.5.0\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=3.2.0.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.3.2.0\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml.Framework, Version=3.2.0.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.Framework.3.2.0\lib\net46\DocumentFormat.OpenXml.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="GdPicture.NET.14, Version=14.3.11.0, Culture=neutral, PublicKeyToken=f52a2e60ad468dbb, processorArchitecture=MSIL">
+      <HintPath>..\packages\GdPicture.14.3.11\lib\net462\GdPicture.NET.14.dll</HintPath>
+    </Reference>
+    <Reference Include="GdPicture.NET.14.barcode.1d.writer, Version=14.3.11.0, Culture=neutral, PublicKeyToken=f52a2e60ad468dbb, processorArchitecture=MSIL">
+      <HintPath>..\packages\GdPicture.14.3.11\lib\net462\GdPicture.NET.14.barcode.1d.writer.dll</HintPath>
+    </Reference>
+    <Reference Include="GdPicture.NET.14.barcode.2d.writer, Version=14.3.11.0, Culture=neutral, PublicKeyToken=f52a2e60ad468dbb, processorArchitecture=MSIL">
+      <HintPath>..\packages\GdPicture.14.3.11\lib\net462\GdPicture.NET.14.barcode.2d.writer.dll</HintPath>
+    </Reference>
+    <Reference Include="GdPicture.NET.14.CAD, Version=14.3.11.0, Culture=neutral, PublicKeyToken=f52a2e60ad468dbb, processorArchitecture=MSIL">
+      <HintPath>..\packages\GdPicture.14.3.11\lib\net462\GdPicture.NET.14.CAD.dll</HintPath>
+    </Reference>
+    <Reference Include="GdPicture.NET.14.CAD.DWG, Version=14.3.11.0, Culture=neutral, PublicKeyToken=f52a2e60ad468dbb, processorArchitecture=MSIL">
+      <HintPath>..\packages\GdPicture.14.3.11\lib\net462\GdPicture.NET.14.CAD.DWG.dll</HintPath>
+    </Reference>
+    <Reference Include="GdPicture.NET.14.Common, Version=14.3.11.0, Culture=neutral, PublicKeyToken=f52a2e60ad468dbb, processorArchitecture=MSIL">
+      <HintPath>..\packages\GdPicture.14.3.11\lib\net462\GdPicture.NET.14.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="GdPicture.NET.14.Document, Version=14.3.11.0, Culture=neutral, PublicKeyToken=f52a2e60ad468dbb, processorArchitecture=MSIL">
+      <HintPath>..\packages\GdPicture.14.3.11\lib\net462\GdPicture.NET.14.Document.dll</HintPath>
+    </Reference>
+    <Reference Include="GdPicture.NET.14.Email, Version=14.3.11.0, Culture=neutral, PublicKeyToken=f52a2e60ad468dbb, processorArchitecture=MSIL">
+      <HintPath>..\packages\GdPicture.14.3.11\lib\net462\GdPicture.NET.14.Email.dll</HintPath>
+    </Reference>
+    <Reference Include="GdPicture.NET.14.HTML, Version=14.3.11.0, Culture=neutral, PublicKeyToken=f52a2e60ad468dbb, processorArchitecture=MSIL">
+      <HintPath>..\packages\GdPicture.14.3.11\lib\net462\GdPicture.NET.14.HTML.dll</HintPath>
+    </Reference>
+    <Reference Include="GdPicture.NET.14.Imaging, Version=14.3.11.0, Culture=neutral, PublicKeyToken=f52a2e60ad468dbb, processorArchitecture=MSIL">
+      <HintPath>..\packages\GdPicture.14.3.11\lib\net462\GdPicture.NET.14.Imaging.dll</HintPath>
+    </Reference>
+    <Reference Include="GdPicture.NET.14.Imaging.Formats, Version=14.3.11.0, Culture=neutral, PublicKeyToken=f52a2e60ad468dbb, processorArchitecture=MSIL">
+      <HintPath>..\packages\GdPicture.14.3.11\lib\net462\GdPicture.NET.14.Imaging.Formats.dll</HintPath>
+    </Reference>
+    <Reference Include="GdPicture.NET.14.Imaging.Formats.Conversion, Version=14.3.11.0, Culture=neutral, PublicKeyToken=f52a2e60ad468dbb, processorArchitecture=MSIL">
+      <HintPath>..\packages\GdPicture.14.3.11\lib\net462\GdPicture.NET.14.Imaging.Formats.Conversion.dll</HintPath>
+    </Reference>
+    <Reference Include="GdPicture.NET.14.Imaging.Rendering, Version=14.3.11.0, Culture=neutral, PublicKeyToken=f52a2e60ad468dbb, processorArchitecture=MSIL">
+      <HintPath>..\packages\GdPicture.14.3.11\lib\net462\GdPicture.NET.14.Imaging.Rendering.dll</HintPath>
+    </Reference>
+    <Reference Include="GdPicture.NET.14.MSOfficeBinary, Version=14.3.11.0, Culture=neutral, PublicKeyToken=f52a2e60ad468dbb, processorArchitecture=MSIL">
+      <HintPath>..\packages\GdPicture.14.3.11\lib\net462\GdPicture.NET.14.MSOfficeBinary.dll</HintPath>
+    </Reference>
+    <Reference Include="GdPicture.NET.14.OpenDocument, Version=14.3.11.0, Culture=neutral, PublicKeyToken=f52a2e60ad468dbb, processorArchitecture=MSIL">
+      <HintPath>..\packages\GdPicture.14.3.11\lib\net462\GdPicture.NET.14.OpenDocument.dll</HintPath>
+    </Reference>
+    <Reference Include="GdPicture.NET.14.OpenXML, Version=14.3.11.0, Culture=neutral, PublicKeyToken=f52a2e60ad468dbb, processorArchitecture=MSIL">
+      <HintPath>..\packages\GdPicture.14.3.11\lib\net462\GdPicture.NET.14.OpenXML.dll</HintPath>
+    </Reference>
+    <Reference Include="GdPicture.NET.14.OpenXML.Templating, Version=14.3.11.0, Culture=neutral, PublicKeyToken=f52a2e60ad468dbb, processorArchitecture=MSIL">
+      <HintPath>..\packages\GdPicture.14.3.11\lib\net462\GdPicture.NET.14.OpenXML.Templating.dll</HintPath>
+    </Reference>
+    <Reference Include="GdPicture.NET.14.PDF, Version=14.3.11.0, Culture=neutral, PublicKeyToken=f52a2e60ad468dbb, processorArchitecture=MSIL">
+      <HintPath>..\packages\GdPicture.14.3.11\lib\net462\GdPicture.NET.14.PDF.dll</HintPath>
+    </Reference>
+    <Reference Include="GdPicture.NET.14.RTF, Version=14.3.11.0, Culture=neutral, PublicKeyToken=f52a2e60ad468dbb, processorArchitecture=MSIL">
+      <HintPath>..\packages\GdPicture.14.3.11\lib\net462\GdPicture.NET.14.RTF.dll</HintPath>
+    </Reference>
+    <Reference Include="GdPicture.NET.14.SVG, Version=14.3.11.0, Culture=neutral, PublicKeyToken=f52a2e60ad468dbb, processorArchitecture=MSIL">
+      <HintPath>..\packages\GdPicture.14.3.11\lib\net462\GdPicture.NET.14.SVG.dll</HintPath>
+    </Reference>
+    <Reference Include="GdPicture.NET.14.wia.gateway, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6973b5c22dcf45f7, processorArchitecture=MSIL">
+      <HintPath>..\packages\GdPicture.14.3.11\lib\net462\GdPicture.NET.14.wia.gateway.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json.Bson, Version=1.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.Bson.1.0.2\lib\net45\Newtonsoft.Json.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenMcdf, Version=2.4.1.0, Culture=neutral, PublicKeyToken=fdbb1629d7c00800, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenMcdf.2.4.1\lib\net40\OpenMcdf.dll</HintPath>
+    </Reference>
+    <Reference Include="protobuf-net, Version=3.0.0.0, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
+      <HintPath>..\packages\protobuf-net.3.2.46\lib\net462\protobuf-net.dll</HintPath>
+    </Reference>
+    <Reference Include="protobuf-net.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
+      <HintPath>..\packages\protobuf-net.Core.3.2.46\lib\net462\protobuf-net.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="RtfPipe, Version=2.0.7677.4303, Culture=neutral, PublicKeyToken=5f6ab4ce530296d2, processorArchitecture=MSIL">
+      <HintPath>..\packages\RtfPipe.2.0.7677.4303\lib\net45\RtfPipe.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.6.0\lib\net462\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Immutable, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.8.0.0\lib\net462\System.Collections.Immutable.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Packaging, Version=8.0.0.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Packaging.8.0.1\lib\net462\System.IO.Packaging.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.6.0\lib\net462\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.6.0.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.6.0\lib\net462\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.1.0\lib\net462\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security" />
+    <Reference Include="System.Security.Cryptography.Pkcs, Version=8.0.0.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Pkcs.8.0.1\lib\net462\System.Security.Cryptography.Pkcs.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.8.0.0\lib\net462\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=8.0.0.5, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.8.0.5\lib\net462\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,6 +182,7 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="frmGdPictureViewer.cs">
@@ -82,6 +215,7 @@
     <EmbeddedResource Include="ucGdPicturePdfViewer.resx">
       <DependentUpon>ucGdPicturePdfViewer.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -106,4 +240,11 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\GdPicture.runtimes.windows.14.3.11\build\net462\GdPicture.runtimes.windows.targets" Condition="Exists('..\packages\GdPicture.runtimes.windows.14.3.11\build\net462\GdPicture.runtimes.windows.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Dieses Projekt verweist auf mindestens ein NuGet-Paket, das auf diesem Computer fehlt. Verwenden Sie die Wiederherstellung von NuGet-Paketen, um die fehlenden Dateien herunterzuladen. Weitere Informationen finden Sie unter "http://go.microsoft.com/fwlink/?LinkID=322105". Die fehlende Datei ist "{0}".</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\GdPicture.runtimes.windows.14.3.11\build\net462\GdPicture.runtimes.windows.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\GdPicture.runtimes.windows.14.3.11\build\net462\GdPicture.runtimes.windows.targets'))" />
+  </Target>
 </Project>
